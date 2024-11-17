@@ -581,6 +581,7 @@ body.brown{
     padding-top: 5px;
     padding-bottom: 5px;
     color: white;
+    border-radius: 5px;
 }
 
 .label-txt{
