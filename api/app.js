@@ -60,3 +60,5 @@ app.get('/about_us', (req, res) => {
 app.listen(port, () => {
     console.log('App is running...');
 });
+
+export default app;
