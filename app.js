@@ -7,7 +7,10 @@ const port = 3011;
 app.set('views', './src/views'); 
 app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
-
+app.use((req, res, next) => {
+    res.locals.currentRoute = req.path;
+    next();
+});
 
 app.get('/', (req, res) => {
     res.render('p1_login');
@@ -67,6 +70,10 @@ app.get('/user_profile', (req, res) => {
 
 app.get('/about_us', (req, res) => {
     res.render('p61_about_us');
+});
+
+app.get('/barcode', (req, res) => {
+    res.render('p55_barcode');
 });
 
 app.listen(port, () => {

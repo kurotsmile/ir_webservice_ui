@@ -4,32 +4,32 @@
         <ul class="nav flex-column menu-sidebar">
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item" href="home">
-                    <img  src="public/SVG/MenuD.svg" />
+                    <img src="public/SVG/MenuD.svg" />
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item active" href="home">
-                    <img src="public/SVG/HomeD.svg" />
+                    <img src="<%= currentRoute === '/home' ? 'public/SVG/Home.svg' : 'public/SVG/HomeD.svg' %>" />
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item" href="pset_list">
-                    <img  src="public/SVG/PsetD.svg" />
+                    <img  src="<%= currentRoute === '/pset_list' ? 'public/SVG/Pset.svg' : 'public/SVG/PsetD.svg' %>" />
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item" href="jobs">
-                    <img  src="public/SVG/Job48D.svg" />
+                    <img  src="<%= currentRoute === '/jobs' ? 'public/SVG/Job48.svg' : 'public/SVG/Job48D.svg' %>" />
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link menu-bottom-item" href="user_profile">
-                    <img  src="public/SVG/UserD.svg" />
+                    <img  src="<%= currentRoute === '/user_profile' ? 'public/SVG/User.svg' : 'public/SVG/UserD.svg' %>" />
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item" href="about_us">
-                    <img  src="public/SVG/HelpD.svg" />
+                    <img  src="<%= currentRoute === '/about_us' ? 'public/SVG/Help.svg' : 'public/SVG/HelpD.svg' %>" />
                 </a>
             </li>
         </ul>
