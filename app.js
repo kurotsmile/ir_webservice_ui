@@ -53,6 +53,10 @@ app.get('/edit_jobs', (req, res) => {
     res.render('p23_edit_jobs');
 });
 
+app.get('/edit_jobs_interlocks', (req, res) => {
+    res.render('p25_edit_jobs_interlocks');
+});
+
 app.get('/add_pset', (req, res) => {
     res.render('p24_add_pset');
 });

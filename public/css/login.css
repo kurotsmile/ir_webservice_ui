@@ -38,6 +38,7 @@ main {
     padding-bottom: 20px;
     border: solid 1px #989898;
     border-style: dashed;
+    text-align: center;
 }
 #icon-upload{
     margin-bottom: 20px;
@@ -53,4 +54,15 @@ input::placeholder {
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
+}
+
+#frm_login_service{
+    max-width: 417px;
+    text-align: left;
+    margin-left: 50%;
+    margin-right: 50%;
+    margin-top: 50%;
+    margin-bottom: 50%;
+    min-width: 340px;
+    transform: translate(-50%, -50%);
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Interlocks</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <link href="/public/css/index.css?v=18" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
+    <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="brown">
+    <%- include('menu_sidebar') %>
+
+    <div class="p-1 px-md-4 mb-1 bg-dark box-shadow">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <h2 class="text-white" style="margin-left: -42px;">Interlocks</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/pset_list">Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Forward Operation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="input-group r border mb-2 mt-2">
+                                <span class="input-group-text r-left">&nbsp;</span>
+                                <input type="text" placeholder="Search" class="form-control">
+                                <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Job</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content Full Width -->
+    <main>
+        <div class="container-fluid">
+            <table class="table table-lg table-dark table-bordered table-p-list">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 20%;">Step</th>
+                    <th style="width: 50%;">Pset Name</th>
+                    <th style="width: 30%;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row">1</td>
+                    <td>J1</td>
+                    <td>
+                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
+                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
+                        <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope="row">2 <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
+                    <td>Jacob 2</td>
+                    <td>
+                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
+                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
+                        <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
