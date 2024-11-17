@@ -16,11 +16,51 @@ app.use('/public', express.static(path.join(__dirname, '../public')));
 
 // Các route
 app.get('/', (req, res) => {
-    res.render('index2');
+    res.render('p1_login');
 });
 
 app.get('/login', (req, res) => {
     res.render('p1_login');
+});
+
+app.get('/service_login', (req, res) => {
+    res.render('p2_service_login');
+});
+
+app.get('/change_password', (req, res) => {
+    res.render('p3_change_password');
+});
+
+app.get('/pset_list', (req, res) => {
+    res.render('p4_pset_list');
+});
+
+app.get('/alert_waring', (req, res) => {
+    res.render('p9_alet_warning');
+});
+
+app.get('/edit_pset', (req, res) => {
+    res.render('p13_edit_pset');
+});
+
+app.get('/jobs', (req, res) => {
+    res.render('p22_jobs');
+});
+
+app.get('/edit_jobs', (req, res) => {
+    res.render('p23_edit_jobs');
+});
+
+app.get('/add_pset', (req, res) => {
+    res.render('p24_add_pset');
+});
+
+app.get('/user_profile', (req, res) => {
+    res.render('p60_user_profile');
+});
+
+app.get('/about_us', (req, res) => {
+    res.render('p61_about_us');
 });
 
 // Định nghĩa export để Vercel sử dụng
