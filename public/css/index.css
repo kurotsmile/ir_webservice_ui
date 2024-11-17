@@ -506,6 +506,26 @@ canvas {
 .table-p-list tbody tr td{
     background-color: #000000;
 }
+
+#bk_dark_full{
+    background-color:#101010b8;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100;
+}
+
+#box_msg{
+    width: 400px;
+    position: fixed;
+    z-index: 200;
+    left: 50%;
+    right: 50%;
+    background-color: #333333;
+    color: white;
+}
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */

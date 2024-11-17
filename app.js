@@ -29,8 +29,16 @@ app.get('/pset_list', (req, res) => {
     res.render('p4_pset_list');
 });
 
+app.get('/alert_waring', (req, res) => {
+    res.render('p9_alet_warning');
+});
+
 app.get('/edit_pset', (req, res) => {
-    res.render('p5_edit_pset');
+    res.render('p13_edit_pset');
+});
+
+app.get('/jobs', (req, res) => {
+    res.render('p22_jobs');
 });
 
 app.listen(port, () => {
