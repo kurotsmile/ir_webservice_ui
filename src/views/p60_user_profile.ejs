@@ -24,7 +24,7 @@
             <div class="row row-title mb-3">
                 <div class="col-12">
                     <h2 class="text-white ml-3">User Profile</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/pset_list">Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Pset</div>
+                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Infomation</div>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -62,69 +62,76 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">User Name</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Password</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="password" placeholder="Enter data" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Confirm Password</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="password" placeholder="Enter data" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Session Timeout</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="30 Minutes" class="form-control">
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p mt-3 mb-3">
-                <div class="col-6">
-                    <div class="label-txt">Forward Operation</div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Right.svg" style="float: right" class="mb-2 mt-3"/>
-                </div>
-            </div>
-
-            <div class="row row-p mt-3 mb-3">
-                <div class="col-6">
-                    <div class="label-txt">Reverse Operation</div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Right.svg" style="float: right" class="mb-2 mt-3"/>
-                </div>
-            </div>
-
-            <div class="row row-p  mt-3">
-                <div class="col-6">
-                    <div class="label-txt">Advence Operation <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Down.svg" style="float: right" class="mb-2 mt-3"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Cycle Timeout</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">TR Per Pset</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
 
         </div>
     </main>
+
+    <div id="menu_footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
+                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

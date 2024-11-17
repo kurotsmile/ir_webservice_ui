@@ -22,7 +22,7 @@ html, body {
 .sidebar {
     min-height: 100vh;
     width: 80px;
-    background-color: #343a40;
+    background-color: #000000;
     position: fixed;
     top: 0;
     left: 0;
@@ -43,6 +43,10 @@ html, body {
 
 .sidebar a:hover {
     background-color:#c2261b;
+}
+
+.txt_error{
+    color: #c2261b !important;
 }
 
 .icon {

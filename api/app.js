@@ -14,13 +14,12 @@ app.set('view engine', 'ejs');
 // Thiết lập thư mục public
 app.use('/public', express.static(path.join(__dirname, '../public')));
 
-// Các route
 app.get('/', (req, res) => {
     res.render('p1_login');
 });
 
 app.get('/home', (req, res) => {
-    res.render('index2');
+    res.render('p6_home');
 });
 
 app.get('/login', (req, res) => {
@@ -45,6 +44,10 @@ app.get('/alert_waring', (req, res) => {
 
 app.get('/edit_pset', (req, res) => {
     res.render('p13_edit_pset');
+});
+
+app.get('/forward_operation', (req, res) => {
+    res.render('p16_forward_operation');
 });
 
 app.get('/jobs', (req, res) => {
