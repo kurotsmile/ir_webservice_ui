@@ -29,6 +29,10 @@ app.get('/pset_list', (req, res) => {
     res.render('p4_pset_list');
 });
 
+app.get('/edit_pset', (req, res) => {
+    res.render('p5_edit_pset');
+});
+
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log('App is running...');
 });
