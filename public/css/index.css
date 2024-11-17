@@ -527,9 +527,34 @@ canvas {
     position: fixed;
     z-index: 200;
     left: 50%;
-    right: 50%;
+    top: 50%; 
     background-color: #333333;
     color: white;
+    transform: translate(-50%, -50%);
+}
+
+#box_msg .title{
+    background-color: #4d4d4d;
+}
+
+#box_msg .title .txt{
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+#box_msg .title .txt img{
+    width: 38px;
+}
+
+#box_msg .body{
+    padding: 20px;
+}
+
+#box_msg .panel_btn{
+    padding: 20px;
+    text-align: right;
 }
 
 .row-title{
