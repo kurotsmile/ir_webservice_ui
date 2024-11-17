@@ -587,9 +587,26 @@ body.brown{
     border-radius: 5px;
 }
 
+.row-h{
+    background-color: #4d4d4d;
+    font-size: 18px;
+    color: white;
+}
+
+.row-h .label-txt{
+    margin-left: 5px;
+}
+
 .label-txt{
     margin-top: 22px;
     margin-bottom: 22px;
+}
+
+.val-txt{
+    float: right;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    margin-right: 6px;
 }
 /* Mobile First Styles (default for all devices) */
 
