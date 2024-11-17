@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>IR Webbase</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <link href="/public/css/index.css?v=18" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
+    <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+ 
+    <!-- Left Sidebar -->
+    <nav class="sidebar bg-dark ">
+        <div class="position-sticky">
+            <ul class="nav flex-column menu-sidebar">
+                <li class="nav-item">
+                    <a class="nav-link menu-bottom-item" href="#">
+                        <img  src="public/SVG/MenuD.svg" />
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-bottom-item active" href="#">
+                        <img src="public/SVG/HomeD.svg" />
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-bottom-item" href="#">
+                        <img  src="public/SVG/PsetD.svg" />
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-bottom-item" href="#">
+                        <img  src="public/SVG/Job48D.svg" />
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link menu-bottom-item" href="#">
+                        <img  src="public/SVG/UserD.svg" />
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-bottom-item" href="#">
+                        <img  src="public/SVG/HelpD.svg" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="p-1 px-md-4 mb-1 bg-dark box-shadow">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <div class="dropdown custom-dropdown mt-2 rounded-lg w-100 d-flex align-items-center">
+                        <!-- Icon -->
+                        <img style="position: absolute;"  src="public/SVG/Job.svg" />
+                        <!-- Dropdown toggle button -->
+                        <select class="form-select custom-combobox" onchange="handleJobChange()" id="job-selection"
+                            style="text-align: center ;width: 380px !important;  border: none !important;"
+                            aria-label="Default select example">
+                            <option value="" disabled selected hidden>Select Job</option>
+                            <% jobs.forEach(function(job) { %>
+                                <option value="<%= job.ID %>">
+                                    <%= job.Name %>
+                                </option>
+                                <% }); %>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="barcode mt-2 d-flex align-items-center"
+                        style="width: 380px !important;  border: none !important">
+                        <img  src="public/SVG/Barcode.svg" />
+                        <span class="text">Barcode</span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
+                    <div class="d-right list-attr">
+                        <div class="attr-item horizontal-icon">
+                            <img  src="public/SVG/Tool48D.svg" />
+                            <img  src="public/SVG/MesD.svg" />
+                            <img src="public/SVG/PmAlarmD.svg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content Full Width -->
+    <main class="">
+        <div class="container-fluid">
+
+            <!-- Screens -->
+            <div id="resultsScreen" class="screen active">
+
+                <div class="row">
+                    <div class="col-12 ">
+
+                        <div class="progress-container">
+                            <div id="textNextPage" class="progress-top">
+                            </div>
+                            <div class="progress progress-custom">
+                                <div class="progress-bar progress-bar-custom" id="progress-bar-fill" role="progressbar">
+                                    <span style="text-align: left;margin-left: 1.1%;font-weight: 500;font-size: 20px;"
+                                        id="curPset"></span>
+                                </div>
+                                <label id="lbStep"
+                                    style="color: #fff; margin-right: 1.1%;"></label>
+                            </div>
+                            <!-- <div id="progress-bar-fill" class="progress-bar " style="background-color: #3a3a3a;">
+                                <div ></div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row ">
+                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                        <div class="row-container d-flex">
+                            <div class="icon-contaner bg-check" id="task-icon">
+                                <img id="img-status" src="public/SVG/Pass.svg" />
+                            </div>
+                            <div id="task-all">
+
+                                <div id="task-element">
+                                    <div id="stepPage" class="task-item" > &nbsp;</div>
+                                    <div class="task-item" id="hint1">&nbsp;</div>
+                                    <div class="task-item" id="hint2">&nbsp;</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                        <div id="are-tor" class="row-container d-flex">
+                            <div class="lager-icon" id="crTorque" style="display: flex;flex-wrap: wrap;">
+                                <img  src="public/SVG/Torque.svg" />
+                                <div class="title">Torque (<span id="unit">Nm</span>)</div>
+                                <div class="number torque_number" id="torque_number">0.00</div>
+                            </div>
+
+                            <div class="list-attr">
+                                <div class="attr-item attr-item-up" id="crTorUp">
+                                    <div class="icon">
+                                        <img  src="public/SVG/ULimit.svg" />
+                                        </i>
+                                    </div>
+                                    <div class="txt" id="torque_high_limit"></div>
+                                </div>
+                                <div class="attr-item attr-item-number">
+                                    <div class="icon">
+                                        <img src="public/SVG/Target.svg" />
+                                    </div>
+                                    <div class="txt" id="torque_target"> &nbsp;</div>
+                                </div>
+                                <div class="attr-item attr-item-low" id="crTorDn">
+                                    <div class="icon">
+                                        <img src="public/SVG/LLimit.svg" />
+                                    </div>
+                                    <div class="txt" id="torque_low_limit"> &nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                        <div id="angle-tor" class="row-container d-flex">
+                            <div class="lager-icon" id="crAngle" style="display: flex;flex-wrap: wrap;">
+                                <img  src="public/SVG/Angle.svg" />
+                                <div class="title">Angle (°)</div>
+                                <div class="number degree_number" id="angle_number">0</div>
+                            </div>
+                            <div class="list-attr">
+                                <div class="attr-item" id="crAngUp">
+                                    <div class="icon">
+                                        <img  src="public/SVG/ULimit.svg" />
+                                    </div>
+                                    <div class="txt" id="angle_high_limit">&nbsp;</div>
+                                </div>
+                                <div class="attr-item">
+                                    <div class="icon">
+                                        <img  src="public/SVG/Target.svg" />
+                                    </i></div>
+                                    <div class="txt" id="angle_target">&nbsp;</div>
+                                </div>
+                                <div class="attr-item" id="crAngDn">
+                                    <div class="icon">
+                                        <img src="public/SVG/LLimit.svg" />
+                                    </div>
+                                    <div class="txt" id="angle_low_limit">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-9 col-md-3 col-lg-3 col-xl-3">
+                        <div class="row-container ">
+                            <div class="til-lager-icon oranger">
+                                <div class="tilt-icon">
+                                    <img  src="public/SVG/Tilt.svg" />
+                                    <div class="title">Tilt Angle (°)</div>
+                                </div>
+                                <div class="number" id="tilt_angle">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <select id="chartTypeSelect" class="form-select custom-combobox"
+                            aria-label="Default select example">
+                            <option value="0" selected="">Torque vs. Angle</option>
+                            <option value="1">Torque vs .Time</option>
+                            <option value="2">Angle vs .Time</option>
+                            <option value="3">Current vs .Time</option>
+                        </select>
+                    </div>
+                    <div class="col-9 d-flex  " style="justify-content: flex-end;">
+                        <div class="">
+                            <img src="public/SVG/Download.svg" alt="SVG Image" width="47"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <canvas id="myChart" width="1747" height="500"
+                            style="display: block; box-sizing: border-box;"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="ip-container" >
+                            <img  src="public/SVG/IP2G.svg" />
+                            <label class="ip-address" id="device-ip"></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="ip-container">
+                            <img  src="public/SVG/IP1G.svg" />
+                            <div class="ip-address" id="device-ip-controller"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex" >
+                        <div class="PF-OP"><label>PFOP</label> </div>
+                        <div class="ToolsNet"><label>ToolsNet</label></div>
+                        <div class="Fieldbus"><label>Fieldbus</label></div>
+                    </div>   
+                    
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Include the Moment.js adapter for Chart.js -->
+    <script src="/public/lib/socket/socket.io.min.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/js/graph.js"></script>
+</body>
+
+</html>

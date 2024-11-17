@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+	<g transform="translate(-2551 131)">
+		<rect width="36" height="36" transform="translate(2551 -131)" fill="Transparent"/>
+		<g transform="translate(15 17)">
+			<rect width="2" height="14" transform="translate(2545 -137)" fill="#fff"/>
+			<rect width="1" height="14" transform="translate(2556 -137)" fill="#fff"/>
+			<rect width="3" height="14" transform="translate(2560 -137)" fill="#fff"/>
+			<rect width="4" height="14" transform="translate(2549 -137)" fill="#fff"/>
+		</g>
+	</g>
+</svg>

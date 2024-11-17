@@ -1,0 +1,56 @@
+main {
+    margin-left: 0px;
+    padding: 0px;
+    width:auto;
+    color: white;
+    text-align: center;
+}
+
+#panel-right{
+    background-color: #333333;
+}
+
+#logo-text{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+#logo-text .hilight{
+    color: #e54028;
+}
+
+.img_welcome{
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+#box_upload{
+    background-color: black;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#box_upload .body{
+    background-color: #333333;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: solid 1px #989898;
+    border-style: dashed;
+}
+#icon-upload{
+    margin-bottom: 20px;
+}
+
+input::placeholder {
+    opacity: 0.5;
+    color:white !important;
+}
+
+#box_login{
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}

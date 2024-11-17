@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+	<g transform="translate(-11)">
+		<rect width="48" height="48" transform="translate(11)" fill="none"/>
+		<path d="M0,18A18,18,0,1,1,18,36,18,18,0,0,1,0,18ZM6.862,6.862A15.75,15.75,0,1,0,29.136,29.136,15.75,15.75,0,0,0,6.862,6.862ZM11,27h0a2,2,0,0,1-2-2V11a2,2,0,0,1,2-2H23l4,4V25a2,2,0,0,1-2,2Zm4-5a3,3,0,0,0,3,3h.009A3,3,0,1,0,15,22Zm-4-7H21V11H11Z" transform="translate(17 6)" fill="#fff"/>
+	</g>
+</svg>
