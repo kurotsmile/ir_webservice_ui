@@ -526,6 +526,24 @@ canvas {
     background-color: #333333;
     color: white;
 }
+
+.row-title{
+    box-shadow: -7px -1px 15px 0px black;
+    padding-bottom: 10px;
+}
+
+body.brown{
+    background-color: #333333 !important;
+}
+
+.breadcrumb{
+    color: white;
+}
+
+.breadcrumb .nav1{
+    color: #01A1CB;
+    text-decoration: none;
+}
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */
