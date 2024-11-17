@@ -1,0 +1,128 @@
+{
+    "ID": "J1727600180553740",
+    "Index": "1",
+    "Name": "J1",
+    "PsetCount": 1,
+    "Interlocks": {
+        "ValidJob": false,
+        "BcodeVin": false,
+        "LockOnRescan": false,
+        "ToolEnable": false,
+        "SmartSocket": false,
+        "ReverseDisable": false
+    },
+    "Psets": [
+        {
+            "ID": "P1727548723000753",
+            "Strategy": "Torque",
+            "Target": 2.5,
+            "Steps": 1,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        },
+        {
+            "ID": "",
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false
+        }
+    ]
+}

@@ -40,6 +40,11 @@ app.get('/jobs', (req, res) => {
     res.render('p22_jobs');
 });
 
+app.get('/edit_jobs', (req, res) => {
+    res.render('p23_edit_jobs');
+});
+
+
 app.listen(port, () => {
     console.log('App is running...');
 });

@@ -471,8 +471,9 @@ canvas {
 }
 
 .input-group.r{
-    padding-top: 20px;
+    padding-top: 6px;
     border-radius: 50px !important;
+    padding-bottom: 6px;
 }
 .input-group.r input{
     background-color: #000000;
@@ -487,6 +488,10 @@ canvas {
 .input-group.r .input-group-text{
     background-color: #000000 !important;
     border: unset;
+}
+
+.input-group.r.border{
+    border: solid 1px #333333;
 }
 
 .f-right{
@@ -528,7 +533,7 @@ canvas {
 }
 
 .row-title{
-    box-shadow: -7px -1px 15px 0px black;
+    box-shadow: 0px 7px 15px 0px black;
     padding-bottom: 10px;
 }
 
@@ -543,6 +548,19 @@ body.brown{
 .breadcrumb .nav1{
     color: #01A1CB;
     text-decoration: none;
+}
+
+.row-p{
+    background-color: black;
+    margin-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+}
+
+.label-txt{
+    margin-top: 22px;
+    margin-bottom: 22px;
 }
 /* Mobile First Styles (default for all devices) */
 

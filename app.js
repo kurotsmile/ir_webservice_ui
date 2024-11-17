@@ -41,6 +41,24 @@ app.get('/jobs', (req, res) => {
     res.render('p22_jobs');
 });
 
+app.get('/edit_jobs', (req, res) => {
+    res.render('p23_edit_jobs');
+});
+
+app.get('/add_pset', (req, res) => {
+    res.render('p24_add_pset');
+});
+
+app.get('/user_profile', (req, res) => {
+    res.render('p60_user_profile');
+});
+
+app.get('/about_us', (req, res) => {
+    res.render('p61_about_us');
+});
+
 app.listen(port, () => {
     console.log('App is running...');
 });
+
+export default app;
