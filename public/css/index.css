@@ -503,6 +503,9 @@ canvas {
     border-bottom-right-radius: 50px !important;
 }
 
+.table-p-list tbody tr td{
+    background-color: #000000;
+}
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */
