@@ -130,7 +130,6 @@ select {
     display: block;
 }
 
-
 /* css menu select */
 .select-container {
     position: relative;
@@ -149,7 +148,6 @@ select {
 .select-container span {
     cursor: pointer;
 }
-
 
 /* barcode */
 .barcode {
@@ -496,6 +494,7 @@ canvas {
 
 .input-group.r.border{
     border: solid 1px #333333;
+    background-color: black;
 }
 
 .f-right{

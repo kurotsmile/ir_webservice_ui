@@ -54,37 +54,18 @@
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
-            <table class="table table-lg table-dark table-bordered table-p-list">
-                <thead>
-                  <tr>
-                    <th scope="col" style="width: 20%;">Step</th>
-                    <th style="width: 50%;">Pset Name</th>
-                    <th style="width: 30%;">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>J1</td>
-                    <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row">2 <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
-                    <td>Jacob 2</td>
-                    <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt"><img src="/public/SVG/Tick.svg"> Valid Job</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="P1_copy" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </body>

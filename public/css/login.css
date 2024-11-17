@@ -66,3 +66,14 @@ input::placeholder {
     min-width: 340px;
     transform: translate(-50%, -50%);
 }
+
+.login_line{
+    background-image: url(../images/line.png);
+    background-repeat: repeat-x;
+    background-position-y: 50%;
+}
+
+.login_line span{
+    background-color: #333333;
+    padding: 12px;
+}
