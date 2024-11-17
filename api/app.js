@@ -13,7 +13,6 @@ app.set('view engine', 'ejs');
 
 // Thiết lập thư mục public
 app.use('/public', express.static(path.join(__dirname, '../public')));
-
 app.use((req, res, next) => {
     res.locals.currentRoute = req.path;
     next();
@@ -63,10 +62,6 @@ app.get('/edit_jobs', (req, res) => {
     res.render('p23_edit_jobs');
 });
 
-app.get('/edit_jobs_interlocks', (req, res) => {
-    res.render('p25_edit_jobs_interlocks');
-});
-
 app.get('/add_pset', (req, res) => {
     res.render('p24_add_pset');
 });
@@ -79,12 +74,5 @@ app.get('/about_us', (req, res) => {
     res.render('p61_about_us');
 });
 
-app.get('/barcode', (req, res) => {
-    res.render('p55_barcode');
-});
-
-app.listen(port, () => {
-    console.log('App is running...');
-});
-
+// Định nghĩa export để Vercel sử dụng
 export default app;
