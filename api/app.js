@@ -87,5 +87,18 @@ app.get('/alarm', (req, res) => {
     res.render('p62_alarm');
 });
 
+app.get('/edit_alarm', (req, res) => {
+    res.render('p63_alarm_edit');
+});
+
+app.get('/tool_calibartion', (req, res) => {
+    res.render('p56_tool_calibartion');
+});
+
+app.get('/calibration_data', (req, res) => {
+    res.render('p57_calibration_data');
+});
+
+
 // Định nghĩa export để Vercel sử dụng
 export default app;

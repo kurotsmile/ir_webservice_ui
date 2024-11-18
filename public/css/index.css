@@ -646,6 +646,14 @@ table thead tr th{
     background-color: #4d4d4d;
     color: white;
 }
+
+.btn-success{
+    background-color: #61ae23 !important;
+}
+
+.btn-info{
+    background-color: #00a1cb !important;
+}
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */
