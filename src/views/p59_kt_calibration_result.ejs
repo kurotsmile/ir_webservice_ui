@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>KT Calibration Result</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
+    <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="brown">
+ 
+    <%- include('menu_sidebar') %>
+
+    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <a href="tool_calibartion"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
+                    <h2 class="text-white">KT Calibration Result</h2>
+                    <div class="breadcrumb">
+                        <a class="nav1" href="/home">Home</a> 
+                        <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> <a href="tool_calibartion">Tool Calibartion</a>
+                        <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit KT Calibration Result
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Full Width -->
+    <main>
+        <div class="container-fluid">
+            <table class="table table-lg table-dark table-bordered table-p-list m-0">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-white">Cycle Counter</th>
+                    <th class="text-white">Cycle Counter</th>
+                    <th class="text-white">Cycle Counter</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>#Value</td>
+                    <td>#Value</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>#Value</td>
+                    <td>#Value</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>#Value</td>
+                    <td>#Value</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>#Value</td>
+                    <td>#Value</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>#Value</td>
+                    <td>#Value</td>
+                  </tr>
+                </tbody>
+            </table>
+
+            <div class="row row-h m-1">
+                <div class="col-6">
+                    <div class="label-txt">Resultant TR Value</div>
+                </div>
+                <div class="col-5">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="TRValue#" class="form-control">
+                        <span class="input-group-text r-right">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-secondary btn-rounded f-right mt-3" style="min-width:100px;color: black;font-weight: bold;">Set</button>
+                </div>
+            </div
+        </div>
+    </main>
+
+</body>
+</html>

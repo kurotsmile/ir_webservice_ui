@@ -578,7 +578,7 @@ body.brown{
     color: white;
 }
 
-.breadcrumb .nav1{
+.breadcrumb a{
     color: #01A1CB;
     text-decoration: none;
 }

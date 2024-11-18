@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 // Thiết lập thư mục public
 app.use('/public', express.static(path.join(__dirname, '../public')));
 app.use((req, res, next) => {
-    res.locals.ver = '1.1.2';
+    res.locals.ver = '1.1.5';
     res.locals.currentRoute = req.path;
     next();
 });
@@ -99,6 +99,12 @@ app.get('/calibration_data', (req, res) => {
     res.render('p57_calibration_data');
 });
 
+app.get('/calibration_result', (req, res) => {
+    res.render('p58_calibration_result');
+});
 
-// Định nghĩa export để Vercel sử dụng
+app.get('/kt_calibration_result', (req, res) => {
+    res.render('p59_kt_calibration_result');
+});
+
 export default app;
