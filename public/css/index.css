@@ -45,6 +45,11 @@ html, body {
     background-color:#c2261b;
 }
 
+#sidebar_logo{
+    position: fixed;
+    bottom: 15px;
+}
+
 .txt_error{
     color: #c2261b !important;
 }
@@ -613,6 +618,20 @@ body.brown{
     margin-bottom: 22px;
     margin-right: 6px;
 }
+table thead tr th{
+    font-weight: normal;
+    color: #7e7e7e !important;
+}
+
+#bar_menu_top{
+    box-shadow: 0px 3px 8px 0px #00000099;
+}
+
+#btn_back_menu_top{
+    margin: 15px;float: left;
+    margin-left: -44px;
+}
+
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */
