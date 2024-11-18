@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 // Thiết lập thư mục public
 app.use('/public', express.static(path.join(__dirname, '../public')));
 app.use((req, res, next) => {
-    res.locals.ver = '1.1.0';
+    res.locals.ver = '1.1.2';
     res.locals.currentRoute = req.path;
     next();
 });

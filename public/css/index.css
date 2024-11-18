@@ -642,6 +642,10 @@ table thead tr th{
     margin-left: -44px;
 }
 
+#bar_footer{
+    background-color: #4d4d4d;
+    color: white;
+}
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */
