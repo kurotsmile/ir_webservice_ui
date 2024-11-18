@@ -593,6 +593,11 @@ body.brown{
     color: white;
 }
 
+.row-none{
+    font-size: 18px;
+    color: white;
+}
+
 .row-h .label-txt{
     margin-left: 5px;
 }

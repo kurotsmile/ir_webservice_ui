@@ -82,5 +82,9 @@ app.get('/barcode', (req, res) => {
     res.render('p55_barcode');
 });
 
+app.get('/alarm', (req, res) => {
+    res.render('p62_alarm');
+});
+
 // Định nghĩa export để Vercel sử dụng
 export default app;

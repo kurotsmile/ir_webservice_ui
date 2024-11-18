@@ -76,6 +76,10 @@ app.get('/barcode', (req, res) => {
     res.render('p55_barcode');
 });
 
+app.get('/alarm', (req, res) => {
+    res.render('p62_alarm');
+});
+
 app.listen(port, () => {
     console.log('App is running...');
 });
