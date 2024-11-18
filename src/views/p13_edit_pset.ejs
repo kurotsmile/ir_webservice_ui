@@ -18,16 +18,28 @@
  
     <%- include('menu_sidebar') %>
 
+    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <h2 class="text-white" style="margin-left: -42px;">Pset Edit</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/pset_list">List Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Pset</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
-            <div class="row row-title mb-3">
-                <div class="col-12">
-                    <h2 class="text-white ml-3">Pset Edit</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/pset_list">Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Pset</div>
-                </div>
-            </div>
-
             <div class="row row-p">
                 <div class="col-6">
                     <div class="label-txt">Pset Name</div>
@@ -97,19 +109,51 @@
                 </div>
             </div>
 
-            <div class="row row-p  mt-3">
+            <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Trace Setting</a></div>
+                    <div class="label-txt">Cycle Timeout</div>
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Down.svg" style="float: right" class="mb-2 mt-3"/>
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="15" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="row row-p  mt-3">
+            <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Trace Enable</a></div>
+                    <div class="label-txt">TR Per Pset</div>
+                </div>
+
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="1" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Acceleration (%)</div>
+                </div>
+
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="90" class="form-control">
+                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">File on Early Trigger Release</div>
                 </div>
 
                 <div class="col-6">
