@@ -498,7 +498,7 @@ canvas {
 }
 
 .input-group.r.border{
-    border: solid 1px #333333;
+    border: solid 1px #606060 !important;
     background-color: black;
 }
 
@@ -621,6 +621,16 @@ body.brown{
 table thead tr th{
     font-weight: normal;
     color: #7e7e7e !important;
+}
+
+#job-selection-dropdown{
+    margin-left: 62px;
+}
+
+.form-select {
+    -bs-form-select-bg-img:unset!important;
+    background-image: unset !important;
+    border: unset !important;
 }
 
 #bar_menu_top{

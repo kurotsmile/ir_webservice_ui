@@ -8,7 +8,7 @@
 
     <title>IR Webbase</title>
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-    <link href="/public/css/index.css?v=18" rel="stylesheet" />
+    <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
@@ -22,16 +22,15 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <div class="dropdown custom-dropdown mt-2 rounded-lg w-100 d-flex align-items-center">
-                        <!-- Icon -->
-                        <img style="position: absolute;"  src="public/SVG/Job.svg" />
-                        <!-- Dropdown toggle button -->
-                        <select class="form-select custom-combobox" onchange="handleJobChange()" id="job-selection"
-                            style="text-align: center ;width: 380px !important;  border: none !important;"
-                            aria-label="Default select example">
+                    
+                    <div class="input-group mb-3 r border w-50 mt-3 p-0" style="border: unset !important;" id="job-selection-dropdown">
+                        <span class="input-group-text r-left"><img src="/public/SVG/Job.svg"/></span>
+                        <select class="form-select custom-combobox" onchange="handleJobChange()" id="job-selection">
                             <option value="" disabled selected hidden>Select Job</option>
                         </select>
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
+
                 </div>
 
                 <div class="col-12 col-md-3 col-lg-3 col-xl-3">
