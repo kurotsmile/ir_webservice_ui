@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <a href="add_pset" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</a>
+                            <a href="#" onclick="add_pset();return false;" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <th style="min-width: 30%;">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="all_item_pset">
                   <tr>
                     <td scope="row">1</td>
                     <td>Mark</td>
@@ -93,6 +93,36 @@
             </table>
         </div>
     </main>
+
+    <div id="bar_footer">
+        <div class="container-fluid">
+            <div class="row p-3">
+                <div class="col-12 text-center">
+                   <img src="/public/SVG/Back.svg">
+                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">10/1</span>
+                   <img src="/public/SVG/Forward.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function add_pset(){
+            var rowCount = $('#all_item_pset tr').length;
+            var html_item='';
+            html_item+='<tr>';
+                html_item+='<td scope="row">'+rowCount+'</td>';
+                html_item+='<td>P'+rowCount+'</td>';
+                html_item+='<td>';
+                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>';
+                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
+                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
+                html_item+='</td>';
+            html_item+='</tr>';
+
+            $("#all_item_pset").append(html_item);
+        }
+    </script>
 </body>
 
 </html>

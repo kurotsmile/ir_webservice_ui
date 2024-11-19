@@ -2,7 +2,7 @@
 import express from 'express';
 
 const app = express();
-const port = 3011;
+const port = 3000;
 
 app.set('views', './src/views'); 
 app.set('view engine', 'ejs');
@@ -87,6 +87,38 @@ app.get('/date_and_time', (req, res) => {
 
 app.get('/system_initialisation', (req, res) => {
     res.render('p31_system_initialisation');
+});
+
+app.get('/wifi_setting_and_hotspot', (req, res) => {
+    res.render('p34_wifi_setting_and_hotspot');
+});
+
+app.get('/buzzer_setting', (req, res) => {
+    res.render('p35_buzzer_setting');
+});
+
+app.get('/pfop_settings', (req, res) => {
+    res.render('p36_pfop_settings');
+});
+
+app.get('/bcode_vin_setting', (req, res) => {
+    res.render('p37_bcode_vin_setting');
+});
+
+app.get('/barcode_string', (req, res) => {
+    res.render('p38_barcode_string');
+});
+
+app.get('/ac_toolsnet_setting', (req, res) => {
+    res.render('p39_ac_toolsnet_setting');
+});
+
+app.get('/fieldbus_settings', (req, res) => {
+    res.render('p40_fieldbus_settings');
+});
+
+app.get('/fieldbus_io_setting', (req, res) => {
+    res.render('p41_fieldbus_io_setting');
 });
 
 app.get('/cycle_result', (req, res) => {
