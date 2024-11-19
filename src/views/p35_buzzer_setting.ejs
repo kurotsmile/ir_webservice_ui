@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Buzzer Setting</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
+    <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="brown">
+ 
+    <%- include('menu_sidebar') %>
+
+    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
+                    <h2 class="text-white">Buzzer Setting</h2>
+                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Buzzer Setting</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Full Width -->
+    <main>
+        <div class="container-fluid">
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Fail Cycle</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Job Complete</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Batch Complete</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="menu_footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
+                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

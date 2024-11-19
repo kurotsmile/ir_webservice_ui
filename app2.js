@@ -57,32 +57,44 @@ app.get('/edit_jobs', (req, res) => {
     res.render('p23_edit_jobs');
 });
 
-app.get('/edit_jobs_interlocks', (req, res) => {
-    res.render('p25_edit_jobs_interlocks');
-});
-
 app.get('/add_pset', (req, res) => {
     res.render('p24_add_pset');
 });
 
-app.get('/user_profile', (req, res) => {
-    res.render('p60_user_profile');
+app.get('/edit_jobs_interlocks', (req, res) => {
+    res.render('p25_edit_jobs_interlocks');
 });
 
-app.get('/about_us', (req, res) => {
-    res.render('p61_about_us');
+app.get('/ethernet_setting', (req, res) => {
+    res.render('p28_ethernet_setting');
+});
+
+app.get('/fail_rules', (req, res) => {
+    res.render('p26_fail_rules');
+});
+
+app.get('/global_settings', (req, res) => {
+    res.render('p27_global_settings');
+});
+
+app.get('/accessories', (req, res) => {
+    res.render('p29_accessories');
+});
+
+app.get('/date_and_time', (req, res) => {
+    res.render('p30_date_and_time');
+});
+
+app.get('/system_initialisation', (req, res) => {
+    res.render('p31_system_initialisation');
+});
+
+app.get('/cycle_result', (req, res) => {
+    res.render('p47_cycle_result');
 });
 
 app.get('/barcode', (req, res) => {
     res.render('p55_barcode');
-});
-
-app.get('/alarm', (req, res) => {
-    res.render('p62_alarm');
-});
-
-app.get('/edit_alarm', (req, res) => {
-    res.render('p63_alarm_edit');
 });
 
 app.get('/tool_calibartion', (req, res) => {
@@ -101,18 +113,21 @@ app.get('/kt_calibration_result', (req, res) => {
     res.render('p59_kt_calibration_result');
 });
 
-app.get('/accessories', (req, res) => {
-    res.render('p29_accessories');
+app.get('/user_profile', (req, res) => {
+    res.render('p60_user_profile');
 });
 
-app.get('/global_settings', (req, res) => {
-    res.render('p27_global_settings');
+app.get('/about_us', (req, res) => {
+    res.render('p61_about_us');
 });
 
-app.get('/cycle_result', (req, res) => {
-    res.render('p47_cycle_result');
+app.get('/alarm', (req, res) => {
+    res.render('p62_alarm');
 });
 
+app.get('/edit_alarm', (req, res) => {
+    res.render('p63_alarm_edit');
+});
 app.listen(port, () => {
     console.log('App is running...');
 });
