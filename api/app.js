@@ -114,4 +114,9 @@ app.get('/accessories', (req, res) => {
 app.get('/global_settings', (req, res) => {
     res.render('p27_global_settings');
 });
+
+app.get('/cycle_result', (req, res) => {
+    res.render('p47_cycle_result');
+});
+
 export default app;
