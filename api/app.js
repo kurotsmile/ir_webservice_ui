@@ -107,4 +107,11 @@ app.get('/kt_calibration_result', (req, res) => {
     res.render('p59_kt_calibration_result');
 });
 
+app.get('/accessories', (req, res) => {
+    res.render('p29_accessories');
+});
+
+app.get('/global_settings', (req, res) => {
+    res.render('p27_global_settings');
+});
 export default app;
