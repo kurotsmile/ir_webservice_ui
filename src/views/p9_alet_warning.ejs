@@ -1,100 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Pset List</title>
-    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-    <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
-    <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
-    <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
- 
-    <%- include('menu_sidebar') %>
-
-    <div class="p-1 px-md-4 mb-1 bg-dark box-shadow">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
-                    &nbsp;
-                </div>
-
-                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <h2 class="text-white ml-3">Pset List</h2>
-                </div>
-
-                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
-                    <button class="btn btn-info text-white btn-rounded f-right"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</button>
-                </div>
-            </div>
-        </div>
+<div id="bk_dark_full"></div>
+<div id="box_msg">
+    <div class="title">
+        <div class="txt"><img src="/public/SVG/Warning.svg"/> Warning</div>
     </div>
-
-
-    <!-- Main Content Full Width -->
-    <main class="">
-        <div class="container-fluid">
-            <table class="table table-lg table-dark table-bordered table-p-list">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Pset Name</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>Mark</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row">2</td>
-                    <td>Jacob</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row"><span>3</span> <img src="/public/SVG/Warning.svg"></td>
-                    <td>P3</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-
-    <div id="bk_dark_full"></div>
-    <div id="box_msg">
-        <div class="title">
-            <div class="txt"><img src="/public/SVG/Warning.svg"/> Warning</div>
-        </div>
-        <div class="body">
-            Are you sure you want to delete <b>P3</b>?<br/>
-            <b>P3</b> is Associated width <b>J3</b>
-        </div>
-        <div class="panel_btn">
-            <a href="/pset_list" class="btn btn-secondary btn-rounded">Cancel</a>
-            <button class="btn btn-danger btn-rounded">Delete</button>
-        </div>
+    <div class="body">
+        Are you sure you want to delete <b>P3</b>?<br/>
+        <b>P3</b> is Associated width <b>J3</b>
     </div>
-</body>
-
-</html>
+    <div class="panel_btn">
+        <a href="#" onclick="$('#bk_dark_full').hide();$('#box_msg').hide();return false;" class="btn btn-secondary btn-rounded">Cancel</a>
+        <button class="btn btn-danger btn-rounded">Delete</button>
+    </div>
+</div>

@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static(path.join(__dirname, '../public')));
 app.use((req, res, next) => {
-    res.locals.ver = '1.1.6';
+    res.locals.ver = '1.1.8';
     res.locals.currentRoute = req.path;
     next();
 });

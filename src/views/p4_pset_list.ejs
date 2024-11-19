@@ -66,7 +66,7 @@
                     <td scope="row">1</td>
                     <td>Mark</td>
                     <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
                         <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                     </td>
@@ -75,7 +75,7 @@
                     <td scope="row">2</td>
                     <td>Jacob</td>
                     <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
                         <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                     </td>
@@ -84,7 +84,7 @@
                     <td scope="row"><span class="txt_error">3</span> <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
                     <td>P3</td>
                     <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
                         <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                     </td>
@@ -106,6 +106,8 @@
         </div>
     </div>
 
+    <%- include('p9_alet_warning.ejs') %>
+
     <script>
         function add_pset(){
             var rowCount = $('#all_item_pset tr').length;
@@ -114,13 +116,18 @@
                 html_item+='<td scope="row">'+rowCount+'</td>';
                 html_item+='<td>P'+rowCount+'</td>';
                 html_item+='<td>';
-                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>';
+                    html_item+='<a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
                     html_item+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
                 html_item+='</td>';
             html_item+='</tr>';
 
             $("#all_item_pset").append(html_item);
+        }
+
+        function show_delete(){
+            $("#bk_dark_full").show();
+            $("#box_msg").show();
         }
     </script>
 </body>

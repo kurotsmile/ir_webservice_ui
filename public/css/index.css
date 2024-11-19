@@ -555,6 +555,7 @@ canvas {
     right: 0px;
     bottom: 0px;
     z-index: 100;
+    display: none;
 }
 
 #box_msg{
@@ -566,6 +567,7 @@ canvas {
     background-color: #333333;
     color: white;
     transform: translate(-50%, -50%);
+    display: none;
 }
 
 #box_msg .title{

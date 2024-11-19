@@ -67,14 +67,14 @@
                     <td scope="row">1</td>
                     <td>J1</td>
                     <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Tick.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>
                     </td>
                     <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
                     </td>
@@ -83,14 +83,14 @@
                     <td scope="row"><span class="txt_error">2</span> <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
                     <td>Jacob 2</td>
                     <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Tick.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>
                     </td>
                     <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
+                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
                         <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
                     </td>
@@ -99,5 +99,42 @@
             </table>
         </div>
     </main>
+
+    <div id="bar_footer" style="border-bottom: solid 2px black;">
+        <div class="container-fluid">
+            <div class="row p-3">
+                <div class="col-4">
+                    <span style="margin-left: 63px;"></span>Tool Jobjs : 1
+                </div>
+                <div class="col-4 text-center">
+                    Valid : 1
+                </div>
+                <div class="col-4" style="text-align: right;">
+                    Invalid : 1
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bar_footer">
+        <div class="container-fluid">
+            <div class="row p-3">
+                <div class="col-12 text-center">
+                   <img src="/public/SVG/Back.svg">
+                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">10/1</span>
+                   <img src="/public/SVG/Forward.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('p9_alet_warning.ejs') %>
+
+    <script>
+        function show_delete(){
+            $("#bk_dark_full").show();
+            $("#box_msg").show();
+        }
+    </script>
 </body>
 </html>
