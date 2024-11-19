@@ -50,6 +50,33 @@ html, body {
     bottom: 15px;
 }
 
+#sidebar_expand{
+    background-color: black;
+    width: 300px;
+    height: 100%;
+    top: 0px;
+    bottom: 0px;
+    z-index: 200;
+    left: 80px;
+    display: none;
+    position: fixed;
+    color: white;
+    text-align: left;
+}
+#sidebar_expand .item:hover{
+    background-color:#c2261b;
+}
+#sidebar_expand div a{
+    text-align: left;
+    display: block;
+    padding: 6px;
+    margin: 0px;
+    text-decoration: none;
+}
+#sidebar_expand div a:hover{
+    background-color: unset;
+}
+
 .txt_error{
     color: #c2261b !important;
 }

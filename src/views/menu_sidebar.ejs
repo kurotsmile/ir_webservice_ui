@@ -3,7 +3,7 @@
     <div class="position-sticky">
         <ul class="nav flex-column menu-sidebar">
             <li class="nav-item">
-                <a class="nav-link menu-bottom-item" href="home">
+                <a class="nav-link menu-bottom-item" href="home" onclick="$('#sidebar_expand').fadeToggle(100);return false;">
                     <img src="public/SVG/MenuD.svg" />
                 </a>
             </li>
@@ -34,5 +34,21 @@
             </li>
             <img  src="/public/images/logo.png" id="sidebar_logo" />
         </ul>
+    </div>
+
+    <div id="sidebar_expand">
+        <div class="container-fluid">
+            <div class="row item"><div class="col-12 p-1"><a href="home">Home</a></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="pset_list">Pset</a></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="jobs">Job</a></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="jobs">Accessories</a></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="jobs">Global Setting</a></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="jobs">Cycle Result</a></div></div>
+            <div class="row item"><div class="col-10 p-1"><a href="jobs">Setting</a></div><div class="col-2 p-1"><img style="width: 30px;" src="/public/SVG/Right.svg"></div></div>
+            <div class="row item"><div class="col-10 p-1"><a href="jobs">Communication Setting</a></div><div class="col-2 p-1"><img style="width: 30px;" src="/public/SVG/Right.svg"></div></div>
+            <div class="row item"><div class="col-10 p-1"><a href="jobs">System Maintenance</a></div><div class="col-2 p-1"><img style="width: 30px;" src="/public/SVG/Right.svg"></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="jobs">User management</a></div></div>
+            <div class="row item"><div class="col-12 p-1"><a href="about_us">About</a></div></div>
+        </div>
     </div>
 </nav>
