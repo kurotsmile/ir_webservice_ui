@@ -683,6 +683,21 @@ table thead tr th{
 .btn-info{
     background-color: #00a1cb !important;
 }
+#list_menu_top_right a{
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+}
+
+#list_menu_top_right a:hover{
+    background-color: #c2261b;
+}
+
+#list_menu_top_right a img{
+    vertical-align: unset !important;
+}
+
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */
