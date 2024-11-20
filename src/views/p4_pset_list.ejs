@@ -61,21 +61,7 @@
                     <th style="min-width: 30%;">Action</th>
                   </tr>
                 </thead>
-                <tbody id="all_item_pset">
-                    <% if (psetList && psetList.length > 0) { %>
-                        <% psetList.forEach(pset => { %>
-                            <tr>
-                                <td scope="row"><%= pset.ID %></td>
-                                <td><%= pset.Name %></td>
-                                <td>
-                                    <a href="#" onclick="show_delete(this);return false" data-id="<%= pset.ID %>" data-name="<%= pset.Name %>"><img src="/public/SVG/Trash.svg"></a>
-                                    <a href="#"  onclick="show_copy(this);return false" data-id="<%= pset.ID %>" data-name="<%= pset.Name %>"><img src="/public/SVG/Copy.svg"></a>
-                                    <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                                </td>
-                              </tr>
-                        <% }) %>
-                    <% } %>
-                </tbody>
+                <tbody id="all_item_pset"></tbody>
             </table>
         </div>
     </main>
@@ -95,27 +81,37 @@
     <%- include('p9_alet_warning.ejs') %>
 
     <script>
-        var listpsetData = '<%= JSON.stringify(psetList) %>';
-        console.log(listpsetData);
-        
-        function add_pset(){
-            var rowCount = $('#all_item_pset tr').length;
+        var listpsetData = <%- JSON.stringify(psetList) %>;
+
+        function add_item_p(data_p){
             var html_item='';
             html_item+='<tr>';
-                html_item+='<td scope="row">'+rowCount+'</td>';
-                html_item+='<td>P'+rowCount+'</td>';
+                html_item+='<td scope="row">'+data_p.ID+'</td>';
+                html_item+='<td>'+data_p.Name+'</td>';
                 html_item+='<td>';
-                    html_item+='<a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>';
-                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
+                    html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'" data-index="'+data_p.index+'"><img src="/public/SVG/Trash.svg"></a>';
+                    html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'"" data-index="'+data_p.index+'"><img src="/public/SVG/Copy.svg"></a>';
                     html_item+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
                 html_item+='</td>';
             html_item+='</tr>';
+            return $(html_item);
+        }
 
-            $("#all_item_pset").append(html_item);
+        function add_pset(){
+            var rowCount = $('#all_item_pset tr').length;
+            var obj_p_new={};
+            obj_p_new["ID"]="p"+rowCount;
+            obj_p_new["Name"]="p"+rowCount;
+            obj_p_new["Status"]=false;
+            obj_p_new["StepCount"]=0;
+            listpsetData.push(obj_p_new);
+            save_data();
+            load_list();
         }
 
         function show_delete(emp){
             var p_name=$(emp).data("name");
+            var p_index=$(emp).data("index");
             var html='';
             html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
             html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
@@ -135,7 +131,9 @@
             var btn_del='';
             btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
             $(btn_del).click(()=>{
-                $(emp).parent().parent().remove();
+                listpsetData.splice(parseInt(p_index),1);
+                save_data();
+                load_list();
                 close_box_msg();
             });
             
@@ -190,7 +188,16 @@
             return false;
         }
 
+        function load_list(){
+            $("#all_item_pset").empty();
+            $(listpsetData).each(function(index,p){
+                p["index"]=index;
+                $("#all_item_pset").append(add_item_p(p));
+            });
+        }
+
         $(document).ready(function () {
+            load_list();
             $("#inp_search").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
                 $("#all_item_pset tr").filter(function () {
@@ -209,10 +216,10 @@
                     file_name: "PsetList"
                 }),
                 success: function(response) {
-                    alert(response.message);
+                    console.log(response.message);
                 },
                 error: function(error) {
-                    alert(error.responseJSON.error);
+                    console.log(error.responseJSON.error);
                 }
             });
         }
