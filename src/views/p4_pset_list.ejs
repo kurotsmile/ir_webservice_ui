@@ -70,9 +70,11 @@
         <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-12 text-center">
-                   <img src="/public/SVG/Back.svg">
-                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">10/1</span>
-                   <img src="/public/SVG/Forward.svg">
+                   <img src="/public/SVG/Back.svg" onclick="prev_page();return false" role="button">
+                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">
+                    <span id="currentPage">1</span>/<span id="totalPages">1</span>
+                   </span>
+                   <img src="/public/SVG/Forward.svg" onclick="next_page();return false" role="button">
                 </div>
             </div>
         </div>
@@ -82,7 +84,10 @@
 
     <script>
         var listpsetData = JSON.parse('<%- JSON.stringify(psetList) %>');
-
+        var itemsPerPage = 10;
+        var currentPage = 1;
+        var totalPages = Math.ceil(listpsetData.length / itemsPerPage);
+        
         function add_item_p(data_p){
             var html_item='';
             html_item+='<tr>';
@@ -98,7 +103,7 @@
         }
 
         function add_pset(){
-            var rowCount = $('#all_item_pset tr').length;
+            var rowCount = listpsetData.length;
             var obj_p_new={};
             obj_p_new["ID"]="p"+rowCount;
             obj_p_new["Name"]="p"+rowCount;
@@ -196,11 +201,21 @@
         }
 
         function load_list(){
-            $("#all_item_pset").empty();
             $(listpsetData).each(function(index,p){
                 p["index"]=index;
-                $("#all_item_pset").append(add_item_p(p));
             });
+            displayItems(currentPage)
+        }
+
+        function displayItems(page) {
+            var startIndex = (page - 1) * itemsPerPage;
+            var endIndex = startIndex + itemsPerPage;
+            var paginatedItems = listpsetData.slice(startIndex, endIndex);
+            $('#all_item_pset').empty();
+            $.each(paginatedItems, function(index, item) {
+                $('#all_item_pset').append(add_item_p(item));
+            });
+            update_nav_page();
         }
 
         $(document).ready(function () {
@@ -229,6 +244,21 @@
                     console.log(error.responseJSON.error);
                 }
             });
+        }
+
+        function next_page(){
+            currentPage++;
+            displayItems(currentPage);
+        }
+
+        function prev_page(){
+            currentPage--;
+            displayItems(currentPage);
+        }
+
+        function update_nav_page(){
+            $("#currentPage").html(currentPage);
+            $("#totalPages").html(totalPages);
         }
     </script>
 </body>
