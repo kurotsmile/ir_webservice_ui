@@ -70,11 +70,11 @@
         <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-12 text-center">
-                   <img src="/public/SVG/Back.svg" onclick="prev_page();return false" role="button">
+                   <img src="/public/SVG/Back.svg" onclick="prev_page();return false" role="button" id="btn_page_prev">
                    <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">
                     <span id="currentPage">1</span>/<span id="totalPages">1</span>
                    </span>
-                   <img src="/public/SVG/Forward.svg" onclick="next_page();return false" role="button">
+                   <img src="/public/SVG/Forward.svg" onclick="next_page();return false" role="button"  id="btn_page_next">
                 </div>
             </div>
         </div>
@@ -175,9 +175,9 @@
             var btn_copy='';
             btn_copy=$('<button class="btn btn-info btn-rounded text-white">Copy</button>');
             $(btn_copy).click(()=>{
-                var rowCount = $('#all_item_pset tr').length;
+                var rowCount = listpsetData.length;
                 var obj_p_new={};
-                obj_p_new["ID"]="p"+rowCount;
+                obj_p_new["ID"]=rowCount;
                 obj_p_new["Name"]=$("#inp_name_copy").val();
                 obj_p_new["Status"]=false;
                 obj_p_new["StepCount"]=0;
@@ -259,6 +259,10 @@
         function update_nav_page(){
             $("#currentPage").html(currentPage);
             $("#totalPages").html(totalPages);
+            $("#btn_page_prev").show();
+            $("#btn_page_next").show();
+            if(currentPage<=1) $("#btn_page_prev").hide();
+            if(currentPage>=totalPages) $("#btn_page_next").hide();
         }
     </script>
 </body>
