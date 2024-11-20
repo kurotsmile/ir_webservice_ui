@@ -63,38 +63,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>J1</td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row"><span class="txt_error">2</span> <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
-                    <td>Jacob 2</td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
+                    <% if (jsonList && jsonList.length > 0) { %>
+                        <% jsonList.forEach(job => { %>
+                            <tr>       
+                                <td scope="row"><%= job.ID %></td>
+                                <td><%= job.Name %></td>
+                                <td>
+                                    <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="show_delete(this);return false" data-id="<%= job.ID %>" data-name="<%= job.Name %>"><img src="/public/SVG/Trash.svg"></a>
+                                    <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
+                                    <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
+                                </td>
+                              </tr>
+                        <% }) %>
+                    <% } %>
                 </tbody>
             </table>
         </div>

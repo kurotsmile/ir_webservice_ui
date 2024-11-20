@@ -62,7 +62,15 @@ app.get('/forward_operation', (req, res) => {
 });
 
 app.get('/jobs', (req, res) => {
-    res.render('p22_jobs');
+    const filePath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading JSON file:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        const jsonList = JSON.parse(data);
+        res.render('p22_jobs', { jsonList });
+    });
 });
 
 app.get('/edit_jobs', (req, res) => {
