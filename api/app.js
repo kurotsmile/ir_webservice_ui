@@ -38,7 +38,7 @@ app.get('/change_password', (req, res) => {
 });
 
 app.get('/pset_list', (req, res) => {
-    const filePath = path.join(__dirname, 'public', 'jsonData', 'PsetList.json');
+    const filePath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading JSON file:', err);
