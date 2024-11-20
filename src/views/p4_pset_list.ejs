@@ -62,33 +62,19 @@
                   </tr>
                 </thead>
                 <tbody id="all_item_pset">
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>Mark</td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row">2</td>
-                    <td>Jacob</td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row"><span class="txt_error">3</span> <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
-                    <td>P3</td>
-                    <td>
-                        <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
+                    <% if (psetList && psetList.length > 0) { %>
+                        <% psetList.forEach(pset => { %>
+                            <tr>
+                                <td scope="row"><%= pset.ID %></td>
+                                <td><%= pset.Name %></td>
+                                <td>
+                                    <a href="#" onclick="show_delete(this);return false" data-id="<%= pset.ID %>" data-name="<%= pset.Name %>"><img src="/public/SVG/Trash.svg"></a>
+                                    <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
+                                    <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
+                                </td>
+                              </tr>
+                        <% }) %>
+                    <% } %>
                 </tbody>
             </table>
         </div>
@@ -125,7 +111,7 @@
             $("#all_item_pset").append(html_item);
         }
 
-        function show_delete(){
+        function show_delete(emp){
             $("#bk_dark_full").show();
             $("#box_msg").show();
         }

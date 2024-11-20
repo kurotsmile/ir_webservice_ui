@@ -1,5 +1,10 @@
 
 import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); 
 
 const app = express();
 const port = 3000;
@@ -34,7 +39,15 @@ app.get('/change_password', (req, res) => {
 });
 
 app.get('/pset_list', (req, res) => {
-    res.render('p4_pset_list');
+    const filePath = path.join(__dirname, 'public', 'jsonData', 'PsetList.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading JSON file:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        const psetList = JSON.parse(data);
+        res.render('p4_pset_list', { psetList });
+    });
 });
 
 app.get('/alert_waring', (req, res) => {
