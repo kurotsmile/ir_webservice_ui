@@ -69,7 +69,7 @@
                                 <td><%= pset.Name %></td>
                                 <td>
                                     <a href="#" onclick="show_delete(this);return false" data-id="<%= pset.ID %>" data-name="<%= pset.Name %>"><img src="/public/SVG/Trash.svg"></a>
-                                    <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
+                                    <a href="#"  onclick="show_copy(this);return false" data-id="<%= pset.ID %>" data-name="<%= pset.Name %>"><img src="/public/SVG/Copy.svg"></a>
                                     <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                                 </td>
                               </tr>
@@ -112,8 +112,78 @@
         }
 
         function show_delete(emp){
+            var p_name=$(emp).data("name");
+            var html='';
+            html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
+            html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
+            $("#box_msg_title").empty();
+            $("#box_msg_body").empty();
+            $("#box_msg_btn").empty();
+
+            $("#box_msg_title").html('<div class="txt"><img src="/public/SVG/Warning.svg"/> Warning</div>');
+            $("#box_msg_body").html(html);
+
+            var btn_cancel='';
+            btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded">Cancel</a>');
+            $(btn_cancel).click(()=>{
+                close_box_msg();
+            });
+
+            var btn_del='';
+            btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
+            $(btn_del).click(()=>{
+                $(emp).parent().parent().remove();
+                close_box_msg();
+            });
+            
+            $("#box_msg_btn").append(btn_cancel);
+            $("#box_msg_btn").append(btn_del);
+
             $("#bk_dark_full").show();
             $("#box_msg").show();
+        }
+
+        function show_copy(emp){
+            var p_name=$(emp).data("name");
+            var html='';
+            html+='<div class="w-100">';
+            html+='<div class="input-group r border mb-2 mt-2 w-100">';
+                html+='<span class="input-group-text r-left">&nbsp;</span>';
+                html+='<input type="text" placeholder="Enter data" value="'+p_name+'_copy" class="form-control">';
+                html+='<span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>';
+                html+='</div>';
+            html+='</div>';
+            $("#box_msg_title").empty();
+            $("#box_msg_body").empty();
+            $("#box_msg_btn").empty();
+
+            $("#box_msg_title").html('<div class="txt">Copy '+p_name+'</div>');
+            $("#box_msg_body").html(html);
+
+            var btn_cancel='';
+            btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded">Cancel</a>');
+            $(btn_cancel).click(()=>{
+                close_box_msg();
+            });
+
+            var btn_copy='';
+            btn_copy=$('<button class="btn btn-info btn-rounded text-white">Copy</button>');
+            $(btn_copy).click(()=>{
+                alert("Copy");
+                close_box_msg();
+            });
+            
+            $("#box_msg_btn").append(btn_cancel);
+            $("#box_msg_btn").append(btn_copy);
+
+            $("#bk_dark_full").show();
+            $("#box_msg").show();
+        }
+
+        function close_box_msg(){
+            $('#bk_dark_full').hide();
+            $('#box_msg').hide();
+            return false;
         }
     </script>
 </body>
