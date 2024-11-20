@@ -37,7 +37,7 @@
                         <div class="col-8">
                             <div class="input-group r border mb-2 mt-2">
                                 <span class="input-group-text r-left">&nbsp;</span>
-                                <input type="text" placeholder="Search" class="form-control">
+                                <input type="text" placeholder="Search" class="form-control" id="inp_search">
                                 <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                             </div>
                         </div>
@@ -185,6 +185,16 @@
             $('#box_msg').hide();
             return false;
         }
+
+        $(document).ready(function () {
+            $("#inp_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#all_item_pset tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+
     </script>
 </body>
 

@@ -36,7 +36,7 @@
                         <div class="col-8">
                             <div class="input-group r border mb-2 mt-2">
                                 <span class="input-group-text r-left">&nbsp;</span>
-                                <input type="text" placeholder="Search" class="form-control">
+                                <input type="text" placeholder="Search" class="form-control" id="inp_search">
                                 <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                             </div>
                         </div>
@@ -62,14 +62,14 @@
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="all_item_job">
                     <% if (jsonList && jsonList.length > 0) { %>
                         <% jsonList.forEach(job => { %>
                             <tr>       
                                 <td scope="row"><%= job.ID %></td>
                                 <td><%= job.Name %></td>
                                 <td>
-                                    <a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Tick.svg"></a>
                                     <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
                                     <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
                                     <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
@@ -77,7 +77,7 @@
                                 </td>
                                 <td>
                                     <a href="#" onclick="show_delete(this);return false" data-id="<%= job.ID %>" data-name="<%= job.Name %>"><img src="/public/SVG/Trash.svg"></a>
-                                    <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
+                                    <a href="#" onclick="show_copy(this);return false" data-id="<%= job.ID %>" data-name="<%= job.Name %>"><img src="/public/SVG/Copy.svg"></a>
                                     <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                                 </td>
                               </tr>
@@ -119,10 +119,106 @@
     <%- include('p9_alet_warning.ejs') %>
 
     <script>
-        function show_delete(){
+        function add_job(){
+            var rowCount = $('#all_item_pset tr').length;
+            var html_item='';
+            html_item+='<tr>';
+                html_item+='<td scope="row">'+rowCount+'</td>';
+                html_item+='<td>P'+rowCount+'</td>';
+                html_item+='<td>';
+                    html_item+='<a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>';
+                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
+                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
+                html_item+='</td>';
+            html_item+='</tr>';
+
+            $("#all_item_pset").append(html_item);
+        }
+
+        function show_delete(emp){
+            var p_name=$(emp).data("name");
+            var html='';
+            html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
+            html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
+            $("#box_msg_title").empty();
+            $("#box_msg_body").empty();
+            $("#box_msg_btn").empty();
+
+            $("#box_msg_title").html('<div class="txt"><img src="/public/SVG/Warning.svg"/> Warning</div>');
+            $("#box_msg_body").html(html);
+
+            var btn_cancel='';
+            btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded">Cancel</a>');
+            $(btn_cancel).click(()=>{
+                close_box_msg();
+            });
+
+            var btn_del='';
+            btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
+            $(btn_del).click(()=>{
+                $(emp).parent().parent().remove();
+                close_box_msg();
+            });
+            
+            $("#box_msg_btn").append(btn_cancel);
+            $("#box_msg_btn").append(btn_del);
+
             $("#bk_dark_full").show();
             $("#box_msg").show();
         }
+
+        function show_copy(emp){
+            var p_name=$(emp).data("name");
+            var html='';
+            html+='<div class="w-100">';
+            html+='<div class="input-group r border mb-2 mt-2 w-100">';
+                html+='<span class="input-group-text r-left">&nbsp;</span>';
+                html+='<input type="text" placeholder="Enter data" value="'+p_name+'_copy" class="form-control">';
+                html+='<span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>';
+                html+='</div>';
+            html+='</div>';
+            $("#box_msg_title").empty();
+            $("#box_msg_body").empty();
+            $("#box_msg_btn").empty();
+
+            $("#box_msg_title").html('<div class="txt">Copy '+p_name+'</div>');
+            $("#box_msg_body").html(html);
+
+            var btn_cancel='';
+            btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded">Cancel</a>');
+            $(btn_cancel).click(()=>{
+                close_box_msg();
+            });
+
+            var btn_copy='';
+            btn_copy=$('<button class="btn btn-info btn-rounded text-white">Copy</button>');
+            $(btn_copy).click(()=>{
+                alert("Copy");
+                close_box_msg();
+            });
+            
+            $("#box_msg_btn").append(btn_cancel);
+            $("#box_msg_btn").append(btn_copy);
+
+            $("#bk_dark_full").show();
+            $("#box_msg").show();
+        }
+
+        function close_box_msg(){
+            $('#bk_dark_full').hide();
+            $('#box_msg').hide();
+            return false;
+        }
+
+        $(document).ready(function () {
+            $("#inp_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#all_item_job tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+
     </script>
 </body>
 </html>
