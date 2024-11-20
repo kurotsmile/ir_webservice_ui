@@ -1,11 +1,18 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+function get_file_system(nameFile) {
+    const dirData = path.join(os.homedir(), 'Data');
+    const filePath = path.join(dirData, `${nameFile}.json`);
+    return filePath;
+}
 
 app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'ejs');
@@ -17,19 +24,31 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
+
 app.get('/', (req, res) => {
     res.render('p1_login');
 });
 
 app.get('/home', (req, res) => {
-    const filePath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading JSON file:', err);
-            return res.status(500).send('Internal Server Error');
-        }
-        const jsonList = JSON.parse(data);
-        res.render('p6_home', { jsonList });
+    const primaryPath = path.join(get_file_system("JobList"));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
+
+    return new Promise((resolve, reject) => {
+        fs.access(primaryPath, fs.constants.F_OK, (err) => {
+            const filePath = err ? secondaryPath : primaryPath;
+            fs.readFile(filePath, 'utf8', (readErr, data) => {
+                if (readErr) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                } else {
+                    try {
+                        const jsonData = JSON.parse(data);
+                        res.render('p6_home', { jsonList:jsonData });
+                    } catch (parseErr) {
+                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
+                    }
+                }
+            });
+        });
     });
 });
 
@@ -46,11 +65,12 @@ app.get('/change_password', (req, res) => {
 });
 
 app.get('/pset_list', (req, res) => {
-    const primaryPath = path.join('C:\\Users\\van-thien.SYSTEM-EXE\\Data\\PsetList.json');
+    const primaryPath = path.join(get_file_system("PsetList"));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
 
     return new Promise((resolve, reject) => {
         fs.access(primaryPath, fs.constants.F_OK, (err) => {
+            console.log(err);
             const filePath = err ? secondaryPath : primaryPath;
             fs.readFile(filePath, 'utf8', (readErr, data) => {
                 if (readErr) {
@@ -73,7 +93,9 @@ app.get('/alert_waring', (req, res) => {
 });
 
 app.get('/edit_pset', (req, res) => {
-    res.render('p13_edit_pset');
+    const id = req.query.id;
+    const name=req.query.name;
+    res.render('p13_edit_pset', { id,name});
 });
 
 app.get('/forward_operation', (req, res) => {
@@ -81,14 +103,25 @@ app.get('/forward_operation', (req, res) => {
 });
 
 app.get('/jobs', (req, res) => {
-    const filePath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading JSON file:', err);
-            return res.status(500).send('Internal Server Error');
-        }
-        const jsonList = JSON.parse(data);
-        res.render('p22_jobs', { jsonList });
+    const primaryPath = path.join(get_file_system("JobList"));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
+
+    return new Promise((resolve, reject) => {
+        fs.access(primaryPath, fs.constants.F_OK, (err) => {
+            const filePath = err ? secondaryPath : primaryPath;
+            fs.readFile(filePath, 'utf8', (readErr, data) => {
+                if (readErr) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                } else {
+                    try {
+                        const jsonData = JSON.parse(data);
+                        res.render('p22_jobs', { jsonList:jsonData });
+                    } catch (parseErr) {
+                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
+                    }
+                }
+            });
+        });
     });
 });
 
@@ -205,7 +238,7 @@ app.post('/save-json', (req, res) => {
     if (!data_json || !file_name) {
         return res.status(400).json({ error: 'data_json and file_name are required' });
     }
-    const filePath = path.join('C:\\Users\\van-thien.SYSTEM-EXE\\Data\\'+file_name+'.json');
+    const filePath = path.join(get_file_system(file_name));
     fs.writeFile(filePath, JSON.stringify(data_json, null, 2), (err) => {
         if (err) {
             console.error('Error writing JSON file:', err);
