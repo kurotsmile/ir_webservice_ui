@@ -60,7 +60,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  field_key="Units">
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>"  field_key="Units">
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" field_key="CycleDelay">
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.CycleDelay ? jsonData.CycleDelay : 0 %>" field_key="CycleDelay">
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="15" class="form-control">
+                        <input type="text" placeholder="Enter data"  class="form-control" value="<%= jsonData && jsonData.CycleTimeout ? jsonData.CycleTimeout : 0 %>" field_key="CycleTimeout">
                         <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TrPerPset ? jsonData.TrPerPset : 0 %>" field_key="TrPerPset">
                         <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="90" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Acceleration ? jsonData.Acceleration : 0 %>" field_key="Acceleration">
                         <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
