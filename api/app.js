@@ -16,13 +16,22 @@ app.use((req, res, next) => {
     res.locals.currentRoute = req.path;
     next();
 });
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.render('p1_login');
 });
 
 app.get('/home', (req, res) => {
-    res.render('p6_home');
+    const filePath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading JSON file:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        const jsonList = JSON.parse(data);
+        res.render('p6_home', { jsonList });
+    });
 });
 
 app.get('/login', (req, res) => {
@@ -179,6 +188,22 @@ app.get('/alarm', (req, res) => {
 
 app.get('/edit_alarm', (req, res) => {
     res.render('p63_alarm_edit');
+});
+
+app.post('/save-json', (req, res) => {
+    const { data_json, file_name } = req.body;
+    if (!data_json || !file_name) {
+        return res.status(400).json({ error: 'data_json and file_name are required' });
+    }
+    const filePath = path.join('C:\\Users\\van-thien.SYSTEM-EXE\\Data\\'+file_name+'.json');
+    fs.writeFile(filePath, JSON.stringify(data_json, null, 2), (err) => {
+        if (err) {
+            console.error('Error writing JSON file:', err);
+        } else {
+            console.log(`File saved successfully at ${filePath}`);
+        }
+    });
+    res.status(200).json({ message: 'Data saved successfully!' });
 });
 
 export default app;

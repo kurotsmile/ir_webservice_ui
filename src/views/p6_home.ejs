@@ -27,6 +27,11 @@
                         <span class="input-group-text r-left"><img src="/public/SVG/Job.svg"/></span>
                         <select class="form-select custom-combobox" onchange="handleJobChange()" id="job-selection">
                             <option value="" disabled selected hidden>Select Job</option>
+                            <% if (jsonList && jsonList.length > 0) { %>
+                                <% jsonList.forEach(job => { %>
+                                    <option value="<%= job.ID %>"><%= job.Name %></option>
+                                <% }) %>
+                            <% } %>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>

@@ -95,6 +95,9 @@
     <%- include('p9_alet_warning.ejs') %>
 
     <script>
+        var listpsetData = '<%= JSON.stringify(psetList) %>';
+        console.log(listpsetData);
+        
         function add_pset(){
             var rowCount = $('#all_item_pset tr').length;
             var html_item='';
@@ -171,6 +174,7 @@
             $(btn_copy).click(()=>{
                 alert("Copy");
                 close_box_msg();
+                save_data();
             });
             
             $("#box_msg_btn").append(btn_cancel);
@@ -195,6 +199,23 @@
             });
         });
 
+        function save_data(){
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: listpsetData,
+                    file_name: "PsetList"
+                }),
+                success: function(response) {
+                    alert(response.message);
+                },
+                error: function(error) {
+                    alert(error.responseJSON.error);
+                }
+            });
+        }
     </script>
 </body>
 
