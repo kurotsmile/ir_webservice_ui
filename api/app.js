@@ -17,7 +17,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
-
 app.get('/', (req, res) => {
     res.render('p1_login');
 });
@@ -47,14 +46,25 @@ app.get('/change_password', (req, res) => {
 });
 
 app.get('/pset_list', (req, res) => {
-    const filePath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading JSON file:', err);
-            return res.status(500).send('Internal Server Error');
-        }
-        const psetList = JSON.parse(data);
-        res.render('p4_pset_list', { psetList });
+    const primaryPath = path.join('C:\\Users\\van-thien.SYSTEM-EXE\\Data\\PsetList.json');
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
+
+    return new Promise((resolve, reject) => {
+        fs.access(primaryPath, fs.constants.F_OK, (err) => {
+            const filePath = err ? secondaryPath : primaryPath;
+            fs.readFile(filePath, 'utf8', (readErr, data) => {
+                if (readErr) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                } else {
+                    try {
+                        const jsonData = JSON.parse(data);
+                        res.render('p4_pset_list', { psetList:jsonData });
+                    } catch (parseErr) {
+                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
+                    }
+                }
+            });
+        });
     });
 });
 

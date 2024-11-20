@@ -81,7 +81,7 @@
     <%- include('p9_alet_warning.ejs') %>
 
     <script>
-        var listpsetData = <%- JSON.stringify(psetList) %>;
+        var listpsetData = JSON.parse('<%- JSON.stringify(psetList) %>');
 
         function add_item_p(data_p){
             var html_item='';
