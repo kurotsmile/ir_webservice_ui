@@ -1,4 +1,3 @@
-
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -11,6 +10,7 @@ const port = 3000;
 
 app.set('views', './src/views'); 
 app.set('view engine', 'ejs');
+
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
     res.locals.ver = '1.1.6';

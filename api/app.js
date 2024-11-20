@@ -2,7 +2,6 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -39,7 +38,7 @@ app.get('/change_password', (req, res) => {
 });
 
 app.get('/pset_list', (req, res) => {
-    const filePath = path.join(__dirname, 'public', 'jsonData', 'PsetList.json');
+    const filePath = path.join(__dirname, 'api/public', 'jsonData', 'PsetList.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading JSON file:', err);
