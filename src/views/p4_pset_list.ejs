@@ -96,7 +96,7 @@
                 html_item+='<td>';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'" data-index="'+data_p.index+'"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'"" data-index="'+data_p.index+'"><img src="/public/SVG/Copy.svg"></a>';
-                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
+                    html_item+='<a href="edit_pset?id='+data_p.ID+'&name='+data_p.Name+'"><img src="/public/SVG/Edit.svg"></a>';
                 html_item+='</td>';
             html_item+='</tr>';
             return $(html_item);
@@ -105,7 +105,7 @@
         function add_pset(){
             var rowCount = listpsetData.length;
             var obj_p_new={};
-            obj_p_new["ID"]="p"+rowCount;
+            obj_p_new["ID"]=rowCount;
             obj_p_new["Name"]="p"+rowCount;
             obj_p_new["Status"]=false;
             obj_p_new["StepCount"]=0;

@@ -75,7 +75,9 @@ app.get('/alert_waring', (req, res) => {
 });
 
 app.get('/edit_pset', (req, res) => {
-    res.render('p13_edit_pset');
+    const id = req.query.id;
+    const name=req.query.name;
+    res.render('p13_edit_pset', { id,name});
 });
 
 app.get('/forward_operation', (req, res) => {
