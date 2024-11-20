@@ -150,7 +150,7 @@
             html+='<div class="w-100">';
             html+='<div class="input-group r border mb-2 mt-2 w-100">';
                 html+='<span class="input-group-text r-left">&nbsp;</span>';
-                html+='<input type="text" placeholder="Enter data" value="'+p_name+'_copy" class="form-control">';
+                html+='<input type="text" placeholder="Enter data" value="'+p_name+'_copy" class="form-control" id="inp_name_copy">';
                 html+='<span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>';
                 html+='</div>';
             html+='</div>';
@@ -170,9 +170,16 @@
             var btn_copy='';
             btn_copy=$('<button class="btn btn-info btn-rounded text-white">Copy</button>');
             $(btn_copy).click(()=>{
-                alert("Copy");
+                var rowCount = $('#all_item_pset tr').length;
+                var obj_p_new={};
+                obj_p_new["ID"]="p"+rowCount;
+                obj_p_new["Name"]=$("#inp_name_copy").val();
+                obj_p_new["Status"]=false;
+                obj_p_new["StepCount"]=0;
+                listpsetData.push(obj_p_new);
                 close_box_msg();
                 save_data();
+                load_list();
             });
             
             $("#box_msg_btn").append(btn_cancel);
