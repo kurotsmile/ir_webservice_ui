@@ -190,7 +190,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.Tilt_angel_inclination ? jsonData.Tilt_angel_inclination : 0 %>" field_key="Tilt_angel_inclination">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Tilt_angel_working_inclination ? jsonData.Tilt_angel_working_inclination : 0 %>" field_key="Tilt_angel_working_inclination">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -218,7 +218,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="90" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.HoldTorque ? jsonData.HoldTorque : 90 %>" field_key="HoldTorque">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -262,7 +262,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Time ? jsonData.Time : 1 %>" field_key="Time">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -276,7 +276,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1000" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TracePoints ? jsonData.TracePoints : 1000 %>" field_key="TracePoints">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data">
+                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data" value="<%= jsonData && jsonData.TorqueThresholdToCapture ? jsonData.TorqueThresholdToCapture : 1 %>" field_key="TorqueThresholdToCapture">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
