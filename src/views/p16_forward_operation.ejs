@@ -26,6 +26,7 @@
                             &nbsp;
                         </div>
                         <div class="col-11">
+                            <a href="/edit_pset?id=<%= id %>"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
                             <h2 class="text-white" style="margin-left: -42px;">Forward Operation</h2>
                             <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/edit_pset?id=<%= id %>">Edit Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Forward Operation</div>
                         </div>
@@ -37,12 +38,12 @@
                         <div class="col-8">
                             <div class="input-group r border mb-2 mt-2">
                                 <span class="input-group-text r-left">&nbsp;</span>
-                                <input type="text" placeholder="Search" class="form-control">
+                                <input type="text" placeholder="Search" class="form-control" id="inp_search">
                                 <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                             </div>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Job</button>
+                            <button onclick="add_steps();return false;" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Step</button>
                         </div>
                     </div>
                 </div>
@@ -62,7 +63,7 @@
                     <th style="width: 30%;">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="all_items">
                     <% 
                         const typeNames = ["Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
                     %>
@@ -88,5 +89,22 @@
             </table>
         </div>
     </main>
+
+    <script>
+        var jsonData=JSON.parse('<%- JSON.stringify(jsonData) %>');
+
+        function add_steps(){
+            alert("Add steps");
+        }
+
+        $(document).ready(function () {
+            $("#inp_search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#all_items tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

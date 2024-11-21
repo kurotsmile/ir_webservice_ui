@@ -70,14 +70,29 @@ app.get('/pset_list', (req, res) => {
 
     return new Promise((resolve, reject) => {
         fs.access(primaryPath, fs.constants.F_OK, (err) => {
-            console.log(err);
             const filePath = err ? secondaryPath : primaryPath;
             fs.readFile(filePath, 'utf8', (readErr, data) => {
                 if (readErr) {
                     reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
                 } else {
                     try {
-                        const jsonData = JSON.parse(data);
+                        let jsonData = JSON.parse(data);
+
+                        if (!Array.isArray(jsonData)) jsonData = [];
+
+                        for (let i = jsonData.length; i < 16; i++) {
+                            jsonData.push({
+                                ID: "",
+                                Name: "",
+                                Status: false,
+                                StepCount: 0,
+                                index: i + 1
+                            });
+                        }
+                        jsonData = jsonData.map((item, idx) => ({
+                            ...item,
+                            index: idx + 1,
+                        }));
                         res.render('p4_pset_list', { psetList:jsonData });
                     } catch (parseErr) {
                         reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
@@ -87,6 +102,7 @@ app.get('/pset_list', (req, res) => {
         });
     });
 });
+
 
 app.get('/alert_waring', (req, res) => {
     res.render('p9_alet_warning');

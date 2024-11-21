@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.1.6';
+    res.locals.ver = '1.2.3';
     res.locals.currentRoute = req.path;
     next();
 });
@@ -78,7 +78,23 @@ app.get('/pset_list', (req, res) => {
                     reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
                 } else {
                     try {
-                        const jsonData = JSON.parse(data);
+                        let jsonData = JSON.parse(data);
+
+                        if (!Array.isArray(jsonData)) jsonData = [];
+
+                        for (let i = jsonData.length; i < 16; i++) {
+                            jsonData.push({
+                                ID: "",
+                                Name: "",
+                                Status: false,
+                                StepCount: 0,
+                                index: i + 1
+                            });
+                        }
+                        jsonData = jsonData.map((item, idx) => ({
+                            ...item,
+                            index: idx + 1,
+                        }));
                         res.render('p4_pset_list', { psetList:jsonData });
                     } catch (parseErr) {
                         reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));

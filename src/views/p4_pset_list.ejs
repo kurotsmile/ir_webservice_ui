@@ -53,7 +53,7 @@
     <!-- Main Content Full Width -->
     <main class="">
         <div class="container-fluid">
-            <table class="table table-lg table-dark table-bordered table-p-list">
+            <table class="table table-lg table-dark table-bordered table-p-list mb-5">
                 <thead>
                   <tr>
                     <th scope="col" style="width: 10%;">ID</th>
@@ -66,7 +66,7 @@
         </div>
     </main>
 
-    <div id="bar_footer">
+    <div id="bar_footer" class="fixed">
         <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-12 text-center">
@@ -103,14 +103,22 @@
         }
 
         function add_pset(){
-            var rowCount = listpsetData.length;
-            var obj_p_new={};
-            obj_p_new["ID"]=""+rowCount;
-            obj_p_new["Name"]="p"+rowCount;
-            obj_p_new["Status"]=false;
-            obj_p_new["StepCount"]=0;
-            listpsetData.push(obj_p_new);
-            currentPage=totalPages;
+            var is_add=false;
+            $(listpsetData).each(function(index,p){
+                if(p.ID==""){
+                    p.ID=""+(index+1);
+                    p["Name"]="P"+(index+1);
+                    p["Status"]=false;
+                    p["StepCount"]=0;
+                    is_add=true;
+                    return false;
+                }
+            });
+            if(is_add)
+                alert("New addition successful!");
+            else
+                alert("Cannot add because Pset quantity is reached!");
+
             save_data();
             load_list();
         }
@@ -137,7 +145,11 @@
             var btn_del='';
             btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
             $(btn_del).click(()=>{
-                listpsetData.splice(parseInt(p_index),1);
+                var index_p=parseInt(p_index);
+                listpsetData[index_p].ID="";
+                listpsetData[index_p].Name="";
+                listpsetData[index_p].StepCount=0;
+                listpsetData[index_p].Status=false;
                 save_data();
                 load_list();
                 close_box_msg();
@@ -236,6 +248,10 @@
         });
 
         function save_data(){
+            $(listpsetData).each(function(index,p){
+                p["index"]=index;
+            });
+
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
@@ -267,10 +283,6 @@
         function update_nav_page(){
             $("#currentPage").html(currentPage);
             $("#totalPages").html(totalPages);
-            $("#btn_page_prev").show();
-            $("#btn_page_next").show();
-            if(currentPage<=1) $("#btn_page_prev").hide();
-            if(currentPage>=totalPages) $("#btn_page_next").hide();
         }
 
         function update_meta_nav_page(){

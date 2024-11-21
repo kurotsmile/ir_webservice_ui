@@ -676,6 +676,13 @@ table thead tr th{
     color: white;
 }
 
+#bar_footer.fixed{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
 .btn-success{
     background-color: #61ae23 !important;
 }
