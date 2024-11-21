@@ -222,9 +222,14 @@
         $(document).ready(function () {
             load_list();
             $("#inp_search").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#all_item_pset tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                const value = $(this).val().toLowerCase();
+                const filteredData = listpsetData.filter(item =>
+                    String(item.ID).toLowerCase().includes(value) || item.Name.toLowerCase().includes(value)
+                );
+
+                $('#all_item_pset').empty();
+                $.each(filteredData, function(index, item) {
+                    $('#all_item_pset').append(add_item_p(item));
                 });
             });
         });
