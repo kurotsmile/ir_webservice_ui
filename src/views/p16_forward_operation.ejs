@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-11">
                             <h2 class="text-white" style="margin-left: -42px;">Forward Operation</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/pset_list">Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Forward Operation</div>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/edit_pset?id=<%= id %>">Edit Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Forward Operation</div>
                         </div>
                     </div>
                 </div>
@@ -63,26 +63,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>J1</td>
-                    <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row">2 <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
-                    <td>Jacob 2</td>
-                    <td>
-                        <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                        <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
-                    </td>
-                  </tr>
+                    <% 
+                        const typeNames = ["Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
+                    %>
+                    <% if (jsonData.Steps && jsonData.Steps.length > 0) { %>
+                        <% for (let i = 0; i < jsonData.Steps.length; i++) { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= typeNames[jsonData.Steps[i].Type] || "Unknown Type" %></td>
+                                <td>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
+                                    <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="3" class="text-center">No steps available</td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>
