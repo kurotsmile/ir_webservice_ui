@@ -47,8 +47,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="<%=name %>" class="form-control field_data" field_key="Name">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" value="<%=name %>" class="form-control field_data" field_key="Name" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,14 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>"  field_key="Units">
+                        <select class="form-select custom-combobox field_data" field_key="Units"> 
+                            <option value="Nm" <%= jsonData && jsonData.Units === 'Nm' ? 'selected' : '' %>>Nm</option>
+                            <option value="dNm" <%= jsonData && jsonData.Units === 'dNm' ? 'selected' : '' %>>dNm</option>
+                            <option value="Ft-lbs" <%= jsonData && jsonData.Units === 'Ft-lbs' ? 'selected' : '' %>>Ft-lbs</option>
+                            <option value="Ln-lbs" <%= jsonData && jsonData.Units === 'Ln-lbs' ? 'selected' : '' %>>Ln-lbs</option>
+                            <option value="Kg-M" <%= jsonData && jsonData.Units === 'Kg-M' ? 'selected' : '' %>>Kg-M</option>
+                            <option value="Kg-Cm" <%= jsonData && jsonData.Units === 'Kg-Cm' ? 'selected' : '' %>>Kg-Cm</option>
+                        </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -118,7 +125,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data"  class="form-control" value="<%= jsonData && jsonData.CycleTimeout ? jsonData.CycleTimeout : 0 %>" field_key="CycleTimeout">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -132,7 +139,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TrPerPset ? jsonData.TrPerPset : 0 %>" field_key="TrPerPset">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -146,7 +153,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Acceleration ? jsonData.Acceleration : 0 %>" field_key="Acceleration">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -180,7 +187,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="0" class="form-control field_data">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -194,7 +201,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="0" class="form-control field_data">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -208,7 +215,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="90" class="form-control field_data">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -252,7 +259,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="1" class="form-control field_data">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -266,7 +273,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="1000" class="form-control field_data">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -280,7 +287,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="0" class="form-control field_data">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -324,7 +331,7 @@
 
     <script>
         function save_data() {
-            var obj_p = {};
+            var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
             $(".field_data").each(function (index, emp) {
                 var $emp = $(emp);
                 var val_emp = $emp.val();
@@ -337,6 +344,12 @@
             alert(JSON.stringify(obj_p));
         }
 
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
     </script>
 </body>
 </html>

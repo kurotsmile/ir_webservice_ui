@@ -105,7 +105,7 @@
         function add_pset(){
             var rowCount = listpsetData.length;
             var obj_p_new={};
-            obj_p_new["ID"]=rowCount;
+            obj_p_new["ID"]=""+rowCount;
             obj_p_new["Name"]="p"+rowCount;
             obj_p_new["Status"]=false;
             obj_p_new["StepCount"]=0;
@@ -178,12 +178,13 @@
             $(btn_copy).click(()=>{
                 var rowCount = listpsetData.length;
                 var obj_p_new={};
-                obj_p_new["ID"]=rowCount;
+                obj_p_new["ID"]=""+rowCount;
                 obj_p_new["Name"]=$("#inp_name_copy").val();
                 obj_p_new["Status"]=false;
                 obj_p_new["StepCount"]=0;
                 listpsetData.push(obj_p_new);
                 close_box_msg();
+                currentPage=totalPages;
                 save_data();
                 load_list();
             });
