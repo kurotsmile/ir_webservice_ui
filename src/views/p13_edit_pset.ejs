@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Pset List</title>
+    <title>Pset Edit</title>
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
     <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
@@ -60,7 +60,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" field_key="Units"> 
+                        <select class="form-select custom-combobox field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>" field_key="Units"> 
                             <option value="Nm" <%= jsonData && jsonData.Units === 'Nm' ? 'selected' : '' %>>Nm</option>
                             <option value="dNm" <%= jsonData && jsonData.Units === 'dNm' ? 'selected' : '' %>>dNm</option>
                             <option value="Ft-lbs" <%= jsonData && jsonData.Units === 'Ft-lbs' ? 'selected' : '' %>>Ft-lbs</option>
@@ -332,6 +332,7 @@
     <script>
         function save_data() {
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
+            var id_file=obj_p["ID"];
             $(".field_data").each(function (index, emp) {
                 var $emp = $(emp);
                 var val_emp = $emp.val();
@@ -341,7 +342,23 @@
                     console.log(index + " : " + key_emp + " = " + val_emp);
                 }
             });
-            alert(JSON.stringify(obj_p));
+            
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: obj_p,
+                    file_name: id_file
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                    alert("Update success");
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
         }
 
         function show_edit(emp){
@@ -350,6 +367,13 @@
                 $(this).prop('disabled', !$(this).prop('disabled'));
             });
         }
+
+        $(document).ready(()=>{
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+        });
     </script>
 </body>
 </html>
