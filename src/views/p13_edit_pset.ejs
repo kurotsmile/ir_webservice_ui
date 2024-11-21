@@ -168,7 +168,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3 field_data"/>
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EarlyRelease ? jsonData.EarlyRelease : false %>" field_key="EarlyRelease" field_type="emp_value"/>
                 </div>
             </div>
 
@@ -178,7 +178,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3 field_data"/>
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.RehitDetection ? jsonData.RehitDetection : false %>" field_key="RehitDetection" field_type="emp_value"/>
                 </div>
             </div>
             
@@ -240,7 +240,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3 field_data"/>
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value"/>
                 </div>
             </div>
 
@@ -250,7 +250,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;" class="mb-2 mt-3 field_data"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value"/>
                 </div>
             </div>
 
@@ -347,8 +347,6 @@
                         obj_p[key_emp] =  $(emp).val();
                 }
             });
-
-            alert(JSON.stringify(obj_p));
             
             $.ajax({
                 url: '/save-json',
@@ -411,6 +409,24 @@
                     $(this).attr("src", "/public/SVG/Checked.svg");
                 } else {
                     $(this).attr("src", "/public/SVG/Unchecked.svg");
+                }
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
                 }
             });
         });
