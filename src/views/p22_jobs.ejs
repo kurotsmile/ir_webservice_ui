@@ -119,6 +119,22 @@
     <%- include('p9_alet_warning.ejs') %>
 
     <script>
+        var jsonList= JSON.parse('<%- JSON.stringify(jsonList) %>');
+
+        function add_item_j(data_j){
+            var html_item='';
+            html_item+='<tr>';
+                html_item+='<td scope="row">'+data_j.ID+'</td>';
+                html_item+='<td>'+data_j.Name+'</td>';
+                html_item+='<td>';
+                    html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'" data-index="'+data_j.index+'"><img src="/public/SVG/Trash.svg"></a>';
+                    html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'"" data-index="'+data_j.index+'"><img src="/public/SVG/Copy.svg"></a>';
+                    html_item+='<a href="edit_jobs?id='+data_j.ID+'&name='+data_j.Name+'"><img src="/public/SVG/Edit.svg"></a>';
+                html_item+='</td>';
+            html_item+='</tr>';
+            return $(html_item);
+        }
+
         function add_job(){
             var rowCount = $('#all_item_pset tr').length;
             var html_item='';

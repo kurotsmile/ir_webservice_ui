@@ -1,695 +1,98 @@
 [
-  {
-    "ID": "P1727548723000753",
-    "Name": "P133",
-    "Status": true,
-    "StepCount": 1,
-    "Units": "Kg-Cm",
-    "CycleDelay": "0",
-    "CycleTimeout": 15,
-    "TrPerPset": "1",
-    "Acceleration": "90",
-    "EarlyRelease": true,
-    "RehitDetection": true,
-    "TiltStart": 0,
-    "TiltWorking": 0,
-    "HoldTorque": "100",
-    "TraceEnable": true,
-    "CompleteTraceTransfer": false,
-    "Time": "1",
-    "TracePoints": "1000",
-    "TorqueThresholdToCapture": "0",
-    "TraceSelection": "Torque",
-    "CurveLog": "All",
-    "Steps": [
-      {
-        "Type": 1,
-        "TA": {
-          "TorqueTarget": 2.5,
-          "TorqueHighLimit": 3,
-          "TorqueLowLimit": 2,
-          "Threshold": 0,
-          "DownshiftThreshold": 1,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 1,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 30,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      },
-      {
-        "Type": 0,
-        "TA": {
-          "TorqueTarget": 1,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "OvershootComppensation": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "AT": {
-          "AngleTarget": 1,
-          "AngleHighLimit": 1,
-          "AngleLowLimit": 0,
-          "OvershootComppensation": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "Threshold": 0,
-          "DownshiftThreshold": 0,
-          "Direction": "Clockwise",
-          "FreeSpeed": 100,
-          "ShiftdownSpeed": 20,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "PT": {
-          "Direction": "Clockwise",
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "CutInAngle": 1,
-          "CutInTorqueHighLimit": 0,
-          "SnugTorque": 0,
-          "TorqueHighLimit": 1,
-          "TorqueLowLimit": 0,
-          "FreeSpeed": 100,
-          "Method": "Angle",
-          "TargetPrevailingAngle": 0,
-          "PrevailingAngleHighLimit": 0,
-          "PrevailingAngleLowLimit": 0,
-          "SlopeChordLength": 8,
-          "SlopeDeviation": 0,
-          "SlopeDeviationPersistence": 0,
-          "StepTransition": "Level and Smooth"
-        },
-        "Seat": {
-          "TorqueTarget": 0,
-          "AngleHighLimit": 32000,
-          "AngleLowLimit": 0,
-          "EorDataEnable": true,
-          "TorqueThresholdEnabled": true,
-          "StepTransition": "Level and Smooth"
-        },
-        "Delay": {
-          "Target": 0.1
-        },
-        "Backout": {
-          "BackoutAngle": 1,
-          "BackoutHighTorqueLimit": 0,
-          "BackoutSpeed": 0,
-          "EorDataEnable": true
-        }
-      }
-    ],
-    "Reverse": {
-      "DisableReverse": false,
-      "ReverseEorEnabled": false,
-      "BatchDecrement": false,
-      "TorqueTarget": 8,
-      "ReverseThreshold": 4.5,
-      "ReverseSpeed": 30
+    {
+        "ID": "P1727548723000753",
+        "Name": "P1",
+        "Status": true,
+        "StepCount": 1
     },
-    "Tilt_angel_inclination": "0",
-    "Tilt_angel_working_inclination": "0"
-  },
-  {
-    "ID": "P1727551564006282",
-    "Name": "P2",
-    "Status": false,
-    "StepCount": 1
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 8
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 1
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 1
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 8
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 1
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 8
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  },
-  {
-    "ID": "",
-    "Name": "",
-    "Status": false,
-    "StepCount": 0
-  }
+    {
+        "ID": "P1727551564006282",
+        "Name": "P2",
+        "Status": false,
+        "StepCount": 1
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 8
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 1
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 1
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 8
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 1
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 8
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    },
+    {
+        "ID": "",
+        "Name": "",
+        "Status": false,
+        "StepCount": 0
+    }
 ]
