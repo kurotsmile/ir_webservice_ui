@@ -357,10 +357,29 @@
                 }),
                 success: function(response) {
                     console.log(response.message);
+                    update_for_list(obj_p,id_file);
                     alert("Update success");
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);
+                }
+            });
+        }
+
+        function update_for_list(obj_p,id){
+            $.ajax({
+                url: '/update-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    dataJson: obj_p,
+                    id: id
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                },
+                error: function(error) {
+                    console.log(error);
                 }
             });
         }

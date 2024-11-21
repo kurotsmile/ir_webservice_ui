@@ -305,7 +305,7 @@ app.post('/update-json', (req, res) => {
 
         try {
             const jsonData = JSON.parse(data);
-            const index = jsonData.findIndex(item => item.id === id);
+            const index = jsonData.findIndex(item => item.ID === id);
             if (index === -1) {
                 return res.status(404).json({ error: `Object with id ${id} not found` });
             }

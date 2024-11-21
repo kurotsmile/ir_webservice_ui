@@ -286,4 +286,40 @@ app.post('/save-json', (req, res) => {
     res.status(200).json({ message: 'Data saved successfully!' });
 });
 
+app.post('/update-json', (req, res) => {
+    const { id, dataJson } = req.body;
+
+    if (!id || !dataJson) {
+        return res.status(400).json({ error: "Missing id or dataJson in request body" });
+    }
+
+    const primaryPath = path.join(get_file_system("PsetList"));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
+
+    const filePath = fs.existsSync(primaryPath) ? primaryPath : secondaryPath;
+    fs.readFile(filePath, 'utf8', (readErr, data) => {
+        if (readErr) {
+            return res.status(500).json({ error: `Failed to read file: ${readErr.message}` });
+        }
+
+        try {
+            const jsonData = JSON.parse(data);
+            const index = jsonData.findIndex(item => item.ID === id);
+            if (index === -1) {
+                return res.status(404).json({ error: `Object with id ${id} not found` });
+            }
+            jsonData[index] = { ...jsonData[index], ...dataJson };
+            fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (writeErr) => {
+                if (writeErr) {
+                    return res.status(500).json({ error: `Failed to write file: ${writeErr.message}` });
+                }
+                res.status(200).json({ message: "Update successful", updatedObject: jsonData[index] });
+            });
+        } catch (parseErr) {
+            return res.status(500).json({ error: `Error parsing JSON data: ${parseErr.message}` });
+        }
+    });
+});
+
+
 export default app;
