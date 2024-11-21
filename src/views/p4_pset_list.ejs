@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/app.js?v=<%= ver %>"></script>
 </head>
 
 <body class="brown">
@@ -27,7 +28,8 @@
                             &nbsp;
                         </div>
                         <div class="col-11">
-                            <h2 class="text-white" style="margin-left: -42px;">Pset List</h2>
+                            <a href="home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white pt-2" style="margin-left: -42px;">Pset List</h2>
                         </div>
                     </div>
                 </div>
@@ -102,23 +104,30 @@
             return $(html_item);
         }
 
-        function add_pset(){
+        function add_pset(p_name=''){
             var is_add=false;
             $(listpsetData).each(function(index,p){
                 if(p.ID==""){
                     p.ID=""+(index+1);
-                    p["Name"]="P"+(index+1);
+                    if(p_name=='') 
+                        p["Name"]="P"+(index+1);
+                    else
+                        p["Name"]=p_name;
                     p["Status"]=false;
                     p["StepCount"]=0;
                     is_add=true;
                     return false;
                 }
             });
-            if(is_add)
-                alert("New addition successful!");
-            else
+            if(is_add){
+                if(p_name=='')
+                    show_msg("New addition successful!","Add Pset");
+                else
+                    show_msg("Object copied successfully!","Add Pset");
+            }
+            else{
                 alert("Cannot add because Pset quantity is reached!");
-
+            }
             save_data();
             load_list();
         }
@@ -188,17 +197,8 @@
             var btn_copy='';
             btn_copy=$('<button class="btn btn-info btn-rounded text-white">Copy</button>');
             $(btn_copy).click(()=>{
-                var rowCount = listpsetData.length;
-                var obj_p_new={};
-                obj_p_new["ID"]=""+rowCount;
-                obj_p_new["Name"]=$("#inp_name_copy").val();
-                obj_p_new["Status"]=false;
-                obj_p_new["StepCount"]=0;
-                listpsetData.push(obj_p_new);
                 close_box_msg();
-                currentPage=totalPages;
-                save_data();
-                load_list();
+                add_pset($("#inp_name_copy").val());
             });
             
             $("#box_msg_btn").append(btn_cancel);
