@@ -1,98 +1,29 @@
 [
-    {
-        "ID": "P1727548723000753",
-        "Name": "P1",
-        "Status": true,
-        "StepCount": 1
-    },
-    {
-        "ID": "P1727551564006282",
-        "Name": "P2",
-        "Status": false,
-        "StepCount": 1
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 8
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 1
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 1
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 8
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 1
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 8
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    },
-    {
-        "ID": "",
-        "Name": "",
-        "Status": false,
-        "StepCount": 0
-    }
+  {
+    "ID": "P1727551564006282",
+    "Name": "P2",
+    "Status": false,
+    "StepCount": 1,
+    "index": 0
+  },
+  {
+    "ID": "p1",
+    "Name": "p1",
+    "Status": false,
+    "StepCount": 0,
+    "index": 1
+  },
+  {
+    "ID": "p2",
+    "Name": "p2",
+    "Status": false,
+    "StepCount": 0,
+    "index": 2
+  },
+  {
+    "ID": "p3",
+    "Name": "P2_copy",
+    "Status": false,
+    "StepCount": 0
+  }
 ]

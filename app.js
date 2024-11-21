@@ -113,6 +113,7 @@ app.get('/pset_list', (req, res) => {
         });
     });
 });
+
 app.get('/alert_waring', (req, res) => {
     res.render('p9_alet_warning');
 });
@@ -349,15 +350,12 @@ app.post('/save-json', (req, res) => {
 });
 
 app.post('/update-json', (req, res) => {
-    const { id, dataJson } = req.body;
-
-    if (!id || !dataJson) {
-        return res.status(400).json({ error: "Missing id or dataJson in request body" });
+    const { index, dataJson,file_name} = req.body;
+    if (index === undefined || !dataJson) {
+        return res.status(400).json({ error: "Missing index or dataJson in request body" });
     }
-
-    const primaryPath = path.join(get_file_system("PsetList"));
-    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'PsetList.json');
-
+    const primaryPath = path.join(get_file_system(file_name));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', file_name+'.json');
     const filePath = fs.existsSync(primaryPath) ? primaryPath : secondaryPath;
     fs.readFile(filePath, 'utf8', (readErr, data) => {
         if (readErr) {
@@ -366,16 +364,19 @@ app.post('/update-json', (req, res) => {
 
         try {
             const jsonData = JSON.parse(data);
-            const index = jsonData.findIndex(item => item.ID === id);
-            if (index === -1) {
-                return res.status(404).json({ error: `Object with id ${id} not found` });
+            if (index < 0 || index >= jsonData.length) {
+                return res.status(400).json({ error: "Invalid index provided" });
             }
             jsonData[index] = { ...jsonData[index], ...dataJson };
             fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (writeErr) => {
                 if (writeErr) {
                     return res.status(500).json({ error: `Failed to write file: ${writeErr.message}` });
                 }
-                res.status(200).json({ message: "Update successful", updatedObject: jsonData[index] });
+
+                res.status(200).json({
+                    message: "Update successful",
+                    updatedObject: jsonData[index],
+                });
             });
         } catch (parseErr) {
             return res.status(500).json({ error: `Error parsing JSON data: ${parseErr.message}` });

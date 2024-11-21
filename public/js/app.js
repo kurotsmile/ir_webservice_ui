@@ -13,7 +13,9 @@ function show_msg(html_body='',title,act_show=null,label_btn_done=null){
     var btn_cancel='';
     btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded" id="btn_msg_cancel">Cancel</a>');
     $(btn_cancel).click(()=>{
-        close_box_msg();
+        $('#bk_dark_full').hide();
+        $('#box_msg').hide();
+        return false;
     });
 
     if(label_btn_done!=null){
@@ -27,4 +29,9 @@ function show_msg(html_body='',title,act_show=null,label_btn_done=null){
     $("#bk_dark_full").show();
     $("#box_msg").show();
     if(act_show) act_show();
+}
+
+function close_msg(){
+    $('#bk_dark_full').hide();
+    $('#box_msg').hide();
 }

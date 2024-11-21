@@ -52,7 +52,7 @@
         </div>
     </div>
 
-
+    <%- include('p9_alet_warning.ejs') %>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
@@ -65,37 +65,67 @@
                   </tr>
                 </thead>
                 <tbody id="all_items">
-                    <% 
-                        const typeNames = ["Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
-                    %>
-                    <% if (jsonData.Steps && jsonData.Steps.length > 0) { %>
-                        <% for (let i = 0; i < jsonData.Steps.length; i++) { %>
-                            <tr>
-                                <td><%= i + 1 %></td>
-                                <td><%= typeNames[jsonData.Steps[i].Type] || "Unknown Type" %></td>
-                                <td>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Trash.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Copy.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Move.svg"></a>
-                                </td>
-                            </tr>
-                        <% } %>
-                    <% } else { %>
-                        <tr>
-                            <td colspan="3" class="text-center">No steps available</td>
-                        </tr>
-                    <% } %>
+                    <tr>
+                        <td colspan="3" class="text-center">No steps available</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </main>
 
     <script>
+        const typeNames = ["Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
         var jsonData=JSON.parse('<%- JSON.stringify(jsonData) %>');
 
+        function row_step(data_s){
+            var html='<tr>';
+            html+='<td>'+(data_s.index+1)+'</td>'; 
+            html+='<td>'+typeNames[data_s.Type]+'</td>'; 
+            html+='<td>';
+                html+='<a role="button" href="#" onclick="delete_steps('+data_s.index+');return false;"><img src="/public/SVG/Trash.svg"></a>'; 
+                html+='<a role="button" href="#"><img src="/public/SVG/Copy.svg"></a>'; 
+                html+='<a role="button" href="#"><img src="/public/SVG/Edit.svg"></a>'; 
+                html+='<a role="button" href="#"><img src="/public/SVG/Move.svg"></a>'; 
+            html+='</td>';
+            html+='</tr>';
+            return $(html);
+        }
+
+        function delete_steps(index){
+            show_msg("Are you sure you want to delete step "+(parseInt(index+1))+"?","Delete Step",()=>{
+                var btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
+                $(btn_del).click(()=>{
+                    jsonData.Steps.splice(index, 1);
+                    save_data();
+                    load_list();
+                    close_msg();
+                });
+                $("#box_msg_btn").append(btn_del);
+            });
+        }
+
         function add_steps(){
-            alert("Add steps");
+            if(jsonData.Steps==null) jsonData.Steps=[];
+            var obj_step={};
+            obj_step["Type"]=1;
+            obj_step["TA"]={};
+            obj_step["AT"]={};
+            obj_step["PT"]={};
+            obj_step["Seat"]={};
+            obj_step["Delay"]={};
+            obj_step["Backout"]={};
+            jsonData.Steps.push(obj_step);
+            show_msg("Add Steps success!","Edit Pset");
+            save_data();
+            load_list();
+        }
+
+        function load_list(){
+            $("#all_items").empty();
+            $(jsonData.Steps).each(function(index,s){
+                s["index"]=index;
+                $("#all_items").append(row_step(s));
+            });
         }
 
         $(document).ready(function () {
@@ -105,7 +135,28 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                 });
             });
+            
+            load_list();
         });
+
+        function save_data() {
+            var id_file='<%= id %>';
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: jsonData,
+                    file_name: id_file
+                }),
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
     </script>
 </body>
 </html>

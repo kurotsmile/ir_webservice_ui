@@ -335,10 +335,12 @@
         </div>
     </div>
 
+    <%- include('p9_alet_warning.ejs') %>
+    
     <script>
         function save_data() {
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
-            var id_file=obj_p["ID"];
+            var id_file='<%= id %>';
             $(".field_data").each(function (index, emp) {
                 var key_emp = $(emp).attr("field_key");
                 var type_emp = $(emp).attr("field_type");
@@ -349,6 +351,8 @@
                         obj_p[key_emp] =  $(emp).val();
                 }
             });
+
+            if(obj_p["Steps"]==null) obj_p["Steps"]=[];
             
             $.ajax({
                 url: '/save-json',
@@ -366,7 +370,7 @@
                     obj_p_item["Status"]=false;
                     obj_p_item["StepCount"]=obj_p["StepCount"];
                     update_for_list(obj_p_item,id_file);
-                    alert("Update success");
+                    show_msg("Update success","Edit Pset");
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);
@@ -381,7 +385,8 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     dataJson: obj_p,
-                    id: id
+                    index: id,
+                    file_name:"PsetList"
                 }),
                 success: function(response) {
                     console.log(response.message);
@@ -405,7 +410,7 @@
                $(this).attr("value",val);
             });
 
-            var traceSelection = '<%= jsonData && jsonData.TraceSelection ? jsonData.TraceSelection : 1 %>';
+            var traceSelection = '<%= jsonData && jsonData.TraceSelection ? jsonData.TraceSelection : "Torque" %>';
             $(".btn_sel_trace").each(function(){
                 if ($(this).attr("value") == traceSelection) {
                     $(this).attr("src", "/public/SVG/Checked.svg");

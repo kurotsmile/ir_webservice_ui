@@ -98,7 +98,7 @@
                 html_item+='<td>';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'" data-index="'+data_p.index+'"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'"" data-index="'+data_p.index+'"><img src="/public/SVG/Copy.svg"></a>';
-                    html_item+='<a href="edit_pset?id='+data_p.ID+'&name='+data_p.Name+'"><img src="/public/SVG/Edit.svg"></a>';
+                    html_item+='<a href="edit_pset?id='+data_p.index+'&name='+data_p.Name+'"><img src="/public/SVG/Edit.svg"></a>';
                 html_item+='</td>';
             html_item+='</tr>';
             return $(html_item);
