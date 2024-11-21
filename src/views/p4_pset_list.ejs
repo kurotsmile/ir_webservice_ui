@@ -246,6 +246,7 @@
                 }),
                 success: function(response) {
                     console.log(response.message);
+                    update_meta_nav_page();
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);
@@ -270,6 +271,10 @@
             $("#btn_page_next").show();
             if(currentPage<=1) $("#btn_page_prev").hide();
             if(currentPage>=totalPages) $("#btn_page_next").hide();
+        }
+
+        function update_meta_nav_page(){
+            totalPages = Math.ceil(listpsetData.length / itemsPerPage);
         }
     </script>
 </body>
