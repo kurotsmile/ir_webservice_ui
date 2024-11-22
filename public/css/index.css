@@ -705,6 +705,10 @@ table thead tr th{
     vertical-align: unset !important;
 }
 
+.btn-sort {
+    cursor: grab;
+}
+
 /* Mobile First Styles (default for all devices) */
 
 /* Extra small devices (phones, 0px and up) */

@@ -13,6 +13,7 @@
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/public/js/app.js?v=<%= ver %>"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 </head>
 
 <body class="brown">
@@ -83,12 +84,20 @@
             html+='<td>'+typeNames[data_s.Type]+'</td>'; 
             html+='<td>';
                 html+='<a role="button" href="#" onclick="delete_steps('+data_s.index+');return false;"><img src="/public/SVG/Trash.svg"></a>'; 
-                html+='<a role="button" href="#"><img src="/public/SVG/Copy.svg"></a>'; 
+                html+='<a role="button" href="#" onclick="copy_steps('+data_s.index+');return false;"><img src="/public/SVG/Copy.svg"></a>'; 
                 html+='<a role="button" href="#"><img src="/public/SVG/Edit.svg"></a>'; 
-                html+='<a role="button" href="#"><img src="/public/SVG/Move.svg"></a>'; 
+                html+='<a role="button" href="#" class="btn-sort"><img src="/public/SVG/Move.svg"></a>'; 
             html+='</td>';
             html+='</tr>';
             return $(html);
+        }
+
+        function copy_steps(index){
+            let copiedObject = { ...jsonData.Steps[index] };
+            jsonData.Steps.push(copiedObject);
+            show_msg("Copied "+(index+1)+" step to new step successfully!","Copy");
+            save_data();
+            load_list();
         }
 
         function delete_steps(index){
@@ -137,6 +146,13 @@
             });
             
             load_list();
+            $("#all_items").sortable({
+                axis: "y",
+                handle: ".btn-sort",
+                stop: function () {
+
+                }
+            }).disableSelection();
         });
 
         function save_data() {
