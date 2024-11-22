@@ -202,6 +202,49 @@ app.get('/forward_operation', (req, res) => {
         });
 });
 
+app.get('/edit_pset_step', (req, res) => {
+    const id = req.query.id;
+    const index_step = req.query.index_step;
+    const primaryPath = path.join(get_file_system(id));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', id + '.json');
+
+    const checkAndReadFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.access(filePath, fs.constants.F_OK, (err) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    fs.readFile(filePath, 'utf8', (readErr, data) => {
+                        if (readErr) {
+                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                        } else {
+                            resolve(data);
+                        }
+                    });
+                }
+            });
+        });
+    };
+
+    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+        .then(([primaryData, secondaryData]) => {
+            let jsonData;
+            if (primaryData) {
+                jsonData = JSON.parse(primaryData);
+            } else if (secondaryData) {
+                jsonData = JSON.parse(secondaryData);
+            } else {
+                jsonData = {};
+            }
+            res.render('p19_edit_pset_step', { jsonData, id,index_step});
+        })
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send('An error occurred while processing your request.');
+        });
+});
+
+
 app.get('/jobs', (req, res) => {
     const primaryPath = path.join(get_file_system("JobList"));
     const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'JobList.json');

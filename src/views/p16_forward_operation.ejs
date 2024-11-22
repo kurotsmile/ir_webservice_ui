@@ -30,7 +30,11 @@
                         <div class="col-11">
                             <a href="/edit_pset?id=<%= id %>"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
                             <h2 class="text-white" style="margin-left: -42px;">Forward Operation</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/edit_pset?id=<%= id %>">Edit Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Forward Operation</div>
+                            <div class="breadcrumb"  style="margin-left: -42px;">
+                                <a class="nav1" href="/pset_list">List Steps</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                <a href="edit_pset?id=<%= id %>">Edit Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                Forward Operation
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,6 +81,7 @@
     <script>
         const typeNames = ["Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
         var jsonData=JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var id_file='<%= id %>';
 
         function row_step(data_s){
             var html='<tr>';
@@ -85,7 +90,7 @@
             html+='<td>';
                 html+='<a role="button" href="#" onclick="delete_steps('+data_s.index+');return false;"><img src="/public/SVG/Trash.svg"></a>'; 
                 html+='<a role="button" href="#" onclick="copy_steps('+data_s.index+');return false;"><img src="/public/SVG/Copy.svg"></a>'; 
-                html+='<a role="button" href="#"><img src="/public/SVG/Edit.svg"></a>'; 
+                html+='<a role="button" href="edit_pset_step?id='+id_file+'&index_step='+data_s.index+'"><img src="/public/SVG/Edit.svg"></a>'; 
                 html+='<a role="button" href="#" class="btn-sort"><img src="/public/SVG/Move.svg"></a>'; 
             html+='</td>';
             html+='</tr>';
