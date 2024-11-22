@@ -93,12 +93,12 @@
         function add_item_p(data_p){
             var html_item='';
             html_item+='<tr>';
-                html_item+='<td scope="row">'+data_p.ID+'</td>';
+                html_item+='<td scope="row">'+(parseInt(data_p.index)+1)+'</td>';
                 html_item+='<td>'+data_p.Name+'</td>';
                 html_item+='<td>';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'" data-index="'+data_p.index+'"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_p.ID+'" data-name="'+data_p.Name+'"" data-index="'+data_p.index+'"><img src="/public/SVG/Copy.svg"></a>';
-                    html_item+='<a href="edit_pset?id='+data_p.index+'&name='+data_p.Name+'"><img src="/public/SVG/Edit.svg"></a>';
+                    html_item+='<a href="edit_pset?id='+data_p.ID+'&name='+data_p.Name+'"><img src="/public/SVG/Edit.svg"></a>';
                 html_item+='</td>';
             html_item+='</tr>';
             return $(html_item);
@@ -108,7 +108,7 @@
             var is_add=false;
             $(listpsetData).each(function(index,p){
                 if(p.ID==""){
-                    p.ID=""+(index+1);
+                    p.ID="P"+Math.floor(Date.now() * 1000);
                     if(p_name=='') 
                         p["Name"]="P"+(index+1);
                     else
@@ -273,11 +273,13 @@
         }
 
         function next_page(){
+            if(currentPage>=totalPages) return false;
             currentPage++;
             displayItems(currentPage);
         }
 
         function prev_page(){
+            if(currentPage<=1) return false;
             currentPage--;
             displayItems(currentPage);
         }
