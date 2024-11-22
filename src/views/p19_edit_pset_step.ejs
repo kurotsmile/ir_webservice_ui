@@ -46,7 +46,7 @@
     <% const stepData=jsonData.Steps[index_step];%>
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid" id="all_fields">
             <div class="row row-p">
                 <div class="col-6">
                     <div class="label-txt">Step Type</div>
@@ -268,6 +268,253 @@
     <%- include('p9_alet_warning.ejs') %>
     
     <script>
+        var data_step={
+            "Type": 1,
+            "TA": {
+                "TorqueTarget": 1,
+                "TorqueHighLimit": 1,
+                "TorqueLowLimit": 0,
+                "Threshold": 0,
+                "DownshiftThreshold": 0,
+                "Direction": "Counterclockwise",
+                "OvershootComppensation": 0,
+                "AngleHighLimit": 32000,
+                "AngleLowLimit": 0,
+                "FreeSpeed": 100,
+                "ShiftdownSpeed": 20,
+                "EorDataEnable": true,
+                "TorqueThresholdEnabled": true,
+                "StepTransition": "Hard Shift"
+            },
+            "AT": {
+                "AngleTarget": 1,
+                "AngleHighLimit": 1,
+                "AngleLowLimit": 0,
+                "OvershootComppensation": 0,
+                "TorqueHighLimit": 1,
+                "TorqueLowLimit": 0,
+                "Threshold": 0,
+                "DownshiftThreshold": 0,
+                "Direction": "Clockwise",
+                "FreeSpeed": 100,
+                "ShiftdownSpeed": 20,
+                "EorDataEnable": true,
+                "TorqueThresholdEnabled": true,
+                "StepTransition": "Soft Shift"
+            },
+            "PT": {
+                "Direction": "Clockwise",
+                "EorDataEnable": true,
+                "TorqueThresholdEnabled": true,
+                "CutInAngle": 1,
+                "CutInTorqueHighLimit": 0,
+                "SnugTorque": 0,
+                "TorqueHighLimit": 1,
+                "TorqueLowLimit": 0,
+                "FreeSpeed": 100,
+                "Method": "Angle",
+                "TargetPrevailingAngle": 0,
+                "PrevailingAngleHighLimit": 0,
+                "PrevailingAngleLowLimit": 0,
+                "SlopeChordLength": 8,
+                "SlopeDeviation": 0,
+                "SlopeDeviationPersistence": 0,
+                "StepTransition": "Soft Shift"
+            },
+            "Seat": {
+                "TorqueTarget": 0,
+                "AngleHighLimit": 32000,
+                "AngleLowLimit": 0,
+                "EorDataEnable": true,
+                "TorqueThresholdEnabled": true,
+                "StepTransition": "Soft Shift"
+            },
+            "Delay": {
+                "Target": 0.1
+            },
+            "Backout": {
+                "BackoutAngle": 1,
+                "BackoutHighTorqueLimit": 0,
+                "BackoutSpeed": 0,
+                "EorDataEnable": true
+            }
+        };
+
+        var data_form={
+            "Type": 1,
+            "TA": {
+                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
+                "TorqueTarget": {type:"input",label:"Torque Target (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueHighLimit":{type:"input",label:"Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueLowLimit": {type:"input",label:"Torque Low Limit",type_field:"emp_inp",type_data:"number"},
+                "Threshold": {type:"input",label:"Threshold",type_field:"emp_inp",type_data:"number"},
+                "AngleHighLimit": {type:"input",label:"Angle High Limit (°)",type_field:"emp_inp",type_data:"number"},
+                "DownshiftThreshold": {type:"input",label:"Downshift Threshold",type_field:"emp_inp",type_data:"number"},
+                "OvershootComppensation": {type:"input",label:"OvershootComppensation",type_field:"emp_inp",type_data:"number"},
+                "AngleLowLimit": {type:"input",label:"AngleLowLimit",type_field:"emp_inp",type_data:"number"},
+                "FreeSpeed":{type:"input",label:"Free Speed (%)",type_field:"emp_inp",type_data:"number"},
+                "ShiftdownSpeed": {type:"input",label:"ShiftdownSpeed",type_field:"emp_inp",type_data:"number"},
+                "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
+                "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
+                "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
+            },
+            "AT": {
+                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
+                "AngleTarget":{type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "AngleHighLimit": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "AngleLowLimit": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "OvershootComppensation": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "TorqueHighLimit":{type:"input",label:"Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueLowLimit": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "Threshold":{type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "DownshiftThreshold": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "FreeSpeed":{type:"input",label:"Free Speed (%)",type_field:"emp_inp",type_data:"number"},
+                "ShiftdownSpeed": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
+                "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
+                "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
+            },
+            "PT": {
+                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
+                "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
+                "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
+                "CutInAngle": {type:"input",label:"Cut In Angle (°)",type_field:"emp_inp",type_data:"number"},
+                "CutInTorqueHighLimit":{type:"input",label:"Cut In Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "SnugTorque":{type:"input",label:"Snug Torque (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueHighLimit":{type:"input",label:"Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueLowLimit":{type:"input",label:"Torque Low Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "FreeSpeed":{type:"input",label:"Free Speed (%)",type_field:"emp_inp",type_data:"number"},
+                "Method": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "TargetPrevailingAngle":{type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "PrevailingAngleHighLimit":{type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "PrevailingAngleLowLimit":{type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "SlopeChordLength": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "SlopeDeviation": {type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "SlopeDeviationPersistence":{type:"input",label:"Torque Target",type_field:"emp_inp",type_data:"number"},
+                "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
+            },
+            "Seat": {
+                "TorqueTarget": {type:"input",label:"Torque Target (Nm)",type_field:"emp_inp",type_data:"number"},
+                "AngleHighLimit": {type:"input",label:"Angle High Limit (°)",type_field:"emp_inp",type_data:"number"},
+                "AngleLowLimit": {type:"input",label:"Angle Low Limit (°)",type_field:"emp_inp",type_data:"number"},
+                "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
+                "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
+                "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
+            },
+            "Delay": {
+                "Target": {type:"input",label:"Target (Sec)",type_field:"emp_inp",type_data:"number"}
+            },
+            "Backout": {
+                "BackoutAngle":{type:"input",label:"Backout Angle (°)",type_field:"emp_inp",type_data:"number"},
+                "BackoutHighTorqueLimit": {type:"input",label:"Backout High Torque Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "BackoutSpeed": {type:"input",label:"Backout Speed (%)",type_field:"emp_inp",type_data:"number"},
+                "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"}
+            }
+        };
+
+        var array_type=["TA","AT","PT","Seat","Delay","Backout"];
+        var stepItemData=JSON.parse('<%- JSON.stringify(jsonData.Steps[index_step])%>');
+        var index_type=stepItemData.Type;
+       
+        var data_select_type=[
+            {label:'Torque',value:0},
+            {label:'Angle',value:1},
+            {label:'Prevailling Torque',value:2},
+            {label:'Flush',value:3},
+            {label:'Delay',value:4},
+            {label:'Backout',value:5}
+        ];
+
+        function load_form(){
+            var label_type=array_type[index_type];
+            var step_cur=stepItemData[label_type];
+            if(step_cur==null) step_cur=data_step[label_type];
+
+            $("#all_fields").empty();
+            $("#all_fields").append(row_field('Type','Type',index_type,{type:"select",data:data_select_type}));
+            $.each(data_form[label_type],function(k,v){
+                var data_field=v;
+                var label=data_field.label;
+                var val_inp=step_cur[k];
+                $("#all_fields").append(row_field(k,label,val_inp,data_field));
+            });
+
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+
+            $("#f_Type").change(function(){
+                var v_val=$(this).val();
+                index_type=parseInt(v_val);
+                load_form();
+            });
+        }
+
+        function row_field(id,label,val_inp,data_field=null){
+            var html_field='';
+            var type_field='input';
+            var type_emp='emp_inp';
+            var type_data='number';
+
+            if(data_field!=null){
+                if(data_field.type) type_field=data_field.type;
+                if(data_field.type_field) type_emp=data_field.type_field;
+                if(data_field.type_data) type_data=data_field.type_data;
+            }
+
+            html_field+='<div class="row row-p">';
+                html_field+='<div class="col-6">';
+                    html_field+='<div class="label-txt">'+label+'</div>';
+                html_field+='</div>';
+                html_field+='<div class="col-6">';
+                    if(type_field=='select'){
+                        html_field+='<div class="input-group r border mb-2 mt-2">';
+                            html_field+='<span class="input-group-text r-left">&nbsp;</span>';
+                            html_field+='<select id="f_'+id+'" class="form-select custom-combobox field_data" value="'+val_inp+'" field_key="'+id+'"  field_type="'+type_emp+'" field_type_data="'+type_data+'">';
+                                $(data_field.data).each(function(index,d){
+                                    if(d.value==val_inp)
+                                        html_field+='<option value="'+d.value+'" selected>'+d.label+'</option>';
+                                    else
+                                        html_field+='<option value="'+d.value+'">'+d.label+'</option>';
+                                });
+                            html_field+='</select>';
+                            html_field+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                        html_field+='</div>';
+                    }
+                    else if(type_field=='bool'){
+                        html_field+='<img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="'+val_inp+'" field_key="'+id+'" field_type="'+type_emp+'" field_type_data="'+type_data+'"/>';
+                    }
+                    else{
+                        html_field+='<div class="input-group r border mb-2 mt-2">';
+                        html_field+='<span class="input-group-text r-left">&nbsp;</span>';
+                        html_field+='<input id="f_'+id+'" type="text" placeholder="Enter data"  class="form-control field_data" value="'+val_inp+'" field_key="'+id+'" field_type="'+type_emp+'" field_type_data="'+type_data+'" disabled>';
+                        html_field+='<span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>';
+                        html_field+='</div>';
+                    }
+                html_field+='</div>';
+            html_field+='</div>';
+            return $(html_field);
+        }
+
         function save_data() {
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
             var step_index=parseInt('<%= index_step %>');
@@ -325,28 +572,7 @@
         }
 
         $(document).ready(()=>{
-            $("select").change(function(){
-                var val=$(this).attr("value");
-               $(this).attr("value",val);
-            });
-
-            $(".btn_switch").each(function(){
-                if ($(this).attr("value")=="true")
-                    $(this).attr("src", "/public/SVG/On.svg");
-                else 
-                    $(this).attr("src", "/public/SVG/Off.svg");
-            });
-
-            $(".btn_switch").click(function(){
-                var val_emp=$(this).attr("value");
-                if(val_emp=="true"){
-                    $(this).attr("src", "/public/SVG/Off.svg");
-                    $(this).attr("value",false);
-                }else{
-                    $(this).attr("src", "/public/SVG/On.svg");
-                    $(this).attr("value",true);
-                }
-            });
+            load_form();
         });
     </script>
 </body>
