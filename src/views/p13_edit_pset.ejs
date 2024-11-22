@@ -41,7 +41,7 @@
 
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <div class="row row-p">
                 <div class="col-6">
                     <div class="label-txt">Pset Name</div>
@@ -112,17 +112,17 @@
                 </div>
             </div>
 
-            <div class="row row-p  mt-3">
+            <div class="row row-p mt-3" role="button" onclick="show_group('field_group_advence',this);return false;" value="hide">
                 <div class="col-6">
-                    <div class="label-txt">Advence Operation <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></div>
+                    <div class="label-txt">Advence Operation <a href="/alert_waring"><img class="d-none" src="/public/SVG/Warning.svg"></a></div>
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Down.svg" style="float: right" class="mb-2 mt-3"/>
+                    <img src="/public/SVG/Down.svg" style="float: right" class="mb-2 mt-3 icon_show"/>
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">Cycle Timeout</div>
                 </div>
@@ -136,7 +136,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">TR Per Pset</div>
                 </div>
@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">Acceleration (%)</div>
                 </div>
@@ -164,7 +164,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">File on Early Trigger Release</div>
                 </div>
@@ -174,7 +174,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">Rehit Detection</div>
                 </div>
@@ -184,7 +184,7 @@
                 </div>
             </div>
             
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">Tilt Angle Inclination</div>
                 </div>
@@ -198,7 +198,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">Tilt Angle Working Inclination</div>
                 </div>
@@ -212,7 +212,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_advence">
                 <div class="col-6">
                     <div class="label-txt">Hold Torque (ms)</div>
                 </div>
@@ -226,17 +226,17 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p" role="button" onclick="show_group('field_group_trace',this);return false;" value="hide">
                 <div class="col-6">
                     <div class="label-txt">Trace Setting</div>
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Down.svg" style="float: right;" class="mb-2 mt-3 field_data"/>
+                    <img src="/public/SVG/Down.svg" style="float: right;" class="mb-2 mt-3 icon_show"/>
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_trace">
                 <div class="col-6">
                     <div class="label-txt">Trace Enable</div>
                 </div>
@@ -246,7 +246,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_trace">
                 <div class="col-6">
                     <div class="label-txt">Complete Trace Transfer</div>
                 </div>
@@ -256,7 +256,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_trace">
                 <div class="col-6">
                     <div class="label-txt">Time (Sec)</div>
                 </div>
@@ -270,7 +270,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_trace">
                 <div class="col-6">
                     <div class="label-txt">Trace Points</div>
                 </div>
@@ -284,7 +284,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_trace">
                 <div class="col-6">
                     <div class="label-txt">Torque Threshold to Capture</div>
                 </div>
@@ -298,7 +298,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p row_field_hide field_group_trace">
                 <div class="col-6">
                     <div id="Trace_selection_val" class="label-txt field_data" value="<%= jsonData && jsonData.TraceSelection ? jsonData.TraceSelection : 1 %>" field_key="TraceSelection" field_type="emp_value" field_type_data="string">Trace Selection</div>
                 </div>
@@ -310,10 +310,12 @@
                     <span class="m-3"><img role="button" class="btn_sel_trace"  src="/public/SVG/Unchecked.svg" onclick="sel_Trace_Selection(this);return false;" value="Torque,Angle and Current"/> Torque,Angle and Current</span>
                 </div>
             </div>
+
+            <div style="height: 250px;"></div>
         </div>
     </main>
 
-    <div id="bar_footer">
+    <div id="bar_footer" class="fixed2">
         <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-12">
@@ -324,7 +326,7 @@
         </div>
     </div>
 
-    <div id="menu_footer">
+    <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -412,6 +414,8 @@
         }
 
         $(document).ready(()=>{
+            $(".row_field_hide").hide();
+
             $("select").change(function(){
                 var val=$(this).attr("value");
                $(this).attr("value",val);
@@ -444,6 +448,19 @@
                 }
             });
         });
+
+        function show_group(s_name_group,emp){
+            var val_show=$(emp).attr("value");
+            if(val_show=="hide"){
+                $(emp).find(".icon_show").attr("src", "public/SVG/ExUp.svg");
+                $("."+s_name_group).show();
+                $(emp).attr("value","show");
+            }else{
+                $(emp).find(".icon_show").attr("src", "public/SVG/Down.svg");
+                $("."+s_name_group).hide();
+                $(emp).attr("value","hide");
+            }
+        }
 
         function sel_Trace_Selection(emp){
             var val_emp=$(emp).attr("value");
