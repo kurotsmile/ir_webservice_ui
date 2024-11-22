@@ -43,10 +43,76 @@
         </div>
     </div>
     
+    <% const Reverse=jsonData.Reverse;%>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
-            sdf
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Disable Reverse</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= Reverse && Reverse.DisableReverse ? Reverse.DisableReverse : false %>" field_key="DisableReverse" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Reverse Eor Enabled</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= Reverse && Reverse.ReverseEorEnabled ? Reverse.ReverseEorEnabled : false %>" field_key="ReverseEorEnabled" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Batch Decrement</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= Reverse && Reverse.BatchDecrement ? Reverse.BatchDecrement : false %>" field_key="BatchDecrement" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Torque Target</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= Reverse && Reverse.TorqueTarget ? Reverse.TorqueTarget :"" %>" field_key="TorqueTarget" field_type="emp_inp" field_type_data="number" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Reverse Threshold</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= Reverse && Reverse.ReverseThreshold ? Reverse.ReverseThreshold :"" %>" field_key="ReverseThreshold" field_type="emp_inp" field_type_data="number" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Reverse Speed</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= Reverse && Reverse.ReverseSpeed ? Reverse.ReverseSpeed :"" %>" field_key="ReverseSpeed" field_type="emp_inp" field_type_data="number" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
