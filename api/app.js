@@ -64,51 +64,49 @@ app.get('/change_password', (req, res) => {
     res.render('p3_change_password');
 });
 
+
 app.get('/pset_list', (req, res) => {
     const primaryPath = path.join(get_file_system("PsetList"));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
+    const jsonPDefaultPath = path.join(__dirname, '../public', 'jsonData', 'PDefault.json');
 
-    return new Promise((resolve, reject) => {
-        fs.access(primaryPath, fs.constants.F_OK, (err) => {
-            const filePath = err ? secondaryPath : primaryPath;
-            fs.readFile(filePath, 'utf8', (readErr, data) => {
-                if (readErr) {
-                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+    const readJsonFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filePath, 'utf8', (err, data) => {
+                if (err) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
                 } else {
                     try {
-
-                        let jsonData = JSON.parse(data);
-
-                        if (!Array.isArray(jsonData)) {
-                            jsonData = [];
-                        }
-
-                        for (let i = jsonData.length; i < 16; i++) {
-                            jsonData.push({
-                                ID: "",
-                                Name: "",
-                                Status: false,
-                                StepCount: 0,
-                                index: i + 1, // Vị trí của phần tử
-                            });
-                        }
-
-                        jsonData = jsonData.map((item, idx) => {
-                            const index = idx + 1;
-                            return {
-                                ...item,
-                                index: index,
-                                ID: item.ID !== "" ? String(index) : item.ID,
-                            };
-                        });
-
-                        res.render('p4_pset_list', { psetList: jsonData });
+                        resolve(JSON.parse(data));
                     } catch (parseErr) {
                         reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
                     }
                 }
             });
         });
+    };
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            const jsonPDefault = await readJsonFile(jsonPDefaultPath);
+            const psetList = Array.isArray(jsonData) ? jsonData : [];
+
+            for (let i = psetList.length; i < 16; i++) {
+                psetList.push({
+                    ID: "",
+                    Name: "",
+                    Status: false,
+                    StepCount: 0,
+                    index: i + 1,
+                });
+            }
+
+            res.render('p4_pset_list', { psetList, jsonPDefault });
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
     });
 });
 
@@ -245,7 +243,7 @@ app.get('/edit_pset_step', (req, res) => {
 app.get('/reverse_operation', (req, res) => {
     const id = req.query.id;
     const primaryPath = path.join(get_file_system(id));
-    const secondaryPath = path.join(__dirname, 'public', 'jsonData', id + '.json');
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
 
     const checkAndReadFile = (filePath) => {
         return new Promise((resolve, reject) => {

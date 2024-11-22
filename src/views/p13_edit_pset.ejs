@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="col-6">
-                    <a href="reverse_operation?id=<%= id %>"></a><img src="/public/SVG/Right.svg" style="float: right" class="mb-2 mt-3"/>
+                    <a href="reverse_operation?id=<%= id %>"><img src="/public/SVG/Right.svg" style="float: right" class="mb-2 mt-3"/></a>
                 </div>
             </div>
 
@@ -242,7 +242,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value"/>
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>
 
@@ -252,7 +252,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>
 

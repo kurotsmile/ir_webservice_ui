@@ -109,13 +109,35 @@
             $(listpsetData).each(function(index,p){
                 if(p.ID==""){
                     p.ID="P"+Math.floor(Date.now() * 1000);
+
+                    var id_file=p.ID;
+                    var obj_data = JSON.parse('<%- JSON.stringify(jsonPDefault) %>');
+
                     if(p_name=='') 
                         p["Name"]="P"+(index+1);
                     else
                         p["Name"]=p_name;
                     p["Status"]=false;
                     p["StepCount"]=0;
+                    obj_data["ID"]=p.ID;
+                    obj_data["Name"]=p.Name;
                     is_add=true;
+                    $.ajax({
+                        url: '/save-json',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            data_json: obj_data,
+                            file_name: id_file
+                        }),
+                        success: function(response) {
+                            console.log(response.message);
+                        },
+                        error: function(error) {
+                            console.log(error.responseJSON.error);
+                        }
+                    });
+
                     return false;
                 }
             });
@@ -217,9 +239,6 @@
         }
 
         function load_list(){
-            $(listpsetData).each(function(index,p){
-                p["index"]=index;
-            });
             displayItems(currentPage)
         }
 
@@ -228,8 +247,13 @@
             var endIndex = startIndex + itemsPerPage;
             var paginatedItems = listpsetData.slice(startIndex, endIndex);
             $('#all_item_pset').empty();
+            var count_index=0;
             $.each(paginatedItems, function(index, item) {
-                if(item.ID!="") $('#all_item_pset').append(add_item_p(item));
+                if(item.ID!=""){
+                    item["index"]=count_index;
+                    $('#all_item_pset').append(add_item_p(item));
+                    count_index++;
+                }
             });
             update_nav_page();
         }

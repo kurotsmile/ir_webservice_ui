@@ -42,203 +42,11 @@
             </div>
         </div>
     </div>
-    <% const stepData=jsonData.Steps[index_step];%>
+    
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Step Type</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= stepData && stepData.Type ? stepData.Type : 0 %>" field_key="Type"  field_type="emp_inp" field_type_data="number"> 
-                            <option value="0" <%= stepData && stepData.Type === 0 ? 'selected' : '' %>>Torque</option>
-                            <option value="1" <%= stepData && stepData.Type === 1 ? 'selected' : '' %>>Angle</option>
-                            <option value="2" <%= stepData && stepData.Type === 2 ? 'selected' : '' %>>Prevailling Torque</option>
-                            <option value="3" <%= stepData && stepData.Type === 3 ? 'selected' : '' %>>Flush</option>
-                            <option value="4" <%= stepData && stepData.Type === 4 ? 'selected' : '' %>>Delay</option>
-                            <option value="5" <%= stepData && stepData.Type === 5 ? 'selected' : '' %>>Backout</option>
-                        </select>
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Direction</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.Direction ? stepData.Direction : 'Clockwise' %>" field_key="Direction" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Target (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueTarget ? stepData.TorqueTarget :0 %>" field_key="TorqueTarget" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Hight Limit (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueHighLimit ? stepData.TorqueHighLimit :0 %>" field_key="TorqueHighLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Low Limit (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueLowLimit ? stepData.TorqueLowLimit :0 %>" field_key="TorqueLowLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Angle Hight Limit (*)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.AngleHighLimit ? stepData.AngleHighLimit :0 %>" field_key="AngleHighLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Angle Low Limit (*)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.AngleLowLimit ? stepData.AngleLowLimit :0 %>" field_key="AngleLowLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Threshold (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.Threshold ? stepData.Threshold :0 %>" field_key="Threshold" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Free Speed</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.FreeSpeed ? stepData.FreeSpeed :0 %>" field_key="FreeSpeed" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Overshoot Compensation (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.OvershootComppensation ? stepData.OvershootComppensation :0 %>" field_key="OvershootComppensation" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Downshift Threshold (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.DownshiftThreshold ? stepData.DownshiftThreshold :0 %>" field_key="DownshiftThreshold" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Downshift Speed</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.ShiftdownSpeed ? stepData.ShiftdownSpeed :0 %>" field_key="ShiftdownSpeed" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">EOR Data Enable</div>
-                </div>
-                <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EorDataEnable ? jsonData.EorDataEnable : false %>" field_key="EorDataEnable" field_type="emp_value" field_type_data="bool"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Threshold Enabled</div>
-                </div>
-                <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TorqueThresholdEnabled ? jsonData.TorqueThresholdEnabled : false %>" field_key="TorqueThresholdEnabled" field_type="emp_value" field_type_data="bool"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Step Transition</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.StepTransition ? stepData.StepTransition :"" %>" field_key="StepTransition" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
+            sdf
         </div>
     </main>
 
@@ -269,7 +77,6 @@
     <script>
         function save_data() {
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
-            var step_index=parseInt('<%= index_step %>');
             var id_file='<%= id %>';
 
             var obj_s={};
@@ -291,12 +98,6 @@
                 }
             });
 
-            var obj_step_new={};
-            obj_step_new.Type=obj_s["Type"];
-            delete obj_s.Type;
-            obj_step_new.TA=obj_s;
-            obj_p.Steps[step_index]=obj_step_new;
-            
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
