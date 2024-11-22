@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-
+    <% const stepData=jsonData.Steps[index_step];%>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
@@ -54,88 +54,27 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.Name ? jsonData.Name : name %>" class="form-control field_data" field_key="Name" field_type="emp_inp" disabled>
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Units</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>" field_key="Units" field_type="emp_inp" > 
-                            <option value="Nm" <%= jsonData && jsonData.Units === 'Nm' ? 'selected' : '' %>>Nm</option>
-                            <option value="dNm" <%= jsonData && jsonData.Units === 'dNm' ? 'selected' : '' %>>dNm</option>
-                            <option value="Ft-lbs" <%= jsonData && jsonData.Units === 'Ft-lbs' ? 'selected' : '' %>>Ft-lbs</option>
-                            <option value="Ln-lbs" <%= jsonData && jsonData.Units === 'Ln-lbs' ? 'selected' : '' %>>Ln-lbs</option>
-                            <option value="Kg-M" <%= jsonData && jsonData.Units === 'Kg-M' ? 'selected' : '' %>>Kg-M</option>
-                            <option value="Kg-Cm" <%= jsonData && jsonData.Units === 'Kg-Cm' ? 'selected' : '' %>>Kg-Cm</option>
-                        </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Cycle Delay (Sec)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= jsonData && jsonData.CycleDelay ? jsonData.CycleDelay : 0 %>" field_key="CycleDelay" field_type="emp_inp" >
-                            <% for (let i = 0; i <= 10; i++) { %>
-                                <option value="<%= i %>" <%= jsonData && jsonData.CycleDelay == i ? 'selected' : '' %>><%= i %></option>
-                            <% } %>
+                        <select class="form-select custom-combobox field_data" value="<%= stepData && stepData.Type ? stepData.Type : 0 %>" field_key="Type" field_type="emp_inp" > 
+                            <option value="0" <%= stepData && stepData.Type === 0 ? 'selected' : '' %>>Torque</option>
+                            <option value="1" <%= stepData && stepData.Type === 1 ? 'selected' : '' %>>Angle</option>
+                            <option value="2" <%= stepData && stepData.Type === 2 ? 'selected' : '' %>>Prevailling Torque</option>
+                            <option value="3" <%= stepData && stepData.Type === 3 ? 'selected' : '' %>>Flush</option>
+                            <option value="4" <%= stepData && stepData.Type === 4 ? 'selected' : '' %>>Delay</option>
+                            <option value="5" <%= stepData && stepData.Type === 5 ? 'selected' : '' %>>Backout</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
 
-            <div class="row row-p mt-3">
-                <div class="col-6">
-                    <div class="label-txt">Forward Operation</div>
-                </div>
-
-                <div class="col-6">
-                    <a href="forward_operation?id=<%= id %>"><img src="/public/SVG/Right.svg" style="float: right" class="mb-2 mt-3"/></a>
-                </div>
-            </div>
-
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Reverse Operation</div>
+                    <div class="label-txt">Direction</div>
                 </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Right.svg" style="float: right" class="mb-2 mt-3"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Advence Operation <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Down.svg" style="float: right" class="mb-2 mt-3"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Cycle Timeout</div>
-                </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control" value="<%= jsonData && jsonData.CycleTimeout ? jsonData.CycleTimeout : 0 %>" field_key="CycleTimeout" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.Direction ? stepData.Direction : 'Clockwise' %>" field_key="Direction" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -143,13 +82,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">TR Per Pset</div>
+                    <div class="label-txt">Torque Target (Nm)</div>
                 </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TrPerPset ? jsonData.TrPerPset : 0 %>" field_key="TrPerPset" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueTarget ? stepData.TorqueTarget :0 %>" field_key="TorqueTarget" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -157,13 +95,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Acceleration (%)</div>
+                    <div class="label-txt">Torque Hight Limit (Nm)</div>
                 </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Acceleration ? jsonData.Acceleration : 0 %>" field_key="Acceleration" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueHighLimit ? stepData.TorqueHighLimit :0 %>" field_key="TorqueHighLimit" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -171,33 +108,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">File on Early Trigger Release</div>
+                    <div class="label-txt">Torque Low Limit (Nm)</div>
                 </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EarlyRelease ? jsonData.EarlyRelease : false %>" field_key="EarlyRelease" field_type="emp_value"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Rehit Detection</div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.RehitDetection ? jsonData.RehitDetection : false %>" field_key="RehitDetection" field_type="emp_value"/>
-                </div>
-            </div>
-            
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Tilt Angle Inclination</div>
-                </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TiltStart ? jsonData.TiltStart : 0 %>" field_key="TiltStart" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueLowLimit ? stepData.TorqueLowLimit :0 %>" field_key="TorqueLowLimit" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -205,13 +121,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Tilt Angle Working Inclination</div>
+                    <div class="label-txt">Angle Hight Limit (*)</div>
                 </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TiltWorking ? jsonData.TiltWorking : 0 %>" field_key="TiltWorking" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.AngleHighLimit ? stepData.AngleHighLimit :0 %>" field_key="AngleHighLimit" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -219,13 +134,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Hold Torque (ms)</div>
+                    <div class="label-txt">Angle Low Limit (*)</div>
                 </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.HoldTorque ? jsonData.HoldTorque : 90 %>" field_key="HoldTorque" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.AngleLowLimit ? stepData.AngleLowLimit :0 %>" field_key="AngleLowLimit" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -233,43 +147,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Trace Setting</div>
+                    <div class="label-txt">Threshold (Nm)</div>
                 </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Down.svg" style="float: right;" class="mb-2 mt-3 field_data"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Trace Enable</div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Complete Trace Transfer</div>
-                </div>
-
-                <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TraceEnable ? jsonData.TraceEnable : false %>" field_key="TraceEnable" field_type="emp_value"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Time (Sec)</div>
-                </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Time ? jsonData.Time : 1 %>" field_key="Time" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.Threshold ? stepData.Threshold :0 %>" field_key="Threshold" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -277,13 +160,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Trace Points</div>
+                    <div class="label-txt">Free Speed</div>
                 </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TracePoints ? jsonData.TracePoints : 1000 %>" field_key="TracePoints" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.FreeSpeed ? stepData.FreeSpeed :0 %>" field_key="FreeSpeed" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -291,13 +173,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Torque Threshold to Capture</div>
+                    <div class="label-txt">Overshoot Compensation (Nm)</div>
                 </div>
-
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data" value="<%= jsonData && jsonData.TorqueThresholdToCapture ? jsonData.TorqueThresholdToCapture : 1 %>" field_key="TorqueThresholdToCapture" field_type="emp_inp" >
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.OvershootComppensation ? stepData.OvershootComppensation :0 %>" field_key="OvershootComppensation" field_type="emp_inp" >                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -305,16 +186,39 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div id="Trace_selection_val" class="label-txt field_data" value="<%= jsonData && jsonData.TraceSelection ? jsonData.TraceSelection : 1 %>" field_key="TraceSelection" field_type="emp_value">Trace Selection</div>
+                    <div class="label-txt">Downshift Threshold (Nm)</div>
                 </div>
-
-                <div class="col-6 pt-3" style="text-align: right;">
-                    <span class="m-3"><img role="button" class="btn_sel_trace" src="/public/SVG/Checked.svg" onclick="sel_Trace_Selection(this);return false;" value="Torque"/> Torque</span>
-                    <span class="m-3"><img role="button" class="btn_sel_trace"  src="/public/SVG/Unchecked.svg" onclick="sel_Trace_Selection(this);return false;" value="Angle"/> Angle</span>
-                    <span class="m-3"><img role="button" class="btn_sel_trace"  src="/public/SVG/Unchecked.svg" onclick="sel_Trace_Selection(this);return false;" value="Angle and Torque"/> Angle and Torque</span>
-                    <span class="m-3"><img role="button" class="btn_sel_trace"  src="/public/SVG/Unchecked.svg" onclick="sel_Trace_Selection(this);return false;" value="Torque,Angle and Current"/> Torque,Angle and Current</span>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.DownshiftThreshold ? stepData.DownshiftThreshold :0 %>" field_key="DownshiftThreshold" field_type="emp_inp" >                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
                 </div>
             </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Downshift Speed</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.ShiftdownSpeed ? stepData.ShiftdownSpeed :0 %>" field_key="ShiftdownSpeed" field_type="emp_inp" >                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">EOR Data Enable</div>
+                </div>
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EorDataEnable ? jsonData.EorDataEnable : false %>" field_key="EorDataEnable" field_type="emp_value"/>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -345,19 +249,25 @@
     <script>
         function save_data() {
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
+            var step_index=parseInt('<%= index_step %>');
             var id_file='<%= id %>';
+
+            var obj_s={};
             $(".field_data").each(function (index, emp) {
                 var key_emp = $(emp).attr("field_key");
                 var type_emp = $(emp).attr("field_type");
                 if (key_emp !== undefined) {
                     if(type_emp=="emp_value")
-                        obj_p[key_emp] = $(emp).attr("value");
+                        obj_s[key_emp] = $(emp).attr("value");
                     else
-                        obj_p[key_emp] =  $(emp).val();
+                        obj_s[key_emp] =  $(emp).val();
                 }
             });
 
-            if(obj_p["Steps"]==null) obj_p["Steps"]=[];
+            var obj_step_new={};
+            obj_step_new.Type=obj_s["Type"];
+            obj_step_new.TA=obj_s;
+            obj_p.Steps[step_index]=obj_step_new;
             
             $.ajax({
                 url: '/save-json',
@@ -369,12 +279,6 @@
                 }),
                 success: function(response) {
                     console.log(response.message);
-                    var obj_p_item={};
-                    obj_p_item["ID"]=id_file;
-                    obj_p_item["Name"]=obj_p["Name"];
-                    obj_p_item["Status"]=false;
-                    obj_p_item["StepCount"]=obj_p["StepCount"];
-                    update_for_list(obj_p_item,id_file);
                     show_msg("Update success","Edit Pset");
                 },
                 error: function(error) {
@@ -383,24 +287,6 @@
             });
         }
 
-        function update_for_list(obj_p,id){
-            $.ajax({
-                url: '/update-json',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    dataJson: obj_p,
-                    index: id,
-                    file_name:"PsetList"
-                }),
-                success: function(response) {
-                    console.log(response.message);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
 
         function show_edit(emp){
             $(emp).parent().find('img').toggleClass("bg-info rounded");
@@ -413,15 +299,6 @@
             $("select").change(function(){
                 var val=$(this).attr("value");
                $(this).attr("value",val);
-            });
-
-            var traceSelection = '<%= jsonData && jsonData.TraceSelection ? jsonData.TraceSelection : "Torque" %>';
-            $(".btn_sel_trace").each(function(){
-                if ($(this).attr("value") == traceSelection) {
-                    $(this).attr("src", "/public/SVG/Checked.svg");
-                } else {
-                    $(this).attr("src", "/public/SVG/Unchecked.svg");
-                }
             });
 
             $(".btn_switch").each(function(){
@@ -442,13 +319,6 @@
                 }
             });
         });
-
-        function sel_Trace_Selection(emp){
-            var val_emp=$(emp).attr("value");
-            $(".btn_sel_trace").attr("src","/public/SVG/Unchecked.svg");
-            $(emp).attr("src","/public/SVG/Checked.svg");
-            $("#Trace_selection_val").attr("value",val_emp);
-        }
     </script>
 </body>
 </html>

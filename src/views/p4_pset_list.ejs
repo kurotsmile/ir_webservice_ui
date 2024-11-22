@@ -119,6 +119,8 @@
                     return false;
                 }
             });
+
+            /*
             if(is_add){
                 if(p_name=='')
                     show_msg("New addition successful!","Add Pset");
@@ -127,7 +129,7 @@
             }
             else{
                 alert("Cannot add because Pset quantity is reached!");
-            }
+            }*/
             save_data();
             load_list();
         }
@@ -227,7 +229,7 @@
             var paginatedItems = listpsetData.slice(startIndex, endIndex);
             $('#all_item_pset').empty();
             $.each(paginatedItems, function(index, item) {
-                $('#all_item_pset').append(add_item_p(item));
+                if(item.ID!="") $('#all_item_pset').append(add_item_p(item));
             });
             update_nav_page();
         }
