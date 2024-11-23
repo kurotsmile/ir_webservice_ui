@@ -391,7 +391,7 @@
                 "SlopeChordLength": {type:"input",label:"Slope Chord Length",type_field:"emp_inp",type_data:"number"},
                 "SlopeDeviation": {type:"input",label:"Slope Deviation",type_field:"emp_inp",type_data:"number"},
                 "SlopeDeviationPersistence":{type:"input",label:"Slope Deviation Persistence",type_field:"emp_inp",type_data:"number"},
-                "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
+                "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Level and Smooth",label:"Level and Smooth"},{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
             },
             "Seat": {
                 "TorqueTarget": {type:"input",label:"Torque Target (Nm)",type_field:"emp_inp",type_data:"number"},
@@ -519,7 +519,6 @@
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
             var step_index=parseInt('<%= index_step %>');
             var id_file='<%= id %>';
-
             var obj_s={};
             $(".field_data").each(function (index, emp) {
                 var key_emp = $(emp).attr("field_key");
@@ -541,8 +540,9 @@
 
             var obj_step_new={};
             obj_step_new.Type=obj_s["Type"];
+            data_step["Type"]=obj_s["Type"];
+            obj_step_new=data_step;
             delete obj_s.Type;
-            obj_step_new.TA=obj_s;
             obj_p.Steps[step_index]=obj_step_new;
             
             $.ajax({
