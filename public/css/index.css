@@ -50,6 +50,19 @@ html, body {
     bottom: 15px;
 }
 
+#logo_sidebar{
+    display: block;
+    position: fixed;
+    bottom: 18px;
+    left: 70px;
+    font-size: 31px;
+}
+
+#logo_sidebar .hilight{
+    color: #c2261b;
+    font-weight: bold;
+}
+
 #sidebar_expand{
     background-color: black;
     width: 300px;
@@ -62,6 +75,11 @@ html, body {
     position: fixed;
     color: white;
     text-align: left;
+}
+
+#sidebar_expand .container-fluid{
+    height: 90%;
+    overflow-y: auto;
 }
 #sidebar_expand .item:hover{
     background-color:#c2261b;
