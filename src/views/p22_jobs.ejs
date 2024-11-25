@@ -34,15 +34,15 @@
 
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12 col-md-8 col-lg-8 col-xl-8">
                             <div class="input-group r border mb-2 mt-2">
                                 <span class="input-group-text r-left">&nbsp;</span>
                                 <input type="text" placeholder="Search" class="form-control" id="inp_search">
                                 <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <button class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Job</button>
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                            <button class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2" onclick="add_j();return false;"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Job</button>
                         </div>
                     </div>
                 </div>
@@ -63,37 +63,16 @@
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody id="all_item_job">
-                    <% if (jsonList && jsonList.length > 0) { %>
-                        <% jsonList.forEach(job => { %>
-                            <tr>       
-                                <td scope="row"><%= job.ID %></td>
-                                <td><%= job.Name %></td>
-                                <td>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Tick.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>
-                                </td>
-                                <td>
-                                    <a href="#" onclick="show_delete(this);return false" data-id="<%= job.ID %>" data-name="<%= job.Name %>"><img src="/public/SVG/Trash.svg"></a>
-                                    <a href="#" onclick="show_copy(this);return false" data-id="<%= job.ID %>" data-name="<%= job.Name %>"><img src="/public/SVG/Copy.svg"></a>
-                                    <a href="/edit_jobs"><img src="/public/SVG/Edit.svg"></a>
-                                </td>
-                              </tr>
-                        <% }) %>
-                    <% } %>
-                </tbody>
+                <tbody id="all_item_job"></tbody>
             </table>
         </div>
     </main>
 
-    <div id="bar_footer" style="border-bottom: solid 2px black;">
+    <div id="bar_footer" style="border-bottom: solid 2px black;bottom: 72px;" class="fixed2">
         <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-4">
-                    <span style="margin-left: 63px;"></span>Tool Jobjs : <%= jsonList.length %>
+                    <span style="margin-left: 63px;"></span>Tool Jobjs : <span id="totalJobs"><%= jsonList.length %></span>
                 </div>
                 <div class="col-4 text-center">
                     Valid : 1
@@ -105,13 +84,15 @@
         </div>
     </div>
 
-    <div id="bar_footer">
+    <div id="bar_footer" class="fixed">
         <div class="container-fluid">
             <div class="row p-3">
                 <div class="col-12 text-center">
-                   <img src="/public/SVG/Back.svg">
-                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">10/1</span>
-                   <img src="/public/SVG/Forward.svg">
+                   <img src="/public/SVG/Back.svg" onclick="prev_page();return false" role="button" id="btn_page_prev">
+                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">
+                        <span id="currentPage">1</span>/<span id="totalPages">1</span>
+                   </span>
+                   <img src="/public/SVG/Forward.svg" onclick="next_page();return false" role="button"  id="btn_page_next">
                 </div>
             </div>
         </div>
@@ -121,12 +102,52 @@
 
     <script>
         var jsonList= JSON.parse('<%- JSON.stringify(jsonList) %>');
+        var itemsPerPage = 10;
+        var currentPage = 1;
+        var totalPages = Math.ceil(jsonList.length / itemsPerPage);
+
+        function load_list(){
+            var length_item=0;
+            $.each(jsonList, function(index, item) {
+                if(item.ID!="") length_item++;
+                if(item.index==null) item.index=index;
+                if(item.index==NaN) item.index=index;
+            });
+
+            if(length_item>10)
+                currentPage=2;
+            else
+                currentPage=1;
+            displayItems(currentPage)
+        }
+
+        function displayItems(page) {
+            var startIndex = (page - 1) * itemsPerPage;
+            var endIndex = startIndex + itemsPerPage;
+            var paginatedItems = jsonList.slice(startIndex, endIndex);
+            $('#all_item_job').empty();
+            var count_index=0;
+            $.each(paginatedItems, function(index, item) {
+                if(item.ID!=""){
+                    $('#all_item_job').append(add_item_j(item));
+                    count_index++;
+                }
+            });
+            update_meta_nav_page();
+        }
 
         function add_item_j(data_j){
             var html_item='';
             html_item+='<tr>';
-                html_item+='<td scope="row">'+data_j.ID+'</td>';
+                html_item+='<td scope="row">'+(data_j.index+1)+'</td>';
                 html_item+='<td>'+data_j.Name+'</td>';
+                html_item+='<td>';
+                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Tick.svg"></a>';
+                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>';
+                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>';
+                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>';
+                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>';
+                html_item+='</td>';
                 html_item+='<td>';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'" data-index="'+data_j.index+'"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'"" data-index="'+data_j.index+'"><img src="/public/SVG/Copy.svg"></a>';
@@ -136,24 +157,67 @@
             return $(html_item);
         }
 
-        function add_job(){
-            var rowCount = $('#all_item_pset tr').length;
-            var html_item='';
-            html_item+='<tr>';
-                html_item+='<td scope="row">'+rowCount+'</td>';
-                html_item+='<td>P'+rowCount+'</td>';
-                html_item+='<td>';
-                    html_item+='<a href="#" onclick="show_delete();return false"><img src="/public/SVG/Trash.svg"></a>';
-                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
-                    html_item+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
-                html_item+='</td>';
-            html_item+='</tr>';
+        function add_j(p_name=''){
+            let locate = -1;
+            let n = "";
+            let exist = false;
 
-            $("#all_item_pset").append(html_item);
+            for (let i = 0; i < jsonList.length; i++) {
+                if (!jsonList[i].ID || jsonList[i].ID === "") {
+                    locate = i;
+                    break;
+                }
+            }
+
+            if (locate === -1) return;
+
+            jsonList[locate].ID = "J" + Math.floor(Date.now() * 1000);
+            for (let j = 1; j <= jsonList.length + 1; j++) {
+                n = `J${j}`;
+                exist = false;
+                for (let k = 0; k < locate; k++) {
+                    if (jsonList[k].Name === n) {
+                        exist = true;
+                        break;
+                    }
+                }
+
+                if (!exist) break;
+            }
+
+            if(p_name=='')
+                jsonList[locate].Name = n;
+            else
+                jsonList[locate].Name = p_name;
+
+            jsonList[locate].StepCount = 0;
+
+            var obj_data = JSON.parse('<%- JSON.stringify(jsonJDefault) %>');
+            var id_file=jsonList[locate].ID;
+            obj_data["ID"]=jsonList[locate].ID;
+            obj_data["Name"]=jsonList[locate].Name 
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: obj_data,file_name: id_file
+                }),success: function(response) {
+                    console.log(response.message);
+                },
+                error: function(error) {
+                console.log(error.responseJSON.error);
+                }
+            });
+
+            save_data();
+            load_list();
         }
 
         function show_delete(emp){
             var p_name=$(emp).data("name");
+            var p_index=$(emp).data("index");
+            var p_id_file=$(emp).data("id");
             var html='';
             html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
             html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
@@ -173,7 +237,27 @@
             var btn_del='';
             btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
             $(btn_del).click(()=>{
-                $(emp).parent().parent().remove();
+                var index_p=parseInt(p_index);
+                jsonList[index_p].ID="";
+                jsonList[index_p].Name="";
+                jsonList[index_p].StepCount=0;
+                jsonList[index_p].Status=false;
+                jsonList.sort((a, b) => {
+                    if (a.ID === "" && b.ID !== "") {return 1;}
+                    if (a.ID !== "" && b.ID === "") {return -1;}
+                    return 0;
+                });
+                $.ajax({
+                    url: '/delete-file',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({file_name: p_id_file}),
+                    success: function(response) {console.log(response.message);},
+                    error: function(error) {console.log(error.responseJSON.error);}
+                });
+                
+                save_data();
+                load_list();
                 close_box_msg();
             });
             
@@ -221,6 +305,29 @@
             $("#box_msg").show();
         }
 
+
+        function save_data(){
+            $(jsonList).each(function(index,p){
+                p["index"]=index;
+            });
+
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: jsonList,
+                    file_name: "JobList"
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                    update_meta_nav_page();
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
         function close_box_msg(){
             $('#bk_dark_full').hide();
             $('#box_msg').hide();
@@ -234,7 +341,31 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                 });
             });
+            load_list();
         });
+
+        function next_page(){
+            if(currentPage>=totalPages) return false;
+            currentPage++;
+            displayItems(currentPage);
+        }
+
+        function prev_page(){
+            if(currentPage<=1) return false;
+            currentPage--;
+            displayItems(currentPage);
+        }
+
+        function update_meta_nav_page(){
+            var count_index=0;
+            $.each(jsonList, function(index, item) {
+                if(item.ID!="")count_index++;
+            });
+            totalPages = Math.ceil(count_index / itemsPerPage);
+            $("#totalJobs").html(count_index);
+            $("#currentPage").html(currentPage);
+            $("#totalPages").html(totalPages);
+        }
 
     </script>
 </body>
