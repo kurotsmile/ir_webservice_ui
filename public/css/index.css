@@ -712,40 +712,51 @@ table thead tr th{
     vertical-align: unset !important;
 }
 
-.btn-sort {
-    cursor: grab;
-}
+.btn-sort {cursor: grab;}
 
-/* Mobile First Styles (default for all devices) */
+.col_tb_id{width: 10%;}
+.col_tb_name{width: 70%;}
+.col_tb_action{min-width: 30%;}
 
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
-    /* CSS for devices smaller than 576px (phones) */
+    .col_tb_id{width: unset;}
+    .col_tb_name{width: unset;}
+    .col_tb_action{min-width: unset;}
+    #bar_menu_top{margin-left: 80px;}
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-    /* CSS for devices between 576px and 767px (small phones, landscape mode) */
+    .col_tb_id{width: unset;}
+    .col_tb_name{width: unset;}
+    .col_tb_action{min-width: unset;}
+    #bar_menu_top{margin-left: 80px;}
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-    /* CSS for devices between 768px and 991px (tablets) */
+    .col_tb_id{width: unset;}
+    .col_tb_name{width: unset;}
+    .col_tb_action{min-width: unset;}
+    #bar_menu_top{margin-left: 80px;}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     /* CSS for devices between 992px and 1199px (desktops) */
+    #bar_menu_top{margin-left: unset;}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) and (max-width: 1399.98px) {
     /* CSS for devices between 1200px and 1399px (large desktops) */
+    #bar_menu_top{margin-left: unset;}
 }
 
 /* Extra Extra large devices (very large desktops, 1400px and up) */
 @media (min-width: 1400px) {
-    /* CSS for devices larger than 1400px (extra large desktops) */
+    #bar_menu_top{margin-left: unset;}
 }
 
 /* Landscape orientation */
@@ -887,8 +898,6 @@ table thead tr th{
     border-radius: 30px; /* Rounded corners */
     text-align: center;
     padding: 0 3em
-
-    /* margin: 0 7%; */
 }
 
 .Fieldbus{
@@ -901,12 +910,9 @@ table thead tr th{
     /* margin: 0 7%; */
 }
 
-/* For Chrome, Safari, and other WebKit browsers */
 ::-webkit-scrollbar {
     display: none;
   }
-  
-  /* For Firefox */
   * {
     scrollbar-width: none; /* Hide scrollbar */
   }

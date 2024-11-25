@@ -36,14 +36,14 @@
 
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12 col-md-8 col-lg-8 col-xl-8">
                             <div class="input-group r border mb-2 mt-2">
                                 <span class="input-group-text r-left">&nbsp;</span>
                                 <input type="text" placeholder="Search" class="form-control" id="inp_search">
                                 <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                             <a href="#" onclick="add_pset();return false;" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</a>
                         </div>
                     </div>
@@ -58,9 +58,9 @@
             <table class="table table-lg table-dark table-bordered table-p-list mb-5">
                 <thead>
                   <tr>
-                    <th scope="col" style="width: 10%;">ID</th>
-                    <th style="width: 70%;">Pset Name</th>
-                    <th style="min-width: 30%;">Action</th>
+                    <th scope="col" class="col_tb_id">ID</th>
+                    <th class="col_tb_name">Pset Name</th>
+                    <th class="col_tb_action">Action</th>
                   </tr>
                 </thead>
                 <tbody id="all_item_pset"></tbody>
@@ -274,7 +274,7 @@
             $("#inp_search").on("keyup", function () {
                 const value = $(this).val().toLowerCase();
                 const filteredData = listpsetData.filter(item =>
-                    String(item.ID).toLowerCase().includes(value) || item.Name.toLowerCase().includes(value)
+                    item.Name.toLowerCase().includes(value)
                 );
 
                 $('#all_item_pset').empty();
