@@ -467,6 +467,8 @@
                 index_type=parseInt(v_val);
                 load_form();
             });
+
+            check_field_Method();
         }
 
         function row_field(id,label,val_inp,data_field=null){
@@ -481,7 +483,7 @@
                 if(data_field.type_data) type_data=data_field.type_data;
             }
 
-            html_field+='<div class="row row-p">';
+            html_field+='<div id="row_f_'+id+'" class="row row-p">';
                 html_field+='<div class="col-6">';
                     html_field+='<div class="label-txt">'+label+'</div>';
                 html_field+='</div>';
@@ -563,6 +565,34 @@
             });
         }
 
+        function check_field_Method(){
+            if($("#f_Method").length==0) return false;
+
+            $("#f_Method").off("change").change(function(){
+                $("#f_Method").attr("value",$("#f_Method").val());
+                check_field_Method();
+                return false;
+            });
+
+            $("#row_f_TargetPrevailingAngle").hide();
+            $("#row_f_PrevailingAngleHighLimit").hide();
+            $("#row_f_PrevailingAngleLowLimit").hide();
+            $("#row_f_SlopeChordLength").hide();
+            $("#row_f_SlopeDeviation").hide();
+            $("#row_f_SlopeDeviationPersistence").hide();
+
+            var val_method=$("#f_Method").attr("value");
+
+            if(val_method=="Angle"){
+                $("#row_f_TargetPrevailingAngle").show();
+                $("#row_f_PrevailingAngleHighLimit").show();
+                $("#row_f_PrevailingAngleLowLimit").show();
+            }else{
+                $("#row_f_SlopeChordLength").show();
+                $("#row_f_SlopeDeviation").show();
+                $("#row_f_SlopeDeviationPersistence").show();
+            }
+        }
 
         function show_edit(emp){
             $(emp).parent().find('img').toggleClass("bg-info rounded");

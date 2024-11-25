@@ -30,7 +30,9 @@
                             <option value="" disabled selected hidden>Select Job</option>
                             <% if (jsonList && jsonList.length > 0) { %>
                                 <% jsonList.forEach(job => { %>
-                                    <option value="<%= job.ID %>"><%= job.Name %></option>
+                                    <% if (job.ID !== "") { %>
+                                        <option value="<%= job.ID %>"><%= job.Name %></option>
+                                    <% } %>
                                 <% }) %>
                             <% } %>
                         </select>

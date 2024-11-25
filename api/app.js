@@ -64,7 +64,6 @@ app.get('/change_password', (req, res) => {
     res.render('p3_change_password');
 });
 
-
 app.get('/pset_list', (req, res) => {
     const primaryPath = path.join(get_file_system("PsetList"));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
