@@ -462,4 +462,23 @@ app.post('/update-json', (req, res) => {
     });
 });
 
+app.post('/delete-file', (req, res) => {
+    const { file_name } = req.body;
+    if (!file_name) {
+        return res.status(400).json({ success: false, message: 'File name cannot be empty' });
+    }
+    const primaryPath = path.join(get_file_system(file_name));
+    fs.access(primaryPath, fs.constants.F_OK, (err) => {
+        if (err) {
+            return res.status(404).json({ success: false, message: 'File does not exist.' });
+        }
+        fs.unlink(primaryPath, (err) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: 'File deletion failed.', error: err.message });
+            }
+            return res.status(200).json({ success: true, message: 'File deleted successfully.' });
+        });
+    });
+});
+
 export default app;

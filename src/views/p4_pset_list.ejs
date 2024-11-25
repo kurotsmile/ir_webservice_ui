@@ -105,35 +105,45 @@
         }
 
         function add_pset(p_name=''){
-            var is_add=false;
-            $(listpsetData).each(function(index,p){
-                if(p.ID==""){
-                    p.ID="P"+Math.floor(Date.now() * 1000);
+            let locate = -1;
+            let n = "";
+            let exist = false;
 
-                    var id_file=p.ID;
-                    var obj_data = JSON.parse('<%- JSON.stringify(jsonPDefault) %>');
+            for (let i = 0; i < listpsetData.length; i++) {
+                if (!listpsetData[i].ID || listpsetData[i].ID === "") {
+                    locate = i;
+                    break;
+                }
+            }
 
-                    if(p_name==''){
-                        const sequentialNames = listpsetData.filter(obj => /^P\d+$/.test(obj.Name)).map(obj => obj.Name);
-                        let maxIndex = 0;
-                        sequentialNames.forEach(Name => {
-                            const number = parseInt(Name.slice(1));
-                            if (number > maxIndex) {
-                                maxIndex = number;
-                            }
-                        });
-                        p["Name"]=`P${maxIndex + 1}`;
+            if (locate === -1) return;
+
+            listpsetData[locate].ID = "P" + Math.floor(Date.now() * 1000);
+            for (let j = 1; j <= listpsetData.length + 1; j++) {
+                n = `P${j}`;
+                exist = false;
+                for (let k = 0; k < locate; k++) {
+                    if (listpsetData[k].Name === n) {
+                        exist = true;
+                        break;
                     }
-                    else{
-                        p["Name"]=p_name;
-                    }
-                        
-                    p["Status"]=false;
-                    p["StepCount"]=0;
-                    obj_data["ID"]=p.ID;
-                    obj_data["Name"]=p.Name;
-                    is_add=true;
-                    $.ajax({
+                }
+
+                if (!exist) break;
+            }
+
+            if(p_name=='')
+                listpsetData[locate].Name = n;
+            else
+                listpsetData[locate].Name = p_name;
+
+            listpsetData[locate].StepCount = 0;
+
+            var obj_data = JSON.parse('<%- JSON.stringify(jsonPDefault) %>');
+            var id_file=listpsetData[locate].ID;
+            obj_data["ID"]=listpsetData[locate].ID;
+            obj_data["Name"]=listpsetData[locate].Name 
+            $.ajax({
                         url: '/save-json',
                         type: 'POST',
                         contentType: 'application/json',
@@ -147,22 +157,7 @@
                         error: function(error) {
                             console.log(error.responseJSON.error);
                         }
-                    });
-
-                    return false;
-                }
             });
-
-            /*
-            if(is_add){
-                if(p_name=='')
-                    show_msg("New addition successful!","Add Pset");
-                else
-                    show_msg("Object copied successfully!","Add Pset");
-            }
-            else{
-                alert("Cannot add because Pset quantity is reached!");
-            }*/
             save_data();
             load_list();
         }
@@ -170,7 +165,9 @@
         function show_delete(emp){
             var p_name=$(emp).data("name");
             var p_index=$(emp).data("index");
+            var p_id_file=$(emp).data("id");
             var html='';
+
             html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
             html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
             $("#box_msg_title").empty();
@@ -194,6 +191,20 @@
                 listpsetData[index_p].Name="";
                 listpsetData[index_p].StepCount=0;
                 listpsetData[index_p].Status=false;
+                listpsetData.sort((a, b) => {
+                    if (a.ID === "" && b.ID !== "") {return 1;}
+                    if (a.ID !== "" && b.ID === "") {return -1;}
+                    return 0;
+                });
+                $.ajax({
+                    url: '/delete-file',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({file_name: p_id_file}),
+                    success: function(response) {console.log(response.message);},
+                    error: function(error) {console.log(error.responseJSON.error);}
+                });
+                
                 save_data();
                 load_list();
                 close_box_msg();
@@ -250,6 +261,17 @@
         }
 
         function load_list(){
+            var length_item=0;
+            $.each(listpsetData, function(index, item) {
+                if(item.ID!="") length_item++;
+                if(item.index==null) item.index=index;
+                if(item.index==NaN) item.index=index;
+            });
+
+            if(length_item>10)
+                currentPage=2;
+            else
+                currentPage=1;
             displayItems(currentPage)
         }
 
@@ -261,7 +283,6 @@
             var count_index=0;
             $.each(paginatedItems, function(index, item) {
                 if(item.ID!=""){
-                    item["index"]=count_index;
                     $('#all_item_pset').append(add_item_p(item));
                     count_index++;
                 }
@@ -277,10 +298,15 @@
                     item.Name.toLowerCase().includes(value)
                 );
 
-                $('#all_item_pset').empty();
-                $.each(filteredData, function(index, item) {
-                    $('#all_item_pset').append(add_item_p(item));
-                });
+                if(value.trim()!=""){
+                    $('#all_item_pset').empty();
+                    $.each(filteredData, function(index, item) {
+                        $('#all_item_pset').append(add_item_p(item));
+                    });
+                }else{
+                    load_list();
+                }
+
             });
         });
 
@@ -322,7 +348,7 @@
         function update_meta_nav_page(){
             var count_index=0;
             $.each(listpsetData, function(index, item) {
-                if(item.ID!="") count_index++;
+                if(item.ID!="")count_index++;
             });
             totalPages = Math.ceil(count_index / itemsPerPage);
             $("#currentPage").html(currentPage);
