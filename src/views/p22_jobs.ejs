@@ -274,7 +274,7 @@
             html+='<div class="w-100">';
             html+='<div class="input-group r border mb-2 mt-2 w-100">';
                 html+='<span class="input-group-text r-left">&nbsp;</span>';
-                html+='<input type="text" placeholder="Enter data" value="'+p_name+'_copy" class="form-control">';
+                html+='<input type="text" id="inp_name_copy" placeholder="Enter data" value="'+p_name+'_copy" class="form-control">';
                 html+='<span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>';
                 html+='</div>';
             html+='</div>';
@@ -294,7 +294,7 @@
             var btn_copy='';
             btn_copy=$('<button class="btn btn-info btn-rounded text-white">Copy</button>');
             $(btn_copy).click(()=>{
-                alert("Copy");
+                add_j($("#inp_name_copy").val());
                 close_box_msg();
             });
             
@@ -336,11 +336,22 @@
 
         $(document).ready(function () {
             $("#inp_search").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#all_item_job tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
+                const value = $(this).val().toLowerCase();
+                const filteredData = jsonList.filter(item =>
+                    item.Name.toLowerCase().includes(value)
+                );
+
+                if(value.trim()!=""){
+                    $('#all_item_job').empty();
+                    $.each(filteredData, function(index, item) {
+                        $('#all_item_job').append(add_item_j(item));
+                    });
+                }else{
+                    load_list();
+                }
+
             });
+
             load_list();
         });
 
