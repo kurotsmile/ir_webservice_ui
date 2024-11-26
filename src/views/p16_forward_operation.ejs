@@ -119,16 +119,8 @@
         }
 
         function add_steps(){
-            if(jsonData.Steps==null) jsonData.Steps=[];
-            var obj_step={};
-            obj_step["Type"]=1;
-            obj_step["TA"]={};
-            obj_step["AT"]={};
-            obj_step["PT"]={};
-            obj_step["Seat"]={};
-            obj_step["Delay"]={};
-            obj_step["Backout"]={};
-            jsonData.Steps.push(obj_step);
+            var int_step=parseInt(jsonData.StepCount)+1;
+            jsonData.StepCount=int_step;
             show_msg("Add Steps success!","Edit Pset");
             save_data();
             load_list();
@@ -137,6 +129,7 @@
         function load_list(){
             $("#all_items").empty();
             $(jsonData.Steps).each(function(index,s){
+                if(index>=parseInt(jsonData.StepCount)) return true;
                 s["index"]=index;
                 $("#all_items").append(row_step(s));
             });

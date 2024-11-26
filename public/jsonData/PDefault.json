@@ -18,7 +18,7 @@
     "TorqueThresholdToCapture": 0,
     "TraceSelection": "Torque",
     "CurveLog": "All",
-    "StepCount": 1,
+    "StepCount": 0,
     "Steps": [
         {
             "Type": 1,
