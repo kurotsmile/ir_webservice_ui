@@ -739,6 +739,12 @@ table thead tr th{
 .attr_job_disable{
     opacity: 0.3;
 }
+
+#all_items .dragging{
+    width: 92.4%;
+    display: inline-flex;
+}
+
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}

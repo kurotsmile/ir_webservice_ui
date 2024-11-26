@@ -147,8 +147,21 @@
             $("#all_items").sortable({
                 axis: "y",
                 handle: ".btn-sort",
-                stop: function () {
-
+                start: function (event, ui) {
+                    ui.item.addClass("dragging");
+                    ui.item.find('td').each(function(index,r) {
+                        if(index==0) $(r).css("width","20%");
+                        if(index==1) $(r).css("width","50%");
+                        if(index==2) $(r).css("width","30%");
+                    });
+                },
+                stop: function (event, ui){
+                    ui.item.removeClass("dragging");
+                    ui.item.find('td').each(function(index,r) {
+                        if(index==0) $(r).css("width","20%");
+                        if(index==1) $(r).css("width","50%");
+                        if(index==2) $(r).css("width","30%");
+                    });
                 }
             }).disableSelection();
         });
