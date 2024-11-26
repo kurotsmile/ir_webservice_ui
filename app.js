@@ -302,7 +302,11 @@ app.get('/jobs', (req, res) => {
             const jsonJDefault = await readJsonFile(jsonJDefaultPath);
             const jsonList = Array.isArray(jsonData) ? jsonData : [];
 
-            for (let i = jsonList.length; i < 32; i++) jsonList.push({ID: "",Name: "",Status: false,StepCount: 0,index: i + 1});
+            for (let i = jsonList.length; i < 32; i++){
+                let obj_j=jsonJDefault;
+                obj_j.index=i + 1;
+                jsonList.push(obj_j);
+            }
 
             res.render('p22_jobs', { jsonList, jsonJDefault });
         } catch (error) {
@@ -312,7 +316,44 @@ app.get('/jobs', (req, res) => {
 });
 
 app.get('/edit_jobs', (req, res) => {
-    res.render('p23_edit_jobs');
+    const id = req.query.id;
+    const primaryPath = path.join(get_file_system(id));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', id + '.json');
+
+    const checkAndReadFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.access(filePath, fs.constants.F_OK, (err) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    fs.readFile(filePath, 'utf8', (readErr, data) => {
+                        if (readErr) {
+                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                        } else {
+                            resolve(data);
+                        }
+                    });
+                }
+            });
+        });
+    };
+
+    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+        .then(([primaryData, secondaryData]) => {
+            let jsonData;
+            if (primaryData) {
+                jsonData = JSON.parse(primaryData);
+            } else if (secondaryData) {
+                jsonData = JSON.parse(secondaryData);
+            } else {
+                jsonData = {};
+            }
+            res.render('p23_edit_jobs', { jsonData, id});
+        })
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send('An error occurred while processing your request.');
+        });
 });
 
 app.get('/add_pset', (req, res) => {

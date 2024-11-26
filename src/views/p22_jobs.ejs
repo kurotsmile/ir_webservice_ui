@@ -75,10 +75,10 @@
                     <span style="margin-left: 63px;"></span>Tool Jobjs : <span id="totalJobs"><%= jsonList.length %></span>
                 </div>
                 <div class="col-4 text-center">
-                    Valid : 1
+                    Valid : <span id="ValidJob">1</span>
                 </div>
                 <div class="col-4" style="text-align: right;">
-                    Invalid : 1
+                    Invalid : <span id="InValidJob">1</span>
                 </div>
             </div>
         </div>
@@ -125,14 +125,23 @@
             var startIndex = (page - 1) * itemsPerPage;
             var endIndex = startIndex + itemsPerPage;
             var paginatedItems = jsonList.slice(startIndex, endIndex);
+            var counValidJob=0;
+            var counInValidJob=0;
             $('#all_item_job').empty();
             var count_index=0;
             $.each(paginatedItems, function(index, item) {
                 if(item.ID!=""){
                     $('#all_item_job').append(add_item_j(item));
                     count_index++;
+                    if(item.ValidJob!=null){
+                        if(item.ValidJob) counValidJob++;
+                        else counInValidJob++;
+                    }
                 }
             });
+
+            $("#ValidJob").html(counValidJob);
+            $("#InValidJob").html(counInValidJob);
             update_meta_nav_page();
         }
 
@@ -151,7 +160,7 @@
                 html_item+='<td>';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'" data-index="'+data_j.index+'"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'"" data-index="'+data_j.index+'"><img src="/public/SVG/Copy.svg"></a>';
-                    html_item+='<a href="edit_jobs?id='+data_j.ID+'&name='+data_j.Name+'"><img src="/public/SVG/Edit.svg"></a>';
+                    html_item+='<a href="edit_jobs?id='+data_j.ID+'"><img src="/public/SVG/Edit.svg"></a>';
                 html_item+='</td>';
             html_item+='</tr>';
             return $(html_item);
@@ -202,12 +211,9 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     data_json: obj_data,file_name: id_file
-                }),success: function(response) {
-                    console.log(response.message);
-                },
-                error: function(error) {
-                console.log(error.responseJSON.error);
-                }
+                }),
+                success: function(response) { console.log(response.message);},
+                error: function(error) { console.log(error.responseJSON.error);}
             });
 
             save_data();
