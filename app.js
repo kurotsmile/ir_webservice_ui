@@ -357,7 +357,77 @@ app.get('/edit_jobs', (req, res) => {
 });
 
 app.get('/add_pset', (req, res) => {
-    res.render('p24_add_pset');
+    const primaryPath = path.join(get_file_system("PsetList"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'PsetList.json');
+    const jsonPDefaultPath = path.join(__dirname, 'public', 'jsonData', 'PDefault.json');
+
+    const readJsonFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filePath, 'utf8', (err, data) => {
+                if (err) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
+                } else {
+                    try {
+                        resolve(JSON.parse(data));
+                    } catch (parseErr) {
+                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
+                    }
+                }
+            });
+        });
+    };
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            const jsonPDefault = await readJsonFile(jsonPDefaultPath);
+            const psetList = Array.isArray(jsonData) ? jsonData : [];
+
+            for (let i = psetList.length; i < 16; i++) psetList.push({ID: "",Name: "",Status: false,StepCount: 0,index: i + 1});
+
+            const id = req.query.id;
+            const primaryPath = path.join(get_file_system(id));
+            const secondaryPath = path.join(__dirname, 'public', 'jsonData', id + '.json');
+        
+            const checkAndReadFile = (filePath) => {
+                return new Promise((resolve, reject) => {
+                    fs.access(filePath, fs.constants.F_OK, (err) => {
+                        if (err) {
+                            resolve(null);
+                        } else {
+                            fs.readFile(filePath, 'utf8', (readErr, data) => {
+                                if (readErr) {
+                                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                                } else {
+                                    resolve(data);
+                                }
+                            });
+                        }
+                    });
+                });
+            };
+        
+            Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+                .then(([primaryData, secondaryData]) => {
+                    let jsonData;
+                    if (primaryData) {
+                        jsonData = JSON.parse(primaryData);
+                    } else if (secondaryData) {
+                        jsonData = JSON.parse(secondaryData);
+                    } else {
+                        jsonData = {};
+                    }
+                    res.render('p24_add_pset', { jsonData, id,psetList,jsonPDefault});
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                    res.status(500).send('An error occurred while processing your request.');
+                });
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.get('/edit_jobs_interlocks', (req, res) => {

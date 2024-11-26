@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="col-2">
-                    <a href="add_pset" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</a>
+                    <a href="add_pset?id=<%= jsonData && jsonData.ID ? jsonData.ID : '' %>" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</a>
                 </div>
             </div>
             <table class="table table-lg table-dark table-bordered table-p-list">

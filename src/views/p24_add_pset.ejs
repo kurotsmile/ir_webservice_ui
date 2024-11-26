@@ -63,29 +63,52 @@
                     <th>Steps</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td scope="row">
-                        <img src="/public/SVG/Off.svg"/>
-                    </td>
-                    <td>P1</td>
-                    <td>Torque</td>
-                    <td>20</td>
-                    <td>1</td>
-                  </tr>
-                  <tr>
-                    <td scope="row">
-                        <img src="/public/SVG/On.svg"/>
-                    </td>
-                    <td>P2</td>
-                    <td>Torque</td>
-                    <td>20</td>
-                    <td>1</td>
-                  </tr>
-                </tbody>
+                <tbody id="all_items"></tbody>
             </table>
         </div>
     </main>
-</body>
 
+    <script>
+        var listpsetData = JSON.parse('<%- JSON.stringify(psetList) %>');
+
+        function item_p(data_p){
+            if(data_p.ID=="") return false;
+            var html='<tr>';
+                html+='<td scope="row">';
+                    html+='<img src="/public/SVG/Off.svg" role="button" class="mb-2 mt-3 field_data btn_switch" value="'+data_p.Staus+'" field_key="Status" field_type="emp_value" field_type_data="bool"/>';
+                html+='</td>';
+                html+='<td>'+data_p.Name+'</td>';
+                html+='<td>Torque</td>';
+                html+='<td>20</td>';
+                html+='<td>1</td>';
+            html+='</tr>';
+            return $(html);
+        }
+
+        $(document).ready(()=>{
+            $("#all_items").empty();
+            $(listpsetData).each(function(index,p){
+                $("#all_items").append(item_p(p));
+            });
+
+            $(".btn_switch").each(function(){
+            if ($(this).attr("value")=="true")
+                $(this).attr("src", "/public/SVG/On.svg");
+            else 
+                $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+        });
+    </script>
+</body>
 </html>
