@@ -151,11 +151,15 @@
                 html_item+='<td scope="row">'+(data_j.index+1)+'</td>';
                 html_item+='<td>'+data_j.Name+'</td>';
                 html_item+='<td>';
-                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Tick.svg"></a>';
-                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Barcode.svg"></a>';
-                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Tool.svg"></a>';
-                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Flower.svg"></a>';
-                    html_item+='<a href="/edit_jobs"><img src="/public/SVG/Reverse.svg"></a>';
+                    if(data_j.ValidJob)
+                        html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Tick.svg"></a>';
+                    else
+                        html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Tick.svg" class="attr_job_disable"></a>';
+
+                    html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Barcode.svg" class="attr_job_disable"></a>';
+                    html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Tool.svg" class="attr_job_disable"></a>';
+                    html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Flower.svg" class="attr_job_disable"></a>';
+                    html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Reverse.svg" class="attr_job_disable"></a>';
                 html_item+='</td>';
                 html_item+='<td>';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'" data-index="'+data_j.index+'"><img src="/public/SVG/Trash.svg"></a>';

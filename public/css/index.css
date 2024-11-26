@@ -736,6 +736,9 @@ table thead tr th{
 .col_tb_name{width: 70%;}
 .col_tb_action{min-width: 30%;}
 
+.attr_job_disable{
+    opacity: 0.3;
+}
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}
