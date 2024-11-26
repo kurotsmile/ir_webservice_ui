@@ -544,9 +544,10 @@
             obj_step_new.Type=obj_s["Type"];
             data_step["Type"]=obj_s["Type"];
             obj_step_new=data_step;
+            var label_type=array_type[obj_s.Type];
             delete obj_s.Type;
             obj_p.Steps[step_index]=obj_step_new;
-            
+            obj_p.Steps[step_index][label_type]=obj_s;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',

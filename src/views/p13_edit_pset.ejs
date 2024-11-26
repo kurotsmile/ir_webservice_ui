@@ -361,7 +361,7 @@
             });
 
             if(obj_p["Steps"]==null) obj_p["Steps"]=[];
-            
+            if(obj_p.index) delete obj_p.index;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
