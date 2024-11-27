@@ -92,15 +92,7 @@ app.get('/pset_list', (req, res) => {
             const jsonPDefault = await readJsonFile(jsonPDefaultPath);
             const psetList = Array.isArray(jsonData) ? jsonData : [];
 
-            for (let i = psetList.length; i < 16; i++) {
-                psetList.push({
-                    ID: "",
-                    Name: "",
-                    Status: false,
-                    StepCount: 0,
-                    index: i + 1,
-                });
-            }
+            for (let i = psetList.length; i < 16; i++) psetList.push({ID: "",Name: "",Status: false,StepCount: 0,index: i + 1});
 
             res.render('p4_pset_list', { psetList, jsonPDefault });
         } catch (error) {
@@ -283,48 +275,211 @@ app.get('/reverse_operation', (req, res) => {
 app.get('/jobs', (req, res) => {
     const primaryPath = path.join(get_file_system("JobList"));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
+    const jsonJDefaultPath = path.join(__dirname, '../public', 'jsonData', 'JDefault.json');
 
-    return new Promise((resolve, reject) => {
-        fs.access(primaryPath, fs.constants.F_OK, (err) => {
-            const filePath = err ? secondaryPath : primaryPath;
-            fs.readFile(filePath, 'utf8', (readErr, data) => {
-                if (readErr) {
-                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+    const readJsonFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filePath, 'utf8', (err, data) => {
+                if (err) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
                 } else {
                     try {
-                        const jsonData = JSON.parse(data);
-                        res.render('p22_jobs', { jsonList:jsonData });
+                        resolve(JSON.parse(data));
                     } catch (parseErr) {
                         reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
                     }
                 }
             });
         });
+    };
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            const jsonJDefault = await readJsonFile(jsonJDefaultPath);
+            const jsonList = Array.isArray(jsonData) ? jsonData : [];
+
+            for (let i = jsonList.length; i < 32; i++){
+                let obj_j=jsonJDefault;
+                obj_j.index=i + 1;
+                jsonList.push(obj_j);
+            }
+
+            res.render('p22_jobs', { jsonList, jsonJDefault });
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
     });
 });
 
 app.get('/edit_jobs', (req, res) => {
-    res.render('p23_edit_jobs');
+    const id = req.query.id;
+    const primaryPath = path.join(get_file_system(id));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
+
+    const checkAndReadFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.access(filePath, fs.constants.F_OK, (err) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    fs.readFile(filePath, 'utf8', (readErr, data) => {
+                        if (readErr) {
+                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                        } else {
+                            resolve(data);
+                        }
+                    });
+                }
+            });
+        });
+    };
+
+    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+        .then(([primaryData, secondaryData]) => {
+            let jsonData;
+            if (primaryData) {
+                jsonData = JSON.parse(primaryData);
+            } else if (secondaryData) {
+                jsonData = JSON.parse(secondaryData);
+            } else {
+                jsonData = {};
+            }
+            res.render('p23_edit_jobs', { jsonData, id});
+        })
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send('An error occurred while processing your request.');
+        });
 });
 
 app.get('/add_pset', (req, res) => {
-    res.render('p24_add_pset');
+    const primaryPath = path.join(get_file_system("PsetList"));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
+    const jsonPDefaultPath = path.join(__dirname, '../public', 'jsonData', 'PDefault.json');
+
+    const readJsonFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filePath, 'utf8', (err, data) => {
+                if (err) {
+                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
+                } else {
+                    try {
+                        resolve(JSON.parse(data));
+                    } catch (parseErr) {
+                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
+                    }
+                }
+            });
+        });
+    };
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            const jsonPDefault = await readJsonFile(jsonPDefaultPath);
+            const psetList = Array.isArray(jsonData) ? jsonData : [];
+
+            for (let i = psetList.length; i < 16; i++) psetList.push({ID: "",Name: "",Status: false,StepCount: 0,index: i + 1});
+
+            const id = req.query.id;
+            const primaryPath = path.join(get_file_system(id));
+            const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
+        
+            const checkAndReadFile = (filePath) => {
+                return new Promise((resolve, reject) => {
+                    fs.access(filePath, fs.constants.F_OK, (err) => {
+                        if (err) {
+                            resolve(null);
+                        } else {
+                            fs.readFile(filePath, 'utf8', (readErr, data) => {
+                                if (readErr) {
+                                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                                } else {
+                                    resolve(data);
+                                }
+                            });
+                        }
+                    });
+                });
+            };
+        
+            Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+                .then(([primaryData, secondaryData]) => {
+                    let jsonData;
+                    if (primaryData) {
+                        jsonData = JSON.parse(primaryData);
+                    } else if (secondaryData) {
+                        jsonData = JSON.parse(secondaryData);
+                    } else {
+                        jsonData = {};
+                    }
+                    res.render('p24_add_pset', { jsonData, id,psetList,jsonPDefault});
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                    res.status(500).send('An error occurred while processing your request.');
+                });
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.get('/edit_jobs_interlocks', (req, res) => {
-    res.render('p25_edit_jobs_interlocks');
-});
+    const id = req.query.id;
+    const primaryPath = path.join(get_file_system(id));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
 
-app.get('/ethernet_setting', (req, res) => {
-    res.render('p28_ethernet_setting');
+    const checkAndReadFile = (filePath) => {
+        return new Promise((resolve, reject) => {
+            fs.access(filePath, fs.constants.F_OK, (err) => {
+                if (err) {
+                    resolve(null);
+                } else {
+                    fs.readFile(filePath, 'utf8', (readErr, data) => {
+                        if (readErr) {
+                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                        } else {
+                            resolve(data);
+                        }
+                    });
+                }
+            });
+        });
+    };
+
+    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+        .then(([primaryData, secondaryData]) => {
+            let jsonData;
+            if (primaryData) {
+                jsonData = JSON.parse(primaryData);
+            } else if (secondaryData) {
+                jsonData = JSON.parse(secondaryData);
+            } else {
+                jsonData = {};
+            }
+            res.render('p25_edit_jobs_interlocks', { jsonData, id });
+        })
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send('An error occurred while processing your request.');
+        });
 });
 
 app.get('/fail_rules', (req, res) => {
-    res.render('p26_fail_rules');
+    const id_job = req.query.id_job;
+    res.render('p26_fail_rules', {id_job});
 });
 
 app.get('/global_settings', (req, res) => {
     res.render('p27_global_settings');
+});
+
+app.get('/ethernet_setting', (req, res) => {
+    res.render('p28_ethernet_setting');
 });
 
 app.get('/accessories', (req, res) => {
@@ -462,20 +617,53 @@ app.post('/update-json', (req, res) => {
     });
 });
 
+app.post('/update-list-by-id', (req, res) => {
+    const { dataJson, file_name } = req.body;
+    if (!dataJson || !dataJson.ID) {
+        return res.status(400).json({ error: "Missing dataJson or ID in request body" });
+    }
+
+    const primaryPath = path.join(get_file_system(file_name));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', file_name + '.json');
+    const filePath = fs.existsSync(primaryPath) ? primaryPath : secondaryPath;
+
+    fs.readFile(filePath, 'utf8', (readErr, data) => {
+        if (readErr) {
+            return res.status(500).json({ error: `Failed to read file: ${readErr.message}` });
+        }
+
+        try {
+            const jsonData = JSON.parse(data);
+            const objIndex = jsonData.findIndex(obj => obj.ID === dataJson.ID);
+            if (objIndex === -1) {
+                return res.status(400).json({ error: "Object with the provided ID not found" });
+            }
+            jsonData[objIndex] = { ...jsonData[objIndex], ...dataJson };
+            fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (writeErr) => {
+                if (writeErr) {
+                    return res.status(500).json({ error: `Failed to write file: ${writeErr.message}` });
+                }
+                res.status(200).json({
+                    message: "Update successful",
+                    updatedObject: jsonData[objIndex],
+                });
+            });
+        } catch (parseErr) {
+            return res.status(500).json({ error: `Error parsing JSON data: ${parseErr.message}` });
+        }
+    });
+});
+
 app.post('/delete-file', (req, res) => {
     const { file_name } = req.body;
-    if (!file_name) {
-        return res.status(400).json({ success: false, message: 'File name cannot be empty' });
-    }
+
+    if (!file_name)return res.status(400).json({ success: false, message: 'File name cannot be empty' });
+
     const primaryPath = path.join(get_file_system(file_name));
     fs.access(primaryPath, fs.constants.F_OK, (err) => {
-        if (err) {
-            return res.status(404).json({ success: false, message: 'File does not exist.' });
-        }
+        if (err) return res.status(404).json({ success: false, message: 'File does not exist.' });
         fs.unlink(primaryPath, (err) => {
-            if (err) {
-                return res.status(500).json({ success: false, message: 'File deletion failed.', error: err.message });
-            }
+            if (err) return res.status(500).json({ success: false, message: 'File deletion failed.', error: err.message });
             return res.status(200).json({ success: true, message: 'File deleted successfully.' });
         });
     });

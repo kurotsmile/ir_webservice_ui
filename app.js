@@ -471,16 +471,17 @@ app.get('/edit_jobs_interlocks', (req, res) => {
         });
 });
 
-app.get('/ethernet_setting', (req, res) => {
-    res.render('p28_ethernet_setting');
-});
-
 app.get('/fail_rules', (req, res) => {
-    res.render('p26_fail_rules');
+    const id_job = req.query.id_job;
+    res.render('p26_fail_rules', {id_job});
 });
 
 app.get('/global_settings', (req, res) => {
     res.render('p27_global_settings');
+});
+
+app.get('/ethernet_setting', (req, res) => {
+    res.render('p28_ethernet_setting');
 });
 
 app.get('/accessories', (req, res) => {
