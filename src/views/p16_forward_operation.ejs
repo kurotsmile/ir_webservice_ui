@@ -199,6 +199,10 @@
                 return item.Type !== 0;
             }).length;
 
+            $(jsonData.Steps).each(function(index,s){
+                if(s.index) delete s.index;
+            });
+
             jsonData.StepCount=countNonZero;
 
             $.ajax({

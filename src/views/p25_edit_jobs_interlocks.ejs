@@ -104,6 +104,8 @@
             </div>
         </div>
     </main>
+    
+    <%- include('p9_alet_warning.ejs') %>
 
     <script>
     $(document).ready(()=>{
@@ -123,8 +125,79 @@
                 $(this).attr("src", "/public/SVG/On.svg");
                 $(this).attr("value",true);
             }
+            save_data();
         });
     });
+
+    function save_data(){
+        var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var id_file='<%= id %>';
+
+        var obj_interlocks={};
+        $(".field_data").each(function (index, emp) {
+            var key_emp = $(emp).attr("field_key");
+            var type_emp = $(emp).attr("field_type");
+            var type_data = $(emp).attr("field_type_data");
+            if (key_emp !== undefined) {
+                var v='';
+                if(type_emp=="emp_value")
+                    v=$(emp).attr("value");
+                else
+                    v= $(emp).val();
+
+                if(type_data=="number") v=Number(v);
+                if(type_data=="bool") v=(v?.toLowerCase?.() === 'true');
+                obj_interlocks[key_emp]=v;
+            }
+        });
+
+        obj_p.Interlocks=obj_interlocks;
+
+        $.ajax({
+            url: '/save-json',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                data_json: obj_p,
+                file_name: id_file
+            }),
+            success: function(response) {
+                console.log(response.message);
+            },
+            error: function(error) {
+                console.log(error.responseJSON.error);
+            }
+        });
+
+        let obj_new={}
+        obj_new.ID=id_file;
+        obj_new.Name=obj_p.Name;
+        obj_new.ValidJob=obj_p.Interlocks.ValidJob;
+        obj_new.BcodeVin=obj_p.Interlocks.BcodeVin;
+        obj_new.ToolEnable=obj_p.Interlocks.ToolEnable;
+        obj_new.SmartSocket=obj_p.Interlocks.SmartSocket;
+        obj_new.ReverseDisable=obj_p.Interlocks.ReverseDisable;
+        obj_new.PsetCount=obj_p.PsetCount;
+        update_for_list_pset_obj(obj_new);
+    }
+
+    function update_for_list_pset_obj(data_j){
+        $.ajax({
+            url: '/update-list-by-id',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                    dataJson: data_j,
+                    file_name: 'JobList'
+            }),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error.responseJSON.error);
+            }
+        });
+    }
     </script>
 </body>
 </html>
