@@ -177,7 +177,11 @@
                         let originalIndex = $(this).data("index");
                         newOrder.push(jsonData.Steps[originalIndex]);
                     });
-                    jsonData.Steps = newOrder;
+
+                    $(newOrder).each(function(index,s){
+                        jsonData.Steps[index]=s;
+                    });
+                    
                     save_data();
                     setTimeout(() => {
                         load_list();
@@ -199,18 +203,20 @@
                 return item.Type !== 0;
             }).length;
 
-            $(jsonData.Steps).each(function(index,s){
-                if(s.index) delete s.index;
-            });
-
             jsonData.StepCount=countNonZero;
 
+            let obj_steps=jsonData.Steps.map(s => {
+                const { index, ...rest } = s;
+                return rest;
+            });
+            let obj_data=jsonData;
+            obj_data.Steps=obj_steps;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    data_json: jsonData,
+                    data_json: obj_data,
                     file_name: id_file
                 }),
                 success: function(response) {

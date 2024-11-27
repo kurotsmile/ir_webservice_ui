@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Pset List</title>
+    <title>Add Pset</title>
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
     <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
@@ -29,8 +29,14 @@
                         </div>
                         <div class="col-11">
                             <img id="btn_back_menu_top" src="/public/SVG/Back.svg"/>
-                            <h2 class="text-white" style="margin-left: -42px;">Interlocks</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/jobs">Jobs</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Interlocks Setting</div>
+                            <h2 class="text-white" style="margin-left: -42px;">Add Pset</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;">
+                                <a class="nav1" href="/jobs">Jobs</a>
+                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> 
+                                <a href="/edit_jobs?id=<%= id%>">Edit Job</a>
+                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> 
+                                Add Pset
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,7 @@
                         <div class="col-11">
                             <a href="jobs"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
                             <h2 class="text-white" style="margin-left: -42px;">Edit Jobs</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/jobs">List Jobs</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Pset</div>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/jobs">List Jobs</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Jobs</div>
                         </div>
                     </div>
                 </div>
@@ -94,39 +94,44 @@
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td scope="row">1</td>
-                    <td>Mark</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row">2</td>
-                    <td>Jacob</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row"><span>3</span> <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
-                    <td>P3</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="all_items"></tbody>
             </table>
 
         </div>
     </main>
+    <script>
+        var jsonData = JSON.parse('<%- JSON.stringify(jsonData) %>');
+
+        function item_p(data_p){
+            if(data_p.ID=="") return false;
+            var html='<tr>';
+            html+='<td scope="row"><span>'+(data_p.index+1)+'</span> <a href="/alert_waring" style="display: none;"><img src="/public/SVG/Warning.svg"></a></td>';
+            html+='<td>'+data_p.Strategy+'</td>';
+            html+='<td>';
+                html+='<a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>';
+                html+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
+                html+='<a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>';
+                html+='</td>';
+            html+='</tr>';
+            return $(html);
+        }
+
+        $(document).ready(()=>{
+            load_list();
+        });
+
+        function load_list(){
+            $("#all_items").empty();
+            let count_item=0;
+            $(jsonData.Psets).each(function(index,p){
+                if(p.Strategy!=""){
+                    p.index=count_item;
+                    $("#all_items").append(item_p(p));
+                    count_item++;
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
