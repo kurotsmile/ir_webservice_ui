@@ -123,13 +123,13 @@
 
         function add_steps(){
             if(jsonData.StepCount>=8) return false;
-
-            var int_step=parseInt(jsonData.StepCount)+1;
-            jsonData.StepCount=int_step;
-            jsonData.Steps[int_step].Type=1;
+            var next_step=parseInt(jsonData.StepCount)+1;
+            var cur_step=parseInt(jsonData.StepCount);
+            jsonData.StepCount=next_step;
+            jsonData.Steps[cur_step].Type=1;
             var obj_list_update={};
             obj_list_update.ID=id_file;
-            obj_list_update.StepCount=int_step;
+            obj_list_update.StepCount=next_step;
             update_for_list_pset_obj(obj_list_update);
             save_data();
             load_list();
