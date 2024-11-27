@@ -618,6 +618,43 @@ app.post('/update-json', (req, res) => {
     });
 });
 
+app.post('/update-list-by-id', (req, res) => {
+    const { dataJson, file_name } = req.body;
+    if (!dataJson || !dataJson.ID) {
+        return res.status(400).json({ error: "Missing dataJson or ID in request body" });
+    }
+
+    const primaryPath = path.join(get_file_system(file_name));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', file_name + '.json');
+    const filePath = fs.existsSync(primaryPath) ? primaryPath : secondaryPath;
+
+    fs.readFile(filePath, 'utf8', (readErr, data) => {
+        if (readErr) {
+            return res.status(500).json({ error: `Failed to read file: ${readErr.message}` });
+        }
+
+        try {
+            const jsonData = JSON.parse(data);
+            const objIndex = jsonData.findIndex(obj => obj.ID === dataJson.ID);
+            if (objIndex === -1) {
+                return res.status(400).json({ error: "Object with the provided ID not found" });
+            }
+            jsonData[objIndex] = { ...jsonData[objIndex], ...dataJson };
+            fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (writeErr) => {
+                if (writeErr) {
+                    return res.status(500).json({ error: `Failed to write file: ${writeErr.message}` });
+                }
+                res.status(200).json({
+                    message: "Update successful",
+                    updatedObject: jsonData[objIndex],
+                });
+            });
+        } catch (parseErr) {
+            return res.status(500).json({ error: `Error parsing JSON data: ${parseErr.message}` });
+        }
+    });
+});
+
 app.post('/delete-file', (req, res) => {
     const { file_name } = req.body;
 

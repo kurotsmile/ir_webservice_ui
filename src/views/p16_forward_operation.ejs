@@ -119,9 +119,14 @@
         }
 
         function add_steps(){
+            if(jsonData.StepCount>=8) return false;
+
             var int_step=parseInt(jsonData.StepCount)+1;
             jsonData.StepCount=int_step;
-            show_msg("Add Steps success!","Edit Pset");
+            var obj_list_update={};
+            obj_list_update.ID=id_file;
+            obj_list_update.StepCount=int_step;
+            update_for_list_pset_obj(obj_list_update);
             save_data();
             load_list();
         }
@@ -175,6 +180,24 @@
                 data: JSON.stringify({
                     data_json: jsonData,
                     file_name: id_file
+                }),
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
+
+        function update_for_list_pset_obj(data_p){
+            $.ajax({
+                url: '/update-list-by-id',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    dataJson: data_p,
+                    file_name: 'PsetList'
                 }),
                 success: function(response) {
                     console.log(response);
