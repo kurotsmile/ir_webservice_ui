@@ -79,7 +79,7 @@
     </main>
 
     <script>
-        const typeNames = ["Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
+        const typeNames = ["","Torque", "Angle", "Prevailling Torque", "Flush", "Delay", "Backout"];
         var jsonData=JSON.parse('<%- JSON.stringify(jsonData) %>');
         var id_file='<%= id %>';
 
@@ -99,7 +99,10 @@
 
         function copy_steps(index){
             let copiedObject = { ...jsonData.Steps[index] };
-            jsonData.Steps.push(copiedObject);
+            var next_step=parseInt(jsonData.StepCount)+1;
+            if(next_step>8) return false;
+
+            jsonData.Steps[next_step]=copiedObject;
             show_msg("Copied "+(index+1)+" step to new step successfully!","Copy");
             save_data();
             load_list();
@@ -109,7 +112,7 @@
             show_msg("Are you sure you want to delete step "+(parseInt(index+1))+"?","Delete Step",()=>{
                 var btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
                 $(btn_del).click(()=>{
-                    jsonData.Steps.splice(index, 1);
+                    jsonData.Steps[index].Type=0;
                     save_data();
                     load_list();
                     close_msg();
@@ -123,6 +126,7 @@
 
             var int_step=parseInt(jsonData.StepCount)+1;
             jsonData.StepCount=int_step;
+            jsonData.Steps[int_step].Type=1;
             var obj_list_update={};
             obj_list_update.ID=id_file;
             obj_list_update.StepCount=int_step;
@@ -173,6 +177,19 @@
 
         function save_data() {
             var id_file='<%= id %>';
+            let countNonZero = 0;
+            jsonData.Steps.sort(function(a, b) {
+                if (a.Type !== 0 && b.Type === 0)return -1;
+                else if (a.Type === 0 && b.Type !== 0) return 1;
+                return 0; 
+            });
+
+            countNonZero = jsonData.Steps.filter(function(item) {
+                return item.Type !== 0;
+            }).length;
+
+            jsonData.StepCount=countNonZero;
+
             $.ajax({
                 url: '/save-json',
                 type: 'POST',

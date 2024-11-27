@@ -55,12 +55,12 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select class="form-select custom-combobox field_data" value="<%= stepData && stepData.Type ? stepData.Type : 0 %>" field_key="Type"  field_type="emp_inp" field_type_data="number"> 
-                            <option value="0" <%= stepData && stepData.Type === 0 ? 'selected' : '' %>>Torque</option>
-                            <option value="1" <%= stepData && stepData.Type === 1 ? 'selected' : '' %>>Angle</option>
-                            <option value="2" <%= stepData && stepData.Type === 2 ? 'selected' : '' %>>Prevailling Torque</option>
-                            <option value="3" <%= stepData && stepData.Type === 3 ? 'selected' : '' %>>Flush</option>
-                            <option value="4" <%= stepData && stepData.Type === 4 ? 'selected' : '' %>>Delay</option>
-                            <option value="5" <%= stepData && stepData.Type === 5 ? 'selected' : '' %>>Backout</option>
+                            <option value="0" <%= stepData && stepData.Type === 1 ? 'selected' : '' %>>Torque</option>
+                            <option value="1" <%= stepData && stepData.Type === 2 ? 'selected' : '' %>>Angle</option>
+                            <option value="2" <%= stepData && stepData.Type === 3 ? 'selected' : '' %>>Prevailling Torque</option>
+                            <option value="3" <%= stepData && stepData.Type === 4 ? 'selected' : '' %>>Flush</option>
+                            <option value="4" <%= stepData && stepData.Type === 5 ? 'selected' : '' %>>Delay</option>
+                            <option value="5" <%= stepData && stepData.Type === 6 ? 'selected' : '' %>>Backout</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -417,12 +417,12 @@
         var index_type=stepItemData.Type;
        
         var data_select_type=[
-            {label:'Torque',value:0},
-            {label:'Angle',value:1},
-            {label:'Prevailling Torque',value:2},
-            {label:'Flush',value:3},
-            {label:'Delay',value:4},
-            {label:'Backout',value:5}
+            {label:'Torque',value:1},
+            {label:'Angle',value:2},
+            {label:'Prevailling Torque',value:3},
+            {label:'Flush',value:4},
+            {label:'Delay',value:5},
+            {label:'Backout',value:6}
         ];
 
         function load_form(){
