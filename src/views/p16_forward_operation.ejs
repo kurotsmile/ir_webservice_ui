@@ -84,7 +84,7 @@
         var id_file='<%= id %>';
 
         function row_step(data_s){
-            var html='<tr>';
+            var html='<tr data-index="'+data_s.index+'">';
             html+='<td>'+(data_s.index+1)+'</td>'; 
             html+='<td>'+typeNames[data_s.Type]+'</td>'; 
             html+='<td>';
@@ -171,6 +171,17 @@
                         if(index==1) $(r).css("width","50%");
                         if(index==2) $(r).css("width","30%");
                     });
+                },update: function (event, ui) {
+                    let newOrder = [];
+                    $("#all_items tr").each(function () {
+                        let originalIndex = $(this).data("index");
+                        newOrder.push(jsonData.Steps[originalIndex]);
+                    });
+                    jsonData.Steps = newOrder;
+                    save_data();
+                    setTimeout(() => {
+                        load_list();
+                    }, 300);
                 }
             }).disableSelection();
         });
