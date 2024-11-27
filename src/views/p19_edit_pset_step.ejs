@@ -34,7 +34,7 @@
                                 <a class="nav1" href="/pset_list">List Steps</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
                                 <a href="edit_pset?id=<%= id %>">Edit Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
                                 <a href="forward_operation?id=<%= id %>">Forward Operation</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                Step Edit <%= parseInt(index_step+1) %>
+                                Step Edit <%=  Number(index_step)+1 %>
                             </div>
                         </div>
                     </div>
@@ -46,201 +46,7 @@
     <% const stepData=jsonData.Steps[index_step];%>
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid" id="all_fields">
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Step Type</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= stepData && stepData.Type ? stepData.Type : 0 %>" field_key="Type"  field_type="emp_inp" field_type_data="number"> 
-                            <option value="0" <%= stepData && stepData.Type === 1 ? 'selected' : '' %>>Torque</option>
-                            <option value="1" <%= stepData && stepData.Type === 2 ? 'selected' : '' %>>Angle</option>
-                            <option value="2" <%= stepData && stepData.Type === 3 ? 'selected' : '' %>>Prevailling Torque</option>
-                            <option value="3" <%= stepData && stepData.Type === 4 ? 'selected' : '' %>>Flush</option>
-                            <option value="4" <%= stepData && stepData.Type === 5 ? 'selected' : '' %>>Delay</option>
-                            <option value="5" <%= stepData && stepData.Type === 6 ? 'selected' : '' %>>Backout</option>
-                        </select>
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Direction</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.Direction ? stepData.Direction : 'Clockwise' %>" field_key="Direction" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Target (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueTarget ? stepData.TorqueTarget :0 %>" field_key="TorqueTarget" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Hight Limit (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueHighLimit ? stepData.TorqueHighLimit :0 %>" field_key="TorqueHighLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Low Limit (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.TorqueLowLimit ? stepData.TorqueLowLimit :0 %>" field_key="TorqueLowLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Angle Hight Limit (*)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.AngleHighLimit ? stepData.AngleHighLimit :0 %>" field_key="AngleHighLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Angle Low Limit (*)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.AngleLowLimit ? stepData.AngleLowLimit :0 %>" field_key="AngleLowLimit" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Threshold (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.Threshold ? stepData.Threshold :0 %>" field_key="Threshold" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Free Speed</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.FreeSpeed ? stepData.FreeSpeed :0 %>" field_key="FreeSpeed" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Overshoot Compensation (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.OvershootComppensation ? stepData.OvershootComppensation :0 %>" field_key="OvershootComppensation" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Downshift Threshold (Nm)</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.DownshiftThreshold ? stepData.DownshiftThreshold :0 %>" field_key="DownshiftThreshold" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Downshift Speed</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.ShiftdownSpeed ? stepData.ShiftdownSpeed :0 %>" field_key="ShiftdownSpeed" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">EOR Data Enable</div>
-                </div>
-                <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EorDataEnable ? jsonData.EorDataEnable : false %>" field_key="EorDataEnable" field_type="emp_value" field_type_data="bool"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Torque Threshold Enabled</div>
-                </div>
-                <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.TorqueThresholdEnabled ? jsonData.TorqueThresholdEnabled : false %>" field_key="TorqueThresholdEnabled" field_type="emp_value" field_type_data="bool"/>
-                </div>
-            </div>
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Step Transition</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= stepData && stepData.StepTransition ? stepData.StepTransition :"" %>" field_key="StepTransition" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="container-fluid" id="all_fields"></div>
     </main>
 
     <div id="bar_footer">
@@ -268,6 +74,7 @@
     <%- include('p9_alet_warning.ejs') %>
     
     <script>
+        var data_p= JSON.parse('<%- JSON.stringify(jsonData) %>');
         var data_step={
             "Type": 1,
             "TA": {
@@ -344,15 +151,15 @@
             "Type": 1,
             "TA": {
                 "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
-                "TorqueTarget": {type:"input",label:"Torque Target (Nm)",type_field:"emp_inp",type_data:"number"},
-                "TorqueHighLimit":{type:"input",label:"Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
-                "TorqueLowLimit": {type:"input",label:"Torque Low Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueTarget": {type:"input",label:"Torque Target ({u})",type_field:"emp_inp",type_data:"number"},
+                "TorqueHighLimit":{type:"input",label:"Torque High Limit ({u})",type_field:"emp_inp",type_data:"number"},
+                "TorqueLowLimit": {type:"input",label:"Torque Low Limit ({u})",type_field:"emp_inp",type_data:"number"},
                 "AngleHighLimit": {type:"input",label:"Angle High Limit (°)",type_field:"emp_inp",type_data:"number"},
                 "AngleLowLimit": {type:"input",label:"Angle Low Limit (°)",type_field:"emp_inp",type_data:"number"},
-                "Threshold":{type:"input",label:"Threshold (Nm)",type_field:"emp_inp",type_data:"number"},
+                "Threshold":{type:"input",label:"Threshold ({u})",type_field:"emp_inp",type_data:"number"},
                 "FreeSpeed":{type:"input",label:"Free Speed (%)",type_field:"emp_inp",type_data:"number"},
                 "OvershootComppensation": {type:"input",label:"Overshoot Comppensation (°)",type_field:"emp_inp",type_data:"number"},
-                "DownshiftThreshold": {type:"input",label:"Shiftdown Torque (Nm)",type_field:"emp_inp",type_data:"number"},
+                "DownshiftThreshold": {type:"input",label:"Shiftdown Torque ({u})",type_field:"emp_inp",type_data:"number"},
                 "ShiftdownSpeed": {type:"input",label:"Shiftdown Speed (%)",type_field:"emp_inp",type_data:"number"},
                 "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
                 "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
@@ -363,12 +170,12 @@
                 "AngleTarget":{type:"input",label:"Angle Target (°)",type_field:"emp_inp",type_data:"number"},
                 "AngleHighLimit": {type:"input",label:"Angle High Limit (°)",type_field:"emp_inp",type_data:"number"},
                 "AngleLowLimit": {type:"input",label:"Angle Low Limit (°)",type_field:"emp_inp",type_data:"number"},
-                "TorqueHighLimit":{type:"input",label:"Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
-                "TorqueLowLimit": {type:"input",label:"Torque Low Limit (Nm)",type_field:"emp_inp",type_data:"number"},
-                "Threshold":{type:"input",label:"Threshold (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueHighLimit":{type:"input",label:"Torque High Limit ({u})",type_field:"emp_inp",type_data:"number"},
+                "TorqueLowLimit": {type:"input",label:"Torque Low Limit ({u})",type_field:"emp_inp",type_data:"number"},
+                "Threshold":{type:"input",label:"Threshold ({u})",type_field:"emp_inp",type_data:"number"},
                 "FreeSpeed":{type:"input",label:"Free Speed (%)",type_field:"emp_inp",type_data:"number"},
                 "OvershootComppensation": {type:"input",label:"Overshoot Comppensation (°)",type_field:"emp_inp",type_data:"number"},
-                "DownshiftThreshold": {type:"input",label:"Shiftdown Torque (Nm)",type_field:"emp_inp",type_data:"number"},
+                "DownshiftThreshold": {type:"input",label:"Shiftdown Torque ({u})",type_field:"emp_inp",type_data:"number"},
                 "ShiftdownSpeed": {type:"input",label:"Shiftdown Speed (%)",type_field:"emp_inp",type_data:"number"},
                 "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
                 "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
@@ -379,10 +186,10 @@
                 "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
                 "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
                 "CutInAngle": {type:"input",label:"Cut In Angle (°)",type_field:"emp_inp",type_data:"number"},
-                "CutInTorqueHighLimit":{type:"input",label:"Cut In Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
-                "SnugTorque":{type:"input",label:"Snug Torque (Nm)",type_field:"emp_inp",type_data:"number"},
-                "TorqueHighLimit":{type:"input",label:"Torque High Limit (Nm)",type_field:"emp_inp",type_data:"number"},
-                "TorqueLowLimit":{type:"input",label:"Torque Low Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "CutInTorqueHighLimit":{type:"input",label:"Cut In Torque High Limit ({u})",type_field:"emp_inp",type_data:"number"},
+                "SnugTorque":{type:"input",label:"Snug Torque ({u})",type_field:"emp_inp",type_data:"number"},
+                "TorqueHighLimit":{type:"input",label:"Torque High Limit ({u})",type_field:"emp_inp",type_data:"number"},
+                "TorqueLowLimit":{type:"input",label:"Torque Low Limit ({u})",type_field:"emp_inp",type_data:"number"},
                 "FreeSpeed":{type:"input",label:"Free Speed (%)",type_field:"emp_inp",type_data:"number"},
                 "Method": {type:"select",label:"Method",type_field:"emp_inp",type_data:"string",data:[{value:"Angle",label:"Angle"},{value:"Slope",label:"Slope"}]},
                 "TargetPrevailingAngle":{type:"input",label:"Target Prevailing Angle",type_field:"emp_inp",type_data:"number"},
@@ -394,7 +201,7 @@
                 "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Level and Smooth",label:"Level and Smooth"},{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
             },
             "Seat": {
-                "TorqueTarget": {type:"input",label:"Torque Target (Nm)",type_field:"emp_inp",type_data:"number"},
+                "TorqueTarget": {type:"input",label:"Torque Target ({u})",type_field:"emp_inp",type_data:"number"},
                 "AngleHighLimit": {type:"input",label:"Angle High Limit (°)",type_field:"emp_inp",type_data:"number"},
                 "AngleLowLimit": {type:"input",label:"Angle Low Limit (°)",type_field:"emp_inp",type_data:"number"},
                 "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
@@ -406,7 +213,7 @@
             },
             "Backout": {
                 "BackoutAngle":{type:"input",label:"Backout Angle (°)",type_field:"emp_inp",type_data:"number"},
-                "BackoutHighTorqueLimit": {type:"input",label:"Backout High Torque Limit (Nm)",type_field:"emp_inp",type_data:"number"},
+                "BackoutHighTorqueLimit": {type:"input",label:"Backout High Torque Limit ({u})",type_field:"emp_inp",type_data:"number"},
                 "BackoutSpeed": {type:"input",label:"Backout Speed (%)",type_field:"emp_inp",type_data:"number"},
                 "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"}
             }
@@ -485,7 +292,7 @@
 
             html_field+='<div id="row_f_'+id+'" class="row row-p">';
                 html_field+='<div class="col-6">';
-                    html_field+='<div class="label-txt">'+label+'</div>';
+                    html_field+='<div class="label-txt">'+label.replace("({u})","("+data_p.Units+")")+'</div>';
                 html_field+='</div>';
                 html_field+='<div class="col-6">';
                     if(type_field=='select'){
