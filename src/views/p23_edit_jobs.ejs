@@ -113,7 +113,7 @@
                 html+='<img src="/public/SVG/Off.svg" style="width: 42px;"  role="button" class="mb-2 mt-2 field_data btn_switch" value="false" field_key="SmartSocket" field_type="emp_value" field_type_data="bool"/>';
                 html+='<a href="#" role="button" onclick="show_delete(this);return false;" data-id="'+data_p.ID+'" data-index="'+data_p.index+'" data-name="'+data_p.Strategy+'"><img src="/public/SVG/Trash.svg"></a>';
                 html+='<a href="#" role="button" class="btn-sort"><img src="/public/SVG/Move.svg"></a>';
-                html+='<a href="/fail_rules?id_job='+jsonData.ID+'"><img src="/public/SVG/Edit.svg"></a>';
+                html+='<a href="/fail_rules?id_job='+jsonData.ID+'&index_p='+data_p.index+'"><img src="/public/SVG/Edit.svg"></a>';
                 html+='</td>';
             html+='</tr>';
             return $(html);

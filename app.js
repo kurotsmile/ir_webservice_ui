@@ -333,6 +333,7 @@ app.get('/edit_jobs_interlocks', (req, res) => {
 
 app.get('/fail_rules', (req, res) => {
     const id_job = req.query.id_job;
+    const index_p=req.query.index_p;
     const primaryPath = path.join(get_file_system(id_job));
     const secondaryPath = path.join(__dirname, 'public', 'jsonData', id_job + '.json');
 
@@ -346,7 +347,7 @@ app.get('/fail_rules', (req, res) => {
             } else {
                 jsonData = {};
             }
-            res.render('p26_fail_rules', { jsonData, id_job});
+            res.render('p26_fail_rules', { jsonData, id_job,index_p});
         })
         .catch((err) => {
             console.error(err.message);
