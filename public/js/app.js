@@ -35,3 +35,16 @@ function close_msg(){
     $('#bk_dark_full').hide();
     $('#box_msg').hide();
 }
+
+function show_sideba_m(s_name_group,emp){
+    var val_show=$(emp).attr("value");
+    if(val_show=="hide"){
+        $(emp).find(".icon_show").attr("src", "public/SVG/ExUp.svg");
+        $("."+s_name_group).removeClass('item-m-hide');
+        $(emp).attr("value","show");
+    }else{
+        $(emp).find(".icon_show").attr("src", "public/SVG/Down.svg");
+        $("."+s_name_group).addClass('item-m-hide');
+        $(emp).attr("value","hide");
+    }
+}

@@ -44,9 +44,25 @@
             <div class="row item"><div class="col-12 p-1"><a href="accessories">Accessories</a></div></div>
             <div class="row item"><div class="col-12 p-1"><a href="global_settings">Global Setting</a></div></div>
             <div class="row item"><div class="col-12 p-1"><a href="cycle_result">Cycle Result</a></div></div>
-            <div class="row item"><div class="col-10 p-1"><a href="jobs">Setting</a></div><div class="col-2 p-1"><img style="width: 30px;" src="/public/SVG/Right.svg"></div></div>
-            <div class="row item"><div class="col-10 p-1"><a href="jobs">Communication Setting</a></div><div class="col-2 p-1"><img style="width: 30px;" src="/public/SVG/Right.svg"></div></div>
-            <div class="row item"><div class="col-10 p-1"><a href="jobs">System Maintenance</a></div><div class="col-2 p-1"><img style="width: 30px;" src="/public/SVG/Right.svg"></div></div>
+            <div class="row item" onclick="show_sideba_m('mm_setting',this);return false;" value="hide"><div class="col-10 p-1"><a href="#">Setting</a></div><div class="col-2 p-1"><img class="icon_show" style="width: 30px;" src="/public/SVG/Down.svg"></div></div>
+            <div class="row item item-m-hide mm_setting"><div class="col-12 p-1"><a href="date_and_time">Date and Time</a></div></div>
+            <div class="row item item-m-hide mm_setting"><div class="col-12 p-1"><a href="system_initialisation">System Initialization</a></div></div>
+            <div class="row item item-m-hide mm_setting"><div class="col-12 p-1"><a href="ethernet_setting">Ethernet</a></div></div>
+            <div class="row item item-m-hide mm_setting"><div class="col-12 p-1"><a href="wifi_setting_and_hotspot">Wifi Setting</a></div></div>
+            <div class="row item item-m-hide mm_setting"><div class="col-12 p-1"><a href="tool_calibartion">Tool</a></div></div>
+            <div class="row item" onclick="show_sideba_m('cm_setting',this);return false;" value="hide"><div class="col-10 p-1"><a href="#">Communication Setting</a></div><div class="col-2 p-1"><img class="icon_show" style="width: 30px;" src="/public/SVG/Down.svg"></div></div>
+            <div class="row item item-m-hide cm_setting"><div class="col-12 p-1"><a href="date_and_time">PFOP</a></div></div>
+            <div class="row item item-m-hide cm_setting"><div class="col-12 p-1"><a href="system_initialisation">Fieldbus</a></div></div>
+            <div class="row item item-m-hide cm_setting"><div class="col-12 p-1"><a href="ethernet_setting">Digital IO</a></div></div>
+            <div class="row item item-m-hide cm_setting"><div class="col-12 p-1"><a href="wifi_setting_and_hotspot">BCode-Vin</a></div></div>
+            <div class="row item item-m-hide cm_setting"><div class="col-12 p-1"><a href="tool_calibartion">AC-ToolsNet</a></div></div>
+            <div class="row item" onclick="show_sideba_m('sm_setting',this);return false;" value="hide"><div class="col-10 p-1"><a href="#">System Maintenance</a></div><div class="col-2 p-1"><img class="icon_show" style="width: 30px;" src="/public/SVG/Down.svg"></div></div>
+            <div class="row item item-m-hide sm_setting"><div class="col-12 p-1"><a href="date_and_time">Backup and Restore</a></div></div>
+            <div class="row item item-m-hide sm_setting"><div class="col-12 p-1"><a href="system_initialisation">Firmware Upgrade</a></div></div>
+            <div class="row item item-m-hide sm_setting"><div class="col-12 p-1"><a href="ethernet_setting">Tool Calibration</a></div></div>
+            <div class="row item item-m-hide sm_setting"><div class="col-12 p-1"><a href="wifi_setting_and_hotspot">PM Alarms</a></div></div>
+            <div class="row item item-m-hide sm_setting"><div class="col-12 p-1"><a href="tool_calibartion">Tool Fault Codes</a></div></div>
+            <div class="row item item-m-hide sm_setting"><div class="col-12 p-1"><a href="tool_calibartion">Debug Logs</a></div></div>
             <div class="row item"><div class="col-12 p-1"><a href="jobs">User management</a></div></div>
             <div class="row item"><div class="col-12 p-1"><a href="about_us">About</a></div></div>
         </div>

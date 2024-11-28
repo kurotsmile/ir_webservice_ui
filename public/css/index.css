@@ -95,6 +95,10 @@ html, body {
     background-color: unset;
 }
 
+.item-m-hide{
+    display: none !important;
+}
+
 .txt_error{
     color: #c2261b !important;
 }
