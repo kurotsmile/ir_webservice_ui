@@ -739,6 +739,16 @@ table thead tr th{
 .col_tb_id{width: 10%;}
 .col_tb_name{width: 70%;}
 .col_tb_action{min-width: 30%;}
+.col_tb_10p{width: 10%;}
+.col_tb_20p{width: 20%;}
+.col_tb_30p{width: 30%;}
+.col_tb_40p{width: 40%;}
+.col_tb_50p{width: 50%;}
+.col_tb_60p{width: 60%;}
+.col_tb_70p{width: 70%;}
+.col_tb_80p{width: 80%;}
+.col_tb_90p{width: 90%;}
+.col_tb_100p{width: 100%;}
 
 .attr_job_disable{
     opacity: 0.3;
@@ -754,11 +764,62 @@ table thead tr th{
     border-color: #f18d05 !important;
 }
 
+.btn-c{
+    display: inline-block;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-width: 63px !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    text-align: center;
+    border-bottom-right-radius: 15px;
+    background-color: #00a1cb !important;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-o{
+    background-color: white;
+    color: #000000;
+    border-radius: 50%;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-o img{
+    position: relative;
+    bottom: -21px;
+    left: -5px;
+    width: 20px;
+}
+
+.btn-o img{
+    position: relative;
+    bottom: -21px;
+    left: -5px;
+    width: 20px;
+}
+
+.btn-o span{
+    position: relative;
+    left: 12px;
+    top: 4px;
+    font-size: 14px;
+    font-weight: bold;
+}
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}
     .col_tb_name{width: unset;}
     .col_tb_action{min-width: unset;}
+    .col_tb_10p,.col_tb_20p,.col_tb_30p,.col_tb_40p,.col_tb_50p,.col_tb_60p,.col_tb_70p,.col_tb_80p,.col_tb_90p,.col_tb_100p{
+        width: unset;
+    }
     #bar_menu_top{margin-left: 80px;}
 }
 
@@ -767,6 +828,9 @@ table thead tr th{
     .col_tb_id{width: unset;}
     .col_tb_name{width: unset;}
     .col_tb_action{min-width: unset;}
+    .col_tb_10p,.col_tb_20p,.col_tb_30p,.col_tb_40p,.col_tb_50p,.col_tb_60p,.col_tb_70p,.col_tb_80p,.col_tb_90p,.col_tb_100p{
+        width: unset;
+    }
     #bar_menu_top{margin-left: 80px;}
 }
 
@@ -775,6 +839,9 @@ table thead tr th{
     .col_tb_id{width: unset;}
     .col_tb_name{width: unset;}
     .col_tb_action{min-width: unset;}
+    .col_tb_10p,.col_tb_20p,.col_tb_30p,.col_tb_40p,.col_tb_50p,.col_tb_60p,.col_tb_70p,.col_tb_80p,.col_tb_90p,.col_tb_100p{
+        width: unset;
+    }
     #bar_menu_top{margin-left: 80px;}
 }
 

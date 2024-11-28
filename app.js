@@ -55,7 +55,7 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.3.3';
+    res.locals.ver = '1.3.4';
     res.locals.currentRoute = req.path;
     next();
 });

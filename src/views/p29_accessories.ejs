@@ -22,28 +22,30 @@
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="col-12 col-md-10 col-lg-10 col-xl-10">
                     <div class="row">
-                        <div class="col-1">
-                            &nbsp;
-                        </div>
-                        <div class="col-11">
-                            <h2 class="text-white" style="margin-left: -42px;">Accessories</h2>
+                        <div class="col-12">
+                            <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
+                            <h2 class="text-white pt-2" style="margin-left: -42px;">Accessories</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;">
+                                <a class="nav1" href="home">Home</a>
+                                 <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                Accessories
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
                     <div class="row">
-                        <div class="col-8">
-                            <div class="input-group r border mb-2 mt-2">
+                        <div class="col-12">
+                            <div class="input-group mb-3 r border w-100 mt-3 p-0" style="border: unset !important;">
                                 <span class="input-group-text r-left">&nbsp;</span>
-                                <input type="text" placeholder="Search" class="form-control">
-                                <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
+                                <select class="form-select custom-combobox">
+                                    <option value="" disabled selected hidden>All Devices</option>
+                                </select>
+                                <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <a href="add_pset" class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Pset</a>
                         </div>
                     </div>
                 </div>
@@ -57,36 +59,29 @@
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
-                    <th scope="col" style="width: 10%;">ID</th>
-                    <th style="width: 70%;">Pset Name</th>
-                    <th style="min-width: 30%;">Action</th>
+                    <th scope="col" class="col_tb_50p">Device Name</th>
+                    <th class="col_tb_30p">Assigned to</th>
+                    <th class="col_tb_20p">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td scope="row">1</td>
-                    <td>Mark</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
+                    <td scope="row">Scanner 1</td>
+                    <td>Station 1</td>
+                    <td style="text-align: right;">
+                        <span class="btn-c">Pair</span>
                         <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                     </td>
                   </tr>
                   <tr>
-                    <td scope="row">2</td>
-                    <td>Jacob</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td scope="row"><span class="txt_error">3</span> <a href="/alert_waring"><img src="/public/SVG/Warning.svg"></a></td>
-                    <td>P3</td>
-                    <td>
-                        <a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>
-                        <a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>
+                    <td scope="row">SocketTray 1</td>
+                    <td>Station 2</td>
+                    <td style="text-align: right;">
+                        <span class="btn-c">Unpair</span>
+                        <div class="btn-o">
+                            <span>1</span>
+                            <img src="/public/SVG/down2.svg"/>
+                        </div>
                         <a href="/edit_pset"><img src="/public/SVG/Edit.svg"></a>
                     </td>
                   </tr>
