@@ -69,8 +69,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.BatchCount ? Interlocks.BatchCount : 0 %>" field_key=""  field_type_data="string" field_type="emp_inp" > 
-                            <option value="none">None</option>
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.SocketAssignment ? Interlocks.SocketAssignment : 'None' %>" field_key="SocketAssignment"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="None">None</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -84,8 +84,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="none" field_key=""  field_type_data="string" field_type="emp_inp" > 
-                            <option value="none">None</option>
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.ResetToPset ? Interlocks.ResetToPset : 'None' %>" field_key="ResetToPset"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="None">None</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -97,7 +97,7 @@
                     <div class="label-txt">Max Attempts Enabled</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="" field_type="emp_value" field_type_data="bool"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= FailRules && FailRules.MaxAttemptsEnable ? Interlocks.MaxAttemptsEnable : false %>" field_key="MaxAttemptsEnable" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>
     
@@ -106,7 +106,7 @@
                     <div class="label-txt">Max NOK Enabled</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="" field_type="emp_value" field_type_data="bool"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= FailRules && FailRules.MaxNokEnable ? Interlocks.MaxNokEnable : false %>" field_key="MaxNokEnable" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>
 
@@ -117,8 +117,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="none" field_key=""  field_type_data="string" field_type="emp_inp" > 
-                            <option value="none">Any Failure</option>
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.FailureType ? Interlocks.FailureType : 'Any Failure' %>" field_key="FailureType"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Any Failure">Any Failure</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -132,8 +132,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="none" field_key=""  field_type_data="string" field_type="emp_inp" > 
-                            <option value="none">Disable on Fail</option>
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.FailureType ? Interlocks.FailureType : 'Disable on Fail' %>" field_key="Action"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Disable on Fail">Disable on Fail</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -147,7 +147,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="1" field_key="RetryCount" field_type="emp_inp" field_type_data="number" disabled>                     
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= FailRules && FailRules.RetryCount ? Interlocks.RetryCount : 0 %>" field_key="RetryCount" field_type="emp_inp" field_type_data="number" disabled>                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -160,8 +160,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="none" field_key=""  field_type_data="string" field_type="emp_inp" > 
-                            <option value="none">Abort</option>
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.RetryAction ? Interlocks.RetryAction : 'Abort' %>" field_key="RetryAction"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Abort">Abort</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -175,7 +175,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
+                    <button class="btn btn-info text-white btn-rounded f-right" onclick="Act_save();return false;">Save</button>
                     <a href="edit_jobs?id=<%= id_job %>" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
                 </div>
             </div>
@@ -213,6 +213,10 @@
             $(emp).parent().find('input').each(function () {
                 $(this).prop('disabled', !$(this).prop('disabled'));
             });
+        }
+
+        function Act_save(){
+            alert("Save");
         }
     </script>
 </body>
