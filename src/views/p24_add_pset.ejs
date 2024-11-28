@@ -124,12 +124,23 @@
 
         function add_p_set(index){
             var data_p=listpsetData[index];
-            var data_pset={
-                "Strategy": "Torque",
-                "Target": 2.5,
-                "Steps": 1,
-                "Complete": false
-            };
+            var data_pset={"ID": "",
+                    "Strategy": "Torque",
+                    "Target": 0,
+                    "Steps": 0,
+                    "Complete": false,
+                    "FailRules": {
+                        "BatchCount": 1,
+                        "SocketAssignment": "None",
+                        "ResetToPset": "None",
+                        "MaxAttemptsEnable": true,
+                        "MaxNokEnable": false,
+                        "FailureType": "Any Failure",
+                        "Action": "Retry Count",
+                        "RetryCount": 1,
+                        "RetryAction": "Abort"
+                    }
+                };
             data_pset.ID=data_p.ID;
             data_pset.Steps=data_p.StepCount;
 
@@ -159,12 +170,22 @@
             var is_update=false;
             for (let i = data_j.Psets.length - 1; i >= 0; i--) {
                 if (data_j.Psets[i].ID==data_p.ID) {
-                    data_j.Psets[i]={
-                        "ID":"",
-                        "Strategy": "Torque",
-                        "Target": 2.5,
-                        "Steps": 1,
-                        "Complete": false
+                    data_j.Psets[i]={"ID": "",
+                        "Strategy": "",
+                        "Target": 0,
+                        "Steps": 0,
+                        "Complete": true,
+                        "FailRules": {
+                            "BatchCount": 1,
+                            "SocketAssignment": "None",
+                            "ResetToPset": "None",
+                            "MaxAttemptsEnable": true,
+                            "MaxNokEnable": false,
+                            "FailureType": "Any Failure",
+                            "Action": "Retry Count",
+                            "RetryCount": 1,
+                            "RetryAction": "Abort"
+                        }
                     };
                     is_update=true;
                     break;

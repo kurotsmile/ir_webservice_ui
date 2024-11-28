@@ -2,7 +2,7 @@
     "ID": "",
     "Index": "0",
     "Name": "",
-    "PsetCount": 1,
+    "PsetCount": 0,
     "Interlocks": {
         "ValidJob": false,
         "BcodeVin": false,
@@ -14,115 +14,291 @@
     "Psets": [
         {
             "ID": "",
-            "Strategy": "Torque",
-            "Target": 2.5,
-            "Steps": 1,
-            "Complete": false
+            "Strategy": "",
+            "Target": 0,
+            "Steps": 0,
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": true,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Retry Count",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         },
         {
             "ID": "",
             "Strategy": "",
             "Target": 0,
             "Steps": 0,
-            "Complete": false
+            "Complete": false,
+            "FailRules": {
+                "BatchCount": 1,
+                "SocketAssignment": "None",
+                "ResetToPset": "None",
+                "MaxAttemptsEnable": true,
+                "MaxNokEnable": false,
+                "FailureType": "Any Failure",
+                "Action": "Disable on Fail",
+                "RetryCount": 1,
+                "RetryAction": "Abort"
+            }
         }
     ]
 }

@@ -13,6 +13,7 @@
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/public/js/app.js?v=<%= ver %>"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 </head>
 
 <body class="brown">
@@ -49,7 +50,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.ID ? jsonData.ID : '' %>" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -62,7 +63,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.Name ? jsonData.Name : '' %>" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -89,9 +90,9 @@
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Pset Name</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="col_tb_id">ID</th>
+                    <th class="col_tb_name">Pset Name</th>
+                    <th class="col_tb_action">Action</th>
                   </tr>
                 </thead>
                 <tbody id="all_items"></tbody>
@@ -99,17 +100,19 @@
 
         </div>
     </main>
+    <%- include('p9_alet_warning.ejs') %>
     <script>
         var jsonData = JSON.parse('<%- JSON.stringify(jsonData) %>');
 
         function item_p(data_p){
             if(data_p.ID=="") return false;
-            var html='<tr>';
+            var html='<tr data-index="'+data_p.index+'">';
             html+='<td scope="row"><span>'+(data_p.index+1)+'</span> <a href="/alert_waring" style="display: none;"><img src="/public/SVG/Warning.svg"></a></td>';
             html+='<td>'+data_p.Strategy+'</td>';
             html+='<td>';
-                html+='<a href="/edit_pset"><img src="/public/SVG/Trash.svg"></a>';
-                html+='<a href="/edit_pset"><img src="/public/SVG/Copy.svg"></a>';
+                html+='<img src="/public/SVG/Off.svg" style="width: 42px;"  role="button" class="mb-2 mt-2 field_data btn_switch" value="false" field_key="SmartSocket" field_type="emp_value" field_type_data="bool"/>';
+                html+='<a href="#" role="button" onclick="show_delete(this);return false;" data-id="'+data_p.ID+'" data-index="'+data_p.index+'" data-name="'+data_p.Strategy+'"><img src="/public/SVG/Trash.svg"></a>';
+                html+='<a href="#" role="button" class="btn-sort"><img src="/public/SVG/Move.svg"></a>';
                 html+='<a href="/fail_rules?id_job='+jsonData.ID+'"><img src="/public/SVG/Edit.svg"></a>';
                 html+='</td>';
             html+='</tr>';
@@ -118,7 +121,36 @@
 
         $(document).ready(()=>{
             load_list();
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
         });
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
 
         function load_list(){
             $("#all_items").empty();
@@ -130,6 +162,126 @@
                     count_item++;
                 }
             });
+
+            $("#all_items").sortable({
+                axis: "y",
+                handle: ".btn-sort",
+                start: function (event, ui) {
+                    ui.item.addClass("dragging");
+                    ui.item.find('td').each(function(index,r) {
+                        if(index==0) $(r).css("width","20%");
+                        if(index==1) $(r).css("width","50%");
+                        if(index==2) $(r).css("width","30%");
+                    });
+                },
+                stop: function (event, ui){
+                    ui.item.removeClass("dragging");
+                    ui.item.find('td').each(function(index,r) {
+                        if(index==0) $(r).css("width","20%");
+                        if(index==1) $(r).css("width","50%");
+                        if(index==2) $(r).css("width","30%");
+                    });
+                },update: function (event, ui) {
+                    var id_file=jsonData.ID;
+                    let newOrder = [];
+                    $("#all_items tr").each(function () {
+                        let originalIndex = $(this).data("index");
+                        newOrder.push(jsonData.Psets[originalIndex]);
+                    });
+
+                    $(newOrder).each(function(index,s){
+                        jsonData.Psets[index]=s;
+                        if(jsonData.Psets[index].index) delete jsonData.Psets[index].index;
+                    });
+                    $.ajax({
+                        url: '/save-json',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            data_json: jsonData,
+                            file_name: id_file
+                        }),
+                        success: function(response) {
+                            console.log(response.message);
+                            load_list();
+                        },
+                        error: function(error) {
+                            console.log(error.responseJSON.error);
+                        }
+                    });
+                }
+            }).disableSelection();
+        }
+
+        function show_delete(emp){
+            var p_name=$(emp).data("name");
+            var p_index=$(emp).data("index");
+            var html='';
+            var id_file=jsonData.ID;
+
+            html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
+            html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
+            $("#box_msg_title").empty();
+            $("#box_msg_body").empty();
+            $("#box_msg_btn").empty();
+
+            $("#box_msg_title").html('<div class="txt"><img src="/public/SVG/Warning.svg"/> Warning</div>');
+            $("#box_msg_body").html(html);
+
+            var btn_cancel='';
+            btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded">Cancel</a>');
+            $(btn_cancel).click(()=>{
+                close_msg();
+            });
+
+            var btn_del='';
+            btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
+            $(btn_del).click(()=>{
+                jsonData.Psets[p_index]={"ID": "",
+                    "Strategy": "",
+                    "Target": 0,
+                    "Steps": 0,
+                    "Complete": true,
+                    "FailRules": {
+                        "BatchCount": 1,
+                        "SocketAssignment": "None",
+                        "ResetToPset": "None",
+                        "MaxAttemptsEnable": true,
+                        "MaxNokEnable": false,
+                        "FailureType": "Any Failure",
+                        "Action": "Retry Count",
+                        "RetryCount": 1,
+                        "RetryAction": "Abort"
+                    }
+                };
+                
+                let elementsWithID = jsonData.Psets.filter(item => item.ID !== "");
+                let elementsWithoutID = jsonData.Psets.filter(item => item.ID === "");
+                jsonData.Psets=elementsWithID.concat(elementsWithoutID);
+                $.ajax({
+                    url: '/save-json',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        data_json: jsonData,
+                        file_name: id_file
+                    }),
+                    success: function(response) {
+                        console.log(response.message);
+                    },
+                    error: function(error) {
+                        console.log(error.responseJSON.error);
+                    }
+                });
+                load_list();
+                close_msg();
+            });
+            
+            $("#box_msg_btn").append(btn_cancel);
+            $("#box_msg_btn").append(btn_del);
+
+            $("#bk_dark_full").show();
+            $("#box_msg").show();
         }
     </script>
 </body>

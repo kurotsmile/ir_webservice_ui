@@ -44,6 +44,8 @@
         </div>
     </div>
 
+    <% const FailRules = jsonData.FailRules || {}; %>
+
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid pb-5">
@@ -54,7 +56,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="1" field_key="BatchCount" field_type="emp_inp" field_type_data="number" disabled>                     
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= FailRules && FailRules.BatchCount ? Interlocks.BatchCount : 0 %>" field_key="BatchCount" field_type="emp_inp" field_type_data="number" disabled>                     
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="none" field_key=""  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.BatchCount ? Interlocks.BatchCount : 0 %>" field_key=""  field_type_data="string" field_type="emp_inp" > 
                             <option value="none">None</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
