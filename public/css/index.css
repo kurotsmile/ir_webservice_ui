@@ -749,6 +749,11 @@ table thead tr th{
     display: inline-flex;
 }
 
+.btn-warning{
+    background-color:#f18d05 !important;
+    border-color: #f18d05 !important;
+}
+
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}

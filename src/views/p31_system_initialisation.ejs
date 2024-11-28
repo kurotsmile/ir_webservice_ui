@@ -33,7 +33,7 @@
 
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid mb-5 pb-5">
 
             <div class="row row-p">
                 <div class="col-6">
@@ -42,8 +42,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="PlantName" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="PlantName" field_key="PlantName" field_type="emp_inp" field_type_data="string" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -55,8 +55,81 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="AssemblyName" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="AssemblyLine" field_key="AssenblyLine" field_type="emp_inp" field_type_data="string" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Station Name</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="StationName" field_key="StationName" field_type="emp_inp" field_type_data="string" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Application Name</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="ApplicationName" field_key="ApplicationName" field_type="emp_inp" field_type_data="string" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Language</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="English" field_key="language"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="English">English</option>
+                            <option value="Vietnamese">Vietnamese</option>
+                            <option value="French">French</option>
+                            <option value="Spanish">Spanish</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Rows Per Page</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="100" field_key="RowsPerPage" field_type="emp_inp" field_type_data="number" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Screen Orientation</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="Vertical" field_key="ScreenOrientation"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Vertical">Vertical</option>
+                            <option value="Horizontal">Horizontal</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -64,16 +137,24 @@
         </div>
     </main>
 
-    <div id="menu_footer">
+    <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <button class="btn btn-info text-white btn-rounded f-right">Save</button>
-                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                    <a href="home" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                    <button class="btn btn-warning text-white btn-rounded f-right">Factory Reset</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
+<script>
+    function show_edit(emp){
+        $(emp).parent().find('img').toggleClass("bg-info rounded");
+        $(emp).parent().find('input').each(function () {
+            $(this).prop('disabled', !$(this).prop('disabled'));
+        });
+    }
+</script>
 </html>
