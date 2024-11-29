@@ -14,6 +14,40 @@ function get_file_system(nameFile) {
     return filePath;
 }
 
+const checkAndReadFile = (filePath) => {
+    return new Promise((resolve, reject) => {
+        fs.access(filePath, fs.constants.F_OK, (err) => {
+            if (err) {
+                resolve(null);
+            } else {
+                fs.readFile(filePath, 'utf8', (readErr, data) => {
+                    if (readErr) {
+                        reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
+                    } else {
+                        resolve(data);
+                    }
+                });
+            }
+        });
+    });
+};
+
+const readJsonFile = (filePath) => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
+            } else {
+                try {
+                    resolve(JSON.parse(data));
+                } catch (parseErr) {
+                    reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
+                }
+            }
+        });
+    });
+};
+
 app.set('views', path.join(__dirname, '../src/views'));
 app.set('view engine', 'ejs');
 
@@ -69,22 +103,6 @@ app.get('/pset_list', (req, res) => {
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
     const jsonPDefaultPath = path.join(__dirname, '../public', 'jsonData', 'PDefault.json');
 
-    const readJsonFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.readFile(filePath, 'utf8', (err, data) => {
-                if (err) {
-                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
-                } else {
-                    try {
-                        resolve(JSON.parse(data));
-                    } catch (parseErr) {
-                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
-                    }
-                }
-            });
-        });
-    };
-
     fs.access(primaryPath, fs.constants.F_OK, async (err) => {
         const filePath = err ? secondaryPath : primaryPath;
         try {
@@ -112,24 +130,6 @@ app.get('/edit_pset', (req, res) => {
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
 
-    const checkAndReadFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.access(filePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    resolve(null);
-                } else {
-                    fs.readFile(filePath, 'utf8', (readErr, data) => {
-                        if (readErr) {
-                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                }
-            });
-        });
-    };
-
     Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
         .then(([primaryData, secondaryData]) => {
             let jsonData;
@@ -152,24 +152,6 @@ app.get('/forward_operation', (req, res) => {
     const id = req.query.id;
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
-
-    const checkAndReadFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.access(filePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    resolve(null);
-                } else {
-                    fs.readFile(filePath, 'utf8', (readErr, data) => {
-                        if (readErr) {
-                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                }
-            });
-        });
-    };
 
     Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
         .then(([primaryData, secondaryData]) => {
@@ -195,24 +177,6 @@ app.get('/edit_pset_step', (req, res) => {
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
 
-    const checkAndReadFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.access(filePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    resolve(null);
-                } else {
-                    fs.readFile(filePath, 'utf8', (readErr, data) => {
-                        if (readErr) {
-                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                }
-            });
-        });
-    };
-
     Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
         .then(([primaryData, secondaryData]) => {
             let jsonData;
@@ -235,24 +199,6 @@ app.get('/reverse_operation', (req, res) => {
     const id = req.query.id;
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
-
-    const checkAndReadFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.access(filePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    resolve(null);
-                } else {
-                    fs.readFile(filePath, 'utf8', (readErr, data) => {
-                        if (readErr) {
-                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                }
-            });
-        });
-    };
 
     Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
         .then(([primaryData, secondaryData]) => {
@@ -277,22 +223,6 @@ app.get('/jobs', (req, res) => {
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'JobList.json');
     const jsonJDefaultPath = path.join(__dirname, '../public', 'jsonData', 'JDefault.json');
 
-    const readJsonFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.readFile(filePath, 'utf8', (err, data) => {
-                if (err) {
-                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
-                } else {
-                    try {
-                        resolve(JSON.parse(data));
-                    } catch (parseErr) {
-                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
-                    }
-                }
-            });
-        });
-    };
-
     fs.access(primaryPath, fs.constants.F_OK, async (err) => {
         const filePath = err ? secondaryPath : primaryPath;
         try {
@@ -313,67 +243,43 @@ app.get('/jobs', (req, res) => {
     });
 });
 
-app.get('/edit_jobs', (req, res) => {
+
+app.get('/edit_jobs', async (req, res) => {
     const id = req.query.id;
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
+    const plistPath = path.join(get_file_system('PsetList'));
 
-    const checkAndReadFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.access(filePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    resolve(null);
-                } else {
-                    fs.readFile(filePath, 'utf8', (readErr, data) => {
-                        if (readErr) {
-                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                }
-            });
-        });
-    };
+    try {
+        const [primaryData, secondaryData, psetListData] = await Promise.all([
+            checkAndReadFile(primaryPath),
+            checkAndReadFile(secondaryPath),
+            checkAndReadFile(plistPath)
+        ]);
 
-    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
-        .then(([primaryData, secondaryData]) => {
-            let jsonData;
-            if (primaryData) {
-                jsonData = JSON.parse(primaryData);
-            } else if (secondaryData) {
-                jsonData = JSON.parse(secondaryData);
-            } else {
-                jsonData = {};
-            }
-            res.render('p23_edit_jobs', { jsonData, id});
-        })
-        .catch((err) => {
-            console.error(err.message);
-            res.status(500).send('An error occurred while processing your request.');
-        });
+        let jsonData = {};
+        if (primaryData) {
+            jsonData = JSON.parse(primaryData);
+        } else if (secondaryData) {
+            jsonData = JSON.parse(secondaryData);
+        }
+
+        let psetList = {};
+        if (psetListData) {
+            psetList = JSON.parse(psetListData);
+        }
+
+        res.render('p23_edit_jobs', { jsonData, psetList, id });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('An error occurred while processing your request.');
+    }
 });
 
 app.get('/add_pset', (req, res) => {
     const primaryPath = path.join(get_file_system("PsetList"));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', 'PsetList.json');
     const jsonPDefaultPath = path.join(__dirname, '../public', 'jsonData', 'PDefault.json');
-
-    const readJsonFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.readFile(filePath, 'utf8', (err, data) => {
-                if (err) {
-                    reject(new Error(`Failed to read file at ${filePath}: ${err.message}`));
-                } else {
-                    try {
-                        resolve(JSON.parse(data));
-                    } catch (parseErr) {
-                        reject(new Error(`Error parsing JSON data from ${filePath}: ${parseErr.message}`));
-                    }
-                }
-            });
-        });
-    };
 
     fs.access(primaryPath, fs.constants.F_OK, async (err) => {
         const filePath = err ? secondaryPath : primaryPath;
@@ -387,24 +293,6 @@ app.get('/add_pset', (req, res) => {
             const id = req.query.id;
             const primaryPath = path.join(get_file_system(id));
             const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
-        
-            const checkAndReadFile = (filePath) => {
-                return new Promise((resolve, reject) => {
-                    fs.access(filePath, fs.constants.F_OK, (err) => {
-                        if (err) {
-                            resolve(null);
-                        } else {
-                            fs.readFile(filePath, 'utf8', (readErr, data) => {
-                                if (readErr) {
-                                    reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                                } else {
-                                    resolve(data);
-                                }
-                            });
-                        }
-                    });
-                });
-            };
         
             Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
                 .then(([primaryData, secondaryData]) => {
@@ -433,24 +321,6 @@ app.get('/edit_jobs_interlocks', (req, res) => {
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, '../public', 'jsonData', id + '.json');
 
-    const checkAndReadFile = (filePath) => {
-        return new Promise((resolve, reject) => {
-            fs.access(filePath, fs.constants.F_OK, (err) => {
-                if (err) {
-                    resolve(null);
-                } else {
-                    fs.readFile(filePath, 'utf8', (readErr, data) => {
-                        if (readErr) {
-                            reject(new Error(`Failed to read file at ${filePath}: ${readErr.message}`));
-                        } else {
-                            resolve(data);
-                        }
-                    });
-                }
-            });
-        });
-    };
-
     Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
         .then(([primaryData, secondaryData]) => {
             let jsonData;
@@ -471,7 +341,26 @@ app.get('/edit_jobs_interlocks', (req, res) => {
 
 app.get('/fail_rules', (req, res) => {
     const id_job = req.query.id_job;
-    res.render('p26_fail_rules', {id_job});
+    const index_p=req.query.index_p;
+    const primaryPath = path.join(get_file_system(id_job));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', id_job + '.json');
+
+    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
+        .then(([primaryData, secondaryData]) => {
+            let jsonData;
+            if (primaryData) {
+                jsonData = JSON.parse(primaryData);
+            } else if (secondaryData) {
+                jsonData = JSON.parse(secondaryData);
+            } else {
+                jsonData = {};
+            }
+            res.render('p26_fail_rules', { jsonData, id_job,index_p});
+        })
+        .catch((err) => {
+            console.error(err.message);
+            res.status(500).send('An error occurred while processing your request.');
+        });
 });
 
 app.get('/global_settings', (req, res) => {
@@ -654,6 +543,47 @@ app.post('/update-list-by-id', (req, res) => {
     });
 });
 
+app.post('/update-list-by-field', (req, res) => {
+    const { dataJson, file_name } = req.body;
+    if (!dataJson || !dataJson.ID) {
+        return res.status(400).json({ error: "Missing dataJson or ID in request body" });
+    }
+
+    const primaryPath = path.join(get_file_system(file_name));
+    const secondaryPath = path.join(__dirname, '../public', 'jsonData', file_name + '.json');
+    const filePath = fs.existsSync(primaryPath) ? primaryPath : secondaryPath;
+
+    fs.readFile(filePath, 'utf8', (readErr, data) => {
+        if (readErr) {
+            return res.status(500).json({ error: `Failed to read file: ${readErr.message}` });
+        }
+
+        try {
+            const jsonData = JSON.parse(data);
+            const objIndex = jsonData.findIndex(obj => obj.ID === dataJson.ID);
+            if (objIndex === -1) {
+                return res.status(400).json({ error: "Object with the provided ID not found" });
+            }
+
+            Object.keys(dataJson).forEach(key => {
+                jsonData[objIndex][key] = dataJson[key];
+            });
+
+            fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (writeErr) => {
+                if (writeErr) {
+                    return res.status(500).json({ error: `Failed to write file: ${writeErr.message}` });
+                }
+                res.status(200).json({
+                    message: "Update successful",
+                    updatedObject: jsonData[objIndex],
+                });
+            });
+        } catch (parseErr) {
+            return res.status(500).json({ error: `Error parsing JSON data: ${parseErr.message}` });
+        }
+    });
+});
+
 app.post('/delete-file', (req, res) => {
     const { file_name } = req.body;
 
@@ -668,5 +598,6 @@ app.post('/delete-file', (req, res) => {
         });
     });
 });
+
 
 export default app;

@@ -567,7 +567,6 @@ app.post('/update-list-by-field', (req, res) => {
                 return res.status(400).json({ error: "Object with the provided ID not found" });
             }
 
-            // Chỉ cập nhật các trường có trong dataJson
             Object.keys(dataJson).forEach(key => {
                 jsonData[objIndex][key] = dataJson[key];
             });
