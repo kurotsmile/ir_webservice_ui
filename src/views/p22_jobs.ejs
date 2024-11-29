@@ -148,7 +148,7 @@
         function add_item_j(data_j){
             var html_item='';
             html_item+='<tr>';
-                html_item+='<td scope="row">'+(data_j.index+1)+'</td>';
+                html_item+='<td scope="row">'+data_j.Index+'</td>';
                 html_item+='<td>'+data_j.Name+'</td>';
                 html_item+='<td>';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Tick.svg" '+(data_j.ValidJob!=true? 'class="attr_job_disable"':'')+'></a>';
@@ -203,7 +203,9 @@
             var obj_data = JSON.parse('<%- JSON.stringify(jsonJDefault) %>');
             var id_file=jsonList[locate].ID;
             obj_data["ID"]=jsonList[locate].ID;
-            obj_data["Name"]=jsonList[locate].Name 
+            obj_data["Name"]=jsonList[locate].Name;
+            obj_data["Index"]=locate;
+            jsonList[locate]=obj_data;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
@@ -310,12 +312,7 @@
             $("#box_msg").show();
         }
 
-
         function save_data(){
-            $(jsonList).each(function(index,p){
-                p["index"]=index;
-            });
-
             $.ajax({
                 url: '/save-json',
                 type: 'POST',

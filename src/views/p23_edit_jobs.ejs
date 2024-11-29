@@ -49,7 +49,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.ID ? jsonData.ID : '' %>" class="form-control">
+                        <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.Index ? jsonData.Index : '0' %>" class="form-control">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -103,12 +103,13 @@
     <%- include('p9_alet_warning.ejs') %>
     <script>
         var jsonData = JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var psetList=JSON.parse('<%- JSON.stringify(psetList) %>');
 
         function item_p(data_p){
             if(data_p.ID=="") return false;
             var html='<tr data-index="'+data_p.index+'">';
             html+='<td scope="row"><span>'+(data_p.index+1)+'</span> <a href="/alert_waring" style="display: none;"><img src="/public/SVG/Warning.svg"></a></td>';
-            html+='<td>'+data_p.Strategy+'</td>';
+            html+='<td>'+getPsetName(data_p.ID)+'</td>';
             html+='<td>';
                 html+='<img src="/public/SVG/Off.svg" style="width: 42px;"  role="button" class="mb-2 mt-2 field_data btn_switch" value="false" field_key="SmartSocket" field_type="emp_value" field_type_data="bool"/>';
                 html+='<a href="#" role="button" onclick="show_delete(this);return false;" data-id="'+data_p.ID+'" data-index="'+data_p.index+'" data-name="'+data_p.Strategy+'"><img src="/public/SVG/Trash.svg"></a>';
@@ -282,6 +283,15 @@
 
             $("#bk_dark_full").show();
             $("#box_msg").show();
+        }
+
+        function getPsetName(inID) {
+            for (let i = 0; i < psetList.length; i++) {
+                if (psetList[i].ID === inID) {
+                    return psetList[i].Name;
+                }
+            }
+            return "[NA]";
         }
     </script>
 </body>

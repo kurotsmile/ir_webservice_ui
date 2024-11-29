@@ -245,27 +245,37 @@ app.get('/jobs', (req, res) => {
     });
 });
 
-app.get('/edit_jobs', (req, res) => {
+
+app.get('/edit_jobs', async (req, res) => {
     const id = req.query.id;
     const primaryPath = path.join(get_file_system(id));
     const secondaryPath = path.join(__dirname, 'public', 'jsonData', id + '.json');
+    const plistPath = path.join(get_file_system('PsetList'));
 
-    Promise.all([checkAndReadFile(primaryPath), checkAndReadFile(secondaryPath)])
-        .then(([primaryData, secondaryData]) => {
-            let jsonData;
-            if (primaryData) {
-                jsonData = JSON.parse(primaryData);
-            } else if (secondaryData) {
-                jsonData = JSON.parse(secondaryData);
-            } else {
-                jsonData = {};
-            }
-            res.render('p23_edit_jobs', { jsonData, id});
-        })
-        .catch((err) => {
-            console.error(err.message);
-            res.status(500).send('An error occurred while processing your request.');
-        });
+    try {
+        const [primaryData, secondaryData, psetListData] = await Promise.all([
+            checkAndReadFile(primaryPath),
+            checkAndReadFile(secondaryPath),
+            checkAndReadFile(plistPath)
+        ]);
+
+        let jsonData = {};
+        if (primaryData) {
+            jsonData = JSON.parse(primaryData);
+        } else if (secondaryData) {
+            jsonData = JSON.parse(secondaryData);
+        }
+
+        let psetList = {};
+        if (psetListData) {
+            psetList = JSON.parse(psetListData);
+        }
+
+        res.render('p23_edit_jobs', { jsonData, psetList, id });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('An error occurred while processing your request.');
+    }
 });
 
 app.get('/add_pset', (req, res) => {
