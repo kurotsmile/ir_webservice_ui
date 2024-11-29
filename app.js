@@ -401,7 +401,18 @@ app.get('/wifi_setting_and_hotspot', (req, res) => {
 });
 
 app.get('/buzzer_setting', (req, res) => {
-    res.render('p35_buzzer_setting');
+    const primaryPath = path.join(get_file_system("Settings"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Settings.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p35_buzzer_setting', {jsonData});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.get('/pfop_settings', (req, res) => {
