@@ -108,11 +108,22 @@
 
         function load_list(){
             var length_item=0;
+            var counValidJob=0;
+            var counInValidJob=0;
             $.each(jsonList, function(index, item) {
-                if(item.ID!="") length_item++;
+                if(item.ID!=""){
+                    length_item++;
+                    if(item.ValidJob!=null){
+                        if(item.ValidJob) counValidJob++;
+                        else counInValidJob++;
+                    }
+                }
                 if(item.index==null) item.index=index;
                 if(item.index==NaN) item.index=index;
             });
+
+            $("#ValidJob").html(counValidJob);
+            $("#InValidJob").html(counInValidJob);
 
             if(length_item>10)
                 currentPage=2;
@@ -125,23 +136,15 @@
             var startIndex = (page - 1) * itemsPerPage;
             var endIndex = startIndex + itemsPerPage;
             var paginatedItems = jsonList.slice(startIndex, endIndex);
-            var counValidJob=0;
-            var counInValidJob=0;
+
             $('#all_item_job').empty();
             var count_index=0;
             $.each(paginatedItems, function(index, item) {
                 if(item.ID!=""){
                     $('#all_item_job').append(add_item_j(item));
                     count_index++;
-                    if(item.ValidJob!=null){
-                        if(item.ValidJob) counValidJob++;
-                        else counInValidJob++;
-                    }
                 }
             });
-
-            $("#ValidJob").html(counValidJob);
-            $("#InValidJob").html(counInValidJob);
             update_meta_nav_page();
         }
 

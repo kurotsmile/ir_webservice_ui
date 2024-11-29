@@ -14,12 +14,18 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item" href="pset_list">
-                    <img  src="<%= currentRoute === '/pset_list' ? 'public/SVG/Pset.svg' : 'public/SVG/PsetD.svg' %>" />
+                    <% 
+                    const validRoutes_p = ['/pset_list', '/edit_pset', '/forward_operation', '/forward_operation','/reverse_operation']; 
+                    %>
+                    <img  src="<%= validRoutes_p.includes(currentRoute)  ? 'public/SVG/Pset.svg' : 'public/SVG/PsetD.svg' %>" />
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link menu-bottom-item" href="jobs">
-                    <img  src="<%= currentRoute === '/jobs' ? 'public/SVG/Job48.svg' : 'public/SVG/Job48D.svg' %>" />
+                    <% 
+                    const validRoutes_j = ['/jobs', '/edit_jobs', '/add_pset','/edit_jobs_interlocks','/edit_jobs_interlocks','/fail_rules']; 
+                    %>
+                    <img  src="<%= validRoutes_j.includes(currentRoute)  ? 'public/SVG/Job48.svg' : 'public/SVG/Job48D.svg' %>" />
                 </a>
             </li>
             <li class="nav-item ">

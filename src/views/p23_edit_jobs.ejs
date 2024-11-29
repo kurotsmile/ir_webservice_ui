@@ -189,7 +189,7 @@
             $("#all_items").empty();
             let count_item=0;
             $(jsonData.Psets).each(function(index,p){
-                if(p.Strategy!=""){
+                if(p.ID!=""){
                     p.index=count_item;
                     $("#all_items").append(item_p(p));
                     count_item++;
@@ -256,6 +256,10 @@
                 var val_emp=$(this).attr("value");
                 var index_p=parseInt($(this).data("index"));
                 var id_file=jsonData.ID;
+
+                $(jsonData.Psets).each(function(index,p){
+                    p.Complete=false;
+                });
                 
                 if(val_emp=="true"){
                     $(this).attr("src", "/public/SVG/Off.svg");
@@ -266,6 +270,7 @@
                     $(this).attr("value",true);
                     jsonData.Psets[index_p].Complete=true;
                 }
+                
                 $.ajax({
                     url: '/save-json',
                     type: 'POST',
@@ -276,6 +281,7 @@
                     }),
                     success: function(response) {
                         console.log(response.message);
+                        load_list();
                     },error: function(error) {
                         console.log(error.responseJSON.error);
                     }
