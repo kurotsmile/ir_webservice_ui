@@ -111,7 +111,7 @@
             html+='<td scope="row"><span>'+(data_p.index+1)+'</span> <a href="/alert_waring" style="display: none;"><img src="/public/SVG/Warning.svg"></a></td>';
             html+='<td>'+getPsetName(data_p.ID)+'</td>';
             html+='<td>';
-                html+='<img src="/public/SVG/Off.svg" style="width: 42px;"  role="button" class="mb-2 mt-2 field_data btn_switch" value="false" field_key="SmartSocket" field_type="emp_value" field_type_data="bool"/>';
+                html+='<img src="/public/SVG/Off.svg" style="width: 42px;"  role="button" class="mb-2 mt-2 field_data btn_switch" data-index="'+data_p.index+'" value="'+data_p.Complete+'" field_key="SmartSocket" field_type="emp_value" field_type_data="bool"/>';
                 html+='<a href="#" role="button" onclick="show_delete(this);return false;" data-id="'+data_p.ID+'" data-index="'+data_p.index+'" data-name="'+data_p.Strategy+'"><img src="/public/SVG/Trash.svg"></a>';
                 html+='<a href="#" role="button" class="btn-sort"><img src="/public/SVG/Move.svg"></a>';
                 html+='<a href="/fail_rules?id_job='+jsonData.ID+'&index_p='+data_p.index+'"><img src="/public/SVG/Edit.svg"></a>';
@@ -136,13 +136,32 @@
 
             $(".btn_switch").click(function(){
                 var val_emp=$(this).attr("value");
+                var index_p=parseInt($(this).data("index"));
+                var id_file=jsonData.ID;
+                
                 if(val_emp=="true"){
                     $(this).attr("src", "/public/SVG/Off.svg");
                     $(this).attr("value",false);
+                    jsonData.Psets[index_p].Complete=false;
                 }else{
                     $(this).attr("src", "/public/SVG/On.svg");
                     $(this).attr("value",true);
+                    jsonData.Psets[index_p].Complete=true;
                 }
+                $.ajax({
+                    url: '/save-json',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        data_json: jsonData,
+                        file_name: id_file
+                    }),
+                    success: function(response) {
+                        console.log(response.message);
+                    },error: function(error) {
+                        console.log(error.responseJSON.error);
+                    }
+                });
             });
 
             $("#j_id").change(function(){
