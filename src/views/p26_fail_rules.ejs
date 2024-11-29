@@ -241,6 +241,9 @@
                 }
             });
             obj_p.Psets[index_edit].FailRules=obj_s;
+            $(obj_p.Psets).each(function(index,p){
+                delete p.index;
+            });
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
