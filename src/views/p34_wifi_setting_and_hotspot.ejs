@@ -30,38 +30,151 @@
             </div>
         </div>
     </div>
-
+    <% const WIFI=jsonData.WIFI%>
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid pb-5 mb-5">
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Fail Cycle</div>
+                    <div class="label-txt">Mode</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= WIFI && WIFI.Mode ? WIFI.Mode : 'Hotspot' %>" field_key="Mode"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Hotspot" <%= WIFI && WIFI.Mode === 'Hotspot' ? 'selected' : '' %>>Hotspot</option>
+                            <option value="ClinetPoint" <%= WIFI && WIFI.Mode === 'ClinetPoint' ? 'selected' : '' %>>ClinetPoint</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
                 </div>
             </div>
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Job Complete</div>
+                    <div class="label-txt">IP Address</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="<%= WIFI && WIFI.IP ? WIFI.IP : '' %>" class="form-control field_data" field_key="IP" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
                 </div>
             </div>
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Batch Complete</div>
+                    <div class="label-txt">Subnet Mask</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="" class="form-control field_data" field_key="IP" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
                 </div>
             </div>
 
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Gateway</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="" class="form-control field_data" field_key="IP" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Network SSID</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= WIFI && WIFI.HSSID ? WIFI.HSSID : 'IR' %>" field_key="HSSID"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Hotspot" <%= WIFI && WIFI.HSSID === 'IR' ? 'selected' : '' %>>IR</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Brand Type</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= WIFI && WIFI.HBand ? WIFI.HBand : '2.4G' %>" field_key="HBand"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Hotspot" <%= WIFI && WIFI.HBand === '2.4G' ? 'selected' : '' %>>IR</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Security/EAP Mode</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="" field_key=""  field_type_data="string" field_type="emp_inp" > 
+                            <option value="WAP Enterprise">WAP Enterprise</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Security Key</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="<%= WIFI && WIFI.CKey ? WIFI.CKey : '' %>" class="form-control field_data" field_key="CKey" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">DNS Server</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="" class="form-control field_data" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Certificates</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="CA" field_key=""  field_type_data="string" field_type="emp_inp" > 
+                            <option value="CA">CA</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 

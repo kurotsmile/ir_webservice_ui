@@ -1,1 +1,30 @@
-{"PFOP":{"Enable":false,"Logs":false,"ToolEnable":false,"CellID":"1","ChID":"1","CtrlName":"INSIGHTQi"},"WIFI":{"Mode":"Hotspot","IP":"192.168.111.1","HSSID":"IR","HKey":"powertool","HBand":"2.4G","CSSID":"ssid","CKey":"password"}}
+{
+    "PFOP": {
+        "Enable": false,
+        "Logs": false,
+        "ToolEnable": false,
+        "CellID": "1",
+        "ChID": "1",
+        "CtrlName": "INSIGHTQi"
+    },
+    "WIFI": {
+        "Mode": "Client Point",
+        "IP": "192.168.111.1",
+        "HSSID": "IR",
+        "HKey": "powertool",
+        "HBand": "2.4G",
+        "CSSID": "201 5GHz",
+        "CKey": "88888888"
+    },
+    "Global": {
+        "BootJob": true,
+        "SpindleOperation": "Handheld",
+        "ToolStartMode": "Trigger Start",
+        "JobSelection": "Internal-Controller"
+    },
+    "Buzzer": {
+        "FailCycle": true,
+        "JobComplete": true,
+        "BatchComplete": true
+    }
+}
