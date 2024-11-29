@@ -127,6 +127,124 @@
                $(this).attr("value",val);
             });
 
+            $("#j_id").change(function(){
+                save_data_j_cur();
+            });
+
+            $("#j_name").change(function(){
+                save_data_j_cur();
+            });
+        });
+
+        function save_data_j_cur(){
+            var id_file=jsonData.ID;
+            jsonData.Index=$("#j_id").val();
+            jsonData.Name=$("#j_name").val();
+
+            var obj_in_list={};
+            obj_in_list.ID=jsonData.ID;
+            obj_in_list.Index=jsonData.Index;
+            obj_in_list.Name=jsonData.Name;
+            
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: jsonData,
+                    file_name: id_file
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                },error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+
+            $.ajax({
+                    url: '/update-list-by-field',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        dataJson: obj_in_list,
+                        file_name:"JobList"
+                    }),
+                    success: function(response) {
+                        console.log(response.message);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+            });
+        }
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
+
+        function load_list(){
+            $("#all_items").empty();
+            let count_item=0;
+            $(jsonData.Psets).each(function(index,p){
+                if(p.Strategy!=""){
+                    p.index=count_item;
+                    $("#all_items").append(item_p(p));
+                    count_item++;
+                }
+            });
+
+            $("#all_items").sortable({
+                axis: "y",
+                handle: ".btn-sort",
+                start: function (event, ui) {
+                    ui.item.addClass("dragging");
+                    ui.item.find('td').each(function(index,r) {
+                        if(index==0) $(r).addClass("col_tb_id");
+                        if(index==1) $(r).addClass("col_tb_name");
+                        if(index==2) $(r).addClass("col_tb_action");
+                    });
+                },
+                stop: function (event, ui){
+                    ui.item.removeClass("dragging");
+                    ui.item.find('td').each(function(index,r) {
+                        if(index==0) $(r).addClass("col_tb_id");
+                        if(index==1) $(r).addClass("col_tb_name");
+                        if(index==2) $(r).addClass("col_tb_action");
+                    });
+                },update: function (event, ui) {
+                    var id_file=jsonData.ID;
+                    let newOrder = [];
+                    $("#all_items tr").each(function () {
+                        let originalIndex = $(this).data("index");
+                        newOrder.push(jsonData.Psets[originalIndex]);
+                    });
+
+                    $(newOrder).each(function(index,s){
+                        jsonData.Psets[index]=s;
+                        if(jsonData.Psets[index].index) delete jsonData.Psets[index].index;
+                    });
+                    $.ajax({
+                        url: '/save-json',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            data_json: jsonData,
+                            file_name: id_file
+                        }),
+                        success: function(response) {
+                            console.log(response.message);
+                            load_list();
+                        },
+                        error: function(error) {
+                            console.log(error.responseJSON.error);
+                        }
+                    });
+                }
+            }).disableSelection();
+
             $(".btn_switch").each(function(){
                 if ($(this).attr("value")=="true")
                     $(this).attr("src", "/public/SVG/On.svg");
@@ -163,119 +281,6 @@
                     }
                 });
             });
-
-            $("#j_id").change(function(){
-                save_data_j_cur();
-            });
-
-            $("#j_name").change(function(){
-                save_data_j_cur();
-            });
-        });
-
-        function save_data_j_cur(){
-            var id_file=jsonData.ID;
-            jsonData.Index=$("#j_id").val();
-            jsonData.Name=$("#j_name").val();
-            
-            $.ajax({
-                url: '/save-json',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    data_json: jsonData,
-                    file_name: id_file
-                }),
-                success: function(response) {
-                    console.log(response.message);
-                },error: function(error) {
-                    console.log(error.responseJSON.error);
-                }
-            });
-
-            $.ajax({
-                    url: '/update-list-by-id',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        dataJson: jsonData,
-                        file_name:"JobList"
-                    }),
-                    success: function(response) {
-                        console.log(response.message);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-            });
-        }
-
-        function show_edit(emp){
-            $(emp).parent().find('img').toggleClass("bg-info rounded");
-            $(emp).parent().find('input').each(function () {
-                $(this).prop('disabled', !$(this).prop('disabled'));
-            });
-        }
-
-        function load_list(){
-            $("#all_items").empty();
-            let count_item=0;
-            $(jsonData.Psets).each(function(index,p){
-                if(p.Strategy!=""){
-                    p.index=count_item;
-                    $("#all_items").append(item_p(p));
-                    count_item++;
-                }
-            });
-
-            $("#all_items").sortable({
-                axis: "y",
-                handle: ".btn-sort",
-                start: function (event, ui) {
-                    ui.item.addClass("dragging");
-                    ui.item.find('td').each(function(index,r) {
-                        if(index==0) $(r).css("width","20%");
-                        if(index==1) $(r).css("width","50%");
-                        if(index==2) $(r).css("width","30%");
-                    });
-                },
-                stop: function (event, ui){
-                    ui.item.removeClass("dragging");
-                    ui.item.find('td').each(function(index,r) {
-                        if(index==0) $(r).css("width","20%");
-                        if(index==1) $(r).css("width","50%");
-                        if(index==2) $(r).css("width","30%");
-                    });
-                },update: function (event, ui) {
-                    var id_file=jsonData.ID;
-                    let newOrder = [];
-                    $("#all_items tr").each(function () {
-                        let originalIndex = $(this).data("index");
-                        newOrder.push(jsonData.Psets[originalIndex]);
-                    });
-
-                    $(newOrder).each(function(index,s){
-                        jsonData.Psets[index]=s;
-                        if(jsonData.Psets[index].index) delete jsonData.Psets[index].index;
-                    });
-                    $.ajax({
-                        url: '/save-json',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            data_json: jsonData,
-                            file_name: id_file
-                        }),
-                        success: function(response) {
-                            console.log(response.message);
-                            load_list();
-                        },
-                        error: function(error) {
-                            console.log(error.responseJSON.error);
-                        }
-                    });
-                }
-            }).disableSelection();
         }
 
         function show_delete(emp){
@@ -356,6 +361,18 @@
                 }
             }
             return "[NA]";
+        }
+
+        function handleCommand(inCmd,Psets) {
+            if (inCmd.includes("ToOff")) {
+                let index = parseInt(inCmd.substring(5)) - 1;
+                if (!isNaN(index) && index >= 0 && index < Psets.length) {
+                    Psets[index].Complete = false;
+                    console.log(`Pset at index ${index} updated:`, Psets[index]);
+                } else {
+                    console.error("Invalid index from command:", inCmd);
+                }
+            }
         }
     </script>
 </body>

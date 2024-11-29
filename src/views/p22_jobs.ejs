@@ -199,13 +199,13 @@
                 jsonList[locate].Name = p_name;
 
             jsonList[locate].StepCount = 0;
+            jsonList[locate].Index=(locate+1).toString();
 
             var obj_data = JSON.parse('<%- JSON.stringify(jsonJDefault) %>');
             var id_file=jsonList[locate].ID;
             obj_data["ID"]=jsonList[locate].ID;
             obj_data["Name"]=jsonList[locate].Name;
             obj_data["Index"]=locate;
-            jsonList[locate]=obj_data;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
@@ -313,6 +313,9 @@
         }
 
         function save_data(){
+            $(jsonList).each(function(index,j){
+                delete j.index;
+            });
             $.ajax({
                 url: '/save-json',
                 type: 'POST',

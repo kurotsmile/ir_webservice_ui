@@ -46,7 +46,7 @@
                         <div class="col-12">
                             <div class="input-group r border mb-2 mt-2">
                                 <span class="input-group-text r-left">&nbsp;</span>
-                                <input type="text" placeholder="Search" class="form-control">
+                                <input type="text" placeholder="Search" class="form-control" id="inp_search">
                                 <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                             </div>
                         </div>
@@ -100,6 +100,27 @@
                 $("#all_items").append(item_p(p));
             });
 
+            $("#inp_search").on("keyup", function () {
+                const value = $(this).val().toLowerCase();
+                const filteredData = listpsetData.filter(item =>
+                    item.Name.toLowerCase().includes(value)
+                );
+
+                if(value.trim()!=""){
+                    $('#all_items').empty();
+                    $.each(filteredData, function(index, item) {
+                        $('#all_items').append(item_p(item));
+                    });
+                }else{
+                    load_list();
+                }
+                load_ui();
+            });
+
+            load_ui();
+        });
+
+        function load_ui(){
             $(".btn_switch").each(function(){
             if ($(this).attr("value")=="true")
                 $(this).attr("src", "/public/SVG/On.svg");
@@ -120,7 +141,7 @@
                     add_p_set(val_index);
                 }
             });
-        });
+        }
 
         function add_p_set(index){
             var data_p=listpsetData[index];
