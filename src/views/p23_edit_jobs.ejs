@@ -259,6 +259,7 @@
 
                 $(jsonData.Psets).each(function(index,p){
                     p.Complete=false;
+                    delete p.index;
                 });
                 
                 if(val_emp=="true"){

@@ -394,7 +394,18 @@ app.get('/buzzer_setting', (req, res) => {
 });
 
 app.get('/pfop_settings', (req, res) => {
-    res.render('p36_pfop_settings');
+    const primaryPath = path.join(get_file_system("Settings"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Settings.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p36_pfop_settings', {jsonData});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.get('/bcode_vin_setting', (req, res) => {

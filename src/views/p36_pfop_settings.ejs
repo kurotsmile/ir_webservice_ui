@@ -22,18 +22,55 @@
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">PFOP Setting</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> PFOP Setting</div>
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <a href="home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white" style="margin-left: -42px;">PFOP Setting</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="home">home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> PFOP Setting</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <% const PFOP=jsonData.PFOP%>
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid mb-5 pb-5">
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Enable Protocol</div>
+                </div>
+
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= PFOP && PFOP.Enable ? PFOP.Enable : false %>" field_key="Enable" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Enable Logs</div>
+                </div>
+
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= PFOP && PFOP.Logs ? PFOP.Logs : false %>" field_key="Logs" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Tool Enable on Power-up</div>
+                </div>
+
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= PFOP && PFOP.ToolEnable ? PFOP.ToolEnable : false %>" field_key="ToolEnable" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
 
             <div class="row row-p">
                 <div class="col-6">
@@ -42,8 +79,34 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Torque" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" value="<%= PFOP && PFOP.CellID ? PFOP.CellID : '' %>" class="form-control field_data" field_key="CellID" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Channel ID</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="<%= PFOP && PFOP.ChID ? PFOP.ChID : '' %>" class="form-control field_data" field_key="ChID" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Controller Name</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" value="<%= PFOP && PFOP.CtrlName ? PFOP.CtrlName : '' %>" class="form-control field_data" field_key="CtrlName" field_type="emp_inp" field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -51,16 +114,90 @@
         </div>
     </main>
 
-    <div id="menu_footer">
+    <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
-                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                    <button class="btn btn-info text-white btn-rounded f-right" onclick="save_data();return false">Save</button>
+                    <a href="home" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
+    <%- include('p9_alet_warning.ejs') %>
+    <script>
+         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
+
+        $(document).ready(()=>{
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+        });
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
+
+        function save_data(){
+            var obj_s={};
+            $(".field_data").each(function (index, emp) {
+                var key_emp = $(emp).attr("field_key");
+                var type_emp = $(emp).attr("field_type");
+                var type_data = $(emp).attr("field_type_data");
+                if (key_emp !== undefined) {
+                    var v='';
+                    if(type_emp=="emp_value")
+                        v=$(emp).attr("value");
+                    else
+                        v= $(emp).val();
+
+                    if(type_data=="number") v=Number(v);
+                    if(type_data=="bool") v=(v?.toLowerCase?.() === 'true');
+
+                    obj_s[key_emp]=v;
+                }
+            });
+            data_json.PFOP=obj_s;
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: data_json,
+                    file_name: 'Settings'
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                    show_msg("Update success","PFOP Setting");
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
