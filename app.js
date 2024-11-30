@@ -55,7 +55,7 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.3.4';
+    res.locals.ver = '1.3.6';
     res.locals.currentRoute = req.path;
     next();
 });
@@ -381,7 +381,18 @@ app.get('/global_settings', (req, res) => {
 });
 
 app.get('/ethernet_setting', (req, res) => {
-    res.render('p28_ethernet_setting');
+    const primaryPath = path.join(get_file_system("Settings"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Settings.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p28_ethernet_setting', {jsonData});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.get('/accessories', (req, res) => {

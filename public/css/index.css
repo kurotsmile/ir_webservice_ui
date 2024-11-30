@@ -812,6 +812,17 @@ table thead tr th{
     font-size: 14px;
     font-weight: bold;
 }
+
+#btn-status{
+    width: 30px;
+    height: 30px;
+    border-radius: 200px;
+    background-color: #61ae23;
+    display: block;
+    float: right;
+    margin-right: 9px;
+}
+
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}
