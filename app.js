@@ -465,7 +465,18 @@ app.get('/ac_toolsnet_setting', (req, res) => {
 });
 
 app.get('/fieldbus_settings', (req, res) => {
-    res.render('p40_fieldbus_settings');
+    const primaryPath = path.join(get_file_system("Settings"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Settings.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p40_fieldbus_settings', {jsonData});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.get('/fieldbus_io_setting', (req, res) => {
