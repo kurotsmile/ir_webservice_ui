@@ -50,8 +50,10 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= Fieldbus && Fieldbus.FieldbusType ? Fieldbus.FieldbusType : 'Ethernet IP' %>" field_key="FieldbusType"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= Fieldbus && Fieldbus.FieldbusType ? Fieldbus.FieldbusType : 'None' %>" field_key="FieldbusType"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="None" <%= Fieldbus && Fieldbus.FieldbusType === 'None' ? 'selected' : '' %>>None</option>
                             <option value="Ethernet IP" <%= Fieldbus && Fieldbus.FieldbusType === 'Ethernet IP' ? 'selected' : '' %>>Ethernet IP</option>
+                            <option value="Profinet" <%= Fieldbus && Fieldbus.FieldbusType === 'Profinet' ? 'selected' : '' %>>Profinet</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -66,7 +68,9 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select class="form-select custom-combobox field_data" value="<%= Fieldbus && Fieldbus.RemoteToolEnableMode ? Fieldbus.RemoteToolEnableMode : 'None' %>" field_key="RemoteToolEnableMode"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Static" <%= Fieldbus && Fieldbus.RemoteToolEnableMode === 'None' ? 'selected' : '' %>>None</option>
+                            <option value="None" <%= Fieldbus && Fieldbus.RemoteToolEnableMode === 'None' ? 'selected' : '' %>>None</option>
+                            <option value="1 Line" <%= Fieldbus && Fieldbus.RemoteToolEnableMode === '1 Line' ? 'selected' : '' %>>1 Line</option>
+                            <option value="2 Line" <%= Fieldbus && Fieldbus.RemoteToolEnableMode === '2 Line' ? 'selected' : '' %>>2 Line</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -206,7 +210,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     data_json: data_json,
-                    file_name: 'Settings'
+                    file_name: 'Communication'
                 }),
                 success: function(response) {
                     console.log(response.message);

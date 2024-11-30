@@ -476,8 +476,8 @@ app.get('/ac_toolsnet_setting', (req, res) => {
 });
 
 app.get('/fieldbus_settings', (req, res) => {
-    const primaryPath = path.join(get_file_system("Settings"));
-    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Settings.json');
+    const primaryPath = path.join(get_file_system("Communication"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Communication.json');
 
     fs.access(primaryPath, fs.constants.F_OK, async (err) => {
         const filePath = err ? secondaryPath : primaryPath;
