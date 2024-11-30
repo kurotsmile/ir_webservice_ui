@@ -40,7 +40,7 @@
                     <div class="label-txt">Boot Job</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= Globals && Globals.BootJob ? Globals.BootJob : false %>" field_key="BootJob" field_type="emp_value"   field_type_data="bool" />
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Handheld Angle" class="form-control">
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld Angle' %>" field_key="SpindleOperation" field_type="emp_inp"  field_type_data="string" >
                         <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
@@ -64,11 +64,14 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Handheld" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"></span>
+                        <select class="form-select custom-combobox" value="Handheld" field_key="SpindleOperation"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Handheld">Handheld</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
+
 
             <div class="row row-p">
                 <div class="col-6">
@@ -77,11 +80,14 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Handheld" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"></span>
+                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld Angle' %>" field_key="ToolStartMode"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Handheld Angle">Handheld Angle</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
+
 
             <div class="row row-p">
                 <div class="col-6">
@@ -90,8 +96,10 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Trigger Start" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"></span>
+                        <select class="form-select custom-combobox" value="Trigger Start" field_key="StartType"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Trigger Start">Trigger Start</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -103,8 +111,10 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Internal - Controller" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"></span>
+                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.JobSelection ? Globals.JobSelection : 'Internal - Controller' %>" field_key="JobSelection"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Internal - Controller">Internal - Controller</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -116,7 +126,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
+                    <button class="btn btn-info text-white btn-rounded f-right" onclick="save_data();return false;">Save</button>
                     <a href="home" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
                 </div>
             </div>
@@ -179,7 +189,7 @@
                     if(key_emp!="") obj_s[key_emp]=v;
                 }
             });
-            data_json.WIFI=obj_s;
+            data_json.Global=obj_s;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
@@ -190,7 +200,7 @@
                 }),
                 success: function(response) {
                     console.log(response.message);
-                    show_msg("Update success","PFOP Setting");
+                    show_msg("Update success","Global Setting");
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);
