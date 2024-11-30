@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="col-6">
-                    <button class="btn btn-info text-white btn-rounded f-right mt-3"><img src="/public/SVG/Add.svg" >Add Input Bytes Assignment</button>
+                    <button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte();return false;"><img src="/public/SVG/Add.svg" >Add Input Bytes Assignment</button>
                 </div>
             </div>
 
@@ -253,6 +253,76 @@
                     console.log(error.responseJSON.error);
                 }
             });
+        }
+
+        function show_add_byte(){
+            var html='';
+            html='<div class="row">';
+                html+='<div class="col-6"><div class="label-txt">Input/Output</div></div>';
+                html+='<div class="col-6">';
+                    html+='<div class="input-group r border mb-2 mt-2">';
+                        html+='<span class="input-group-text r-left">&nbsp;</span>';
+                        html+='<input type="text" placeholder="Input" value="Input" class="form-control" disabled>';
+                        html+='<span class="input-group-text r-right">&nbsp;</span>';
+                    html+='</div>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-6">';
+                    html+='<div class="label-txt">Type</div>';
+                html+='</div>';
+                html+='<div class="col-6">';
+                    html+='<div class="input-group r border mb-2 mt-2">';
+                        html+='<span class="input-group-text r-left">&nbsp;</span>';
+                        html+='<select class="form-select custom-combobox">';
+                            html+='<option value="Bit">Bit</option>';
+                            html+='<option value="BCODE/VIN">BCODE/VIN</option>';
+                        html+='</select>';
+                        html+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                    html+='</div>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-6"><div class="label-txt">Byte(s)</div></div>';
+                html+='<div class="col-6">';
+                    html+='<div class="input-group r border mb-2 mt-2">';
+                        html+='<span class="input-group-text r-left">&nbsp;</span>';
+                        html+='<input type="text" placeholder="Input" value="1" class="form-control" id="num_val_byte"/>';
+                        html+='<span class="input-group-text r-right"><span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span></span>';
+                    html+='</div>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row text-center">';
+                html+='<div class="col-12"><div class="label-txt"><b>* Avalilable number of input Bytes \'253\'*</b></div></div>';
+            html+='</div>';
+
+            show_msg(html,"Show Add Byte",()=>{
+                $("#box_msg").css("width","490px");
+                $("#btn_msg_done").click(()=>{
+                    close_msg();
+                    if(data_json.Fieldbus.IO==undefined) data_json.Fieldbus.IO={};
+                    data_json.Fieldbus.IO.IByteCount=Number($("#num_val_byte").val());
+                    $.ajax({
+                        url: '/save-json',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            data_json: data_json,
+                            file_name: 'Communication'
+                        }),
+                        success: function(response) {
+                            console.log(response.message);
+                            show_msg("Update success","Fieldbus IO Settings");
+                        },
+                        error: function(error) {
+                            console.log(error.responseJSON.error);
+                        }
+                    });
+                });
+            },"Ok");
         }
     </script>
 </body>
