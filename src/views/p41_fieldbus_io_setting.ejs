@@ -158,15 +158,15 @@
             var emp_row=$(`
             <tr>
                         <td>${index}</td>
-                        <td class="list_btn_bit" style="text-align: right;">
-                            <span>0</span>
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                            <span>6</span>
-                            <span>7</span>
+                        <td class="list_btn_bit pt-3" style="text-align: right;">
+                            <span class="btn_0">0</span>
+                            <span class="btn_1">1</span>
+                            <span class="btn_2">2</span>
+                            <span class="btn_3">3</span>
+                            <span class="btn_4">4</span>
+                            <span class="btn_5">5</span>
+                            <span class="btn_6">6</span>
+                            <span class="btn_7">7</span>
                         </td>
                         <td><img role="button" class="btn-del" src="/public/SVG/Trash.svg"></td>
             </tr>`);
@@ -174,6 +174,53 @@
             $(btn_del).click(function(){
                 $(this).parent().parent().remove();
             });
+
+            for(let i=0;i<=7;i++){
+                let btn_bit=$(emp_row).find(".btn_"+i);
+                $(btn_bit).click(function(){
+                    var html='';
+                    html+='<div class="row">';
+                        html+='<div class="col-6">';
+                            html+='<div class="label-txt">Behavior</div>';
+                        html+='</div>';
+                        html+='<div class="col-6">';
+                            html+='<div class="input-group r border mb-2 mt-2">';
+                                html+='<span class="input-group-text r-left">&nbsp;</span>';
+                                html+='<select class="form-select custom-combobox">';
+                                    html+='<option value="None">None</option>';
+                                    for(var y=1;y<=32;y++){
+                                        html+='<option value="job'+y+'">job'+y+'</option>';
+                                    }                                    
+                                html+='</select>';
+                                html+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                            html+='</div>';
+                        html+='</div>';
+                    html+='</div>';
+
+                    html+='<div class="row">';
+                        html+='<div class="col-6">';
+                            html+='<div class="label-txt">Polarity</div>';
+                        html+='</div>';
+                        html+='<div class="col-6">';
+                            html+='<div class="input-group r border mb-2 mt-2">';
+                                html+='<span class="input-group-text r-left">&nbsp;</span>';
+                                html+='<select class="form-select custom-combobox">';
+                                    html+='<option value="Normally Open">Normally Open</option>';
+                                    html+='<option value="Normally Close">Normally Close</option>';
+                                html+='</select>';
+                                html+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                            html+='</div>';
+                        html+='</div>';
+                    html+='</div>';
+
+                    show_msg(html,"Input Byte "+index+", Bit "+i,()=>{
+                        $("#btn_msg_done").click(()=>{
+                            close_msg();
+                            $(btn_bit).addClass("active");
+                        });
+                    },"OK");
+                });
+            }
             return emp_row;
         }
 
@@ -270,11 +317,11 @@
                     if(data_json.Fieldbus.IO==undefined) data_json.Fieldbus.IO={};
                     data_json.Fieldbus.IO.IByteCount=num_val_byte;
                     for(var i=0;i<num_val_byte;i++){
+                        count_byte_in++;
                         if(type=='in')
                             $("#table_in").append(add_byte_row(count_byte_in));
                         else
                             $("#table_out").append(add_byte_row(count_byte_in));
-                        count_byte_in++;
                     }
                     $.ajax({
                         url: '/save-json',
