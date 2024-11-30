@@ -22,14 +22,22 @@
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">Global Setting</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Global Setting</div>
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <a href="home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white" style="margin-left: -42px;">Global Setting</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Global Setting</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <% const Globals=jsonData.Global|| {};%>
     <!-- Main Content Full Width -->
     <main>
@@ -51,7 +59,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld Angle' %>" field_key="SpindleOperation" field_type="emp_inp"  field_type_data="string" >
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= Globals && Globals.ToolType ? Globals.ToolType : 'Handheld Angle' %>" field_key="ToolType" field_type="emp_inp"  field_type_data="string" >
                         <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
@@ -64,8 +72,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox" value="Handheld" field_key="SpindleOperation"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Handheld">Handheld</option>
+                        <select class="form-select custom-combobox" value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld' %>" field_key="SpindleOperation"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Handheld" <%= Globals && Globals.SpindleOperation === 'Handheld' ? 'selected' : '' %>>Handheld</option>
+                            <option value="Remote Start" <%= Globals && Globals.SpindleOperation === 'Remote Start' ? 'selected' : '' %>>Remote Start</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -80,29 +89,16 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld Angle' %>" field_key="ToolStartMode"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Handheld Angle">Handheld Angle</option>
+                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.ToolStartMode ? Globals.ToolStartMode : 'Trigger Start' %>" field_key="ToolStartMode"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Trigger Start" <%= Globals && Globals.ToolStartMode === 'Trigger Start' ? 'selected' : '' %>>Trigger Start</option>
+                            <option value="Push to start" <%= Globals && Globals.ToolStartMode === 'Push to start' ? 'selected' : '' %>>Push to start</option>
+                            <option value="Both" <%= Globals && Globals.ToolStartMode === 'Both' ? 'selected' : '' %>>Both</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
 
-
-            <div class="row row-p">
-                <div class="col-6">
-                    <div class="label-txt">Start Type</div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
-                        <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox" value="Trigger Start" field_key="StartType"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Trigger Start">Trigger Start</option>
-                        </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
-                    </div>
-                </div>
-            </div>
 
             <div class="row row-p">
                 <div class="col-6">
@@ -111,8 +107,14 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.JobSelection ? Globals.JobSelection : 'Internal - Controller' %>" field_key="JobSelection"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Internal - Controller">Internal - Controller</option>
+                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.JobSelection ? Globals.JobSelection : 'Internal-Controller' %>" field_key="JobSelection"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Internal-Controller" <%= Globals && Globals.JobSelection === 'Internal-Controller' ? 'selected' : '' %>>Internal-Controller</option>
+                            <option value="External-MES" <%= Globals && Globals.JobSelection === 'External-MES' ? 'selected' : '' %>>External-MES</option>
+                            <option value="External-BCODE/VIN" <%= Globals && Globals.JobSelection === 'External-BCODE/VIN' ? 'selected' : '' %>>External-BCODE/VIN</option>
+                            <option value="External-Discrete" <%= Globals && Globals.JobSelection === 'External-Discrete' ? 'selected' : '' %>>External-Discrete</option>
+                            <option value="External-Discrete-Fieldbus" <%= Globals && Globals.JobSelection === 'External-Discrete-Fieldbus' ? 'selected' : '' %>>External-Discrete-Fieldbus</option>
+                            <option value="External-Binary" <%= Globals && Globals.JobSelection === 'External-Binary' ? 'selected' : '' %>>External-Binary</option>
+                            <option value="External-Binary-Fieldbus" <%= Globals && Globals.JobSelection === 'External-Binary-Fieldbus' ? 'selected' : '' %>>External-Binary-Fieldbus</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
