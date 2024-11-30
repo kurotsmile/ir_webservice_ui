@@ -55,7 +55,7 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.3.7';
+    res.locals.ver = '1.3.8';
     res.locals.currentRoute = req.path;
     next();
 });
@@ -438,8 +438,8 @@ app.get('/buzzer_setting', (req, res) => {
 });
 
 app.get('/pfop_settings', (req, res) => {
-    const primaryPath = path.join(get_file_system("Settings"));
-    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Settings.json');
+    const primaryPath = path.join(get_file_system("Communication"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Communication.json');
 
     fs.access(primaryPath, fs.constants.F_OK, async (err) => {
         const filePath = err ? secondaryPath : primaryPath;
