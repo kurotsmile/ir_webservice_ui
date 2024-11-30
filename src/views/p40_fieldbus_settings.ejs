@@ -51,7 +51,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select class="form-select custom-combobox field_data" value="<%= Fieldbus && Fieldbus.FieldbusType ? Fieldbus.FieldbusType : 'Ethernet IP' %>" field_key="FieldbusType"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Static" <%= Fieldbus && Fieldbus.FieldbusType === 'Ethernet IP' ? 'selected' : '' %>>Ethernet IP</option>
+                            <option value="Ethernet IP" <%= Fieldbus && Fieldbus.FieldbusType === 'Ethernet IP' ? 'selected' : '' %>>Ethernet IP</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
