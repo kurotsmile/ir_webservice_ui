@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="col-6">
-                    <button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte();return false;"><img src="/public/SVG/Add.svg" >Add Input Bytes Assignment</button>
+                    <button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte('in');return false;"><img src="/public/SVG/Add.svg" >Add Input Bytes Assignment</button>
                 </div>
             </div>
 
@@ -74,36 +74,10 @@
                   <tr>
                     <th scope="col" class="col_tb_id">Byte</th>
                     <th>Bit</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td class="list_btn_bit" style="text-align: right;">
-                            <span>0</span>
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                            <span>6</span>
-                            <span>7</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="list_btn_bit" style="text-align: right;">
-                            <span class="active">0</span>
-                            <span class="active">1</span>
-                            <span class="active">2</span>
-                            <span class="active">3</span>
-                            <span class="active">4</span>
-                            <span class="active">5</span>
-                            <span class="active">6</span>
-                            <span class="active">7</span>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody id="table_in"></tbody>
             </table>
 
 
@@ -113,7 +87,7 @@
                 </div>
 
                 <div class="col-6">
-                    <button class="btn btn-info text-white btn-rounded f-right mt-3"><img src="/public/SVG/Add.svg" >Add Output Bytes Assignment</button>
+                    <button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte('out');return false;"><img src="/public/SVG/Add.svg" >Add Output Bytes Assignment</button>
                 </div>
             </div>
 
@@ -122,36 +96,10 @@
                   <tr>
                     <th scope="col" class="col_tb_id">Byte</th>
                     <th>Bit</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td class="list_btn_bit" style="text-align: right;">
-                            <span>0</span>
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                            <span>6</span>
-                            <span>7</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="list_btn_bit" style="text-align: right;">
-                            <span class="active">0</span>
-                            <span class="active">1</span>
-                            <span class="active">2</span>
-                            <span class="active">3</span>
-                            <span class="active">4</span>
-                            <span class="active">5</span>
-                            <span class="active">6</span>
-                            <span class="active">7</span>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody id="table_out"></tbody>
             </table>
         </div>
     </main>
@@ -170,6 +118,8 @@
     <%- include('p9_alet_warning.ejs') %>
     <script>
         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var count_byte_in=0;
+        var count_byte_out=0;
 
         $(document).ready(()=>{
             $(".field_group_port2").hide();
@@ -204,17 +154,27 @@
             });
         }
 
-        function show_group(s_name_group,emp){
-            var val_show=$(emp).attr("value");
-            if(val_show=="hide"){
-                $(emp).find(".icon_show").attr("src", "public/SVG/ExUp.svg");
-                $("."+s_name_group).show();
-                $(emp).attr("value","show");
-            }else{
-                $(emp).find(".icon_show").attr("src", "public/SVG/Down.svg");
-                $("."+s_name_group).hide();
-                $(emp).attr("value","hide");
-            }
+        function add_byte_row(index){
+            var emp_row=$(`
+            <tr>
+                        <td>${index}</td>
+                        <td class="list_btn_bit" style="text-align: right;">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                            <span>7</span>
+                        </td>
+                        <td><img role="button" class="btn-del" src="/public/SVG/Trash.svg"></td>
+            </tr>`);
+            var btn_del=$(emp_row).find(".btn-del");
+            $(btn_del).click(function(){
+                $(this).parent().parent().remove();
+            });
+            return emp_row;
         }
 
         function save_data(){
@@ -255,14 +215,17 @@
             });
         }
 
-        function show_add_byte(){
+        function show_add_byte(type='in'){
             var html='';
             html='<div class="row">';
                 html+='<div class="col-6"><div class="label-txt">Input/Output</div></div>';
                 html+='<div class="col-6">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
-                        html+='<input type="text" placeholder="Input" value="Input" class="form-control" disabled>';
+                        if(type=='in')
+                            html+='<input type="text" placeholder="Input" value="Input" class="form-control" disabled>';
+                        else
+                            html+='<input type="text" placeholder="Output" value="Output" class="form-control" disabled>';
                         html+='<span class="input-group-text r-right">&nbsp;</span>';
                     html+='</div>';
                 html+='</div>';
@@ -302,9 +265,17 @@
             show_msg(html,"Show Add Byte",()=>{
                 $("#box_msg").css("width","490px");
                 $("#btn_msg_done").click(()=>{
+                    var num_val_byte=Number($("#num_val_byte").val());
                     close_msg();
                     if(data_json.Fieldbus.IO==undefined) data_json.Fieldbus.IO={};
-                    data_json.Fieldbus.IO.IByteCount=Number($("#num_val_byte").val());
+                    data_json.Fieldbus.IO.IByteCount=num_val_byte;
+                    for(var i=0;i<num_val_byte;i++){
+                        if(type=='in')
+                            $("#table_in").append(add_byte_row(count_byte_in));
+                        else
+                            $("#table_out").append(add_byte_row(count_byte_in));
+                        count_byte_in++;
+                    }
                     $.ajax({
                         url: '/save-json',
                         type: 'POST',
@@ -315,7 +286,6 @@
                         }),
                         success: function(response) {
                             console.log(response.message);
-                            show_msg("Update success","Fieldbus IO Settings");
                         },
                         error: function(error) {
                             console.log(error.responseJSON.error);
