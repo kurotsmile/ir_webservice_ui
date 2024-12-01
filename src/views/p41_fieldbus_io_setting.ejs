@@ -156,7 +156,7 @@
             var emp_row=$(`
             <tr>
                         <td>${index}</td>
-                        <td class="list_btn_bit pt-3" style="text-align: right;">
+                        <td id="list_bit_${type}_${index}" class="list_btn_bit pt-3" style="text-align: right;">
                             <span class="btn_0" id="bit_${type}_${index}_0">0</span>
                             <span class="btn_1" id="bit_${type}_${index}_1">1</span>
                             <span class="btn_2" id="bit_${type}_${index}_2">2</span>
@@ -329,7 +329,7 @@
                 html+='<div class="col-6">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
-                        html+='<select class="form-select custom-combobox">';
+                        html+='<select class="form-select custom-combobox" id="type_add">';
                             html+='<option value="Bit">Bit</option>';
                             html+='<option value="BCODE/VIN">BCODE/VIN</option>';
                         html+='</select>';
@@ -356,16 +356,45 @@
             show_msg(html,"Show Add Byte",()=>{
                 $("#box_msg").css("width","490px");
                 $("#btn_msg_done").click(()=>{
+                    var type_add=$("#type_add").val();
                     var num_val_byte=Number($("#num_val_byte").val());
-                    close_msg();
+
+                    if(type_add!="Bit"){
+                        var obj_bit={
+                            "Index": 0,
+                            "Bit": 255,
+                            "Length": 0,
+                            "BehaviorID": 1,
+                            "Behavior": "BCODE / VIN",
+                            "PolarityID": 0,
+                            "Polarity": "Normally Open"
+                        }
+                        if(type=='in')
+                            obj_bit.Index=data_json.Fieldbus.IO.IByteCount;
+                        else
+                            obj_bit.Index=data_json.Fieldbus.IO.OByteCount;
+                        obj_bit.Length=num_val_byte;
+                        
+                        if(type=='in'){
+                            if(data_json.Fieldbus.IO.lsIn==undefined) data_json.Fieldbus.IO.lsIn=[];
+                            data_json.Fieldbus.IO.lsIn.push(obj_bit);
+                        }else{
+                            if(data_json.Fieldbus.IO.lsOut==undefined) data_json.Fieldbus.IO.lsOut=[];
+                            data_json.Fieldbus.IO.lsOut.push(obj_bit);
+                        }
+                    }
+
                     for(var i=0;i<num_val_byte;i++){
                         if(type=='in'){
                             data_json.Fieldbus.IO.IByteCount++;
+                            data_json.Fieldbus.IO.ITypeCount++;
                         }
                         else{
                             data_json.Fieldbus.IO.OByteCount++;
+                            data_json.Fieldbus.IO.OTypeCount++;
                         }
                     }
+                    close_msg();
                     load_data();
                 });
             },"Ok");
@@ -394,9 +423,13 @@
 
                     if(data_json.Fieldbus.IO.lsIn!=null){
                         $(data_json.Fieldbus.IO.lsIn).each(function(index,bit){
-                            $("#bit_in_"+bit.Index+"_"+bit.Bit).addClass("active");
-                            $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
-                            $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Polarity",bit.Polarity);
+                            if(bit.Bit=='255'){
+                                $("#list_bit_in_"+bit.Index).html('<span class="vin">BCODE / VIN</span>');
+                            }else{
+                                $("#bit_in_"+bit.Index+"_"+bit.Bit).addClass("active");
+                                $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
+                                $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Polarity",bit.Polarity);
+                            }
                         });
                     }
                 }
