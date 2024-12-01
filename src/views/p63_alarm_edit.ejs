@@ -204,7 +204,7 @@
         }
 
         function save_data(){
-            var obj_s={};
+            var obj_s=JSON.parse('<%- JSON.stringify(jsonData.PmAlarm.Item[index_edit]) %>');
             $(".field_data").each(function (index, emp) {
                 var key_emp = $(emp).attr("field_key");
                 var type_emp = $(emp).attr("field_type");
