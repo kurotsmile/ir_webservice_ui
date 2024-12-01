@@ -72,7 +72,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox" value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld' %>" field_key="SpindleOperation"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox" value="<%= Globals && Globals.SpindleOperation ? Globals.SpindleOperation : 'Handheld' %>" field_key="SpindleOperation"  field_type_data="string" field_type="emp_inp" id="SpindleOperation" > 
                             <option value="Handheld" <%= Globals && Globals.SpindleOperation === 'Handheld' ? 'selected' : '' %>>Handheld</option>
                             <option value="Remote Start" <%= Globals && Globals.SpindleOperation === 'Remote Start' ? 'selected' : '' %>>Remote Start</option>
                         </select>                        
@@ -87,14 +87,14 @@
                     <div class="label-txt">Tool Start Mode</div>
                 </div>
                 <div class="col-6">
-                    <div class="input-group r border mb-2 mt-2">
+                    <div class="input-group r border mb-2 mt-2" id="input-group-ToolStartMode">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.ToolStartMode ? Globals.ToolStartMode : 'Trigger Start' %>" field_key="ToolStartMode"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= Globals && Globals.ToolStartMode ? Globals.ToolStartMode : 'Trigger Start' %>" field_key="ToolStartMode"  field_type_data="string" field_type="emp_inp" id="ToolStartMode"> 
                             <option value="Trigger Start" <%= Globals && Globals.ToolStartMode === 'Trigger Start' ? 'selected' : '' %>>Trigger Start</option>
                             <option value="Push to start" <%= Globals && Globals.ToolStartMode === 'Push to start' ? 'selected' : '' %>>Push to start</option>
                             <option value="Both" <%= Globals && Globals.ToolStartMode === 'Both' ? 'selected' : '' %>>Both</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right"><img  id="ToolStartMode_btn_edit" src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -163,6 +163,11 @@
                     $(this).attr("value",true);
                 }
             });
+
+            $("#SpindleOperation").change(()=>{
+                check_SpindleOperation();
+            });
+            check_SpindleOperation();
         });
 
         function show_edit(emp){
@@ -208,6 +213,19 @@
                     console.log(error.responseJSON.error);
                 }
             });
+        }
+
+        function check_SpindleOperation(){
+            var val_SpindleOperation=$("#SpindleOperation").val();
+            if(val_SpindleOperation=="Remote Start"){
+                $("#ToolStartMode_btn_edit").hide();
+                $("#ToolStartMode").attr("style", "color: gray !important");
+                $("#ToolStartMode").prop("disabled", true);
+            }else{
+                $("#ToolStartMode_btn_edit").show();
+                $("#ToolStartMode").attr("style", "color: white !important");
+                $("#ToolStartMode").prop("disabled", false);
+            }
         }
     </script>
 </body>

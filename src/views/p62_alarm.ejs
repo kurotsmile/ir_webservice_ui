@@ -62,12 +62,16 @@
         function row_p(data){
             var html='';
             html+='<tr>';
-                html+='<td scope="row">'+data.Alarm+'</td>';
+                html+='<td scope="row">'+(data.index+1)+'</td>';
+                html+='<td>'+data.Alarm+'</td>';
                 html+='<td>'+data.AlarmName+'</td>';
-                html+='<td>'+data.CycleStartCount+'</td>';
-                html+='<td>'+data.EnableAlarm+'</td>';
+                if(data.EnableAlarm){
+                    html+='<td>Active</td>';
+                }else{
+                    html+='<td>Inactive</td>';
+                }
                 html+='<td>';
-                    html+='<a href="edit_alarm?id='+data.Alarm+'"><img src="/public/SVG/Edit.svg"></a>';
+                    html+='<a href="edit_alarm?index_edit='+data.index+'"><img src="/public/SVG/Edit.svg"></a>';
                 html+='</td>';
             html+='</tr>';
             return $(html);
@@ -75,6 +79,7 @@
 
         $(document).ready(()=>{
             $(data_json.PmAlarm.Item).each(function(index,alm){
+                alm.index=index;
                 $("#all_items").append(row_p(alm));
             });
         });

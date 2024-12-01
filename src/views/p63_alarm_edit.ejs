@@ -18,29 +18,42 @@
 <body class="brown">
  
     <%- include('menu_sidebar') %>
+    <% const alarm=jsonData.PmAlarm.Item[index_edit]|| {};%>
 
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/alarm"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">Edit PM1</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Alarm</div>
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <a href="/alarm"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white">Edit <%= alarm && alarm.Alarm ? alarm.Alarm : '' %></h2>
+                            <div class="breadcrumb">
+                                <a class="nav1" href="/home">Home</a> 
+                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                <a class="nav1" href="/alarm">Alarm</a> 
+                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                 Edit <%= alarm && alarm.Alarm ? alarm.Alarm : '' %>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid pb-5 mb-5">
 
             <div class="row row-p">
                 <div class="col-6">
                     <div class="label-txt">Enable Alarm</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= alarm && alarm.EnableAlarm ? alarm.EnableAlarm : false %>" field_key="EnableAlarm" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>
 
@@ -51,8 +64,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="PMName1" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.AlarmName ? alarm.AlarmName : '' %>"  field_key="AlarmName" field_type="emp_inp"  field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -62,7 +75,7 @@
                     <div class="label-txt">Cycle</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= alarm && alarm.Cycle ? alarm.Cycle : false %>" field_key="Cycle" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>
 
@@ -71,7 +84,31 @@
                     <div class="label-txt">Days</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;" class="mb-2 mt-3"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= alarm && alarm.Days ? alarm.Days : false %>" field_key="Days" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Duration</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= alarm && alarm.Duration ? alarm.Duration : 1 %>" field_key="Duration"  field_type_data="number" field_type="emp_inp" > 
+                            <option value="1" <%= alarm && alarm.Duration === 1 ? 'selected' : '' %>>1</option>
+                            <option value="2" <%= alarm && alarm.Duration === 2 ? 'selected' : '' %>>2</option>
+                            <option value="5" <%= alarm && alarm.Duration === 2 ? 'selected' : '' %>>5</option>
+                            <option value="7" <%= alarm && alarm.Duration === 7 ? 'selected' : '' %>>7</option>
+                            <option value="14" <%= alarm && alarm.Duration === 14 ? 'selected' : '' %>>14</option>
+                            <option value="30" <%= alarm && alarm.Duration === 30 ? 'selected' : '' %>>30</option>
+                            <option value="90" <%= alarm && alarm.Duration === 90 ? 'selected' : '' %>>90</option>
+                            <option value="180" <%= alarm && alarm.Duration === 180 ? 'selected' : '' %>>180</option>
+                            <option value="270" <%= alarm && alarm.Duration === 270 ? 'selected' : '' %>>270</option>
+                            <option value="365" <%= alarm && alarm.Duration === 365 ? 'selected' : '' %>>365</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
                 </div>
             </div>
 
@@ -82,8 +119,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1000" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.CycleStartCount ? alarm.CycleStartCount : 0 %>"  field_key="CycleStartCount" field_type="emp_inp"  field_type_data="number" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
@@ -95,8 +132,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="03/11/2024" class="form-control">
-                        <span class="input-group-text r-right">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.EnabledResetDate ? alarm.EnabledResetDate : '' %>"  field_key="EnabledResetDate" field_type="emp_inp"  field_type_data="string">
+                        <span role="button" class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -108,8 +145,8 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="03/11/2024" class="form-control">
-                        <span class="input-group-text r-right">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.TriggerDate ? alarm.TriggerDate : '' %>"  field_key="TriggerDate" field_type="emp_inp"  field_type_data="string">
+                        <span role="button" class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -117,17 +154,92 @@
         </div>
     </main>
 
-    <div id="menu_footer">
+    <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
-                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                    <button class="btn btn-info text-white btn-rounded f-right" onclick="save_data();return false;">Save</button>
+                    <a href="alarm" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
                     <button class="btn btn-warning text-white btn-rounded f-right">Reset</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
+    <%- include('p9_alet_warning.ejs') %>
+    <script>
+        var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var index_edit=parseInt('<%= index_edit %>');
 
+        $(document).ready(()=>{
+  
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+        });
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
+
+        function save_data(){
+            var obj_s={};
+            $(".field_data").each(function (index, emp) {
+                var key_emp = $(emp).attr("field_key");
+                var type_emp = $(emp).attr("field_type");
+                var type_data = $(emp).attr("field_type_data");
+                if (key_emp !== undefined) {
+                    var v='';
+                    if(type_emp=="emp_value")
+                        v=$(emp).attr("value");
+                    else
+                        v= $(emp).val();
+
+                    if(type_data=="number") v=Number(v);
+                    if(type_data=="bool") v=(v?.toLowerCase?.() === 'true');
+
+                    if(key_emp!="") obj_s[key_emp]=v;
+                }
+            });
+            data_json.PmAlarm.Item[index_edit]=obj_s;
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: data_json,
+                    file_name: 'System'
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                    show_msg("Update success","Edit Alarm");
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
+    </script>
+</body>
 </html>

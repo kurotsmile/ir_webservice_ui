@@ -564,7 +564,19 @@ app.get('/alarm', (req, res) => {
 });
 
 app.get('/edit_alarm', (req, res) => {
-    res.render('p63_alarm_edit');
+    const index_edit = req.query.index_edit;
+    const primaryPath = path.join(get_file_system("System"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'System.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p63_alarm_edit', {jsonData,index_edit});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
 });
 
 app.post('/save-json', (req, res) => {
