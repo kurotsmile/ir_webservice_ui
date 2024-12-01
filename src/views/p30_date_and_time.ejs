@@ -10,9 +10,17 @@
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
     <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/public/js/app.js?v=<%= ver %>"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <!-- Timepicker Addon CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css">
+    <!-- Timepicker Addon JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
 </head>
 
 <body class="brown">
@@ -38,6 +46,7 @@
         </div>
     </div>
 
+    <% const SetDT=jsonData.SetDT|| {};%>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">
@@ -49,9 +58,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="Manual" field_key="Settings"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Manual">Manual</option>
-                            <option value="Automatic">Automatic</option>
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.Settings ? SetDT.Settings : 'Manual' %>" field_key="Settings"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Manual" <%= SetDT && SetDT.Settings === 'Manual' ? 'selected' : '' %>>Manual</option>
+                            <option value="NTP" <%= SetDT && SetDT.Settings === 'NTP' ? 'selected' : '' %>>NTP</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -65,10 +74,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="dd/mm/yy" field_key="DateFormate"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="dd/mm/yy">dd/mm/yy</option>
-                            <option value="mm/dd/yy">mm/dd/yy</option>
-                            <option value="yy/mm/dd">yy/mm/dd</option>
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.DateFormat ? SetDT.DateFormat : 'dd/mm/yyyy' %>" field_key="DateFormat"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="dd/mm/yyyy" <%= SetDT && SetDT.DateFormat === 'dd/mm/yyyy' ? 'selected' : '' %>>dd/mm/yyyy</option>
+                            <option value="mm/dd/yyyy" <%= SetDT && SetDT.DateFormat === 'mm/dd/yyyy' ? 'selected' : '' %>>mm/dd/yyyy</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -82,22 +90,22 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="" field_key="SetDateAndTime" field_type="emp_inp" field_type_data="number" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="datetimepicker" disabled>                     
+                        <span role="button" class="input-group-text r-right" onclick="show_sel_time(this)"><img src="/public/SVG/Date.svg"/></span>
                     </div>
                 </div>
             </div>
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Date Formate</div>
+                    <div class="label-txt">Time Formate</div>
                 </div>
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="12 Hours" field_key="DateFormate"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="12 Hours">12 Hours</option>
-                            <option value="24 Hours">24 Hours</option>
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeFormat ? SetDT.TimeFormat : '12 Hrs' %>" field_key="TimeFormat"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="12 Hrs" <%= SetDT && SetDT.TimeFormat === '12 Hrs' ? 'selected' : '' %>>12 Hrs</option>
+                            <option value="24 Hrs" <%= SetDT && SetDT.TimeFormat === '24 Hrs' ? 'selected' : '' %>>24 Hrs</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -111,10 +119,43 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="UTC +05:30" field_key="DateFormate"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="UTC +05:30">UTC +05:30</option>
-                            <option value="UTC +06:30">UTC +06:30</option>
-                        </select>                        
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeZone ? SetDT.TimeZone : '' %>" field_key="TimeZone" field_type_data="string" field_type="emp_inp">
+                            <% const timeZones = [
+                                { label: "UTC-12:00", value: "UTC-12:00" },
+                                { label: "UTC-11:00", value: "UTC-11:00" },
+                                { label: "UTC-10:00", value: "UTC-10:00" },
+                                { label: "UTC-09:00", value: "UTC-09:00" },
+                                { label: "UTC-08:00", value: "UTC-08:00" },
+                                { label: "UTC-07:00", value: "UTC-07:00" },
+                                { label: "UTC-06:00", value: "UTC-06:00" },
+                                { label: "UTC-05:00", value: "UTC-05:00" },
+                                { label: "UTC-04:00", value: "UTC-04:00" },
+                                { label: "UTC-03:00", value: "UTC-03:00" },
+                                { label: "UTC-02:00", value: "UTC-02:00" },
+                                { label: "UTC-01:00", value: "UTC-01:00" },
+                                { label: "UTC±00:00", value: "UTC±00:00" },
+                                { label: "UTC+01:00", value: "UTC+01:00" },
+                                { label: "UTC+02:00", value: "UTC+02:00" },
+                                { label: "UTC+03:00", value: "UTC+03:00" },
+                                { label: "UTC+04:00", value: "UTC+04:00" },
+                                { label: "UTC+05:00", value: "UTC+05:00" },
+                                { label: "UTC+06:00", value: "UTC+06:00" },
+                                { label: "UTC+07:00", value: "UTC+07:00" },
+                                { label: "UTC+08:00", value: "UTC+08:00" },
+                                { label: "UTC+09:00", value: "UTC+09:00" },
+                                { label: "UTC+10:00", value: "UTC+10:00" },
+                                { label: "UTC+11:00", value: "UTC+11:00" },
+                                { label: "UTC+12:00", value: "UTC+12:00" },
+                                { label: "UTC+13:00", value: "UTC+13:00" },
+                                { label: "UTC+14:00", value: "UTC+14:00" }
+                            ]; %>
+                            
+                            <% timeZones.forEach(function(zone) { %>
+                                <option value="<%= zone.value %>" <%= SetDT && SetDT.TimeZone === zone.value ? 'selected' : '' %>>
+                                    <%= zone.label %>
+                                </option>
+                            <% }); %>
+                        </select>                                              
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -133,5 +174,91 @@
             </div>
         </div>
     </div>
+
+    <%- include('p9_alet_warning.ejs') %>
+    
+    <script>
+        var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
+        $(document).ready(function () {
+            $('#datetimepicker').datetimepicker({
+                dateFormat: 'yy-mm-dd',
+                timeFormat: 'HH:mm:ss',
+                showSecond: true,
+                controlType: 'select',
+                onClose: function () {
+                    $('#datetimepicker').parent().find('img').toggleClass("bg-info rounded");
+                    $('#datetimepicker').prop('disabled')
+                }
+            });
+
+            if ($('#datetimepicker').val() === '') {
+                $('#datetimepicker').val(getCurrentISOTime());
+            }
+
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+        });
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
+
+        function show_sel_time(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+            $('#datetimepicker').show().focus(); 
+        }
+
+        function getCurrentISOTime() {
+            const now = new Date();
+            return now.toISOString().replace('Z', '+07:00');
+        }
+
+
+        function save_data(){
+            var obj_s={};
+            $(".field_data").each(function (index, emp) {
+                var key_emp = $(emp).attr("field_key");
+                var type_emp = $(emp).attr("field_type");
+                var type_data = $(emp).attr("field_type_data");
+                if (key_emp !== undefined) {
+                    var v='';
+                    if(type_emp=="emp_value")
+                        v=$(emp).attr("value");
+                    else
+                        v= $(emp).val();
+
+                    if(type_data=="number") v=Number(v);
+                    if(type_data=="bool") v=(v?.toLowerCase?.() === 'true');
+
+                    if(key_emp!="") obj_s[key_emp]=v;
+                }
+            });
+            data_json.SetDT=obj_s;
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: data_json,
+                    file_name: 'Settings'
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                    show_msg("Update success","Date and Time");
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
