@@ -183,7 +183,6 @@
                         close_msg();
                     }).removeClass("btn-info").addClass("btn-danger");
                 },"Delete");
-
             });
 
             for(let i=0;i<=7;i++){
@@ -250,6 +249,12 @@
                     html+='</div>';
 
                     show_msg(html,"Input Byte "+index+", Bit "+i,()=>{
+
+                        var val_Behavior=$(btn_bit).attr("data-Behavior");
+                        var val_Polarity=$(btn_bit).attr("data-Polarity");
+                        $("#bit_Behavior").val(val_Behavior);
+                        $("#bit_Polarity").val(val_Polarity);
+
                         $("#box_msg").css("width","510px");
                         $("#btn_msg_done").click(()=>{
                             var bit_Behavior = $('#bit_Behavior').prop('selectedIndex');
@@ -387,6 +392,8 @@
                     if(data_json.Fieldbus.IO.lsIn!=null){
                         $(data_json.Fieldbus.IO.lsIn).each(function(index,bit){
                             $("#bit_in_"+bit.Index+"_"+bit.Bit).addClass("active");
+                            $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
+                            $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Polarity",bit.Polarity);
                         });
                     }
                 }
@@ -399,6 +406,8 @@
                     if(data_json.Fieldbus.IO.lsOut!=null){
                         $(data_json.Fieldbus.IO.lsOut).each(function(index,bit){
                             $("#bit_out_"+bit.Index+"_"+bit.Bit).addClass("active");
+                            $("#bit_out_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
+                            $("#bit_out_"+bit.Index+"_"+bit.Bit).attr("data-Polarity",bit.Polarity);
                         });
                     }
                 }
