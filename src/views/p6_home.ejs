@@ -19,12 +19,12 @@
  
     <%- include('menu_sidebar') %>
 
-    <div class="p-1 px-md-4 mb-1 bg-dark box-shadow">
+    <div class="p-1 px-md-4 mb-1 bg-dark box-shadow bar_head" >
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                     
-                    <div class="input-group mb-3 r border w-50 mt-3 p-0" style="border: unset !important;" id="job-selection-dropdown">
+                    <div class="input-group mb-3 r border mt-3 p-0 sel-dropdown" style="border: unset !important;" id="job-selection-dropdown">
                         <span class="input-group-text r-left"><img src="/public/SVG/Job.svg"/></span>
                         <select class="form-select custom-combobox" onchange="handleJobChange()" id="job-selection">
                             <option value="" disabled selected hidden>Select Job</option>
@@ -177,7 +177,7 @@
 
                     <div class="col-9 col-md-3 col-lg-3 col-xl-3">
                         <div class="row-container ">
-                            <div class="til-lager-icon oranger">
+                            <div class="til-lager-icon oranger p-2">
                                 <div class="tilt-icon">
                                     <img  src="public/SVG/Tilt.svg" />
                                     <div class="title">Tilt Angle (°)</div>
@@ -189,13 +189,17 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <select id="chartTypeSelect" class="form-select custom-combobox"
-                            aria-label="Default select example">
-                            <option value="0" selected="">Torque vs. Angle</option>
-                            <option value="1">Torque vs .Time</option>
-                            <option value="2">Angle vs .Time</option>
-                            <option value="3">Current vs .Time</option>
-                        </select>
+                        <div class="input-group mb-3 r border mt-3 p-0 sel-dropdown" id="chartTypeSelect_dropdown">
+                            <span class="input-group-text r-left">&nbsp;</span>
+                            <select class="form-select custom-combobox" id="chartTypeSelect">
+                                <option value="0" selected="">Torque vs. Angle</option>
+                                <option value="1">Torque vs .Time</option>
+                                <option value="2">Angle vs .Time</option>
+                                <option value="3">Current vs .Time</option>
+                            </select>
+                            <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        </div>
+
                     </div>
                     <div class="col-9 d-flex  " style="justify-content: flex-end;">
                         <div class="">

@@ -67,7 +67,7 @@
                 html+='<td>'+data.CycleStartCount+'</td>';
                 html+='<td>'+data.EnableAlarm+'</td>';
                 html+='<td>';
-                    html+='<a href="edit_alarm"><img src="/public/SVG/Edit.svg"></a>';
+                    html+='<a href="edit_alarm?id='+data.Alarm+'"><img src="/public/SVG/Edit.svg"></a>';
                 html+='</td>';
             html+='</tr>';
             return $(html);

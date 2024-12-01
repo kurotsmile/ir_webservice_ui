@@ -107,7 +107,7 @@ html, body {
     font-size: 24px;
 }
 
-main {
+main,.bar_head{
     margin-left: 4em;
     padding: 20px;
     width: calc(100% - 80px);
@@ -674,10 +674,6 @@ table thead tr th{
     color: #7e7e7e !important;
 }
 
-#job-selection-dropdown{
-    margin-left: 62px;
-}
-
 .form-select {
     -bs-form-select-bg-img:unset!important;
     background-image: unset !important;
@@ -846,6 +842,10 @@ table thead tr th{
 .list_btn_bit span.active{
     background-color: #00a1cb;
 }
+
+.sel-dropdown{
+    width: 348px !important;
+}
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}
@@ -855,6 +855,9 @@ table thead tr th{
         width: unset;
     }
     #bar_menu_top{margin-left: 80px;}
+    #chartTypeSelect_dropdown{width: 263px !important;}
+    #job-selection-dropdown{width: 100% !important;}
+    .bar_head{margin-left: 70px;}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -866,6 +869,9 @@ table thead tr th{
         width: unset;
     }
     #bar_menu_top{margin-left: 80px;}
+    #chartTypeSelect_dropdown{width: 263px !important;}
+    #job-selection-dropdown{width: 100% !important;}
+    .bar_head{margin-left: 70px;}
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -877,12 +883,14 @@ table thead tr th{
         width: unset;
     }
     #bar_menu_top{margin-left: 80px;}
+    .bar_head{margin-left: 70px;}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     /* CSS for devices between 992px and 1199px (desktops) */
     #bar_menu_top{margin-left: unset;}
+    #chartTypeSelect_dropdown{width: unset !important;}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
