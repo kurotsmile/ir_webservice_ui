@@ -118,8 +118,6 @@
     <%- include('p9_alet_warning.ejs') %>
     <script>
         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
-        var count_byte_in=0;
-        var count_byte_out=0;
 
         $(document).ready(()=>{
             load_data();
@@ -282,7 +280,7 @@
                             load_data();
                             close_msg();
                         });
-                    },"OK");
+                    },"Save");
                 });
             }
             return emp_row;

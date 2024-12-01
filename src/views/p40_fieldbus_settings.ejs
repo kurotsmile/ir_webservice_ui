@@ -139,7 +139,6 @@
         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
 
         $(document).ready(()=>{
-            $(".field_group_port2").hide();
             $("select").change(function(){
                 var val=$(this).attr("value");
                $(this).attr("value",val);
