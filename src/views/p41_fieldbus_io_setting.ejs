@@ -252,30 +252,35 @@
 
                         var val_Behavior=$(btn_bit).attr("data-Behavior");
                         var val_Polarity=$(btn_bit).attr("data-Polarity");
-                        $("#bit_Behavior").val(val_Behavior);
-                        $("#bit_Polarity").val(val_Polarity);
+                        if(val_Behavior!=undefined) $("#bit_Behavior").val(val_Behavior);
+                        if(val_Polarity!=undefined) $("#bit_Polarity").val(val_Polarity);
 
                         $("#box_msg").css("width","510px");
                         $("#btn_msg_done").click(()=>{
-                            var bit_Behavior = $('#bit_Behavior').prop('selectedIndex');
-                            var objLs={};
-                            objLs.Index=index;
-                            objLs.Bit=i;
-                            objLs.Length=0;
-                            objLs.BehaviorID=bit_Behavior;
-                            objLs.Behavior=$("#bit_Behavior").val();
-                            objLs.PolarityID=0;
-                            objLs.Polarity=$("#bit_Polarity").val();
-
-                            if(type=='in'){
-                                if(data_json.Fieldbus.IO.lsIn==undefined) data_json.Fieldbus.IO.lsIn=[];
-                                data_json.Fieldbus.IO.lsIn.push(objLs);
+                            var bit_Behavior = $('#bit_Behavior').prop('selectedIndex');;
+                            if(bit_Behavior=="0"){
+                                remove_bit(index,i,type);
                             }else{
-                                if(data_json.Fieldbus.IO.lsOut==undefined) data_json.Fieldbus.IO.lsOut=[];
-                                data_json.Fieldbus.IO.lsOut.push(objLs);
+                                remove_bit(index,i,type);
+                                var objLs={};
+                                objLs.Index=index;
+                                objLs.Bit=i;
+                                objLs.Length=0;
+                                objLs.BehaviorID=bit_Behavior;
+                                objLs.Behavior=$("#bit_Behavior").val();
+                                objLs.PolarityID=0;
+                                objLs.Polarity=$("#bit_Polarity").val();
+
+                                if(type=='in'){
+                                    if(data_json.Fieldbus.IO.lsIn==undefined) data_json.Fieldbus.IO.lsIn=[];
+                                    data_json.Fieldbus.IO.lsIn.push(objLs);
+                                }else{
+                                    if(data_json.Fieldbus.IO.lsOut==undefined) data_json.Fieldbus.IO.lsOut=[];
+                                    data_json.Fieldbus.IO.lsOut.push(objLs);
+                                }
                             }
+                            load_data();
                             close_msg();
-                            $(btn_bit).addClass("active");
                         });
                     },"OK");
                 });
@@ -445,6 +450,22 @@
                     return value === 0;
                 });
                 data_json.Fieldbus.IO.OutType = nonZeroElements.concat(zeroElements);
+            }
+        }
+
+        function remove_bit(index,bit,type){
+            if(type=='in'){
+                if(data_json.Fieldbus.IO.lsIn!=null){
+                    $(data_json.Fieldbus.IO.lsIn).each(function(i,b){
+                        if(b.Index==index&&b.Bit==bit) data_json.Fieldbus.IO.lsIn.splice(i,1);
+                    });
+                }
+            }else{
+                if(data_json.Fieldbus.IO.lsOut!=null){
+                    $(data_json.Fieldbus.IO.lsOut).each(function(i,b){
+                        if(b.Index==index&&b.Bit==bit) data_json.Fieldbus.IO.lsOut.splice(i,1);
+                    });
+                }
             }
         }
     </script>
