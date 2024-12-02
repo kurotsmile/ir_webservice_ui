@@ -63,7 +63,7 @@
                     <div class="label-txt">Add Source</div>
                 </div>
                 <div class="col-6">
-                    <img src="/public/SVG/Add.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/>
+                    <a href="dio_edit"><img src="/public/SVG/Add.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/></a>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="col-2" style="border-left: solid 2px #4d4d4d;">
-                    <img src="/public/SVG/Edit.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/>
+                    <a href="dio_edit"><img src="/public/SVG/Edit.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/></a>
                     <img src="/public/SVG/Trash.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 }),
                 success: function(response) {
                     console.log(response.message);
-                    show_msg("Update success","Backup and Restore");
+                    show_msg("Update success","DIO");
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>DIO</title>
+    <title>DIO Source</title>
     <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
     <link href="/public/css/index.css?v=<%= ver %>" rel="stylesheet" />
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
@@ -28,54 +28,244 @@
                             &nbsp;
                         </div>
                         <div class="col-11">
-                            <a href="home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
-                            <h2 class="text-white" style="margin-left: -42px;">DIO</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> DIO</div>
+                            <a href="dio"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white" style="margin-left: -42px;">DIO Source</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;">
+                                <a class="nav1" href="/home">Home</a> 
+                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                <a class="nav1" href="/dio">DIO</a> 
+                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
+                                DIO Source
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <% const dio=jsonData.dio|| {};%>
+    <% const DioSource=jsonData.dio|| {};%>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid mb-5 pb-5">
 
             <div class="row row-p" value="hide">
                 <div class="col-6">
-                    <div class="label-txt">Remote Tool Enable Mode</div>
+                    <div class="label-txt">Source</div>
                 </div>
 
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= dio && dio.RemoteToolEnableMode ? dio.RemoteToolEnableMode : 'None' %>" field_key="RemoteToolEnableMode"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="None" <%= dio && dio.RemoteToolEnableMode === 'None' ? 'selected' : '' %>>None</option>
+                        <select class="form-select custom-combobox field_data" value="<%= DioSource && DioSource.Source ? DioSource.Source : 'None' %>" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="DIO (8X8)" <%= DioSource && DioSource.Source === 'None' ? 'selected' : '' %>>DIO (8X8)</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
 
-            <div class="row row-h" value="hide">
+            <div class="row row-h" role="button" onclick="show_group('field_group_asst',this);return false;" value="show">
                 <div class="col-6">
-                    <div class="label-txt">Add Source</div>
+                    <div class="label-txt">Input Assignment</div>
                 </div>
+
                 <div class="col-6">
-                    <img src="/public/SVG/Add.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/>
+                    <img src="/public/SVG/ExUp.svg" style="float: right;" class="mb-2 mt-3 icon_show"/>
+                </div>
+            </div>
+            
+            <div class="row field_group_asst">
+            <table class="table table-lg table-dark table-bordered table-p-list m-0">
+                <thead>
+                  <tr>
+                    <th class="col_tb_80p">Behaviour</th>
+                    <th class="col_tb_20p">Normally Open</th>
+                  </tr>
+                </thead>
+                <tbody id="all_items">
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">1</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 1</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">2</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 2</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">3</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 3</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">4</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 4</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">5</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 1</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">6</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 1</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">7</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 1</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td >
+                            <div class="row">
+                                <div class="col-1 text-center p-3">8</div>
+                                <div class="col-11">
+                                    <div class="input-group r border w-50 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <select class="form-select custom-combobox field_data" value="None" field_key="Source"  field_type_data="string" field_type="emp_inp" > 
+                                            <option value="Job 1">Job 1</option>
+                                        </select>                        
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <div class="row row-h" role="button" onclick="show_group('field_group_out_asst',this);return false;" value="show">
+                <div class="col-6">
+                    <div class="label-txt">Output Assignment</div>
+                </div>
+
+                <div class="col-6">
+                    <img src="/public/SVG/ExUp.svg" style="float: right;" class="mb-2 mt-3 icon_show"/>
                 </div>
             </div>
 
-            <div class="row row-p" value="hide">
-                <div class="col-10">
-                    <div class="label-txt">1. DIO (8X8)</div>
-                </div>
-
-                <div class="col-2" style="border-left: solid 2px #4d4d4d;">
-                    <img src="/public/SVG/Edit.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/>
-                    <img src="/public/SVG/Trash.svg" role="button" style="float: right;" class="mb-2 mt-3 icon_show"/>
-                </div>
+            <div class="row field_group_out_asst">
+            <table class="table table-lg table-dark table-bordered table-p-list m-0">
+                <thead>
+                  <tr>
+                    <th class="col_tb_30p">Behaviour</th>
+                    <th class="col_tb_30p">Spindel ID</th>
+                    <th class="col_tb_30p">Timeout</th>
+                  </tr>
+                </thead>
+            </table>
             </div>
 
         </div>
@@ -157,12 +347,25 @@
                 }),
                 success: function(response) {
                     console.log(response.message);
-                    show_msg("Update success","Backup and Restore");
+                    show_msg("Update success","DIO Source");
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);
                 }
             });
+        }
+
+        function show_group(s_name_group,emp){
+            var val_show=$(emp).attr("value");
+            if(val_show=="hide"){
+                $(emp).find(".icon_show").attr("src", "public/SVG/ExUp.svg");
+                $("."+s_name_group).show();
+                $(emp).attr("value","show");
+            }else{
+                $(emp).find(".icon_show").attr("src", "public/SVG/Down.svg");
+                $("."+s_name_group).hide();
+                $(emp).attr("value","hide");
+            }
         }
     </script>
 </body>

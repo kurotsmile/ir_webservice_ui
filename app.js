@@ -624,6 +624,21 @@ app.get('/dio', (req, res) => {
     });
 });
 
+app.get('/dio_edit', (req, res) => {
+    const primaryPath = path.join(get_file_system("Communication"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'Communication.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p66_dio_edit', {jsonData});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
+});
+
 app.post('/save-json', (req, res) => {
     const { data_json, file_name } = req.body;
     if (!data_json || !file_name) {
