@@ -22,18 +22,77 @@
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">AC-ToolsNet Setting</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> AC-ToolsNet Setting</div>
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white">AC-ToolsNet Setting</h2>
+                            <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> AC-ToolsNet Setting</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <% const ToolsNet=jsonData.ToolsNet|| {};%>
+    <% const timer_seconds = [
+        "5 Seconds",
+        "10 Seconds",
+        "15 Seconds",
+        "20 Seconds",
+        "25 Seconds",
+        "30 Seconds",
+        "35 Seconds",
+        "40 Seconds",
+        "45 Seconds",
+        "50 Seconds",
+        "55 Seconds",
+        "60 Seconds"
+        ]; 
+    %>
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid pb-5 mb-5">
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Enable Protocol</div>
+                </div>
+
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= ToolsNet && ToolsNet.EnableProtocol ? ToolsNet.EnableProtocol : false %>" field_key="EnableProtocol" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Enable Logs</div>
+                </div>
+
+                <div class="col-6">
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= ToolsNet && ToolsNet.EnableLogs ? ToolsNet.EnableLogs : false %>" field_key="EnableLogs" field_type="emp_value" field_type_data="bool"/>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">System Type</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.SystemType ? ToolsNet.SystemType : 'None' %>" field_key="SystemType"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Unidentified" <%= ToolsNet && ToolsNet.SystemType === 'Unidentified' ? 'selected' : '' %>>Unidentified</option>
+                            <option value="Identify" <%= ToolsNet && ToolsNet.SystemType === 'Identify' ? 'selected' : '' %>>Identify</option>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
 
             <div class="row row-p">
                 <div class="col-6">
@@ -42,25 +101,202 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="256.256.256.256" class="form-control">
-                        <span class="input-group-text r-right"><img src="/public/SVG/Edit2.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress1 ? ToolsNet.PIMIPAddress1 : '256.256.256.256' %>"  field_key="PIMIPAddress1" field_type="emp_inp"  field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
             </div>
 
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">PIM IP Address</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress2 ? ToolsNet.PIMIPAddress2 : '256.256.256.256' %>"  field_key="PIMIPAddress2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">PIM IP Address</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress3 ? ToolsNet.PIMIPAddress3 : '256.256.256.256' %>"  field_key="PIMIPAddress3" field_type="emp_inp"  field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Retry Interval</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.RetryInterval ? ToolsNet.RetryInterval : '5 Seconds' %>" field_key="RetryInterval"  field_type_data="string" field_type="emp_inp" > 
+                            <% timer_seconds.forEach(function(t) { %>
+                                <option value="<%= t %>" <%= ToolsNet && ToolsNet.RetryInterval === t ? 'selected' : '' %>><%= t %></option>
+                            <% }); %>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Keep Alive Timer</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.KeepAliveTimer ? ToolsNet.KeepAliveTimer : '5 Seconds' %>" field_key="KeepAliveTimer"  field_type_data="string" field_type="emp_inp" > 
+                            <% timer_seconds.forEach(function(t) { %>
+                                <option value="<%= t %>" <%= ToolsNet && ToolsNet.KeepAliveTimer === t ? 'selected' : '' %>><%= t %></option>
+                            <% }); %>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Connection Retry Timer</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.ConnectionRetryTimer ? ToolsNet.ConnectionRetryTimer : '5 Seconds' %>" field_key="ConnectionRetryTimer"  field_type_data="string" field_type="emp_inp" > 
+                            <% timer_seconds.forEach(function(t) { %>
+                                <option value="<%= t %>" <%= ToolsNet && ToolsNet.ConnectionRetryTimer === t ? 'selected' : '' %>><%= t %></option>
+                            <% }); %>
+                        </select>                        
+                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">System Number</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SystemNumber ? ToolsNet.SystemNumber : 1 %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="number" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-p">
+                <div class="col-6">
+                    <div class="label-txt">Spindle Name</div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group r border mb-2 mt-2">
+                        <span class="input-group-text r-left">&nbsp;</span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SpindleName ? ToolsNet.SpindleName : 'SpindleName' %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="string" disabled>
+                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5"></div>
         </div>
     </main>
 
-    <div id="menu_footer">
+    <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
-                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                    <button class="btn btn-info text-white btn-rounded f-right" onclick="save_data();return false;">Save</button>
+                    <a href="home" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
-</body>
+    <%- include('p9_alet_warning.ejs') %>
+    <script>
+        var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
 
+        $(document).ready(()=>{
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+        });
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
+
+        function save_data(){
+            var obj_s={};
+            $(".field_data").each(function (index, emp) {
+                var key_emp = $(emp).attr("field_key");
+                var type_emp = $(emp).attr("field_type");
+                var type_data = $(emp).attr("field_type_data");
+                if (key_emp !== undefined) {
+                    var v='';
+                    if(type_emp=="emp_value")
+                        v=$(emp).attr("value");
+                    else
+                        v= $(emp).val();
+
+                    if(type_data=="number") v=Number(v);
+                    if(type_data=="bool") v=(v?.toLowerCase?.() === 'true');
+
+                    if(key_emp!="") obj_s[key_emp]=v;
+                }
+            });
+            data_json.ToolsNet=obj_s;
+            $.ajax({
+                url: '/save-json',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data_json: data_json,
+                    file_name: 'Communication'
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                    show_msg("Update success","AC-ToolsNet Setting");
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
+        }
+    </script>
+</body>
 </html>
