@@ -257,15 +257,71 @@
             </div>
 
             <div class="row field_group_out_asst">
-            <table class="table table-lg table-dark table-bordered table-p-list m-0">
-                <thead>
-                  <tr>
-                    <th class="col_tb_30p">Behaviour</th>
-                    <th class="col_tb_30p">Spindel ID</th>
-                    <th class="col_tb_30p">Timeout</th>
-                  </tr>
-                </thead>
-            </table>
+                <table class="table table-lg table-dark table-bordered table-p-list m-0">
+                    <thead>
+                        <tr>
+                            <th class="col_tb_30p">Behaviour</th>
+                            <th class="col_tb_30p">Spindel ID</th>
+                            <th class="col_tb_30p">Timeout</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let i = 0; i <= 7; i++) { %>
+                            <tr>
+                                <td >
+                                    <div class="row">
+                                        <div class="col-1 text-center p-3"><%= i %></div>
+                                        <div class="col-11">
+                                            <div class="input-group r border w-100 mb-2 mt-2">
+                                                <span class="input-group-text r-left">&nbsp;</span>
+                                                <select class="form-select custom-combobox field_data" value="None" field_key="Source<%= i %>"  field_type_data="string" field_type="emp_inp" > 
+                                                    <option value="Job 1">Job 1</option>
+                                                </select>                        
+                                                <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td >
+                                    <div class="input-group r border w-100 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                            <select class="form-select custom-combobox field_data" value="None" field_key="Powwerhead<%= i %>"  field_type_data="string" field_type="emp_inp" > 
+                                                <option value="Powwerhead">Powwerhead</option>
+                                            </select>
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </td>
+                                <td >
+                                    <div class="input-group r border w-100 mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                            <select class="form-select custom-combobox field_data" value="None" field_key="Timeout<%= i %>"  field_type_data="string" field_type="emp_inp" > 
+                                                <option value="0">0</option>
+                                            </select>
+                                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="label-txt">Normally Open</div>
+                                        </div>
+                                        <div class="col-3">
+                                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                                        </div>
+                                        <div class="col-3 border-left" style="border-left: 1px solid #4d5154;">
+                                            <div class="label-txt">Blink</div>
+                                        </div>
+                                        <div class="col-3">
+                                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
             </div>
 
         </div>
