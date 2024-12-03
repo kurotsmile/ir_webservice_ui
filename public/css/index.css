@@ -846,6 +846,41 @@ table thead tr th{
 .sel-dropdown{
     width: 348px !important;
 }
+
+input[type="file"]::file-selector-button {
+    border: unset;
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+    background-color: black;
+    transition: 1s;
+    margin-top: 3px;
+    color: white;
+  }
+  
+input[type="file"]::file-selector-button:hover {
+    background-color: black;
+}
+
+#progressbar_ui {
+    background-color: black;
+    border-radius: 50px;
+    border: solid 1px #a9a9a9;
+}
+  
+#progressbar_ui>.val {
+    background-color: #61ae23;
+    width: 50%;
+    height: 36px;
+    border-radius: 50px;
+}
+
+#progressbar_ui>.label {
+    position: absolute;
+    top: 78px;
+    left: 41px;
+    color: white;
+}
+
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}

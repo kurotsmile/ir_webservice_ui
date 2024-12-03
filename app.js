@@ -55,7 +55,7 @@ app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.4.2';
+    res.locals.ver = '1.4.3';
     res.locals.currentRoute = req.path;
     next();
 });
@@ -546,6 +546,20 @@ app.get('/backup_and_restore', (req, res) => {
     });
 });
 
+app.get('/firmware_upgrade', (req, res) => {
+    const primaryPath = path.join(get_file_system("System"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'System.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            res.render('p49_firmware_upgrade', {jsonData});
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    });
+});
 app.get('/barcode', (req, res) => {
     res.render('p55_barcode');
 });
