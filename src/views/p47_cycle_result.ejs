@@ -28,7 +28,7 @@
                             &nbsp;
                         </div>
                         <div class="col-11">
-                            <img id="btn_back_menu_top" src="/public/SVG/Back.svg"/>
+                            <a href="home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
                             <h2 class="text-white" style="margin-left: -42px;">Cycle Result</h2>
                             <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Cycle Result</div>
                         </div>
@@ -37,9 +37,11 @@
 
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                     <div class="row">
-                        <div class="col-12">
-                            <img src="/public/SVG/Download.svg"/>
-                            <img src="/public/SVG/Trash.svg"/>
+                        <div class="col-12" style="float: right;text-align: right;">
+                            <img role="button" style="width: 48px;" src="/public/SVG/Funnel.svg" onclick="show_funnel();return false;"/>
+                            <img role="button" style="width: 48px;" src="/public/SVG/Reload.svg"/>
+                            <img role="button" style="width: 48px;" src="/public/SVG/Download2.svg"/>
+                            <img role="button" style="width: 48px;" src="/public/SVG/Delete.svg"/>
                         </div>
                     </div>
                 </div>
@@ -53,13 +55,13 @@
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
-                    <th scope="col"><img src="/public/SVG/ArrowBack.svg"></th>
+                    <th scope="col"><img src="/public/SVG/Prev.svg" role="button"></th>
                     <th class="text-white">Job Name <img src="/public/SVG/Dropdown.svg"/></th>
                     <th>Controller Cycle #</th>
                     <th>Result</th>
                     <th>Spindle Cycle #</th>
                     <th>Job Cycle #</th>
-                    <th><img src="/public/SVG/ArrowForward.svg"></th>
+                    <th><img src="/public/SVG/Next.svg" role="button"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -94,6 +96,112 @@
             </table>
         </div>
     </main>
-</body>
 
+    <div id="bar_footer" class="fixed">
+        <div class="container-fluid">
+            <div class="row p-3">
+                <div class="col-12 text-center">
+                   <img src="/public/SVG/Back.svg" onclick="prev_page();return false" role="button" id="btn_page_prev">
+                   <span style="border-radius: 20px;padding-left: 20px !important;padding-right: 20px !important;" class="p-2 bg-dark m-2">
+                        <span id="currentPage">1</span>/<span id="totalPages">1</span>
+                   </span>
+                   <img src="/public/SVG/Forward.svg" onclick="next_page();return false" role="button"  id="btn_page_next">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('p9_alet_warning.ejs') %>
+    <script>
+        function show_funnel(){
+            var html='';
+            html+='<div class="row">';
+                html+='<div class="col-8">EOR Parameters</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-8">Control Cycle #</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-8">Spindle Cycle #</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-8">Job Cycle #</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-8">Date & Time</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-8">Controller Name/Serial #</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            html+='<div class="row">';
+                html+='<div class="col-8">Torque Result</div>';
+                html+='<div class="col-4">';
+                html+='<img role="button" src="/public/SVG/Move.svg"/>';
+                html+='<img role="button" style="width:48px;" src="/public/SVG/On.svg" class="btn_switch" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+                html+='</div>';
+            html+='</div>';
+
+            var html_title='';
+            html_title+='EOR Parameters';
+            html_title+='<img role="button" style="width: 48px;float: right;position: absolute;right: 27px;top: 1px;" src="/public/SVG/On.svg" class="btn_switch mt-0" value="false" field_key="EnableDio" field_type="emp_value" field_type_data="bool"/>';
+
+            show_msg(html,html_title,()=>{
+                Load_UI();
+                $("#btn_msg_done").click(()=>{
+                    close_msg();
+                });
+            },"Save");
+        }
+
+        function Load_UI(){
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+        }
+    </script>
+</body>
 </html>
