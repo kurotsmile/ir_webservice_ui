@@ -560,6 +560,11 @@ app.get('/firmware_upgrade', (req, res) => {
         }
     });
 });
+
+app.get('/accessories_edit', (req, res) => {
+    res.render('p51_accessories_edit');
+});
+
 app.get('/barcode', (req, res) => {
     res.render('p55_barcode');
 });
