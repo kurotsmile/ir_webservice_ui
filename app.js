@@ -12,6 +12,9 @@ const port = 3000;
 
 function get_file_system(nameFile) {
     const dirData = path.join(os.homedir(), 'Data');
+
+    if (!fs.existsSync(dirData)) fs.mkdirSync(dirData, { recursive: true });
+    
     const filePath = path.join(dirData, `${nameFile}.json`);
     return filePath;
 }

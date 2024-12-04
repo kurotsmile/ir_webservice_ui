@@ -22,15 +22,21 @@
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">System Initialisation</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> System Initialisation</div>
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white">System Initialisation</h2>
+                            <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> System Initialisation</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid mb-5 pb-5">
@@ -43,7 +49,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control field_data" value="PlantName" field_key="PlantName" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -56,7 +62,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control field_data" value="AssemblyLine" field_key="AssenblyLine" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -69,7 +75,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control field_data" value="StationName" field_key="StationName" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -82,7 +88,7 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" class="form-control field_data" value="ApplicationName" field_key="ApplicationName" field_type="emp_inp" field_type_data="string" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                        <span role="button" class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -141,19 +147,28 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-info text-white btn-rounded f-right">Save</button>
+                    <button class="btn btn-info text-white btn-rounded f-right" style="min-width: none;">Save</button>
                     <a href="home" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
-                    <button class="btn btn-warning text-white btn-rounded f-right">Factory Reset</button>
+                    <button class="btn btn-warning text-white btn-rounded f-right" onclick="show_factory_reset();return false;">Factory Reset</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<%- include('p9_alet_warning.ejs') %>
 <script>
     function show_edit(emp){
         $(emp).parent().find('img').toggleClass("bg-info rounded");
         $(emp).parent().find('input').each(function () {
             $(this).prop('disabled', !$(this).prop('disabled'));
+        });
+    }
+
+    function show_factory_reset(){
+        var html='';
+        html+='<div id="progressbar_ui"><div class="val"></div><div class="label">Resetting to factory settings</div></div>';
+        show_msg(html,'Factory Reset',()=>{
+            $("#btn_msg_cancel").hide();
         });
     }
 </script>
