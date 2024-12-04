@@ -18,19 +18,7 @@
 <body class="brown">
  
     <%- include('menu_sidebar') %>
-
-    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">Tool Calibration</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Alarm</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <%- include('bar_head',{title:'Tool Calibration'}) %>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">

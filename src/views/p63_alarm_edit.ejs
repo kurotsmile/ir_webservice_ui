@@ -19,31 +19,12 @@
  
     <%- include('menu_sidebar') %>
     <% const alarm=jsonData.PmAlarm.Item[index_edit]|| {};%>
-
-    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
-                    <div class="row">
-                        <div class="col-1">
-                            &nbsp;
-                        </div>
-                        <div class="col-11">
-                            <a href="/alarm"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
-                            <h2 class="text-white">Edit <%= alarm && alarm.Alarm ? alarm.Alarm : '' %></h2>
-                            <div class="breadcrumb">
-                                <a class="nav1" href="/home">Home</a> 
-                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                <a class="nav1" href="/alarm">Alarm</a> 
-                                <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                 Edit <%= alarm && alarm.Alarm ? alarm.Alarm : '' %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <%- include('bar_head', { 
+            title: 'Edit Alarm',
+            navs:[
+                {label:'Alarm',link:'alarm'}
+            ]
+        }) %>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid pb-5 mb-5">

@@ -18,26 +18,20 @@
 <body class="brown">
  
     <%- include('menu_sidebar') %>
-
-    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-10 col-lg-10 col-xl-10">
-                    <a href="tool_calibartion"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">Calibration Result</h2>
-                    <div class="breadcrumb">
-                        <a class="nav1" href="/home">Home</a> 
-                        <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> <a href="tool_calibartion">Tool Calibartion</a>
-                        <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Edit Calibration Result
-                    </div>
-                </div>
-                <div class="col-12 col-md-1 col-lg-1 col-xl-1">
+    <%- include('bar_head_full',{title:'Calibration Result',
+        navs:[
+            {label:'Tool Calibartion',link:'tool_calibartion'}
+        ],
+        back:'tool_calibartion',
+        emp_extension:`
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">&npsb;</div>
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                     <a style="font-weight: bold;" class="btn btn-success text-white btn-rounded f-right mb-2 mt-2 w-100 p-2">Start</a>
                 </div>
             </div>
-        </div>
-    </div>
-
+        `
+        }) %>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid">

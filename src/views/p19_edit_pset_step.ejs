@@ -18,35 +18,20 @@
 <body class="brown">
  
     <%- include('menu_sidebar') %>
+    <%- include('bar_head', { title: 'Step Edit',
+        navs:[
+            {label:'List Pset',link:'pset_list'},
+            {label:'Edit Pset',link:'edit_pset?id='+id},
+            {label:'Forward Operation',link:'forward_operation?id='+id}
+        ],
+        back:'forward_operation?id='+id}) 
+    %>
 
-    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
-                    <div class="row">
-                        <div class="col-1">
-                            &nbsp;
-                        </div>
-                        <div class="col-11">
-                            <a href="/edit_pset?id=<%= id %>"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
-                            <h2 class="text-white" style="margin-left: -42px;">Step Edit</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;">
-                                <a class="nav1" href="/pset_list">List Steps</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                <a href="edit_pset?id=<%= id %>">Edit Pset</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                <a href="forward_operation?id=<%= id %>">Forward Operation</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                Step Edit <%=  Number(index_step)+1 %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <% const stepData=jsonData.Steps[index_step];%>
     <!-- Main Content Full Width -->
     <main>
         <div class="container-fluid mb-5 pb-5" id="all_fields"></div>
+        <div class="mt-5">&nbsp;</div>
     </main>
 
     <div id="bar_footer" class="fixed2">

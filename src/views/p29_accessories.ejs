@@ -18,28 +18,10 @@
 <body class="brown">
  
     <%- include('menu_sidebar') %>
-
-    <div class="p-1 px-md-4 mb-1 box-shadow " id="bar_menu_top">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-10 col-lg-10 col-xl-10">
-                    <div class="row">
-                        <div class="col-1">
-                            &nbsp;
-                        </div>
-                        <div class="col-11">
-                            <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"></a>
-                            <h2 class="text-white pt-2" style="margin-left: -42px;">Accessories</h2>
-                            <div class="breadcrumb"  style="margin-left: -42px;">
-                                <a class="nav1" href="home">Home</a>
-                                 <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg">
-                                Accessories
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
+    <%- include('bar_head2',{
+        title: 'Accessories',
+        emp_extension:
+        `
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3 r border w-100 mt-3 p-0" style="border: unset !important;">
@@ -51,10 +33,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        `
+        }) %>
 
     <!-- Main Content Full Width -->
     <main class="">

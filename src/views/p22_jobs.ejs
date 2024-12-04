@@ -17,43 +17,28 @@
 
 <body class="brown">
     <%- include('menu_sidebar') %>
-
-    <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
-                    <div class="row">
-                        <div class="col-1">
-                            &nbsp;
-                        </div>
-                        <div class="col-11">
-                            <h2 class="text-white" style="margin-left: -42px;">Jobs</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <div class="row">
-                        <div class="col-12 col-md-8 col-lg-8 col-xl-8">
-                            <div class="input-group r border mb-2 mt-2">
-                                <span class="input-group-text r-left">&nbsp;</span>
-                                <input type="text" placeholder="Search" class="form-control" id="inp_search">
-                                <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                            <button class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2" onclick="add_j();return false;"><img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Job</button>
-                        </div>
-                    </div>
+    <%- include('bar_head2', {
+    title: 'Jobs',
+    emp_extension: `
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="input-group r border mb-2 mt-2">
+                    <span class="input-group-text r-left">&nbsp;</span>
+                    <input type="text" placeholder="Search" class="form-control" id="inp_search">
+                    <span class="input-group-text r-right"><img src="/public/SVG/Search.svg"/></span>
                 </div>
             </div>
-        </div>
-    </div>
-
+            <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                <button class="btn btn-info text-white btn-rounded f-right mb-2 mt-2 w-100 p-2" onclick="add_j();return false;">
+                    <img style="width: 25px;height: 25px;margin-right: 6px;" src="/public/SVG/Add.svg"/>Add Job
+                </button>
+            </div>
+        </div>`
+    }) %>
 
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
@@ -65,6 +50,9 @@
                 </thead>
                 <tbody id="all_item_job"></tbody>
             </table>
+            <div class="mt-5">&nbsp;</div>
+            <div class="mt-5">&nbsp;</div>
+            <div class="mt-5">&nbsp;</div>
         </div>
     </main>
 
