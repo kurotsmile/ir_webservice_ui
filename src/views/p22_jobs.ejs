@@ -125,10 +125,7 @@
             $("#ValidJob").html(counValidJob);
             $("#InValidJob").html(counInValidJob);
 
-            if(length_item>10)
-                currentPage=2;
-            else
-                currentPage=1;
+            currentPage=Math.ceil(length_item / itemsPerPage);
             displayItems(currentPage)
         }
 
