@@ -53,12 +53,16 @@ const readJsonFile = (filePath) => {
     });
 };
 
+
 app.set('views', './src/views'); 
 app.set('view engine', 'ejs');
 
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.4.3';
+    res.locals.ver = '1.4.5';
     res.locals.currentRoute = req.path;
     next();
 });

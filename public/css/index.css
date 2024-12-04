@@ -226,21 +226,18 @@ select {
 /* progess container */
 .progress-container {
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     float: left;
     width: 100%;
 }
 
 .progress-top {
-    display: flex;
     background-color: #333333;
     justify-content: space-between;
     align-items: center;
     color: #e3e3e3;
-    font-size: x-large;
-    float: left;
+    font-size: larger;
+    width: 100%;
+    height: 35px;
 }
 
 .progress-top span {
@@ -250,11 +247,34 @@ select {
 
 .progress-bar {
     background-color: #333333;
-    display: flex;
-    justify-content: space-between;
     margin-top: 5px;
-    position: relative;
     overflow: hidden;
+}
+
+#progress_step{
+    height: 35px;
+    background-color: #333333;
+    border-radius: 0px;
+    position: relative;
+}
+
+#progress_step .info{
+    position: relative;
+    font-size: 15px;
+    width: 100%;
+    right: 0px;
+}
+
+#progress_step .info #lbStep_label{
+    float: left;
+    margin-top: 9px;
+    margin-left: 10px;
+}
+
+#progress_step .info #lbStep_count{
+    float: right;
+    margin-top: 9px;
+    margin-right: 10px;
 }
 
 .progress-fill {
@@ -1021,17 +1041,22 @@ input[type="file"]::file-selector-button:hover {
     background: #333333;
     font-size: x-large;
     margin-top: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border-radius: initial;
     height: 4vh;
+    color: white;
 }
 
 .progress-bar.progress-bar-custom {
-    background: #61AE24;
+    background: #46652d;
     width: 0%;
+    height: 100%;
+    margin: 0px;
+    display: block;
+    position: absolute;
+    height: 36px;
+    border-right: solid 3px #61ae23;
 }
+.progress-container{color: white;}
 
 .ip-container {
     background-color: #444; /* Dark grey background */

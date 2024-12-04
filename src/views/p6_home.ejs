@@ -71,26 +71,24 @@
             <!-- Screens -->
             <div id="resultsScreen" class="screen active">
 
-                <div class="row">
-                    <div class="col-12 ">
-
+                <div class="row mb-3">
+                    <div class="col-12">
                         <div class="progress-container">
-                            <div id="textNextPage" class="progress-top">
-                            </div>
-                            <div class="progress progress-custom">
-                                <div class="progress-bar progress-bar-custom" id="progress-bar-fill" role="progressbar">
-                                    <span style="text-align: left;margin-left: 1.1%;font-weight: 500;font-size: 20px;"
-                                        id="curPset"></span>
+                            <div id="textNextPage" class="progress-top"><span class="ml-3">Next :</span></div>
+                            <div class="progress w-100 mt-3" id="progress_step">
+                                <div class="progress-bar progress-bar-custom" id="progress-bar-fill" role="progressbar" style="width: 50%;">
+                                    <span style="text-align: left;margin-left: 1.1%;font-weight: 500;font-size: 20px;" id="curPset"></span>
                                 </div>
-                                <label id="lbStep"
-                                    style="color: #fff; margin-right: 1.1%;"></label>
+                                <div class="info">
+                                    <label id="lbStep_label">P</label>
+                                    <label id="lbStep_count">0/0</label>
+                                </div>
                             </div>
                             <!-- <div id="progress-bar-fill" class="progress-bar " style="background-color: #3a3a3a;">
                                 <div ></div>
                             </div> -->
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row ">
