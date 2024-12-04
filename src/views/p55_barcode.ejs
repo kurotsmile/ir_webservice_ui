@@ -22,10 +22,17 @@
     <div class="p-1 px-md-4 mb-1 box-shadow" id="bar_menu_top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12">
-                    <a href="/home"><img id="btn_back_menu_top" src="/public/SVG/Back.svg" style="margin-left: 60px;"/></a>
-                    <h2 class="text-white">Barcode String</h2>
-                    <div class="breadcrumb"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Setting Barcode</div>
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                    <div class="row">
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-11">
+                            <a href="pset_list"><img id="btn_back_menu_top" src="/public/SVG/Back.svg"/></a>
+                            <h2 class="text-white" style="margin-left: -42px;">Barcode String</h2>
+                            <div class="breadcrumb"  style="margin-left: -42px;"><a class="nav1" href="/home">Home</a> <img style="width: 10px;height: 10px;margin: 6px;" src="/public/SVG/ArrowForward.svg"> Barcode String</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,7 +40,7 @@
 
     <!-- Main Content Full Width -->
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid pm-5 mb-5">
 
             <div class="row row-p">
                 <div class="col-6">
@@ -55,7 +62,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Identifier1" class="form-control">
+                        <select class="form-select custom-combobox field_data" value="Identifier1" field_key="JobSelection"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Identifier1">Identifier1</option>
+                        </select>  
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -68,7 +77,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1" class="form-control">
+                        <select class="form-select custom-combobox field_data" value="1" field_key="Start"  field_type_data="number" field_type="emp_inp" > 
+                            <option value="1">1</option>
+                        </select>  
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -81,7 +92,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1" class="form-control">
+                        <select class="form-select custom-combobox field_data" value="1" field_key="End"  field_type_data="number" field_type="emp_inp" > 
+                            <option value="1">1</option>
+                        </select>  
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -94,7 +107,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="1" class="form-control">
+                        <select class="form-select custom-combobox field_data" value="1" field_key="WildcardCharacter"  field_type_data="number" field_type="emp_inp" > 
+                            <option value="1">1</option>
+                        </select>  
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
@@ -110,11 +125,11 @@
             </div>
 
             <div class="row row-p">
-                <div class="col-2">
+                <div class="col-6  col-md-2 col-lg-2 col-xl-2">
                     <div class="label-txt">Free Order</div>
                 </div>
-                <div class="col-10">
-                   <img src="/public/SVG/Off.svg"  class="mb-2 mt-3"/>
+                <div class="col-6  col-md-10 col-lg-10 col-xl-10">
+                    <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="key_bool" field_type="emp_value" field_type_data="bool"/>
                 </div>
             </div>  
             
@@ -130,28 +145,143 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>P1</td>
-                            <td>Torque</td>
-                            <td>20</td>
-                            <td>1</td>
-                        </tr>
+                            <tr>
+                                <td class="col_tb_30p">
+                                    <div class="input-group r border mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <input type="text" placeholder="Enter data" value="" class="form-control" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                                    </div>
+                                </td>
+                                <td class="col_tb_20p">
+                                    <div class="input-group r border mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <input type="text" placeholder="Enter data" value="" class="form-control" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                                    </div>
+                                </td>
+                                <td class="col_tb_30p">
+                                    <div class="input-group r border mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <input type="text" placeholder="Enter data" value="" class="form-control" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                                    </div>
+                                </td>
+                                <td class="col_tb_20p" style="text-align: right;">
+                                    <a href="#"><img class="mt-3" src="/public/SVG/Trash.svg"></a>
+                                    <a href="#"><img class="mt-3" src="/public/SVG/Move.svg"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="row">
+                                        <div class="col-6  col-md-2 col-lg-2 col-xl-2">
+                                            <div class="label-txt">Ignore Duplicate Scan</div>
+                                        </div>
+                                        <div class="col-6  col-md-10 col-lg-10 col-xl-10">
+                                            <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="key_bool" field_type="emp_value" field_type_data="bool"/>
+                                        </div>
+                                    </div>  
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col_tb_30p">
+                                    <div class="input-group r border mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <input type="text" placeholder="Enter data" value="" class="form-control" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                                    </div>
+                                </td>
+                                <td class="col_tb_20p">
+                                    <div class="input-group r border mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <input type="text" placeholder="Enter data" value="" class="form-control" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                                    </div>
+                                </td>
+                                <td class="col_tb_30p">
+                                    <div class="input-group r border mb-2 mt-2">
+                                        <span class="input-group-text r-left">&nbsp;</span>
+                                        <input type="text" placeholder="Enter data" value="" class="form-control" field_key="" field_type="emp_inp" field_type_data="string" disabled>
+                                        <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
+                                    </div>
+                                </td>
+                                <td class="col_tb_20p" style="text-align: right;">
+                                    <a href="#"><img class="mt-3" src="/public/SVG/Trash.svg"></a>
+                                    <a href="#"><img class="mt-3" src="/public/SVG/Move.svg"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="row">
+                                        <div class="col-6  col-md-2 col-lg-2 col-xl-2">
+                                            <div class="label-txt">Ignore Duplicate Scan</div>
+                                        </div>
+                                        <div class="col-6  col-md-10 col-lg-10 col-xl-10">
+                                           <img src="/public/SVG/On.svg" style="width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="false" field_key="key_bool" field_type="emp_value" field_type_data="bool"/>
+                                        </div>
+                                    </div>  
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>  
+            </div>
+            
+            <div class="mt-5">&nbsp;</div>
         </div>
     </main>
 
-    <div id="menu_footer">
+    <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <a href="login" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
+                    <button class="btn btn-info text-white btn-rounded f-right" onclick="save_data();return false">Save</button>
+                    <a href="home" class="btn btn-secondary text-white btn-rounded f-right">Cancel</a>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
+    <%- include('p9_alet_warning.ejs') %>
+    <script>
+        $(document).ready(()=>{
+
+            $("select").change(function(){
+                var val=$(this).attr("value");
+               $(this).attr("value",val);
+            });
+
+            $(".btn_switch").each(function(){
+                if ($(this).attr("value")=="true")
+                    $(this).attr("src", "/public/SVG/On.svg");
+                else 
+                    $(this).attr("src", "/public/SVG/Off.svg");
+            });
+
+            $(".btn_switch").click(function(){
+                var val_emp=$(this).attr("value");
+                if(val_emp=="true"){
+                    $(this).attr("src", "/public/SVG/Off.svg");
+                    $(this).attr("value",false);
+                }else{
+                    $(this).attr("src", "/public/SVG/On.svg");
+                    $(this).attr("value",true);
+                }
+            });
+        });
+
+        function show_edit(emp){
+            $(emp).parent().find('img').toggleClass("bg-info rounded");
+            $(emp).parent().find('input').each(function () {
+                $(this).prop('disabled', !$(this).prop('disabled'));
+            });
+        }
+
+        function save_data(){
+            show_msg("Update success!","Barcode");
+        }
+    </script>
+</body>
 </html>
