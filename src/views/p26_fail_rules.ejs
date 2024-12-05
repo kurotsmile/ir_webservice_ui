@@ -51,7 +51,11 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.SocketAssignment ? FailRules.SocketAssignment : 'None' %>" field_key="SocketAssignment"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="None">None</option>
+                            <option value="None" <%= FailRules && FailRules.SocketAssignment === 'None' ? 'selected' : '' %>>None</option>
+                            <% for (let i = 1; i <= 32; i++) { %>
+                                <option value="<%= i %>" <%= FailRules && FailRules.SocketAssignment === i.toString() ? 'selected' : '' %>><%= i %></option>
+                            <% } %>
+                            <option value="Any" <%= FailRules && FailRules.SocketAssignment === 'Any' ? 'selected' : '' %>>Any</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -98,8 +102,16 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.FailureType ? FailRules.FailureType : 'Any Failure' %>" field_key="FailureType"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Any Failure">Any Failure</option>
+                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.FailureType ? FailRules.FailureType : 'Hardware Fault' %>" field_key="FailureType"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Hardware Fault" <%= FailRules && FailRules.FailureType === 'Hardware Fault' ? 'selected' : '' %>>Hardware Fault</option>
+                            <option value="High Torque" <%= FailRules && FailRules.FailureType === 'High Torque' ? 'selected' : '' %>>High Torque</option>
+                            <option value="Low Torque" <%= FailRules && FailRules.FailureType === 'Low Torque' ? 'selected' : '' %>>Low Torque</option>
+                            <option value="High Angle" <%= FailRules && FailRules.FailureType === 'High Angle' ? 'selected' : '' %>>High Angle</option>
+                            <option value="Low Angle" <%= FailRules && FailRules.FailureType === 'Low Angle' ? 'selected' : '' %>>Low Angle</option>
+                            <option value="High Torque and High Angle" <%= FailRules && FailRules.FailureType === 'High Torque and High Angle' ? 'selected' : '' %>>High Torque and High Angle</option>
+                            <option value="Low Torque and High Angle" <%= FailRules && FailRules.FailureType === 'Low Torque and High Angle' ? 'selected' : '' %>>Low Torque and High Angle</option>
+                            <option value="Cycle Timeout" <%= FailRules && FailRules.FailureType === 'Cycle Timeout' ? 'selected' : '' %>>Cycle Timeout</option>
+                            <option value="Any Failure" <%= FailRules && FailRules.FailureType === 'Any Failure' ? 'selected' : '' %>>Any Failure</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -113,15 +125,18 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.FailureType ? FailRules.FailureType : 'Disable on Fail' %>" field_key="Action"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Disable on Fail">Disable on Fail</option>
+                        <select id="FailRules_Action" class="form-select custom-combobox field_data" value="<%= FailRules && FailRules.Action ? FailRules.Action : 'Disable on Fail' %>" field_key="Action"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Abort" <%= FailRules && FailRules.Action === 'Abort' ? 'selected' : '' %>>Abort</option>
+                            <option value="Retry" <%= FailRules && FailRules.Action === 'Retry' ? 'selected' : '' %>>Retry</option>
+                            <option value="Retry Count" <%= FailRules && FailRules.Action === 'Retry Count' ? 'selected' : '' %>>Retry Count</option>
+                            <option value="Disable on Fail" <%= FailRules && FailRules.Action === 'Disable on Fail' ? 'selected' : '' %>>Disable on Fail</option>
                         </select>
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p" id="FailRules_RetryCount_Row">
                 <div class="col-6">
                     <div class="label-txt">Retry Count</div>
                 </div>
@@ -134,7 +149,7 @@
                 </div>
             </div>
 
-            <div class="row row-p mb-5">
+            <div class="row row-p mb-5" id="FailRules_Retry_Action_Row">
                 <div class="col-6">
                     <div class="label-txt">Retry Action</div>
                 </div>
@@ -189,6 +204,9 @@
                     $(this).attr("value",true);
                 }
             });
+
+            check_FailRules_Action();
+            $("#FailRules_Action").change(check_FailRules_Action);
         });
 
         function show_edit(emp){
@@ -241,6 +259,17 @@
                     console.log(error.responseJSON.error);
                 }
             });
+        }
+
+        function check_FailRules_Action(){
+            var val=$("#FailRules_Action").val();
+            if(val=="Retry Count"){
+                $("#FailRules_RetryCount_Row").show();
+                $("#FailRules_Retry_Action_Row").show();
+            }else{
+                $("#FailRules_RetryCount_Row").hide();
+                $("#FailRules_Retry_Action_Row").hide();
+            }
         }
     </script>
 </body>
