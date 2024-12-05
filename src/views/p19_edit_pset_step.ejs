@@ -338,9 +338,11 @@
             data_step["Type"]=obj_s["Type"];
             obj_step_new=data_step;
             var label_type=array_type[obj_s.Type];
+            var data_order_field=data_step[label_type];
+            const keys = Object.keys(data_order_field);
             delete obj_s.Type;
             obj_p.Steps[step_index]=obj_step_new;
-            obj_p.Steps[step_index][label_type]=obj_s;
+            obj_p.Steps[step_index][label_type]=obj_op(keys,obj_s);
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
