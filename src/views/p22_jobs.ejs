@@ -302,6 +302,7 @@
 
         function save_data(){
             $(jsonList).each(function(index,j){
+                delete j.StepCount;
                 delete j.index;
             });
             $.ajax({
