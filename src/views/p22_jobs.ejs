@@ -42,10 +42,10 @@
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Job Name</th>
-                    <th scope="col">Interlocks</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="col_tb_10p">ID</th>
+                    <th scope="col" class="col_tb_50p">Job Name</th>
+                    <th scope="col" class="col_tb_20p">Interlocks</th>
+                    <th scope="col" class="col_tb_20p">Action</th>
                   </tr>
                 </thead>
                 <tbody id="all_item_job"></tbody>
@@ -145,7 +145,7 @@
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Flower.svg" '+(data_j.SmartSocket!=true? 'class="attr_job_disable"':'')+'></a>';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Reverse.svg"'+(data_j.ReverseDisable!=true? 'class="attr_job_disable"':'')+'></a>';
                 html_item+='</td>';
-                html_item+='<td>';
+                html_item+='<td class="col_act">';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'" data-index="'+data_j.index+'"><img src="/public/SVG/Trash.svg"></a>';
                     html_item+='<a href="#" onclick="show_copy(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'"" data-index="'+data_j.index+'"><img src="/public/SVG/Copy.svg"></a>';
                     html_item+='<a href="edit_jobs?id='+data_j.ID+'"><img src="/public/SVG/Edit.svg"></a>';

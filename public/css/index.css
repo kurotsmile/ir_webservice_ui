@@ -766,6 +766,15 @@ table thead tr th{
 .col_tb_90p{width: 90%;}
 .col_tb_100p{width: 100%;}
 
+.col_act{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
 .attr_job_disable{
     opacity: 0.3;
 }
