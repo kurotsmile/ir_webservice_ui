@@ -689,9 +689,16 @@ body.brown{
     margin-bottom: 22px;
     margin-right: 6px;
 }
+
+table{
+    border-color: #333333 !important;
+}
+
 table thead tr th{
     font-weight: normal;
-    color: #7e7e7e !important;
+    font-size: larger;
+    color: #8f8f8f !important;
+    background-color: #4d4d4d !important;
 }
 
 .form-select {
