@@ -8,7 +8,7 @@
         "ToolEnable": false,
         "SmartSocket": false,
         "ReverseDisable": false,
-        "PsetCount": 1
+        "PsetCount": 0
     },
     {
         "ID": "",
@@ -19,7 +19,7 @@
         "ToolEnable": false,
         "SmartSocket": false,
         "ReverseDisable": false,
-        "PsetCount": 1
+        "PsetCount": 0
     },
     {
         "ID": "",
@@ -30,7 +30,7 @@
         "ToolEnable": false,
         "SmartSocket": false,
         "ReverseDisable": false,
-        "PsetCount": 7
+        "PsetCount": 0
     },
     {
         "ID": "",
