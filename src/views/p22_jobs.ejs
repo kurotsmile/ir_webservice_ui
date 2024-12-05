@@ -193,7 +193,7 @@
             var id_file=jsonList[locate].ID;
             obj_data["ID"]=jsonList[locate].ID;
             obj_data["Name"]=jsonList[locate].Name;
-            obj_data["Index"]=locate.toString();
+            obj_data["Index"]=jsonList[locate].Index;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
