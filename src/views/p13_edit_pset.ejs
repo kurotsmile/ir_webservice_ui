@@ -374,12 +374,11 @@
 
         function update_for_list(obj_p,id){
             $.ajax({
-                url: '/update-json',
+                url: '/update-list-by-field',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
                     dataJson: obj_p,
-                    index: id,
                     file_name:"PsetList"
                 }),
                 success: function(response) {
