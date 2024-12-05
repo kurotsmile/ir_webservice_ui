@@ -296,7 +296,7 @@
 
         function save_data(){
             $(listpsetData).each(function(index,p){
-                p["index"]=index;
+                delete p.index;
             });
 
             $.ajax({

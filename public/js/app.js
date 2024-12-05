@@ -48,3 +48,19 @@ function show_sideba_m(s_name_group,emp){
         $(emp).attr("value","hide");
     }
 }
+
+function obj_op(fields, object) {
+    var sortedObject = {};
+    fields.forEach(function(field) {
+        if (object.hasOwnProperty(field)) {
+            sortedObject[field] = object[field];
+        }
+    });
+    
+    for (var key in object) {
+        if (!fields.includes(key)) {
+            sortedObject[key] = object[key];
+        }
+    }
+    return sortedObject;
+}
