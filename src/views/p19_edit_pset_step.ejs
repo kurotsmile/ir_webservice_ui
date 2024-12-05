@@ -135,7 +135,7 @@
         var data_form={
             "Type": 1,
             "TA": {
-                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
+                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"string",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
                 "TorqueTarget": {type:"input",label:"Torque Target ({u})",type_field:"emp_inp",type_data:"number"},
                 "TorqueHighLimit":{type:"input",label:"Torque High Limit ({u})",type_field:"emp_inp",type_data:"number"},
                 "TorqueLowLimit": {type:"input",label:"Torque Low Limit ({u})",type_field:"emp_inp",type_data:"number"},
@@ -151,7 +151,7 @@
                 "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
             },
             "AT": {
-                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
+                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"string",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
                 "AngleTarget":{type:"input",label:"Angle Target (°)",type_field:"emp_inp",type_data:"number"},
                 "AngleHighLimit": {type:"input",label:"Angle High Limit (°)",type_field:"emp_inp",type_data:"number"},
                 "AngleLowLimit": {type:"input",label:"Angle Low Limit (°)",type_field:"emp_inp",type_data:"number"},
@@ -167,7 +167,7 @@
                 "StepTransition": {type:"select",label:"Step Transition",type_field:"emp_inp",type_data:"string",data:[{value:"Soft Shift",label:"Soft Shift"},{value:"Hard Shift",label:"Hard Shift"}]}
             },
             "PT": {
-                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"number",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
+                "Direction": {type:"select",label:"Direction",type_field:"emp_inp",type_data:"string",data:[{value:"Clockwise",label:"Clockwise"},{value:"Counterclockwise",label:"Counterclockwise"}]},
                 "EorDataEnable": {type:"bool",label:"EOR Data Enable",type_field:"emp_value",type_data:"bool"},
                 "TorqueThresholdEnabled": {type:"bool",label:"Torque Threshold Enabled",type_field:"emp_value",type_data:"bool"},
                 "CutInAngle": {type:"input",label:"Cut In Angle (°)",type_field:"emp_inp",type_data:"number"},
@@ -327,7 +327,7 @@
 
                     if(type_data=="number") v=Number(v);
                     if(type_data=="bool") v=(v?.toLowerCase?.() === 'true');
-
+                    console.log(key_emp+" -> "+v+" -> "+type_emp);
                     obj_s[key_emp]=v;
                 }
             });
