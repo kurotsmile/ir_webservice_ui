@@ -772,7 +772,7 @@ table thead tr th{
     justify-content: center;
     align-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
 }
 
 .attr_job_disable{

@@ -139,11 +139,13 @@
                 html_item+='<td scope="row">'+data_j.Index+'</td>';
                 html_item+='<td>'+data_j.Name+'</td>';
                 html_item+='<td>';
+                    html_item+='<div class="col_act">';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Tick.svg" '+(data_j.ValidJob!=true? 'class="attr_job_disable"':'')+'></a>';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Barcode.svg" '+(data_j.BcodeVin!=true? 'class="attr_job_disable"':'')+'></a>';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Tool.svg" '+(data_j.ToolEnable!=true? 'class="attr_job_disable"':'')+'></a>';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Flower.svg" '+(data_j.SmartSocket!=true? 'class="attr_job_disable"':'')+'></a>';
                     html_item+='<a href="/edit_jobs" class="m-1"><img src="/public/SVG/Reverse.svg"'+(data_j.ReverseDisable!=true? 'class="attr_job_disable"':'')+'></a>';
+                    html_item+='</div>';
                 html_item+='</td>';
                 html_item+='<td class="col_act">';
                     html_item+='<a href="#" onclick="show_delete(this);return false" data-id="'+data_j.ID+'" data-name="'+data_j.Name+'" data-index="'+data_j.index+'"><img src="/public/SVG/Trash.svg"></a>';

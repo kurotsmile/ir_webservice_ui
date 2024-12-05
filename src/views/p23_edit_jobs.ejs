@@ -76,9 +76,9 @@
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
-                    <th scope="col" class="col_tb_id">ID</th>
-                    <th class="col_tb_name">Pset Name</th>
-                    <th class="col_tb_action">Action</th>
+                    <th scope="col" class="col_tb_10p">ID</th>
+                    <th class="col_tb_60p">Pset Name</th>
+                    <th class="col_tb_30p">Action</th>
                   </tr>
                 </thead>
                 <tbody id="all_items"></tbody>
@@ -96,7 +96,7 @@
             var html='<tr data-index="'+data_p.index+'">';
             html+='<td scope="row"><span>'+(data_p.index+1)+'</span> <a href="/alert_waring" style="display: none;"><img src="/public/SVG/Warning.svg"></a></td>';
             html+='<td>'+getPsetName(data_p.ID)+'</td>';
-            html+='<td>';
+            html+='<td class="col_act">';
                 html+='<img src="/public/SVG/Off.svg" style="width: 42px;"  role="button" class="mb-2 mt-2 field_data btn_switch" data-index="'+data_p.index+'" value="'+data_p.Complete+'" field_key="SmartSocket" field_type="emp_value" field_type_data="bool"/>';
                 html+='<a href="#" role="button" onclick="show_delete(this);return false;" data-id="'+data_p.ID+'" data-index="'+data_p.index+'" data-name="'+data_p.Strategy+'"><img src="/public/SVG/Trash.svg"></a>';
                 html+='<a href="#" role="button" class="btn-sort"><img src="/public/SVG/Move.svg"></a>';

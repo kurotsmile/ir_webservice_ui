@@ -47,9 +47,9 @@
             <table class="table table-lg table-dark table-bordered table-p-list">
                 <thead>
                   <tr>
-                    <th scope="col" style="width: 20%;">Step</th>
-                    <th style="width: 50%;">Strategy</th>
-                    <th style="width: 30%;">Action</th>
+                    <th scope="col" class="col_tb_10p">Step</th>
+                    <th class="col_tb_60p">Strategy</th>
+                    <th class="col_tb_30p">Action</th>
                   </tr>
                 </thead>
                 <tbody id="all_items">
@@ -70,7 +70,7 @@
             var html='<tr data-index="'+data_s.index+'">';
             html+='<td>'+(data_s.index+1)+'</td>'; 
             html+='<td>'+typeNames[data_s.Type]+'</td>'; 
-            html+='<td>';
+            html+='<td class="col_act">';
                 html+='<a role="button" href="#" onclick="delete_steps('+data_s.index+');return false;"><img src="/public/SVG/Trash.svg"></a>'; 
                 html+='<a role="button" href="#" onclick="copy_steps('+data_s.index+');return false;"><img src="/public/SVG/Copy.svg"></a>'; 
                 html+='<a role="button" href="edit_pset_step?id='+id_file+'&index_step='+data_s.index+'"><img src="/public/SVG/Edit.svg"></a>'; 
