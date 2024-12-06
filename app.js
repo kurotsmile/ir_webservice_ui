@@ -62,7 +62,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.4.8';
+    res.locals.ver = '1.4.9';
     res.locals.currentRoute = req.path;
     next();
 });

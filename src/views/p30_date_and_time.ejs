@@ -14,7 +14,7 @@
 
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="/public/js/app.js?v=<%= ver %>"></script>
+    <script src="/public/js/app_web.js?v=<%= ver %>"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
     <!-- Timepicker Addon CSS -->
@@ -182,13 +182,6 @@
                $(this).attr("value",val);
             });
         });
-
-        function show_edit(emp){
-            $(emp).parent().find('img').toggleClass("bg-info rounded");
-            $(emp).parent().find('input').each(function () {
-                $(this).prop('disabled', !$(this).prop('disabled'));
-            });
-        }
 
         function show_sel_time(emp){
             $(emp).parent().find('img').toggleClass("bg-info rounded");

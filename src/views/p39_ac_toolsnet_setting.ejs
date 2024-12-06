@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="/public/js/app.js?v=<%= ver %>"></script>
+    <script src="/public/js/app_web.js?v=<%= ver %>"></script>
 </head>
 
 <body class="brown">
@@ -211,36 +211,8 @@
         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
 
         $(document).ready(()=>{
-            $("select").change(function(){
-                var val=$(this).attr("value");
-               $(this).attr("value",val);
-            });
-
-            $(".btn_switch").each(function(){
-                if ($(this).attr("value")=="true")
-                    $(this).attr("src", "/public/SVG/On.svg");
-                else 
-                    $(this).attr("src", "/public/SVG/Off.svg");
-            });
-
-            $(".btn_switch").click(function(){
-                var val_emp=$(this).attr("value");
-                if(val_emp=="true"){
-                    $(this).attr("src", "/public/SVG/Off.svg");
-                    $(this).attr("value",false);
-                }else{
-                    $(this).attr("src", "/public/SVG/On.svg");
-                    $(this).attr("value",true);
-                }
-            });
+            load_ui_event();
         });
-
-        function show_edit(emp){
-            $(emp).parent().find('img').toggleClass("bg-info rounded");
-            $(emp).parent().find('input').each(function () {
-                $(this).prop('disabled', !$(this).prop('disabled'));
-            });
-        }
 
         function save_data(){
             var obj_s={};

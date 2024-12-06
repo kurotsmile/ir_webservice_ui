@@ -64,3 +64,40 @@ function obj_op(fields, object) {
     }
     return sortedObject;
 }
+
+function show_edit(emp){
+    $(emp).parent().find('img').toggleClass("bg-info rounded");
+    $(emp).parent().find('input').each(function () {
+        $(this).prop('disabled', !$(this).prop('disabled'));
+    });
+}
+
+function load_ui_event(is_select=true,is_switch=true){
+    if(is_select){
+        $("select").change(function(){
+            var val=$(this).attr("value");
+           $(this).attr("value",val);
+        });
+    
+    }
+
+    if(is_switch){
+        $(".btn_switch").each(function(){
+            if ($(this).attr("value")=="true")
+                $(this).attr("src", "/public/SVG/On.svg");
+            else 
+                $(this).attr("src", "/public/SVG/Off.svg");
+        });
+    
+        $(".btn_switch").click(function(){
+            var val_emp=$(this).attr("value");
+            if(val_emp=="true"){
+                $(this).attr("src", "/public/SVG/Off.svg");
+                $(this).attr("value",false);
+            }else{
+                $(this).attr("src", "/public/SVG/On.svg");
+                $(this).attr("value",true);
+            }
+        });
+    }
+}

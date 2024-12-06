@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/public/lib/bootstrap/bootstrap.min.css">
     <script src="/public/lib/jquery/jquery-3.6.0.min.js"></script>
     <script src="/public/lib/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="/public/js/app.js?v=<%= ver %>"></script>
+    <script src="/public/js/app_web.js?v=<%= ver %>"></script>
 </head>
 
 <body class="brown">
@@ -139,13 +139,6 @@
 </body>
 <%- include('p9_alet_warning.ejs') %>
 <script>
-    function show_edit(emp){
-        $(emp).parent().find('img').toggleClass("bg-info rounded");
-        $(emp).parent().find('input').each(function () {
-            $(this).prop('disabled', !$(this).prop('disabled'));
-        });
-    }
-
     function show_factory_reset(){
         var html='';
         html+='<div id="progressbar_ui"><div class="val"></div><div class="label">Resetting to factory settings</div></div>';
