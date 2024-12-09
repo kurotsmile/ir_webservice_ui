@@ -68,9 +68,9 @@
                     html+='<img src="/public/SVG/Off.svg" data-index="'+data_p.index+'" style="width:42px" role="button" class="mb-2 mt-3 field_data btn_switch" value="'+data_p.Staus+'" field_key="Status" field_type="emp_value" field_type_data="bool"/>';
                 html+='</td>';
                 html+='<td>'+data_p.Name+'</td>';
-                html+='<td>Torque</td>';
-                html+='<td>20</td>';
-                html+='<td>'+data_p.StepCount+'</td>';
+                html+='<td>'+getDataFieldById(data_p.ID,'Strategy')+'</td>';
+                html+='<td>'+getDataFieldById(data_p.ID,'Target')+'</td>';
+                html+='<td>'+getDataFieldById(data_p.ID,'Steps')+'</td>';
             html+='</tr>';
             return $(html);
         }
@@ -240,6 +240,11 @@
                     console.log(error);
                 }
             });
+        }
+
+        function getDataFieldById(ID, key) {
+            let item = data_j.Psets.find(item => item.ID === ID);
+            return item && key in item ? item[key] : '[NA]';
         }
     </script>
 </body>
