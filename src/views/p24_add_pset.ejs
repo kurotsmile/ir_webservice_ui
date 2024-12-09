@@ -150,6 +150,8 @@
             let emptyIndex = data_j.Psets.findIndex(item => item.ID === "");
 
             if (emptyIndex !== -1) data_j.Psets[emptyIndex] = data_pset;
+            let PsetCount = data_j.Psets.filter(item => item.ID && item.ID.trim() !== "").length;
+            data_j.PsetCount=PsetCount;
 
             $.ajax({
                 url: '/save-json',
@@ -166,6 +168,8 @@
                     console.log(error.responseJSON.error);
                 }
             });
+
+            update_job_list();
         }
 
         function remove_p_set(index){
@@ -196,6 +200,8 @@
             }
 
             if(is_update==false) return;
+            let PsetCount = data_j.Psets.filter(item => item.ID && item.ID.trim() !== "").length;
+            data_j.PsetCount=PsetCount;
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
@@ -209,6 +215,29 @@
                 },
                 error: function(error) {
                     console.log(error.responseJSON.error);
+                }
+            });
+
+            update_job_list();
+        }
+
+        function update_job_list(){
+            var obj_item_j={};
+            obj_item_j.ID=data_j.ID;
+            obj_item_j.PsetCount=data_j.PsetCount;
+            $.ajax({
+                url: '/update-list-by-field',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    dataJson: obj_item_j,
+                    file_name:"JobList"
+                }),
+                success: function(response) {
+                    console.log(response.message);
+                },
+                error: function(error) {
+                    console.log(error);
                 }
             });
         }
