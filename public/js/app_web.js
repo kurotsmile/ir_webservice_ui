@@ -1,3 +1,14 @@
+var box_alert=null;
+
+function show_alert(msg){
+    $("#box_alert").show();
+    $("#box_alert").find(".txt").html(msg);
+}
+
+function hide_alert(){
+    $("#box_alert").hide();
+}
+
 function show_msg(html_body='',title,act_show=null,label_btn_done=null){
     var html='';
     html+='<div class="w-100">';

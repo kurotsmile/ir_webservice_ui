@@ -917,6 +917,19 @@ input[type="file"]::file-selector-button:hover {
     color: white;
 }
 
+#box_alert{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color:#e54028;
+    z-index: 100;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}

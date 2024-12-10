@@ -240,6 +240,17 @@
             });
 
             check_field_Method();
+
+            $("#f_TorqueTarget").on("input", v_TorqueTarget);
+            $("#f_TorqueHighLimit").on("input", v_TorqueHighLimit);
+            $("#f_TorqueLowLimit").on("input", v_TorqueLowLimit);
+            $("#f_AngleHighLimit").on("input", v_AngleHighLimit);
+            $("#f_AngleLowLimit").on("input", v_AngleLowLimit);
+            $("#f_Threshold").on("input", v_threshold);
+            $("#f_FreeSpeed").on("input", v_Free_Speed);
+            $("#f_OvershootComppensation").on("input", v_Overshoot_Compensation);
+            $("#f_DownshiftThreshold").on("input", v_Downshift_Threshold);
+            $("#f_ShiftdownSpeed").on("input", v_ShiftdownSpeed);
         }
 
         function row_field(id,label,val_inp,data_field=null){
@@ -372,6 +383,233 @@
         $(document).ready(()=>{
             load_form();
         });
+
+        function parseDecimal(value) {
+            return parseFloat(value.replace(',', '.'));
+        }
+
+        function v_TorqueTarget(){
+            var is_error=0;
+            hide_alert();
+            if($("#f_TorqueTarget").length>0){
+                var f_TorqueTarget_val = parseDecimal($("#f_TorqueTarget").val());
+
+                if (isNaN(f_TorqueTarget_val)) {
+                    show_alert("Torque Target should be a valid number");
+                    return;
+                }
+
+                if (isNaN(f_TorqueTarget_val) || f_TorqueTarget_val > 0.1) {
+                    show_alert("Torque Target should be less than or equal to 0.1");
+                    is_error=1;
+                }
+            }
+            return is_error;
+        }
+
+        function v_TorqueHighLimit(){
+            if($("#f_TorqueHighLimit").length>0){
+                hide_alert();
+                var f_TorqueHighLimit_val = parseDecimal($("#f_TorqueHighLimit").val());
+                var f_TorqueTarget_val = parseDecimal($("#f_TorqueTarget").val());
+
+                if (isNaN(f_TorqueHighLimit_val)) {
+                    show_alert("Torque High Limit should be a valid number");
+                    return;
+                }
+
+                if(f_TorqueHighLimit_val<=f_TorqueTarget_val){
+                        show_alert("Torque High Limit should be greater than Torque Target");
+                }else{
+                    if (isNaN(f_TorqueHighLimit_val) || f_TorqueHighLimit_val > 0.13) {
+                        show_alert("Torque High Limit should be less than or equal to 0.13");
+                    }
+                }
+            }
+        }
+
+        function v_TorqueLowLimit() {
+            if ($("#f_TorqueLowLimit").length > 0) {
+                hide_alert();
+
+                var f_TorqueLowLimit_val = parseDecimal($("#f_TorqueLowLimit").val());
+                var f_TorqueTarget_val = parseDecimal($("#f_TorqueTarget").val());
+
+                if (isNaN(f_TorqueLowLimit_val)) {
+                    show_alert("Torque Low Limit should be a valid number");
+                }
+
+                if (f_TorqueLowLimit_val >= f_TorqueTarget_val) {
+                    show_alert("Torque Low Limit should be less than Torque Target");
+                }
+            }
+        }
+
+        function v_AngleHighLimit() {
+            if ($("#f_AngleHighLimit").length > 0 && $("#f_AngleLowLimit").length > 0) {
+                hide_alert();
+
+                var f_AngleHighLimit_val = parseDecimal($("#f_AngleHighLimit").val());
+                var f_AngleLowLimit_val = parseDecimal($("#f_AngleLowLimit").val());
+
+                if (isNaN(f_AngleHighLimit_val)) {
+                    show_alert("Angle High Limit should be a valid number");
+                    return;
+                }
+
+                if (isNaN(f_AngleLowLimit_val)) {
+                    show_alert("Angle Low Limit should be a valid number");
+                    return;
+                }
+
+                if (f_AngleHighLimit_val > 35200) {
+                    show_alert("Angle High Limit should be less than or equal to 35200");
+                    return;
+                }
+
+                if (f_AngleHighLimit_val <= f_AngleLowLimit_val) {
+                    show_alert("Angle High Limit should be greater than Angle Low Limit");
+                    return;
+                }
+            }
+        }
+
+        function v_AngleLowLimit() {
+            if ($("#f_AngleLowLimit").length > 0 && $("#f_AngleHighLimit").length > 0) {
+                hide_alert();
+
+                var f_AngleLowLimit_val = parseDecimal($("#f_AngleLowLimit").val());
+                var f_AngleHighLimit_val = parseDecimal($("#f_AngleHighLimit").val());
+
+                if (isNaN(f_AngleLowLimit_val)) {
+                    show_alert("Angle Low Limit should be a valid number");
+                    return;
+                }
+
+                if (isNaN(f_AngleHighLimit_val)) {
+                    show_alert("Angle High Limit should be a valid number");
+                    return;
+                }
+
+                if (f_AngleLowLimit_val >= f_AngleHighLimit_val) {
+                    show_alert("Angle Low Limit should be less than Angle High Limit");
+                    return;
+                }
+            }
+        }
+
+        function v_threshold() {
+            if ($("#f_Threshold").length > 0 && $("#f_TorqueTarget").length > 0) {
+                hide_alert();
+
+                var f_Threshold_val = parseDecimal($("#f_Threshold").val());
+                var f_TorqueTarget_val = parseDecimal($("#f_TorqueTarget").val());
+
+                if (isNaN(f_Threshold_val)) {
+                    show_alert("Threshold should be a valid number");
+                    return;
+                }
+
+                if (isNaN(f_TorqueTarget_val)) {
+                    show_alert("Torque Target should be a valid number");
+                    return;
+                }
+
+                if (f_Threshold_val >= f_TorqueTarget_val) {
+                    show_alert("Threshold should be less than Torque Target");
+                    return;
+                }
+            }
+        }
+
+        function v_Free_Speed() {
+            if ($("#f_FreeSpeed").length > 0) {
+                hide_alert();
+
+                var f_Free_Speed_val = parseDecimal($("#f_FreeSpeed").val());
+                if (isNaN(f_Free_Speed_val)) {
+                    show_alert("Free Speed should be a valid number");
+                    return;
+                }
+
+                if (f_Free_Speed_val < 20) {
+                    show_alert("Free Speed should be greater than or equal to 20");
+                    return;
+                }
+
+                if (f_Free_Speed_val > 110) {
+                    show_alert("Free Speed should be less than or equal to 110");
+                    return;
+                }
+            }
+        }
+
+        function v_Overshoot_Compensation() {
+            if ($("#f_OvershootComppensation").length > 0 && $("#f_TorqueTarget").length > 0) {
+                hide_alert();
+
+                var f_Overshoot_Compensation_val = parseDecimal($("#f_OvershootComppensation").val());
+                var f_TorqueTarget_val = parseDecimal($("#f_TorqueTarget").val());
+
+                if (isNaN(f_Overshoot_Compensation_val)) {
+                    show_alert("Overshoot Compensation should be a valid number");
+                    return;
+                }
+
+                if (isNaN(f_TorqueTarget_val)) {
+                    show_alert("Torque Target should be a valid number");
+                    return;
+                }
+
+                if (f_Overshoot_Compensation_val >= f_TorqueTarget_val) {
+                        show_alert("Overshoot Compensation should be less than Torque Target");
+                        return;
+                }
+            }
+        }
+
+        function v_Downshift_Threshold() {
+            if ($("#f_DownshiftThreshold").length > 0 && $("#f_TorqueTarget").length > 0) {
+                hide_alert();
+
+                var f_Downshift_Threshold_val = parseDecimal($("#f_DownshiftThreshold").val());
+                var f_TorqueTarget_val = parseDecimal($("#f_TorqueTarget").val());
+
+                if (isNaN(f_Downshift_Threshold_val)) {
+                    show_alert("Downshift Threshold should be a valid number");
+                    return;
+                }
+
+                if (isNaN(f_TorqueTarget_val)) {
+                    show_alert("Torque Target should be a valid number");
+                    return;
+                }
+
+                if (f_Downshift_Threshold_val >= f_TorqueTarget_val) {
+                    show_alert("Downshift Threshold should be less than Torque Target");
+                    return;
+                }
+            }
+        }
+
+        function v_ShiftdownSpeed() {
+            if ($("#f_ShiftdownSpeed").length > 0) {
+                hide_alert();
+
+                var f_ShiftdownSpeed_val = parseDecimal($("#f_ShiftdownSpeed").val());
+
+                if (isNaN(f_ShiftdownSpeed_val)) {
+                    show_alert("Downshift Speed should be a valid number");
+                    return;
+                }
+
+                if (f_ShiftdownSpeed_val > 110) {
+                    show_alert("Downshift Speed should be less than or equal to 110");
+                    return;
+                }
+            }
+        }
+
     </script>
 </body>
 </html>
