@@ -20,15 +20,49 @@ let listLabelY = [
 let labels = [];
 let labelY = [];
 let canvas = {};
+let myChart={};
+
 const numYTicks = 5;
 const numXTicks = 6;
 const padding = 50;
 let graphWidth = 0;
 let graphHeight = 0;
+let isUpdating = false;
 
 $(document).ready(function () {
     load_charjs();
+    graphSelectEvent();
 });
+
+function graphSelectEvent() {
+    document.getElementById('chartTypeSelect').addEventListener('change', function () {
+        selectedValue = this.value;
+        labels = listLabels[selectedValue];
+        labelY = listLabelY[selectedValue];
+        
+        switch(selectedValue) {
+            case '0': 
+                txtLegend1 = 'Angle';
+                txtLegend2 = 'Torque';
+                break;
+            case '1': 
+                txtLegend1 = 'Time';
+                txtLegend2 = 'Torque';
+                break;
+            case '2': 
+                txtLegend1 = 'Time';
+                txtLegend2 = 'Angle';
+                break;
+            case '3': 
+                txtLegend1 = 'Time';
+                txtLegend2 = 'Current';
+                labels = listLabels[0];
+                labelY = listLabelY[0];
+                break;
+        }
+        myChart.update();
+    });
+}
 
 function load_charjs(){
 
@@ -40,7 +74,7 @@ function load_charjs(){
     graphHeight = canvas.height - 100;
 
     const ctx = canvas.getContext('2d');
-    const myChart = new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [],
@@ -91,11 +125,15 @@ function load_charjs(){
             }
         }
     });
-
+    myChart.options.animation = false; 
     window.add_data = function (newAngle, newTorque) {
-        myChart.data.labels.push(newAngle);
-        myChart.data.datasets[0].data.push(newTorque);
-        myChart.update();
+        if (!isUpdating) {
+            isUpdating = true;
+            myChart.data.labels.push(newAngle);
+            myChart.data.datasets[0].data.push(newTorque);
+            myChart.update();
+            isUpdating = false;
+        }
     };
 
     socket = io();
@@ -109,14 +147,13 @@ function load_charjs(){
             }
 
             add_data(count_col, value);
-            let labs_x=createSixSteps(count_col);
+            let labs_x=createSixSteps(count_col*1.1);
             labels[0]=labs_x[0];
             labels[1]=labs_x[1];
             labels[2]=labs_x[2];
             labels[3]=labs_x[3];
             labels[4]=labs_x[4];
             labels[5]=labs_x[5];
-
 
             var labs_y=createSixSteps_float(max_y);
             labelY[0]=labs_y[0];
