@@ -21,6 +21,8 @@ let labels = [];
 let labelY = [];
 let canvas = {};
 let myChart={};
+let data_ir=[];
+let graph_max_y=0;
 
 const numYTicks = 5;
 const numXTicks = 6;
@@ -60,7 +62,13 @@ function graphSelectEvent() {
                 labelY = listLabelY[0];
                 break;
         }
+        graph_max_y=0;
         myChart.update();
+        if(data_ir.length>0){
+            myChart.destroy(); 
+            load_charjs();
+            load_graph_ir(data_ir);
+        }
     });
 }
 
@@ -73,14 +81,14 @@ function load_charjs(){
     graphWidth = canvas.width - 100;
     graphHeight = canvas.height - 100;
 
-    const ctx = canvas.getContext('2d');
+    let ctx = canvas.getContext('2d');
     myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [],
             datasets: [
                 {
-                    label: 'Torque',
+                    label: txtLegend2,
                     data: [],
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -97,7 +105,7 @@ function load_charjs(){
             layout: {
                 padding: {
                     top: 80,
-                    right: 80, 
+                    right: 85, 
                     bottom: 50,
                     left: 43
                 }
@@ -137,32 +145,22 @@ function load_charjs(){
     };
 
     socket = io();
-    let count_col = 0;
-    var max_y=0.0;
+    graph_max_y=0;
     socket.on('drawLine', (result) => {
-        $.each(result.torque, function (index, value) {
-            count_col++;
-            if(parseFloat(value)>max_y){
-                max_y=parseFloat(value);
-            }
-
-            add_data(count_col, value);
-            let labs_x=createSixSteps(count_col*1.1);
-            labels[0]=labs_x[0];
-            labels[1]=labs_x[1];
-            labels[2]=labs_x[2];
-            labels[3]=labs_x[3];
-            labels[4]=labs_x[4];
-            labels[5]=labs_x[5];
-
-            var labs_y=createSixSteps_float(max_y);
-            labelY[0]=labs_y[0];
-            labelY[1]=labs_y[1];
-            labelY[2]=labs_y[2];
-            labelY[3]=labs_y[3];
-            labelY[4]=labs_y[4];
-            labelY[5]=labs_y[5];
+        let time = Array.from({ length: result.torque.length }, (_, i) => i * 0.02); //-> Thời gian mỗi bước 0,02 step
+        let current = Array.from({ length: result.torque.length }, () => Math.random() * 10);
+        let obj_ir = $.map(result.torque, (torqueValue, index) => {
+        return {
+            torque: torqueValue,
+            angle: result.angle[index],
+            time: time[index],
+            current: current[index]
+        };
         });
+        $(obj_ir).each(function(index,ir){
+            data_ir.push(ir);
+        });
+        load_graph_ir(obj_ir);
     });
 
     Chart.register({
@@ -174,6 +172,97 @@ function load_charjs(){
             drawLegend(chart);
         }
     });
+}
+
+function load_graph_ir(obj_ir){
+    
+    if(selectedValue==0){
+        $(obj_ir).each(function(index,ir){
+            add_data(ir.angle, ir.torque);
+            let labs_x=createSixSteps(Math.floor(ir.angle)*1.1);
+            labels[0]=labs_x[0];
+            labels[1]=labs_x[1];
+            labels[2]=labs_x[2];
+            labels[3]=labs_x[3];
+            labels[4]=labs_x[4];
+            labels[5]=labs_x[5];
+
+            if(Math.floor(ir.torque)>graph_max_y) graph_max_y=Math.floor(ir.torque);
+            var labs_y=createSixSteps_float(graph_max_y);
+            labelY[0]=labs_y[0];
+            labelY[1]=labs_y[1];
+            labelY[2]=labs_y[2];
+            labelY[3]=labs_y[3];
+            labelY[4]=labs_y[4];
+            labelY[5]=labs_y[5];
+        });
+    }
+
+    if(selectedValue==1){
+        $(obj_ir).each(function(index,ir){
+            add_data(ir.time, ir.torque);
+            let labs_x=createSixStepsF2(ir.time*1.1);
+            labels[0]=labs_x[0];
+            labels[1]=labs_x[1];
+            labels[2]=labs_x[2];
+            labels[3]=labs_x[3];
+            labels[4]=labs_x[4];
+            labels[5]=labs_x[5];
+
+            if(Math.floor(ir.torque)>graph_max_y) graph_max_y=Math.floor(ir.torque);
+            var labs_y=createSixSteps(graph_max_y);
+            labelY[0]=labs_y[0];
+            labelY[1]=labs_y[1];
+            labelY[2]=labs_y[2];
+            labelY[3]=labs_y[3];
+            labelY[4]=labs_y[4];
+            labelY[5]=labs_y[5];
+        });
+    }
+
+    if(selectedValue==2){
+        $(obj_ir).each(function(index,ir){
+            add_data(ir.time, ir.angle);
+            let labs_x=createSixSteps(Math.floor(ir.time)*1.1);
+            labels[0]=labs_x[0];
+            labels[1]=labs_x[1];
+            labels[2]=labs_x[2];
+            labels[3]=labs_x[3];
+            labels[4]=labs_x[4];
+            labels[5]=labs_x[5];
+
+            if(Math.floor(ir.angle)>graph_max_y) graph_max_y=Math.floor(ir.angle);
+            var labs_y=createSixSteps_float(graph_max_y);
+            labelY[0]=labs_y[0];
+            labelY[1]=labs_y[1];
+            labelY[2]=labs_y[2];
+            labelY[3]=labs_y[3];
+            labelY[4]=labs_y[4];
+            labelY[5]=labs_y[5];
+        });
+    }
+
+    if(selectedValue==3){
+        $(obj_ir).each(function(index,ir){
+            add_data(ir.time, ir.current);
+            let labs_x=createSixSteps(Math.floor(ir.time)*1.1);
+            labels[0]=labs_x[0];
+            labels[1]=labs_x[1];
+            labels[2]=labs_x[2];
+            labels[3]=labs_x[3];
+            labels[4]=labs_x[4];
+            labels[5]=labs_x[5];
+
+            if(Math.floor(ir.current)>graph_max_y) graph_max_y=Math.floor(ir.current);
+            var labs_y=createSixSteps_float(graph_max_y);
+            labelY[0]=labs_y[0];
+            labelY[1]=labs_y[1];
+            labelY[2]=labs_y[2];
+            labelY[3]=labs_y[3];
+            labelY[4]=labs_y[4];
+            labelY[5]=labs_y[5];
+        });
+    }
 }
 
 function createSixSteps(maxValue) {
@@ -219,6 +308,31 @@ function createSixSteps_float(maxValue) {
             steps.push(parseFloat((i * stepValue).toFixed(2)));
         }
     }
+    return steps;
+}
+
+
+function createSixStepsF2(maxValue) {
+    let steps = [];
+    let stepValue;
+
+    if (maxValue <= 0) {
+        stepValue = 1;
+        for (let i = 0; i <= 5; i++) {
+            steps.push(parseFloat((i * stepValue).toFixed(6)));
+        }
+    } else if (maxValue < 30) {
+        stepValue = 5;
+        for (let i = 0; i <= 5; i++) {
+            steps.push(parseFloat((i * stepValue).toFixed(6))); 
+        }
+    } else {
+        stepValue = maxValue / 5;
+        for (let i = 0; i <= 5; i++) {
+            steps.push(parseFloat((i * stepValue).toFixed(6)));
+        }
+    }
+
     return steps;
 }
 
