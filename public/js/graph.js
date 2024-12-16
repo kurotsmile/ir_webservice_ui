@@ -69,21 +69,16 @@ function graphSelectEvent() {
 
 
 function addDataPoint() {
-    ////////////////////////////
-    // const newPoint = generateRandomPoint(minValue, maxValue);
-    // data.push(newPoint);
-    // const anglePoint = generateRandomPoint(0, 36000);
-    // angles.push(anglePoint)
+     const newPoint = generateRandomPoint(minValue, maxValue);
+    //data.push(newPoint);
+    const anglePoint = generateRandomPoint(0, 36000);
+     //angles.push(anglePoint)
 
-    ///////////////////////////
-
-    // If the number of points exceeds numPoints, remove the oldest point
-    // if (data.length > numPoints) {
-    //     data.shift();  // Remove the first element (oldest data point)
-    // }
+    //if (data.length > numPoints) data.shift();
 
     // Clear canvas and redraw everything
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(padding, padding, canvas.width - 2 * padding, canvas.height - 2 * padding);
     drawGrid();
     drawLegend();
     drawLineGraph();
@@ -124,7 +119,7 @@ function drawGrid() {
 
 // Function to plot line graph
 function drawLineGraph() {
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = "#00ffff";
     ctx.lineWidth = 2;
     ctx.beginPath();
     if (selectedValue == 0) {
@@ -222,15 +217,14 @@ function drawLegend() {
     ctx.fillStyle = 'black';
     ctx.fillText(txtLegend2, - 70, 30);
     ctx.restore();
-    ///////////////
 }
 
-// Function to generate a new random data point
+
 function generateRandomPoint(minValue, maxValue) {
     return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 }
 function resizeChart() {
-    canvas.height = (window.innerHeight * 0.5) + 20; // 50% of the viewport height
+    canvas.height = (window.innerHeight * 0.5) + 20;
     graphWidth = canvas.width - 100;
     graphHeight = canvas.height - 100;
     drawGrid();
@@ -238,10 +232,13 @@ function resizeChart() {
     drawLineGraph();
 }
 window.addEventListener('resize', resizeChart);
- // Call it initially
 
 $(document).ready(function () {
+    render_chart();
+});
 
+
+function render_chart(){
     labels = listLabels[0]
     labelY = listLabelY[0]
 
@@ -249,18 +246,20 @@ $(document).ready(function () {
     ctx = canvas.getContext('2d');
     graphSelectEvent();
 
-    // Graph properties
     graphWidth = canvas.width - 100;
     graphHeight = canvas.height - 100;
-    // Draw the graph
+
     drawGrid();
     drawLegend();
 
     socket = io();
     socket.on('drawLine', (result) => {
-        data = result.data.torque;
-        angles = result.data.angle;
+        console.log(result);
         
+        data = result.torque;
+        angles = result.angle;
+        
+        /*
         listLabels = result.graphSettings.listLabels;
         listLabelY = result.graphSettings.listLabelY;
         labels = listLabels[selectedValue];
@@ -269,6 +268,7 @@ $(document).ready(function () {
         maxT = result.graphSettings.maxTorque;
         reset = result.graphSettings.reset;
         maxX = result.graphSettings.maxX;
+        */
         addDataPoint();
     });
-});
+}

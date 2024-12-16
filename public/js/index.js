@@ -61,16 +61,12 @@ function replaceBackgroudColor(id, color) {
     for (const element of arrayColor) {
         $(id).removeClass(element)
     }
-
     $(id).addClass(color);
-
 }
 
 function replaceHtmlContent(id, content) {
     $(id).html(content);
-
 }
-
 
 function replaceBackgroudColorTor(data) {
 
@@ -144,7 +140,7 @@ const selectJob = async (jobId) => {
 
         // Parse the JSON response
         const data = await response.json();
-        
+        alert(JSON.stringify(data));
         // Update the DOM with received data
         updateTextContent('textNextPage', `Next: ${data.NxtPset}`);
         updateTextContent('lbStep', `${data.CurPset}/${data.PsetCount}`);
@@ -189,7 +185,7 @@ function handleJobChange() {
 
     if (selectedJobId) {
         console.log("Selected Job ID:", selectedJobId);
-        selectJob(selectedJobId); // Call selectJob if a valid job is selected
+        //selectJob(selectedJobId); // Call selectJob if a valid job is selected
     } else {
         console.warn("No job selected"); // Optional: handle case when no job is selected
     }
@@ -239,9 +235,9 @@ window.onload = () => {
 $(document).ready(function () {
     // Initialize the socket
     const socket = io();
-
     // Handle 'resultData' event
     socket.on('resultData', (data) => {
+        alert(data);
         updateTorqueAndAngle(data);
         handleHintCountUpdates(data);
         handlePageAndProgressUpdates(data);
@@ -272,7 +268,6 @@ $(document).ready(function () {
     // socket.on('initColor', (data) => {
 
     // });
-    
 });
 
 
