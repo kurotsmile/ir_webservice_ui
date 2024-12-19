@@ -87,8 +87,8 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select id="TimeFormat" class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeFormat ? SetDT.TimeFormat : '12 Hrs' %>" field_key="TimeFormat"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="12 Hrs" <%= SetDT && SetDT.TimeFormat === '12 Hrs' ? 'selected' : '' %>>12 Hrs</option>
-                            <option value="24 Hrs" <%= SetDT && SetDT.TimeFormat === '24 Hrs' ? 'selected' : '' %>>24 Hrs</option>
+                            <option value="12 Hrs" <%= SetDT && SetDT.TimeFormat === '12 Hrs' ? 'selected' : '' %>>12 Hours</option>
+                            <option value="24 Hrs" <%= SetDT && SetDT.TimeFormat === '24 Hrs' ? 'selected' : '' %>>24 Hours</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -232,6 +232,8 @@
 
         function check_format_time(){
             var t_val=$('#TimeFormat').val();
+            var DateFormat_val=$("#DateFormat").val();
+            s_DateFormat=DateFormat_val;
             if(t_val=="12 Hrs")
                 is_24h=false;
             else
@@ -254,22 +256,13 @@
                 controlType: 'select',
                 onClose: function () {
                     const dateValue = $(this).val();
-                    const dateObject = new Date(dateValue); 
+                    const dateObject = convert_Date(dateValue);
                     if (!isNaN(dateObject.getTime())){
                         dateObject_cur=dateObject;
                         timer_cur_val=get_DT_ISO(dateObject);
                         $("#dt").val(get_DT_val(dateObject));
                     }
                     $("#btn_sel_datetime").parent().find('img').removeClass("bg-info rounded");
-                },
-                onSelect: function (datetimeText, inst) {
-                    const dateValue = $(this).val();
-                    const dateObject = new Date(dateValue); 
-                    if (!isNaN(dateObject.getTime())){
-                        dateObject_cur=dateObject;
-                        timer_cur_val=get_DT_ISO(dateObject);
-                        $("#dt").val(get_DT_val(dateObject));
-                    }
                 }
             });
         }
@@ -280,6 +273,13 @@
             $(emp).parent().find('input').each(function () {
                 $(this).prop('disabled', !$(this).prop('disabled'));
             });
+        }
+
+        function convert_Date(dateString){
+            const [datePart, timePart, meridiem] = dateString.split(/[\s]+/);
+            const [year, month, day] = datePart.split('/').map(Number);
+            let [hour, minute] = timePart.split(':').map(Number);
+            return new Date(year, month - 1, day, hour, minute);
         }
 
         function get_DT_ISO(dateObject){
@@ -320,6 +320,7 @@
                 s_date=month+"/"+day+"/"+year;
 
             var s_time="";
+
             if(is_24h){
                 s_time=hourFormatted+":"+minuteFormatted+":"+secondFormatted;
             }else{

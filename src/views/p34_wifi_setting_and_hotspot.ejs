@@ -102,7 +102,8 @@
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select class="form-select custom-combobox field_data" value="<%= WIFI && WIFI.HBand ? WIFI.HBand : '2.4G' %>" field_key="HBand"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Hotspot" <%= WIFI && WIFI.HBand === '2.4G' ? 'selected' : '' %>>IR</option>
+                            <option value="2.4G" <%= WIFI && WIFI.HBand === '2.4G' ? 'selected' : '' %>>2.4G</option>
+                            <option value="5G" <%= WIFI && WIFI.HBand === '5G' ? 'selected' : '' %>>5G</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -116,8 +117,13 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="WAP Enterprise" field_key="HKey"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="WAP Enterprise">WAP Enterprise</option>
+                        <select class="form-select custom-combobox field_data" value="<%= WIFI && WIFI.HKey ? WIFI.HKey : 'WPA Enterprise' %>" field_key="HKey"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="WPA Personal" <%= WIFI && WIFI.HKey === 'WPA Personal' ? 'selected' : '' %>>WPA Personal</option>
+                            <option value="WPA2 Personal" <%= WIFI && WIFI.HKey === 'WPA2 Personal' ? 'selected' : '' %>>WPA2 Personal</option>
+                            <option value="WPA3 Personal" <%= WIFI && WIFI.HKey === 'WPA3 Personal' ? 'selected' : '' %>>WPA3 Personal</option>
+                            <option value="WPA Enterprise" <%= WIFI && WIFI.HKey === 'WPA Enterprise' ? 'selected' : '' %>>WPA Enterprise</option>
+                            <option value="WPA2 Enterprise" <%= WIFI && WIFI.HKey === 'WPA2 Enterprise' ? 'selected' : '' %>>WPA2 Enterprise</option>
+                            <option value="WPA3 Enterprise" <%= WIFI && WIFI.HKey === 'WPA3 Enterprise' ? 'selected' : '' %>>WPA3 Enterprise</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -131,7 +137,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="password" placeholder="Enter data" value="<%= WIFI && WIFI.CKey ? WIFI.CKey : '' %>" class="form-control field_data" field_key="CKey" field_type="emp_inp" field_type_data="string" disabled>
+                        <input type="password" placeholder="Enter data" value="<%= WIFI && WIFI.CKey ? WIFI.CKey : '' %>" class="form-control field_data" field_key="CKey" field_type="emp_inp" field_type_data="string" id="CKey" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -157,8 +163,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox" value="CA" field_key="Certificates"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="CA">CA</option>
+                        <select class="form-select custom-combobox" value="<%= WIFI && WIFI.Certificates ? WIFI.Certificates : 'CA' %>" field_key="Certificates"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="CA" <%= WIFI && WIFI.Certificates === 'CA' ? 'selected' : '' %>>CA</option>
+                            <option value="Client" <%= WIFI && WIFI.Certificates === 'Client' ? 'selected' : '' %>>Client</option>
+                            <option value="Key" <%= WIFI && WIFI.Certificates === 'Key' ? 'selected' : '' %>>Key</option>
+                            <option value="Combined" <%= WIFI && WIFI.Certificates === 'Combined' ? 'selected' : '' %>>Combined</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -184,10 +193,30 @@
 
         $(document).ready(()=>{
             load_ui_event();
+            $("#CKey").on("input", v_TorqueTarget);
         });
+
+        function v_TorqueTarget(){
+            var is_error=0;
+            hide_alert();
+            if($("#CKey").length>0){
+                var val_ckey=$("#CKey").val();
+                hide_alert();
+                if(val_ckey.trim()==""){
+                    show_alert("The Security Key field cannot be left blank!");
+                }
+            }
+            return is_error;
+        }
 
         function save_data(){
             var obj_s={};
+            var val_ckey=$("#CKey").val();
+            if(val_ckey.trim()==""){
+                show_alert("The Security Key field cannot be left blank!");
+                return false;
+            }
+
             $(".field_data").each(function (index, emp) {
                 var key_emp = $(emp).attr("field_key");
                 var type_emp = $(emp).attr("field_type");
