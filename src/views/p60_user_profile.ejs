@@ -30,7 +30,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Administrator" class="form-control" field_key="UserRole"  field_type_data="string" field_type="emp_inp">
+                        <input type="text" placeholder="Enter data" value="Administrator" class="form-control" field_key="UserRole"  field_type_data="string" field_type="emp_inp" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Admin" class="form-control" field_key="FirstName"  field_type_data="string" field_type="emp_inp">
+                        <input type="text" placeholder="Enter data" value="Admin" class="form-control" field_key="FirstName"  field_type_data="string" field_type="emp_inp" id="FirstName" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Admin" class="form-control" field_key="LastName"  field_type_data="string" field_type="emp_inp">
+                        <input type="text" placeholder="Enter data" value="Admin" class="form-control" field_key="LastName"  field_type_data="string" field_type="emp_inp" id="LastName" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="Admin" class="form-control" field_key="UserName"  field_type_data="string" field_type="emp_inp">
+                        <input type="text" placeholder="Enter data" value="Admin" class="form-control" field_key="UserName"  field_type_data="string" field_type="emp_inp" id="UserName" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="password" placeholder="Enter data" value="Admin" class="form-control" field_key="Password"  field_type_data="string" field_type="emp_inp">
+                        <input type="password" placeholder="Enter data" value="Admin" class="form-control" field_key="Password"  field_type_data="string" field_type="emp_inp" id="Password" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="password" placeholder="Enter data" value="Admin" class="form-control" field_key="ConfirmPassword"  field_type_data="string" field_type="emp_inp">
+                        <input type="password" placeholder="Enter data" value="Admin" class="form-control" field_key="ConfirmPassword"  field_type_data="string" field_type="emp_inp" id="ConfirmPassword" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -136,7 +136,151 @@
     <script>
         $(document).ready(()=>{
             load_ui_event();
+            $("#FirstName").on("input",v_FirstName);
+            $("#LastName").on("input",v_LastName);
+            $("#UserName").on("input",v_UserName);
+            $("#Password").on("input",v_Password);
+            $("#ConfirmPassword").on("input",v_ConfirmPassword);
         });
+
+        function v_FirstName() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#FirstName").length > 0) {
+                var val_FirstName = $("#FirstName").val().trim();
+                hide_alert();
+
+                if (val_FirstName === "") {
+                    show_alert("The First Name field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (val_FirstName.length > 25) {
+                    show_alert("The First Name field must not exceed 25 characters.");
+                    is_error = 1;
+                } 
+                else if (!/^[a-zA-Z0-9 _-]+$/.test(val_FirstName)) {
+                    show_alert("The First Name field contains invalid characters. Only letters, numbers, '-', '_' and spaces are allowed.");
+                    is_error = 1;
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_LastName() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#LastName").length > 0) {
+                var val_LastName = $("#LastName").val().trim();
+                hide_alert();
+
+                if (val_LastName === "") {
+                    show_alert("The Last Name field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (val_LastName.length > 25) {
+                    show_alert("The Last Name field must not exceed 25 characters.");
+                    is_error = 1;
+                } 
+                else if (!/^[a-zA-Z0-9 _-]+$/.test(val_LastName)) {
+                    show_alert("The Last Name field contains invalid characters. Only letters, numbers, '-', '_' and spaces are allowed.");
+                    is_error = 1;
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_UserName() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#UserName").length > 0) {
+                var val_UserName = $("#UserName").val().trim();
+                hide_alert();
+                if (val_UserName === "") {
+                    show_alert("The User Name field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (val_UserName.length > 25) {
+                    show_alert("The User Name field must not exceed 25 characters.");
+                    is_error = 1;
+                } 
+                else if (!/^[a-zA-Z0-9 _-]+$/.test(val_UserName)) {
+                    show_alert("The User Name field contains invalid characters. Only letters, numbers, '-', '_' and spaces are allowed.");
+                    is_error = 1;
+                }
+                else {
+                    var existingUserNames = ["user1", "user2", "user3"]; // Danh sách giả định
+                    if (existingUserNames.includes(val_UserName)) {
+                        show_alert("This User Name is already taken. Please choose another one.");
+                        is_error = 1;
+                    }
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_Password() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#Password").length > 0) {
+                var val_Password = $("#Password").val().trim();
+                var val_ConfirmPassword = $("#ConfirmPassword").val().trim();
+                hide_alert();
+
+                if (val_Password === "") {
+                    show_alert("The Password field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (val_Password.length < 8) {
+                    show_alert("The Password field must be at least 8 characters.");
+                    is_error = 1;
+                } else if (val_Password.length > 25) {
+                    show_alert("The Password field must not exceed 25 characters.");
+                    is_error = 1;
+                } 
+                else if (val_Password !== val_ConfirmPassword) {
+                    show_alert("The Password and Confirm Password do not match.");
+                    is_error = 1;
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_ConfirmPassword() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#ConfirmPassword").length > 0) {
+                var val_ConfirmPassword = $("#ConfirmPassword").val().trim();
+                var val_Password = $("#Password").val().trim();
+                hide_alert();
+                if (val_ConfirmPassword === "") {
+                    show_alert("The Confirm Password field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (val_ConfirmPassword.length < 8) {
+                    show_alert("The Confirm Password field must be at least 8 characters.");
+                    is_error = 1;
+                } else if (val_ConfirmPassword.length > 25) {
+                    show_alert("The Confirm Password field must not exceed 25 characters.");
+                    is_error = 1;
+                } 
+                else if (val_ConfirmPassword !== val_Password) {
+                    show_alert("The Confirm Password and Password do not match.");
+                    is_error = 1;
+                }
+            }
+
+            return is_error;
+        }
+
     </script>
 </body>
 
