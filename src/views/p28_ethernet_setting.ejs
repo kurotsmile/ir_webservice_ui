@@ -43,7 +43,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.Gateway ? Ethernet.Gateway : 0 %>" field_key="Gateway" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.Gateway ? Ethernet.Gateway : 0 %>" field_key="Gateway" field_type="emp_inp"  field_type_data="string" id="Gateway" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.PrimaryDNS ? Ethernet.PrimaryDNS : 0 %>"  field_key="PrimaryDNS" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.PrimaryDNS ? Ethernet.PrimaryDNS : 0 %>"  field_key="PrimaryDNS" field_type="emp_inp"  field_type_data="string" id="PrimaryDNS" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SecondaryDNS ? Ethernet.SecondaryDNS : '' %>" field_key="SecondaryDNS" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SecondaryDNS ? Ethernet.SecondaryDNS : '' %>" field_key="SecondaryDNS" field_type="emp_inp"  field_type_data="string" id="SecondaryDNS" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.IPAddress ? Ethernet.IPAddress : '' %>" field_key="IPAddress" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.IPAddress ? Ethernet.IPAddress : '' %>" field_key="IPAddress" field_type="emp_inp"  field_type_data="string" id="IPAddress" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SubnetMask ? Ethernet.SubnetMask : '' %>" field_key="SubnetMask" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SubnetMask ? Ethernet.SubnetMask : '' %>" field_key="SubnetMask" field_type="emp_inp"  field_type_data="string" id="SubnetMask" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -314,9 +314,137 @@
 
         $(document).ready(()=>{
             $(".field_group_port2").hide();
-
             load_ui_event();
+            $("#IPAddress").on("input", v_IPAddress);
+            $("#SubnetMask").on("input", v_SubnetMask);
+            $("#Gateway").on("input", v_Gateway);
+            $("#PrimaryDNS").on("input", v_PrimaryDNS);
+            $("#SecondaryDNS").on("input",v_SecondaryDNS);
         });
+
+        function v_Gateway() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#Gateway").length > 0) {
+                var val_Gateway = $("#Gateway").val().trim();
+                hide_alert();
+
+                if (val_Gateway === "") {
+                    show_alert("The Gateway field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(val_Gateway)) {
+                    show_alert("Please enter a valid Gateway IP address in the format X.X.X.X (e.g., 192.168.1.1).");
+                    is_error = 1;
+                } 
+                else {
+                    var octets = val_Gateway.split(".");
+                    for (var i = 0; i < octets.length; i++) {
+                        var octet = parseInt(octets[i], 10);
+                        if (octet < 0 || octet > 255) {
+                            show_alert("Each segment of the Gateway IP address must be between 0 and 255.");
+                            is_error = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_SecondaryDNS() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#SecondaryDNS").length > 0) {
+                var val_SecondaryDNS = $("#SecondaryDNS").val().trim();
+                hide_alert();
+                if (val_SecondaryDNS.length > 20) {
+                    show_alert("The Secondary DNS field must not exceed 20 characters.");
+                    is_error = 1;
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_IPAddress() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#IPAddress").length > 0) {
+                var val_IPAddress = $("#IPAddress").val().trim();
+                hide_alert();
+                if (val_IPAddress === "") {
+                    show_alert("The IP Address field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(val_IPAddress)) {
+                    show_alert("Please enter a valid IP address in the format X.X.X.X (e.g., 192.168.0.1).");
+                    is_error = 1;
+                } 
+  
+                else {
+                    var octets = val_IPAddress.split(".");
+                    for (var i = 0; i < octets.length; i++) {
+                        if (parseInt(octets[i], 10) < 0 || parseInt(octets[i], 10) > 255) {
+                            show_alert("Each segment of the IP address must be between 0 and 255.");
+                            is_error = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return is_error;
+        }
+
+        function v_SubnetMask() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#SubnetMask").length > 0) {
+                var val_SubnetMask = $("#SubnetMask").val().trim();
+                hide_alert();
+
+                if (val_SubnetMask === "") {
+                    show_alert("The Subnet Mask field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(val_SubnetMask)) {
+                    show_alert("Please enter a valid Subnet Mask in the format X.X.X.X (e.g., 255.255.255.0).");
+                    is_error = 1;
+                } 
+                else {
+                    var octets = val_SubnetMask.split(".");
+                    var valid_subnet_values = [0, 128, 192, 224, 240, 248, 252, 254, 255];
+                    for (var i = 0; i < octets.length; i++) {
+                        if (!valid_subnet_values.includes(parseInt(octets[i], 10))) {
+                            show_alert("Each segment of the Subnet Mask must be a valid value (e.g., 0, 128, 192, ..., 255).");
+                            is_error = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            return is_error;
+        }
+
+        function v_PrimaryDNS() {
+            var is_error = 0;
+            hide_alert();
+            if ($("#PrimaryDNS").length > 0) {
+                var val_PrimaryDNS = $("#PrimaryDNS").val().trim();
+                hide_alert();
+                if (val_PrimaryDNS.length > 20) {
+                    show_alert("The Primary DNS field must not exceed 20 characters.");
+                    is_error = 1;
+                }
+            }
+            return is_error;
+        }
 
         function show_group(s_name_group,emp){
             var val_show=$(emp).attr("value");
