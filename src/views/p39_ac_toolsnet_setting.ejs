@@ -21,20 +21,11 @@
     <%- include('bar_head',{title:'AC-ToolsNet Setting'}) %>
 
     <% const ToolsNet=jsonData.ToolsNet|| {};%>
-    <% const timer_seconds = [
-        "5 Seconds",
-        "10 Seconds",
-        "15 Seconds",
-        "20 Seconds",
-        "25 Seconds",
-        "30 Seconds",
-        "35 Seconds",
-        "40 Seconds",
-        "45 Seconds",
-        "50 Seconds",
-        "55 Seconds",
-        "60 Seconds"
-        ]; 
+    <% 
+        const timer_seconds = [];
+        for (let i = 5; i <= 240; i += 5) {
+            timer_seconds.push(`${i} Seconds`);
+        }
     %>
     <!-- Main Content Full Width -->
     <main>
@@ -67,9 +58,9 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.SystemType ? ToolsNet.SystemType : 'None' %>" field_key="SystemType"  field_type_data="string" field_type="emp_inp" > 
-                            <option value="Unidentified" <%= ToolsNet && ToolsNet.SystemType === 'Unidentified' ? 'selected' : '' %>>Unidentified</option>
-                            <option value="Identify" <%= ToolsNet && ToolsNet.SystemType === 'Identify' ? 'selected' : '' %>>Identify</option>
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.SystemType ? ToolsNet.SystemType : 'Undefined' %>" field_key="SystemType"  field_type_data="string" field_type="emp_inp" > 
+                            <option value="Undefined" <%= ToolsNet && ToolsNet.SystemType === 'Undefined' ? 'selected' : '' %>>Undefined</option>
+                            <option value="Ingersoll Rand" <%= ToolsNet && ToolsNet.SystemType === 'Ingersoll Rand' ? 'selected' : '' %>>Ingersoll Rand</option>
                         </select>                        
                         <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
                     </div>
@@ -83,7 +74,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress1 ? ToolsNet.PIMIPAddress1 : '256.256.256.256' %>"  field_key="PIMIPAddress1" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress1 ? ToolsNet.PIMIPAddress1 : '256.256.256.256' %>"  field_key="PIMIPAddress1" field_type="emp_inp"  field_type_data="string" id="PIMIPAddress1" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -122,7 +113,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.RetryInterval ? ToolsNet.RetryInterval : '5 Seconds' %>" field_key="RetryInterval"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.RetryInterval ? ToolsNet.RetryInterval : '5 Seconds' %>" field_key="RetryInterval"  field_type_data="string" id="RetryInterval" field_type="emp_inp" > 
                             <% timer_seconds.forEach(function(t) { %>
                                 <option value="<%= t %>" <%= ToolsNet && ToolsNet.RetryInterval === t ? 'selected' : '' %>><%= t %></option>
                             <% }); %>
@@ -139,7 +130,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.KeepAliveTimer ? ToolsNet.KeepAliveTimer : '5 Seconds' %>" field_key="KeepAliveTimer"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.KeepAliveTimer ? ToolsNet.KeepAliveTimer : '30 Seconds' %>" field_key="KeepAliveTimer"  field_type_data="string" field_type="emp_inp" > 
                             <% timer_seconds.forEach(function(t) { %>
                                 <option value="<%= t %>" <%= ToolsNet && ToolsNet.KeepAliveTimer === t ? 'selected' : '' %>><%= t %></option>
                             <% }); %>
@@ -173,7 +164,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SystemNumber ? ToolsNet.SystemNumber : 1 %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SystemNumber ? ToolsNet.SystemNumber : 1 %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="number" id="SystemNumber" disabled>
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -212,7 +203,78 @@
 
         $(document).ready(()=>{
             load_ui_event();
+            $("#SystemNumber").on("input", v_SystemNumber);
+            $("#PIMIPAddress1").on("input", v_PIMIPAddress1);
+            //$("#RetryInterval").on("input", v_RetryInterval);
         });
+
+        function v_SystemNumber(){
+            var is_error=0;
+            hide_alert();
+            if($("#SystemNumber").length>0){
+                var val_SystemNumber=$("#SystemNumber").val();
+                hide_alert();
+                if(val_SystemNumber.trim()==""){
+                    show_alert("The System Number field cannot be left blank!");
+                    is_error=1;
+                }else if (!/^\d+$/.test(val_SystemNumber) || parseInt(val_SystemNumber, 10) < 0 || parseInt(val_SystemNumber, 10) > 9999) {
+                    show_alert('Please enter a number between 0 and 9999.');
+                    is_error=1;
+                }
+            }
+            return is_error;
+        }
+
+        function v_PIMIPAddress1() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#PIMIPAddress1").length > 0) {
+                var val_PIMIPAddress1 = $("#PIMIPAddress1").val().trim();
+                hide_alert();
+
+                if (val_PIMIPAddress1 === "") {
+                    show_alert("The IP Address field cannot be left blank!");
+                    is_error = 1;
+                } 
+                else if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(val_PIMIPAddress1)) {
+                    show_alert("Please enter a valid IP address in the format X.X.X.X (e.g., 192.168.0.1).");
+                    is_error = 1;
+                } 
+                else {
+                    var octets = val_PIMIPAddress1.split(".");
+                    for (var i = 0; i < octets.length; i++) {
+                        if (parseInt(octets[i], 10) < 0 || parseInt(octets[i], 10) > 256) {
+                            show_alert("Each segment of the IP address must be between 0 and 256.");
+                            is_error = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            return is_error;
+        }
+
+        function v_RetryInterval() {
+            var is_error = 0;
+            hide_alert();
+
+            if ($("#RetryInterval").length > 0) {
+                var val_RetryInterval = $("#RetryInterval").val().trim();
+                hide_alert();
+
+                if (val_RetryInterval === "") {
+                    $("#RetryInterval").val(5);
+                    val_RetryInterval = 5;
+                }
+
+                if (!/^\d+$/.test(val_RetryInterval) || parseInt(val_RetryInterval, 10) < 5 || parseInt(val_RetryInterval, 10) > 240) {
+                    show_alert("Please enter a number between 5 and 240.");
+                    is_error = 1;
+                }
+            }
+            return is_error;
+        }
 
         function save_data(){
             var obj_s={};
