@@ -40,7 +40,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.Settings ? SetDT.Settings : 'Manual' %>" field_key="Settings"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.Settings ? SetDT.Settings : 'Manual' %>" field_key="Settings"  field_type_data="string" field_type="emp_inp" id="Settings_dt"> 
                             <option value="Manual" <%= SetDT && SetDT.Settings === 'Manual' ? 'selected' : '' %>>Manual</option>
                             <option value="NTP" <%= SetDT && SetDT.Settings === 'NTP' ? 'selected' : '' %>>NTP</option>
                         </select>                        
@@ -51,12 +51,12 @@
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Date Formate</div>
+                    <div class="label-txt">Date Format</div>
                 </div>
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.DateFormat ? SetDT.DateFormat : 'dd/mm/yyyy' %>" field_key="DateFormat"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.DateFormat ? SetDT.DateFormat : 'dd/mm/yyyy' %>" field_key="DateFormat"  field_type_data="string" field_type="emp_inp" id="DateFormat" > 
                             <option value="dd/mm/yyyy" <%= SetDT && SetDT.DateFormat === 'dd/mm/yyyy' ? 'selected' : '' %>>dd/mm/yyyy</option>
                             <option value="mm/dd/yyyy" <%= SetDT && SetDT.DateFormat === 'mm/dd/yyyy' ? 'selected' : '' %>>mm/dd/yyyy</option>
                         </select>                        
@@ -70,22 +70,23 @@
                     <div class="label-txt">Set Date and Time</div>
                 </div>
                 <div class="col-6">
+                    <input type="hidden" id="datetimepicker">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="datetimepicker" disabled>                     
-                        <span role="button" class="input-group-text r-right" onclick="show_sel_time(this)"><img src="/public/SVG/Date.svg"/></span>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="dt" disabled>                     
+                        <span id="btn_sel_datetime" role="button" class="input-group-text r-right" onclick="show_sel_time(this);return false;"><img src="/public/SVG/Date.svg"/></span>
                     </div>
                 </div>
             </div>
 
             <div class="row row-p">
                 <div class="col-6">
-                    <div class="label-txt">Time Formate</div>
+                    <div class="label-txt">Time Format</div>
                 </div>
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeFormat ? SetDT.TimeFormat : '12 Hrs' %>" field_key="TimeFormat"  field_type_data="string" field_type="emp_inp" > 
+                        <select id="TimeFormat" class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeFormat ? SetDT.TimeFormat : '12 Hrs' %>" field_key="TimeFormat"  field_type_data="string" field_type="emp_inp" > 
                             <option value="12 Hrs" <%= SetDT && SetDT.TimeFormat === '12 Hrs' ? 'selected' : '' %>>12 Hrs</option>
                             <option value="24 Hrs" <%= SetDT && SetDT.TimeFormat === '24 Hrs' ? 'selected' : '' %>>24 Hrs</option>
                         </select>                        
@@ -101,7 +102,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeZone ? SetDT.TimeZone : '' %>" field_key="TimeZone" field_type_data="string" field_type="emp_inp">
+                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeZone ? SetDT.TimeZone : '' %>" field_key="TimeZone" field_type_data="string" field_type="emp_inp" id="TimeZone">
                             <% const timeZones = [
                                 { label: "UTC-12:00", value: "UTC-12:00" },
                                 { label: "UTC-11:00", value: "UTC-11:00" },
@@ -115,7 +116,7 @@
                                 { label: "UTC-03:00", value: "UTC-03:00" },
                                 { label: "UTC-02:00", value: "UTC-02:00" },
                                 { label: "UTC-01:00", value: "UTC-01:00" },
-                                { label: "UTC±00:00", value: "UTC±00:00" },
+                                { label: "UTC", value: "UTC" },
                                 { label: "UTC+01:00", value: "UTC+01:00" },
                                 { label: "UTC+02:00", value: "UTC+02:00" },
                                 { label: "UTC+03:00", value: "UTC+03:00" },
@@ -160,22 +161,28 @@
     <%- include('p9_alet_warning.ejs') %>
     
     <script>
+        var is_24h=true;
+        var s_DateFormat="dd/mm/yyyy";
+        var timer_cur_val='';
         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var dateObject_cur=null;
+
         $(document).ready(function () {
-            $('#datetimepicker').datetimepicker({
-                dateFormat: 'yy-mm-dd',
-                timeFormat: 'HH:mm:ss',
-                showSecond: true,
-                controlType: 'select',
-                onClose: function () {
-                    $('#datetimepicker').parent().find('img').toggleClass("bg-info rounded");
-                    $('#datetimepicker').prop('disabled')
-                }
+            check_Settings_dt();
+            $("#TimeFormat").change(function(){
+                var t_val=$(this).val();
+                $('#datetimepicker').datetimepicker('destroy');
+                check_format_time();
+            });
+           
+            $("#DateFormat").change(function(){
+                s_DateFormat=$(this).val();
+                update_DT_val();
             });
 
-            if ($('#datetimepicker').val() === '') {
-                $('#datetimepicker').val(getCurrentISOTime());
-            }
+            $("#Settings_dt").change(check_Settings_dt);
+ 
+            check_format_time(); 
 
             $("select").change(function(){
                 var val=$(this).attr("value");
@@ -183,19 +190,143 @@
             });
         });
 
+        function check_Settings_dt(){
+            var val=$("#Settings_dt").val();
+            if(val=='Manual'){
+                $("#dt").css("color","#FFF");
+                $("#btn_sel_datetime").find("img").show();
+                load_DT_val();
+            }else{
+                $("#btn_sel_datetime").find("img").hide();
+                $("#dt").css("color","#666");
+                dateObject_cur=new Date();
+                timer_cur_val=get_DT_ISO(dateObject_cur);
+                $("#dt").val(get_DT_val(dateObject_cur));
+            }
+        }
+
+        function load_DT_val(){
+            if(data_json.SetDT!=null){
+                if(data_json.SetDT.DT!=null){
+                    timer_cur_val=data_json.SetDT.DT;
+                    dateObject_cur=new Date(timer_cur_val);
+                    $("#dt").val(get_DT_val(dateObject_cur))
+                }else{
+                    dateObject_cur= new Date();
+                    timer_cur_val=get_DT_ISO(dateObject_cur);
+                    $("#dt").val(get_DT_val(dateObject_cur));
+                }
+            }else{
+                dateObject_cur = new Date();
+                timer_cur_val=get_DT_ISO(dateObject_cur);
+                $("#dt").val(get_DT_val(dateObject_cur));
+            }
+        }
+
+        function update_DT_val(){
+            if(dateObject_cur!=null){
+                timer_cur_val=get_DT_ISO(dateObject_cur);
+                $("#dt").val(get_DT_val(dateObject_cur)); 
+            }
+        }
+
+        function check_format_time(){
+            var t_val=$('#TimeFormat').val();
+            if(t_val=="12 Hrs")
+                is_24h=false;
+            else
+                is_24h=true;
+            load_box_date_picker();
+            update_DT_val();
+        }
+
+        function load_box_date_picker(){
+            var t_fomat_h="hh:mm tt";
+
+            if(is_24h)
+                t_fomat_h="HH:mm TT";
+            else
+                t_fomat_h="hh:mm tt";
+            $('#datetimepicker').datetimepicker({
+                dateFormat: 'yy/mm/dd',
+                timeFormat: t_fomat_h,
+                showSecond: false,
+                controlType: 'select',
+                onClose: function () {
+                    const dateValue = $(this).val();
+                    const dateObject = new Date(dateValue); 
+                    if (!isNaN(dateObject.getTime())){
+                        dateObject_cur=dateObject;
+                        timer_cur_val=get_DT_ISO(dateObject);
+                        $("#dt").val(get_DT_val(dateObject));
+                    }
+                    $("#btn_sel_datetime").parent().find('img').removeClass("bg-info rounded");
+                },
+                onSelect: function (datetimeText, inst) {
+                    const dateValue = $(this).val();
+                    const dateObject = new Date(dateValue); 
+                    if (!isNaN(dateObject.getTime())){
+                        dateObject_cur=dateObject;
+                        timer_cur_val=get_DT_ISO(dateObject);
+                        $("#dt").val(get_DT_val(dateObject));
+                    }
+                }
+            });
+        }
+
         function show_sel_time(emp){
+            $('#datetimepicker').datepicker('show');
             $(emp).parent().find('img').toggleClass("bg-info rounded");
             $(emp).parent().find('input').each(function () {
                 $(this).prop('disabled', !$(this).prop('disabled'));
             });
-            $('#datetimepicker').show().focus(); 
         }
 
-        function getCurrentISOTime() {
-            const now = new Date();
-            return now.toISOString().replace('Z', '+07:00');
+        function get_DT_ISO(dateObject){
+            const year = dateObject.getFullYear();
+            const month = dateObject.getMonth() + 1;
+            const day = dateObject.getDate();
+            const hour = dateObject.getHours();
+            const hour12 = hour % 12 || 12; 
+            const minute = dateObject.getMinutes();
+            const second=dateObject.getSeconds();
+            const secondFormatted = second < 10 ? '0' + second : second;
+            const minuteFormatted = minute < 10 ? '0' + minute : minute;
+            const hourFormatted = hour < 10 ? '0' + hour : hour;
+            const hour12Formatted = hour12 < 10 ? '0' + hour12 : hour12;
+            var z=$("#TimeZone").val();
+            z=z.replace("UTC","");
+            return year+'-'+month+'-'+day+'T'+hourFormatted+":"+minuteFormatted+":00.000"+z;
         }
 
+        function get_DT_val(dateObject){
+            const year = dateObject.getFullYear();
+            const month = dateObject.getMonth() + 1;
+            const day = dateObject.getDate();
+            const hour = dateObject.getHours();
+            const hour12 = hour % 12 || 12; 
+            const minute = dateObject.getMinutes();
+            const second=dateObject.getSeconds();
+            const secondFormatted = second < 10 ? '0' + second : second;
+            const minuteFormatted = minute < 10 ? '0' + minute : minute;
+            const hourFormatted = hour < 10 ? '0' + hour : hour;
+            const hour12Formatted = hour12 < 10 ? '0' + hour12 : hour12;
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            
+            var s_date="";
+            if(s_DateFormat=="dd/mm/yyyy")
+                s_date=day+"/"+month+"/"+year;
+            else
+                s_date=month+"/"+day+"/"+year;
+
+            var s_time="";
+            if(is_24h){
+                s_time=hourFormatted+":"+minuteFormatted+":"+secondFormatted;
+            }else{
+                s_time=hour12Formatted+":"+minuteFormatted+" "+ampm;
+            }
+            return s_time+" "+s_date;
+        }
 
         function save_data(){
             var obj_s={};
@@ -216,6 +347,7 @@
                     if(key_emp!="") obj_s[key_emp]=v;
                 }
             });
+            obj_s.DT=timer_cur_val;
             data_json.SetDT=obj_s;
             $.ajax({
                 url: '/save-json',
