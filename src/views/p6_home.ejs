@@ -26,7 +26,7 @@
                     
                     <div class="input-group mb-3 r border mt-3 p-0 sel-dropdown" style="border: unset !important;" id="job-selection-dropdown">
                         <span class="input-group-text r-left"><img src="/public/SVG/Job.svg"/></span>
-                        <select class="form-select custom-combobox" onchange="handleJobChange()" id="job-selection">
+                        <select class="select_val form-select custom-combobox" onchange="handleJobChange()" id="job-selection">
                             <option value="" disabled selected hidden>Select Job</option>
                             <% if (jsonList && jsonList.length > 0) { %>
                                 <% jsonList.forEach(job => { %>
@@ -36,7 +36,7 @@
                                 <% }) %>
                             <% } %>
                         </select>
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right"></span>
                     </div>
 
                 </div>
@@ -112,7 +112,7 @@
                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                         <div id="are-tor" class="row-container d-flex">
                             <div class="lager-icon" id="crTorque" style="display: flex;flex-wrap: wrap;">
-                                <img  src="public/SVG/Torque.svg" />
+                                <img class="icon_img" src="public/SVG/Torque.svg" />
                                 <div class="title">Torque (<span id="unit">Nm</span>)</div>
                                 <div class="number torque_number" id="torque_number">0.00</div>
                             </div>
@@ -144,7 +144,7 @@
                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                         <div id="angle-tor" class="row-container d-flex">
                             <div class="lager-icon" id="crAngle" style="display: flex;flex-wrap: wrap;">
-                                <img  src="public/SVG/Angle.svg" />
+                                <img class="icon_img"  src="public/SVG/Angle.svg" />
                                 <div class="title">Angle (°)</div>
                                 <div class="number degree_number" id="angle_number">0</div>
                             </div>
@@ -172,12 +172,11 @@
                     </div>
                 </div>
                 <div class="row">
-
-                    <div class="col-9 col-md-3 col-lg-3 col-xl-3">
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="row-container ">
                             <div class="til-lager-icon oranger p-2">
                                 <div class="tilt-icon">
-                                    <img  src="public/SVG/Tilt.svg" />
+                                    <img class="icon_img" src="public/SVG/Tilt.svg" />
                                     <div class="title">Tilt Angle (°)</div>
                                 </div>
                                 <div class="number" id="tilt_angle">0</div>
@@ -189,13 +188,13 @@
                     <div class="col-3">
                         <div class="input-group mb-3 r border mt-3 p-0 sel-dropdown" id="chartTypeSelect_dropdown">
                             <span class="input-group-text r-left">&nbsp;</span>
-                            <select class="form-select custom-combobox" id="chartTypeSelect">
+                            <select class="select_val form-select custom-combobox" id="chartTypeSelect">
                                 <option value="0" selected="">Torque vs. Angle</option>
                                 <option value="1">Torque vs .Time</option>
                                 <option value="2">Angle vs .Time</option>
                                 <option value="3">Current vs .Time</option>
                             </select>
-                            <span role="button" class="input-group-text r-right" id="chartTypeSelect_btb">&nbsp;</span>
+                            <span class="input-group-text r-right" id="chartTypeSelect_btb">&nbsp;</span>
                         </div>
 
                     </div>
