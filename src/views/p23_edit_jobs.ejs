@@ -274,30 +274,10 @@
         }
 
         function show_delete(emp){
-            var p_name=$(emp).data("name");
             var p_index=$(emp).data("index");
-            var html='';
             var id_file=jsonData.ID;
 
-            html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
-            html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
-            $("#box_msg_title").empty();
-            $("#box_msg_body").empty();
-            $("#box_msg_btn").empty();
-
-            $("#box_msg_title").html('<div class="txt"><img src="/public/SVG/Warning.svg"/> Warning</div>');
-            $("#box_msg_body").html(html);
-
-            var btn_cancel='';
-            btn_cancel=$('<a href="#" class="btn btn-secondary btn-rounded">Cancel</a>');
-            $(btn_cancel).click(()=>{
-                close_msg();
-            });
-
-            var btn_del='';
-            btn_del=$('<button class="btn btn-danger btn-rounded">Delete</button>');
-            $(btn_del).click(()=>{
-                jsonData.Psets[p_index]={"ID": "",
+            jsonData.Psets[p_index]={"ID": "",
                     "Strategy": "",
                     "Target": 0,
                     "Steps": 0,
@@ -320,14 +300,6 @@
                 jsonData.Psets=elementsWithID.concat(elementsWithoutID);
                 save_data_j_cur();
                 load_list();
-                close_msg();
-            });
-            
-            $("#box_msg_btn").append(btn_cancel);
-            $("#box_msg_btn").append(btn_del);
-
-            $("#bk_dark_full").show();
-            $("#box_msg").show();
         }
 
         function getPsetName(inID) {
