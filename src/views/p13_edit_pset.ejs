@@ -34,7 +34,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.Name ? jsonData.Name : name %>" class="form-control field_data" field_key="Name" field_type="emp_inp" field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" value="<%= jsonData && jsonData.Name ? jsonData.Name : name %>" class="form-control field_data" field_key="Name" field_type="emp_inp" field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>" field_key="Units"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>" field_key="Units"  field_type_data="string" field_type="emp_inp" > 
                             <option value="Nm" <%= jsonData && jsonData.Units === 'Nm' ? 'selected' : '' %>>Nm</option>
                             <option value="dNm" <%= jsonData && jsonData.Units === 'dNm' ? 'selected' : '' %>>dNm</option>
                             <option value="Ft-lbs" <%= jsonData && jsonData.Units === 'Ft-lbs' ? 'selected' : '' %>>Ft-lbs</option>
@@ -55,7 +55,7 @@
                             <option value="Kg-M" <%= jsonData && jsonData.Units === 'Kg-M' ? 'selected' : '' %>>Kg-M</option>
                             <option value="Kg-Cm" <%= jsonData && jsonData.Units === 'Kg-Cm' ? 'selected' : '' %>>Kg-Cm</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -67,12 +67,12 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= jsonData && jsonData.CycleDelay ? jsonData.CycleDelay : 0 %>" field_key="CycleDelay"  field_type_data="number" field_type="emp_inp" >
+                        <select class="select_val form-select custom-combobox field_data" value="<%= jsonData && jsonData.CycleDelay ? jsonData.CycleDelay : 0 %>" field_key="CycleDelay"  field_type_data="number" field_type="emp_inp" >
                             <% for (let i = 0; i <= 10; i++) { %>
                                 <option value="<%= i %>" <%= jsonData && jsonData.CycleDelay == i ? 'selected' : '' %>><%= i %></option>
                             <% } %>
                         </select>
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= jsonData && jsonData.CycleTimeout ? jsonData.CycleTimeout : 0 %>" field_key="CycleTimeout" field_type="emp_inp"  field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data"  class="form-control field_data" value="<%= jsonData && jsonData.CycleTimeout ? jsonData.CycleTimeout : 0 %>" field_key="CycleTimeout" field_type="emp_inp"  field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TrPerPset ? jsonData.TrPerPset : 0 %>" field_key="TrPerPset" field_type="emp_inp"  field_type_data="number"  disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TrPerPset ? jsonData.TrPerPset : 0 %>" field_key="TrPerPset" field_type="emp_inp"  field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Acceleration ? jsonData.Acceleration : 0 %>" field_key="Acceleration" field_type="emp_inp"  field_type_data="number"  disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Acceleration ? jsonData.Acceleration : 0 %>" field_key="Acceleration" field_type="emp_inp"  field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EarlyRelease ? jsonData.EarlyRelease : false %>" field_key="EarlyRelease" field_type="emp_value"   field_type_data="bool" />
+                    <img src="/public/SVG/Off.svg" style="float: right;width: 42px;" role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= jsonData && jsonData.EarlyRelease ? jsonData.EarlyRelease : false %>" field_key="EarlyRelease" field_type="emp_value"  field_type_data="bool" />
                 </div>
             </div>
 
@@ -177,7 +177,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TiltStart ? jsonData.TiltStart : 0 %>" field_key="TiltStart" field_type="emp_inp"  field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TiltStart ? jsonData.TiltStart : 0 %>" field_key="TiltStart" field_type="emp_inp"  field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TiltWorking ? jsonData.TiltWorking : 0 %>" field_key="TiltWorking" field_type="emp_inp" field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.TiltWorking ? jsonData.TiltWorking : 0 %>" field_key="TiltWorking" field_type="emp_inp" field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.HoldTorque ? jsonData.HoldTorque : 90 %>" field_key="HoldTorque" field_type="emp_inp" field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.HoldTorque ? jsonData.HoldTorque : 90 %>" field_key="HoldTorque" field_type="emp_inp" field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -249,7 +249,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Time ? jsonData.Time : 1 %>" field_key="Time" field_type="emp_inp" field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= jsonData && jsonData.Time ? jsonData.Time : 1 %>" field_key="Time" field_type="emp_inp" field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TracePoints ? jsonData.TracePoints : 1000 %>" field_key="TracePoints" field_type="emp_inp" field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= jsonData && jsonData.TracePoints ? jsonData.TracePoints : 1000 %>" field_key="TracePoints" field_type="emp_inp" field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data" value="<%= jsonData && jsonData.TorqueThresholdToCapture ? jsonData.TorqueThresholdToCapture : 1 %>" field_key="TorqueThresholdToCapture" field_type="emp_inp" field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" value="0" class="form-control field_data" value="<%= jsonData && jsonData.TorqueThresholdToCapture ? jsonData.TorqueThresholdToCapture : 1 %>" field_key="TorqueThresholdToCapture" field_type="emp_inp" field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>

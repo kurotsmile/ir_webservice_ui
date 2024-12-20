@@ -77,9 +77,10 @@ function obj_op(fields, object) {
 }
 
 function show_edit(emp){
-    $(emp).parent().find('img').toggleClass("bg-info rounded");
+    //$(emp).parent().find('img').toggleClass("bg-info rounded");
     $(emp).parent().find('input').each(function () {
-        $(this).prop('disabled', !$(this).prop('disabled'));
+        //$(this).prop('disabled', !$(this).prop('disabled'));
+        $(this).focus();
     });
 }
 

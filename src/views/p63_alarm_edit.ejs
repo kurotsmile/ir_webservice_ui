@@ -45,7 +45,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.AlarmName ? alarm.AlarmName : '' %>"  field_key="AlarmName" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.AlarmName ? alarm.AlarmName : '' %>"  field_key="AlarmName" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= alarm && alarm.Duration ? alarm.Duration : 1 %>" field_key="Duration"  field_type_data="number" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= alarm && alarm.Duration ? alarm.Duration : 1 %>" field_key="Duration"  field_type_data="number" field_type="emp_inp" > 
                             <option value="1" <%= alarm && alarm.Duration === 1 ? 'selected' : '' %>>1</option>
                             <option value="2" <%= alarm && alarm.Duration === 2 ? 'selected' : '' %>>2</option>
                             <option value="5" <%= alarm && alarm.Duration === 2 ? 'selected' : '' %>>5</option>
@@ -88,7 +88,7 @@
                             <option value="270" <%= alarm && alarm.Duration === 270 ? 'selected' : '' %>>270</option>
                             <option value="365" <%= alarm && alarm.Duration === 365 ? 'selected' : '' %>>365</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.CycleStartCount ? alarm.CycleStartCount : 0 %>"  field_key="CycleStartCount" field_type="emp_inp"  field_type_data="number" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= alarm && alarm.CycleStartCount ? alarm.CycleStartCount : 0 %>"  field_key="CycleStartCount" field_type="emp_inp"  field_type_data="number">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>

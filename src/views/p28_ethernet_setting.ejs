@@ -43,7 +43,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.Gateway ? Ethernet.Gateway : 0 %>" field_key="Gateway" field_type="emp_inp"  field_type_data="string" id="Gateway" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.Gateway ? Ethernet.Gateway : 0 %>" field_key="Gateway" field_type="emp_inp"  field_type_data="string" id="Gateway">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.PrimaryDNS ? Ethernet.PrimaryDNS : 0 %>"  field_key="PrimaryDNS" field_type="emp_inp"  field_type_data="string" id="PrimaryDNS" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.PrimaryDNS ? Ethernet.PrimaryDNS : 0 %>"  field_key="PrimaryDNS" field_type="emp_inp"  field_type_data="string" id="PrimaryDNS">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SecondaryDNS ? Ethernet.SecondaryDNS : '' %>" field_key="SecondaryDNS" field_type="emp_inp"  field_type_data="string" id="SecondaryDNS" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SecondaryDNS ? Ethernet.SecondaryDNS : '' %>" field_key="SecondaryDNS" field_type="emp_inp"  field_type_data="string" id="SecondaryDNS">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -121,11 +121,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= Ethernet && Ethernet.NetworkType ? Ethernet.NetworkType : 'Static' %>" field_key="NetworkType"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= Ethernet && Ethernet.NetworkType ? Ethernet.NetworkType : 'Static' %>" field_key="NetworkType"  field_type_data="string" field_type="emp_inp" > 
                             <option value="Static" <%= Ethernet && Ethernet.NetworkType === 'Static' ? 'selected' : '' %>>Static</option>
                             <option value="DHCP" <%= Ethernet && Ethernet.NetworkType === 'DHCP' ? 'selected' : '' %>>DHCP</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.IPAddress ? Ethernet.IPAddress : '' %>" field_key="IPAddress" field_type="emp_inp"  field_type_data="string" id="IPAddress" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.IPAddress ? Ethernet.IPAddress : '' %>" field_key="IPAddress" field_type="emp_inp"  field_type_data="string" id="IPAddress">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SubnetMask ? Ethernet.SubnetMask : '' %>" field_key="SubnetMask" field_type="emp_inp"  field_type_data="string" id="SubnetMask" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SubnetMask ? Ethernet.SubnetMask : '' %>" field_key="SubnetMask" field_type="emp_inp"  field_type_data="string" id="SubnetMask">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.Gateway2 ? Ethernet.Gateway2 : 0 %>" field_key="Gateway2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.Gateway2 ? Ethernet.Gateway2 : 0 %>" field_key="Gateway2" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= Ethernet && Ethernet.PrimaryDNS2 ? Ethernet.PrimaryDNS2 : '' %>" field_key="PrimaryDNS2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data"  value="<%= Ethernet && Ethernet.PrimaryDNS2 ? Ethernet.PrimaryDNS2 : '' %>" field_key="PrimaryDNS2" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -206,7 +206,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SecondaryDNS2 ? Ethernet.SecondaryDNS2 : '' %>" field_key="SecondaryDNS2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SecondaryDNS2 ? Ethernet.SecondaryDNS2 : '' %>" field_key="SecondaryDNS2" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -257,11 +257,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= Ethernet && Ethernet.NetworkType ? Ethernet.NetworkType : 'Static' %>" field_key="NetworkType2"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= Ethernet && Ethernet.NetworkType ? Ethernet.NetworkType : 'Static' %>" field_key="NetworkType2"  field_type_data="string" field_type="emp_inp" > 
                             <option value="Static" <%= Ethernet && Ethernet.NetworkType === 'Static' ? 'selected' : '' %>>Static</option>
                             <option value="DHCP" <%= Ethernet && Ethernet.NetworkType === 'DHCP' ? 'selected' : '' %>>DHCP</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -274,7 +274,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.IPAddress2 ? Ethernet.IPAddress2 : '' %>" field_key="IPAddress2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.IPAddress2 ? Ethernet.IPAddress2 : '' %>" field_key="IPAddress2" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -288,7 +288,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SubnetMask2 ? Ethernet.SubnetMask2 : '' %>" field_key="SubnetMask2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= Ethernet && Ethernet.SubnetMask2 ? Ethernet.SubnetMask2 : '' %>" field_key="SubnetMask2" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>

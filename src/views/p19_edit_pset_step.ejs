@@ -273,7 +273,7 @@
                     if(type_field=='select'){
                         html_field+='<div class="input-group r border mb-2 mt-2">';
                             html_field+='<span class="input-group-text r-left">&nbsp;</span>';
-                            html_field+='<select id="f_'+id+'" class="form-select custom-combobox field_data" value="'+val_inp+'" field_key="'+id+'"  field_type="'+type_emp+'" field_type_data="'+type_data+'">';
+                            html_field+='<select id="f_'+id+'" class="select_val form-select custom-combobox field_data" value="'+val_inp+'" field_key="'+id+'"  field_type="'+type_emp+'" field_type_data="'+type_data+'">';
                                 $(data_field.data).each(function(index,d){
                                     if(d.value==val_inp)
                                         html_field+='<option value="'+d.value+'" selected>'+d.label+'</option>';
@@ -281,7 +281,7 @@
                                         html_field+='<option value="'+d.value+'">'+d.label+'</option>';
                                 });
                             html_field+='</select>';
-                            html_field+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                            html_field+='<span class="input-group-text r-right"></span>';
                         html_field+='</div>';
                     }
                     else if(type_field=='bool'){
@@ -290,7 +290,7 @@
                     else{
                         html_field+='<div class="input-group r border mb-2 mt-2">';
                         html_field+='<span class="input-group-text r-left">&nbsp;</span>';
-                        html_field+='<input id="f_'+id+'" type="text" placeholder="Enter data"  class="form-control field_data" value="'+val_inp+'" field_key="'+id+'" field_type="'+type_emp+'" field_type_data="'+type_data+'" disabled>';
+                        html_field+='<input id="f_'+id+'" type="text" placeholder="Enter data"  class="form-control field_data" value="'+val_inp+'" field_key="'+id+'" field_type="'+type_emp+'" field_type_data="'+type_data+'">';
                         html_field+='<span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>';
                         html_field+='</div>';
                     }

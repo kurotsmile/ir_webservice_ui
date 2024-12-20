@@ -58,11 +58,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.SystemType ? ToolsNet.SystemType : 'Undefined' %>" field_key="SystemType"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.SystemType ? ToolsNet.SystemType : 'Undefined' %>" field_key="SystemType"  field_type_data="string" field_type="emp_inp" > 
                             <option value="Undefined" <%= ToolsNet && ToolsNet.SystemType === 'Undefined' ? 'selected' : '' %>>Undefined</option>
                             <option value="Ingersoll Rand" <%= ToolsNet && ToolsNet.SystemType === 'Ingersoll Rand' ? 'selected' : '' %>>Ingersoll Rand</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress1 ? ToolsNet.PIMIPAddress1 : '256.256.256.256' %>"  field_key="PIMIPAddress1" field_type="emp_inp"  field_type_data="string" id="PIMIPAddress1" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress1 ? ToolsNet.PIMIPAddress1 : '256.256.256.256' %>"  field_key="PIMIPAddress1" field_type="emp_inp"  field_type_data="string" id="PIMIPAddress1">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress2 ? ToolsNet.PIMIPAddress2 : '256.256.256.256' %>"  field_key="PIMIPAddress2" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress2 ? ToolsNet.PIMIPAddress2 : '256.256.256.256' %>"  field_key="PIMIPAddress2" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress3 ? ToolsNet.PIMIPAddress3 : '256.256.256.256' %>"  field_key="PIMIPAddress3" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.PIMIPAddress3 ? ToolsNet.PIMIPAddress3 : '256.256.256.256' %>"  field_key="PIMIPAddress3" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -113,12 +113,12 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.RetryInterval ? ToolsNet.RetryInterval : '5 Seconds' %>" field_key="RetryInterval"  field_type_data="string" id="RetryInterval" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.RetryInterval ? ToolsNet.RetryInterval : '5 Seconds' %>" field_key="RetryInterval"  field_type_data="string" id="RetryInterval" field_type="emp_inp" > 
                             <% timer_seconds.forEach(function(t) { %>
                                 <option value="<%= t %>" <%= ToolsNet && ToolsNet.RetryInterval === t ? 'selected' : '' %>><%= t %></option>
                             <% }); %>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -130,12 +130,12 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.KeepAliveTimer ? ToolsNet.KeepAliveTimer : '30 Seconds' %>" field_key="KeepAliveTimer"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.KeepAliveTimer ? ToolsNet.KeepAliveTimer : '30 Seconds' %>" field_key="KeepAliveTimer"  field_type_data="string" field_type="emp_inp" > 
                             <% timer_seconds.forEach(function(t) { %>
                                 <option value="<%= t %>" <%= ToolsNet && ToolsNet.KeepAliveTimer === t ? 'selected' : '' %>><%= t %></option>
                             <% }); %>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -147,12 +147,12 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.ConnectionRetryTimer ? ToolsNet.ConnectionRetryTimer : '5 Seconds' %>" field_key="ConnectionRetryTimer"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= ToolsNet && ToolsNet.ConnectionRetryTimer ? ToolsNet.ConnectionRetryTimer : '5 Seconds' %>" field_key="ConnectionRetryTimer"  field_type_data="string" field_type="emp_inp" > 
                             <% timer_seconds.forEach(function(t) { %>
                                 <option value="<%= t %>" <%= ToolsNet && ToolsNet.ConnectionRetryTimer === t ? 'selected' : '' %>><%= t %></option>
                             <% }); %>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -164,7 +164,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SystemNumber ? ToolsNet.SystemNumber : 1 %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="number" id="SystemNumber" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SystemNumber ? ToolsNet.SystemNumber : 1 %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="number" id="SystemNumber">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SpindleName ? ToolsNet.SpindleName : 'SpindleName' %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="string" disabled>
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= ToolsNet && ToolsNet.SpindleName ? ToolsNet.SpindleName : 'SpindleName' %>"  field_key="SystemNumber" field_type="emp_inp"  field_type_data="string">
                         <span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span>
                     </div>
                 </div>

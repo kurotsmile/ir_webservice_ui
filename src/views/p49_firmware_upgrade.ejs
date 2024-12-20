@@ -31,10 +31,10 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= FirmwareUpgrade && FirmwareUpgrade.UpdateType ? FirmwareUpgrade.UpdateType : 'Controller Update' %>" field_key="UpdateType"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= FirmwareUpgrade && FirmwareUpgrade.UpdateType ? FirmwareUpgrade.UpdateType : 'Controller Update' %>" field_key="UpdateType"  field_type_data="string" field_type="emp_inp" > 
                             <option value="Controller Update" <%= FirmwareUpgrade && FirmwareUpgrade.UpdateType === 'Controller Update' ? 'selected' : '' %>>Controller Update</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>

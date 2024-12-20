@@ -29,12 +29,12 @@
                 <div class="col-12 col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= FieldbusIO && FieldbusIO.Type ? FieldbusIO.Type : 'Input/Output' %>" field_key="Type"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= FieldbusIO && FieldbusIO.Type ? FieldbusIO.Type : 'Input/Output' %>" field_key="Type"  field_type_data="string" field_type="emp_inp" > 
                             <option value="Input/Output" <%= FieldbusIO && FieldbusIO.Type === 'Input/Output' ? 'selected' : '' %>>Input/Output</option>
                             <option value="Input" <%= FieldbusIO && FieldbusIO.Type === 'Input' ? 'selected' : '' %>>Input</option>
                             <option value="Output" <%= FieldbusIO && FieldbusIO.Type === 'Output' ? 'selected' : '' %>>Output</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-6 col-xl-6">&nbsp;</div>
@@ -147,7 +147,7 @@
                         html+='<div class="col-6">';
                             html+='<div class="input-group r border mb-2 mt-2">';
                                 html+='<span class="input-group-text r-left">&nbsp;</span>';
-                                html+='<select class="form-select custom-combobox" id="bit_Behavior">';
+                                html+='<select class="select_val form-select custom-combobox" id="bit_Behavior">';
                                     html+='<option value="None">None</option>';
                                     for(var y=1;y<=32;y++){
                                         html+='<option value="job '+y+'">job '+y+'</option>';
@@ -178,7 +178,7 @@
                                     html+='<option value="PLC Ready">PLC Ready</option>';
                                     html+='<option value="Bypass MES with JOB 256">Bypass MES with JOB 256</option>';
                                 html+='</select>';
-                                html+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                                html+='<span class="input-group-text r-right"></span>';
                             html+='</div>';
                         html+='</div>';
                     html+='</div>';
@@ -190,11 +190,11 @@
                         html+='<div class="col-6">';
                             html+='<div class="input-group r border mb-2 mt-2">';
                                 html+='<span class="input-group-text r-left">&nbsp;</span>';
-                                html+='<select class="form-select custom-combobox" id="bit_Polarity">';
+                                html+='<select class="select_val form-select custom-combobox" id="bit_Polarity">';
                                     html+='<option value="Normally Open">Normally Open</option>';
                                     html+='<option value="Normally Close">Normally Close</option>';
                                 html+='</select>';
-                                html+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                                html+='<span class="input-group-text r-right"></span>';
                             html+='</div>';
                         html+='</div>';
                     html+='</div>';
@@ -267,9 +267,9 @@
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
                         if(type=='in')
-                            html+='<input type="text" placeholder="Input" value="Input" class="form-control" disabled>';
+                            html+='<input type="text" placeholder="Input" value="Input" class="form-control">';
                         else
-                            html+='<input type="text" placeholder="Output" value="Output" class="form-control" disabled>';
+                            html+='<input type="text" placeholder="Output" value="Output" class="form-control">';
                         html+='<span class="input-group-text r-right">&nbsp;</span>';
                     html+='</div>';
                 html+='</div>';
@@ -282,11 +282,11 @@
                 html+='<div class="col-6">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
-                        html+='<select class="form-select custom-combobox" id="type_add">';
+                        html+='<select class="select_val form-select custom-combobox" id="type_add">';
                             html+='<option value="Bit">Bit</option>';
                             html+='<option value="BCODE/VIN">BCODE/VIN</option>';
                         html+='</select>';
-                        html+='<span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>';
+                        html+='<span class="input-group-text r-right"></span>';
                     html+='</div>';
                 html+='</div>';
             html+='</div>';

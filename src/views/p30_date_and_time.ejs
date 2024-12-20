@@ -40,11 +40,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.Settings ? SetDT.Settings : 'Manual' %>" field_key="Settings"  field_type_data="string" field_type="emp_inp" id="Settings_dt"> 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= SetDT && SetDT.Settings ? SetDT.Settings : 'Manual' %>" field_key="Settings"  field_type_data="string" field_type="emp_inp" id="Settings_dt"> 
                             <option value="Manual" <%= SetDT && SetDT.Settings === 'Manual' ? 'selected' : '' %>>Manual</option>
                             <option value="NTP" <%= SetDT && SetDT.Settings === 'NTP' ? 'selected' : '' %>>NTP</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -56,11 +56,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.DateFormat ? SetDT.DateFormat : 'dd/mm/yyyy' %>" field_key="DateFormat"  field_type_data="string" field_type="emp_inp" id="DateFormat" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= SetDT && SetDT.DateFormat ? SetDT.DateFormat : 'dd/mm/yyyy' %>" field_key="DateFormat"  field_type_data="string" field_type="emp_inp" id="DateFormat" > 
                             <option value="dd/mm/yyyy" <%= SetDT && SetDT.DateFormat === 'dd/mm/yyyy' ? 'selected' : '' %>>dd/mm/yyyy</option>
                             <option value="mm/dd/yyyy" <%= SetDT && SetDT.DateFormat === 'mm/dd/yyyy' ? 'selected' : '' %>>mm/dd/yyyy</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <input type="hidden" id="datetimepicker">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="dt" disabled>                     
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="dt">                     
                         <span id="btn_sel_datetime" role="button" class="input-group-text r-right" onclick="show_sel_time(this);return false;"><img src="/public/SVG/Date.svg"/></span>
                     </div>
                 </div>
@@ -86,11 +86,11 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select id="TimeFormat" class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeFormat ? SetDT.TimeFormat : '12 Hrs' %>" field_key="TimeFormat"  field_type_data="string" field_type="emp_inp" > 
+                        <select id="TimeFormat" class="select_val form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeFormat ? SetDT.TimeFormat : '12 Hrs' %>" field_key="TimeFormat"  field_type_data="string" field_type="emp_inp" > 
                             <option value="12 Hrs" <%= SetDT && SetDT.TimeFormat === '12 Hrs' ? 'selected' : '' %>>12 Hours</option>
                             <option value="24 Hrs" <%= SetDT && SetDT.TimeFormat === '24 Hrs' ? 'selected' : '' %>>24 Hours</option>
                         </select>                        
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeZone ? SetDT.TimeZone : '' %>" field_key="TimeZone" field_type_data="string" field_type="emp_inp" id="TimeZone">
+                        <select class="select_val form-select custom-combobox field_data" value="<%= SetDT && SetDT.TimeZone ? SetDT.TimeZone : '' %>" field_key="TimeZone" field_type_data="string" field_type="emp_inp" id="TimeZone">
                             <% const timeZones = [
                                 { label: "UTC-12:00", value: "UTC-12:00" },
                                 { label: "UTC-11:00", value: "UTC-11:00" },
@@ -139,7 +139,7 @@
                                 </option>
                             <% }); %>
                         </select>                                              
-                        <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                        <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
             </div>
