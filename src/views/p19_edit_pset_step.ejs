@@ -39,7 +39,7 @@
             <div class="row p-3">
                 <div class="col-12">
                     <span class="space-l" style="margin-left: 64px;"></span>
-                    <span style="margin-right: 50px;">Tool Max Torque: 90</span> <span>Nm Tool Max Torque: 280 RPM</span>
+                    <span style="margin-right: 50px;" id="lbMaxTorque">Tool Max Torque: 90</span> <span id="lbMaxSpeed">Nm Tool Max Torque: 280 RPM</span>
                 </div>
             </div>
         </div>
@@ -59,7 +59,41 @@
     <%- include('p9_alet_warning.ejs') %>
     
     <script>
+        const fUnit = {
+            "Nm": 0,
+            "dNm": 1,
+            "Ft-lbs": 2,
+            "In-lbs": 3,
+            "Kg-M": 4,
+            "Kg-Cm": 5
+        };
+
+        const tNm = {
+            0: 1,
+            1: 0.1,
+            2: 1.3558179483,
+            3: 0.11298483,
+            4: 9.80665003,
+            5: 0.0980665
+        };
+
+        const tUnit = {
+            0: "Nm",
+            1: "dNm",
+            2: "Ft-lbs",
+            3: "In-lbs",
+            4: "Kg-M",
+            5: "Kg-Cm"
+        };
+
+        let MainWin = {
+            MaxTorque:  1.08,
+            MaxRmp: 1000 
+        };
+
         var data_p= JSON.parse('<%- JSON.stringify(jsonData) %>');
+        let m = MainWin.MaxTorque / tNm[fUnit[data_p.Units]];
+        let fs = (m < 10) ? "#0.00" : "#0.0";
         var data_step={
             "Type": 1,
             "TA": {
@@ -207,6 +241,7 @@
         var array_type=["TA","TA","AT","PT","Seat","Delay","Backout"];
         var stepItemData=JSON.parse('<%- JSON.stringify(jsonData.Steps[index_step])%>');
         var index_type=stepItemData.Type;
+        
        
         var data_select_type=[
             {label:'Torque',value:1},
@@ -251,6 +286,12 @@
             $("#f_OvershootComppensation").on("input", v_Overshoot_Compensation);
             $("#f_DownshiftThreshold").on("input", v_Downshift_Threshold);
             $("#f_ShiftdownSpeed").on("input", v_ShiftdownSpeed);
+
+            let lbMaxTorque = `Tool Max Torque: ${m.toFixed(fs === "#0.00" ? 2 : 1)} ${data_p.Units}`;
+            let lbMaxSpeed = `Tool Max Speed: ${MainWin.MaxRmp.toFixed(0)} RPM`;
+
+            $("#lbMaxTorque").html(lbMaxTorque);
+            $("#lbMaxSpeed").html(lbMaxSpeed);
         }
 
         function row_field(id,label,val_inp,data_field=null){

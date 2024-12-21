@@ -47,7 +47,7 @@
                 <div class="col-6">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="select_val form-select custom-combobox field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>" field_key="Units"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= jsonData && jsonData.Units ? jsonData.Units : '' %>" field_key="Units"  field_type_data="string" field_type="emp_inp" id="Units" > 
                             <option value="Nm" <%= jsonData && jsonData.Units === 'Nm' ? 'selected' : '' %>>Nm</option>
                             <option value="dNm" <%= jsonData && jsonData.Units === 'dNm' ? 'selected' : '' %>>dNm</option>
                             <option value="Ft-lbs" <%= jsonData && jsonData.Units === 'Ft-lbs' ? 'selected' : '' %>>Ft-lbs</option>
@@ -305,7 +305,7 @@
             <div class="row p-3">
                 <div class="col-12">
                     <span class="space-l" style="margin-left: 64px;"></span>
-                    <span style="margin-right: 50px;">Tool Max Torque: 90</span> <span>Nm Tool Max Torque: 280 RPM</span>
+                    <span style="margin-right: 50px;" id="lbMaxTorque">Tool Max Torque: 90</span> <span id="lbMaxSpeed">Nm Tool Max Torque: 280 RPM</span>
                 </div>
             </div>
         </div>
@@ -325,6 +325,39 @@
     <%- include('p9_alet_warning.ejs') %>
     
     <script>
+
+        const fUnit = {
+            "Nm": 0,
+            "dNm": 1,
+            "Ft-lbs": 2,
+            "In-lbs": 3,
+            "Kg-M": 4,
+            "Kg-Cm": 5
+        };
+
+        const tNm = {
+            0: 1,
+            1: 0.1,
+            2: 1.3558179483,
+            3: 0.11298483,
+            4: 9.80665003,
+            5: 0.0980665
+        };
+
+        const tUnit = {
+            0: "Nm",
+            1: "dNm",
+            2: "Ft-lbs",
+            3: "In-lbs",
+            4: "Kg-M",
+            5: "Kg-Cm"
+        };
+
+        let MainWin = {
+            MaxTorque:  1.08,
+            MaxRmp: 1000 
+        };
+
         function save_data() {
             var obj_p = JSON.parse('<%- JSON.stringify(jsonData) %>');
             var id_file='<%= id %>';
@@ -404,7 +437,22 @@
                 }
             });
 
+            $("#Units").change(function(){
+                load_bar_footer_info();
+            });
+            load_bar_footer_info();
         });
+
+        function load_bar_footer_info(){
+            var Units_val=$("#Units").val();
+            let m = MainWin.MaxTorque / tNm[fUnit[Units_val]];
+            let fs = (m < 10) ? "#0.00" : "#0.0";
+            let lbMaxTorque = `Tool Max Torque: ${m.toFixed(fs === "#0.00" ? 2 : 1)} ${Units_val}`;
+            let lbMaxSpeed = `Nm Tool Max Torque ${MainWin.MaxRmp.toFixed(0)} RPM`;
+
+            $("#lbMaxTorque").html(lbMaxTorque);
+            $("#lbMaxSpeed").html(lbMaxSpeed);
+        }
 
         function show_group(s_name_group,emp){
             var val_show=$(emp).attr("value");
