@@ -86,7 +86,7 @@
             if(next_step>8) return false;
 
             jsonData.Steps[next_step]=copiedObject;
-            show_msg("Copied "+(index+1)+" step to new step successfully!","Copy");
+            //show_msg("Copied "+(index+1)+" step to new step successfully!","Copy");
             save_data();
             load_list();
         }
@@ -152,7 +152,7 @@
                     ui.item.find('td').each(function(index,r) {
                         if(index==0) $(r).css("width","10%");
                         if(index==1) $(r).css("width","60%");
-                        if(index==2) $(r).css("width","30%");
+                        if(index==2) $(r).css("width","auto");
                     });
                 },update: function (event, ui) {
                     let newOrder = [];

@@ -832,6 +832,54 @@ app.post('/delete-file', (req, res) => {
     });
 });
 
+app.get('/get_list_job_by_pset_id', (req, res) => {
+    const id_p = req.query.id_p;
+    const primaryPath = path.join(get_file_system("JobList"));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', 'JobList.json');
+
+    fs.access(primaryPath, fs.constants.F_OK, async (err) => {
+        const filePath = err ? secondaryPath : primaryPath;
+        try {
+            const jsonData = await readJsonFile(filePath);
+            const jsonList = Array.isArray(jsonData) ? jsonData : [];
+            let jsonListJob_name = [];
+            
+            for (let i = 0; i < jsonList.length; i++) {
+                const obj = jsonList[i];
+                if (obj.PsetCount !== 0) {
+                    const id = obj.ID;
+                    const primaryPath = path.join(get_file_system(id));
+                    const secondaryPath = path.join(__dirname, 'public', 'jsonData', id + '.json');
+                        const [primaryData, secondaryData] = await Promise.all([
+                            checkAndReadFile(primaryPath),
+                            checkAndReadFile(secondaryPath)
+                        ]);
+                
+                        let jsonDataP = {};
+                        if (primaryData) {
+                            jsonDataP = JSON.parse(primaryData);
+                        } else if (secondaryData) {
+                            jsonDataP = JSON.parse(secondaryData);
+                        }
+                        for (let j = 0; j < jsonDataP.Psets.length; j++) {
+                            let obj_p = jsonDataP.Psets[j];
+                            if(obj_p.ID!=''){
+                                if(obj_p.ID==id_p){
+                                    jsonListJob_name.push(obj.Name);
+                                }
+                            }
+                        }
+                }
+            }
+            
+            return res.status(200).json({ jsonListJob_name });
+            
+        } catch (error) {
+            return res.status(500).send(error.message);
+        }
+    });
+});
+
 
 server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

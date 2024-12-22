@@ -153,7 +153,6 @@
             var html='';
 
             html+='Are you sure you want to delete <b>'+p_name+'</b>?<br/>';
-            html+='<b>'+p_name+'</b> is Associated width <b>'+p_name+'</b>';
             $("#box_msg_title").empty();
             $("#box_msg_body").empty();
             $("#box_msg_btn").empty();
@@ -199,6 +198,20 @@
 
             $("#bk_dark_full").show();
             $("#box_msg").show();
+
+            $.ajax({
+                url: '/get_list_job_by_pset_id?id_p='+p_id_file,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function(response) {
+                    $(response.jsonListJob_name).each(function(index,j){
+                        $("#box_msg_body").append('<div><b>'+p_name+'</b> is Associated width <b>'+j+'</b></div>');
+                    });
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.error);
+                }
+            });
         }
 
         function show_copy(emp){
