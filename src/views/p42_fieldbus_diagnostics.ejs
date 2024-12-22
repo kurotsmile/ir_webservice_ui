@@ -17,7 +17,7 @@
 
 <body class="brown">
     <%- include('menu_sidebar') %>
-    <%- include('bar_head',{title:'Fieldbus IO Settings',
+    <%- include('bar_head',{title:'Fieldbus Diagnostics',
             navs:[
                 {label:'Fieldbus Settings',link:'fieldbus_settings'}
             ],
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="col-6">
-                    <button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte('in');return false;"><img src="/public/SVG/Add.svg" >Add Input Bytes Assignment</button>
+                    <!--<button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte('in');return false;"><img src="/public/SVG/Add.svg" >Add Input Bytes Assignment</button>!-->
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="col-6">
-                    <button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte('out');return false;"><img src="/public/SVG/Add.svg" >Add Output Bytes Assignment</button>
+                    <!--<button class="btn btn-info text-white btn-rounded f-right mt-3" onclick="show_add_byte('out');return false;"><img src="/public/SVG/Add.svg" >Add Output Bytes Assignment</button>!-->
                 </div>
             </div>
 
@@ -89,6 +89,7 @@
         </div>
     </main>
 
+    <!--
     <div id="menu_footer" class="fixed">
         <div class="container-fluid">
             <div class="row">
@@ -99,6 +100,7 @@
             </div>
         </div>
     </div>
+    -->
 
     <%- include('p9_alet_warning.ejs') %>
     <script>
@@ -307,8 +309,9 @@
             html+='</div>';
 
             html+='<div class="row text-center">';
-                html+='<div class="col-12"><div class="label-txt"><b>* Avalilable number of input Bytes \''+(256-$("#table_"+type+" tr").length)+'\'</b></div></div>';
+                html+='<div class="col-12"><div class="label-txt"><b>* Avalilable number of input Bytes \'255\'</b></div></div>';
             html+='</div>';
+
             show_msg(html,"Show Add Byte",()=>{
                 $("#box_msg").css("width","490px");
                 $("#btn_msg_done").click(()=>{
