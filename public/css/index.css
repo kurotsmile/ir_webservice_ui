@@ -395,10 +395,9 @@ select {
 }
 
 .lager-icon .title {
-    font-size: 29px;
-    margin-left: 15px;
+    font-size: 187%;
     float: left;
-    margin-top: 10px;
+    margin-top: 15px;
     font-style: normal;
     font-weight: lighter;
 }
@@ -413,10 +412,12 @@ select {
 }
 
 .lager-icon .icon_img{
-    margin-left: 17px;
+    margin-left: 2px;
     float: left;
-    margin-top: -51px;
-    margin-right: -2px;
+    margin-top: 18px;
+    margin-right: 0px;
+    width: 25%;
+    height: 25%;
 }
 
 .lager-icon.oranger {
@@ -442,13 +443,22 @@ select {
     width: 100%;
     background-color: #333333;
     margin-bottom: 3px;
-    font-size: xx-large;
+    font-size: 200%;
+    display: list-item;
+    list-style: none;
+    height: 62.2px;
+}
+
+.list-attr .attr-item:last-child {
+    margin-bottom: 0;
 }
 
 .list-attr .attr-item .txt {
-    float: right;
-    margin-top: 15px;
+    width: 70%;
+    float: left;
+    margin-top: 6px;
     margin-right: 8px;
+    text-align: center;
 }
 
 .list-attr .attr-item .icon {
@@ -458,6 +468,10 @@ select {
 
 .attr-item.horizontal-icon {
     background-color: unset;
+}
+.attr-item.horizontal-icon a img{
+    width: 100%;
+    height: 100%;
 }
 
 .attr-item.horizontal-icon .icon {
@@ -774,6 +788,11 @@ table thead tr th{
 .btn-info{
     background-color: #00a1cb !important;
 }
+
+#list_menu_top_right{
+    display: flex;
+    gap: 10px;
+}
 #list_menu_top_right a{
     border-radius: 50%;
     width: 48px;
@@ -974,6 +993,9 @@ input[type="file"]::file-selector-button:hover {
     #chartTypeSelect_dropdown{width: 263px !important;}
     #job-selection-dropdown{width: 100% !important;}
     .bar_head{margin-left: 70px;}
+    .lager-icon .title {font-size: x-large;}
+    .list-attr .attr-item {font-size: 25px;}
+    .list-attr .attr-item .txt {width: 50%;}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -988,6 +1010,9 @@ input[type="file"]::file-selector-button:hover {
     #chartTypeSelect_dropdown{width: 263px !important;}
     #job-selection-dropdown{width: 100% !important;}
     .bar_head{margin-left: 70px;}
+    .lager-icon .title {font-size: x-large;}
+    .list-attr .attr-item {font-size: 25px;}
+    .list-attr .attr-item .txt {width: 50%;}
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -1000,6 +1025,9 @@ input[type="file"]::file-selector-button:hover {
     }
     #bar_menu_top{margin-left: 80px;}
     .bar_head{margin-left: 70px;}
+    .lager-icon .title {font-size: x-large;}
+    .list-attr .attr-item {font-size: 25px;}
+    .list-attr .attr-item .txt {width: 50%;}
 }
 
 /* Large devices (desktops, 992px and up) */

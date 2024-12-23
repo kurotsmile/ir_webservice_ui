@@ -22,7 +22,8 @@
     <div class="p-1 px-md-4 mb-1 bg-dark box-shadow bar_head" >
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
                     
                     <div class="input-group mb-3 r border mt-3 p-0 sel-dropdown" style="border: unset !important;" id="job-selection-dropdown">
                         <span class="input-group-text r-left"><img src="/public/SVG/Job.svg"/></span>
@@ -40,17 +41,17 @@
                     </div>
 
                 </div>
-
-                <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+ 
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
                     <a href="barcode" class="input-group mb-3 r border w-100 mt-3" style="border: unset !important;">
                         <span class="input-group-text r-left"><img  src="public/SVG/Barcode.svg" /></span>
                         <div class="form-control r-right bg-dark" style="border: none;background-color: black !important;text-decoration: none;color: #fff;">Barcode</div>
                     </a>
                 </div>
 
-                <div class="col-12 col-md-3 col-lg-3 col-xl-3">&nbsp;</div>
-
-                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
+                <div class="col-12 col-sm-12 col-md-2 col-lg-3 col-xl-3 col-xxl-3">&nbsp;</div>
+                
+                <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 col-xxl-2">
                     <div class="d-right list-attr">
                         <div class="attr-item horizontal-icon pt-2" id="list_menu_top_right">
                             <a href="tool_calibartion"><img src="public/SVG/Tool48D.svg" /></a>
@@ -123,19 +124,19 @@
                                         <img  src="public/SVG/ULimit.svg" />
                                         </i>
                                     </div>
-                                    <div class="txt" id="torque_high_limit"></div>
+                                    <div class="txt" id="torque_high_limit">0.00</div>
                                 </div>
                                 <div class="attr-item attr-item-number">
                                     <div class="icon">
                                         <img src="public/SVG/Target.svg" />
                                     </div>
-                                    <div class="txt" id="torque_target"> &nbsp;</div>
+                                    <div class="txt" id="torque_target">0.00</div>
                                 </div>
                                 <div class="attr-item attr-item-low" id="crTorDn">
                                     <div class="icon">
                                         <img src="public/SVG/LLimit.svg" />
                                     </div>
-                                    <div class="txt" id="torque_low_limit"> &nbsp;</div>
+                                    <div class="txt" id="torque_low_limit">0.00</div>
                                 </div>
                             </div>
                         </div>
@@ -153,19 +154,19 @@
                                     <div class="icon">
                                         <img  src="public/SVG/ULimit.svg" />
                                     </div>
-                                    <div class="txt" id="angle_high_limit">&nbsp;</div>
+                                    <div class="txt" id="angle_high_limit">0</div>
                                 </div>
                                 <div class="attr-item">
                                     <div class="icon">
                                         <img  src="public/SVG/Target.svg" />
                                     </i></div>
-                                    <div class="txt" id="angle_target">&nbsp;</div>
+                                    <div class="txt" id="angle_target">0</div>
                                 </div>
                                 <div class="attr-item" id="crAngDn">
                                     <div class="icon">
                                         <img src="public/SVG/LLimit.svg" />
                                     </div>
-                                    <div class="txt" id="angle_low_limit">&nbsp;</div>
+                                    <div class="txt" id="angle_low_limit">0</div>
                                 </div>
                             </div>
                         </div>
