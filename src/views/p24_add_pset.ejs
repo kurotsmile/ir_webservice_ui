@@ -63,14 +63,14 @@
 
         function item_p(data_p){
             if(data_p.ID=="") return false;
-            var html='<tr>';
+            var html='<tr data-id="'+data_p.ID+'">';
                 html+='<td scope="row">';
                     html+='<img src="/public/SVG/Off.svg" data-index="'+data_p.index+'" style="width:42px" role="button" class="mb-2 mt-3 field_data btn_switch" value="'+data_p.Staus+'" field_key="Status" field_type="emp_value" field_type_data="bool"/>';
                 html+='</td>';
                 html+='<td>'+data_p.Name+'</td>';
-                html+='<td>'+getDataFieldById(data_p.ID,'Strategy')+'</td>';
-                html+='<td>'+getDataFieldById(data_p.ID,'Target')+'</td>';
-                html+='<td>'+getDataFieldById(data_p.ID,'Steps')+'</td>';
+                html+='<td>'+getDataFieldById(data_p.ID,'Strategy','Torque')+'</td>';
+                html+='<td>'+getDataFieldById(data_p.ID,'Target','20')+'</td>';
+                html+='<td>'+getDataFieldById(data_p.ID,'Steps','1')+'</td>';
             html+='</tr>';
             return $(html);
         }
@@ -81,6 +81,23 @@
                 p.index=index;
                 $("#all_items").append(item_p(p));
             });
+
+            /*
+            $("#all_items tr").each(function(index,tr){
+                var p_id=$(tr).data("id");
+                $.ajax({
+                    url: '/get-pset-by-id?id_p='+p_id,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function(response) {
+                        console.log(response.pData.TraceSelection);
+                    },
+                    error: function(error) {
+                        console.log(error.responseJSON.error);
+                    }
+                });
+            });
+            */
 
             $("#inp_search").on("keyup", function () {
                 const value = $(this).val().toLowerCase();
@@ -242,9 +259,9 @@
             });
         }
 
-        function getDataFieldById(ID, key) {
+        function getDataFieldById(ID, key,val_default='0') {
             let item = data_j.Psets.find(item => item.ID === ID);
-            return item && key in item ? item[key] : '[NA]';
+            return item && key in item ? item[key] : val_default;
         }
     </script>
 </body>

@@ -832,6 +832,27 @@ app.post('/update-list-by-field', (req, res) => {
     });
 });
 
+app.get('/get-pset-by-id', (req, res) => {
+    const id_p = req.query.id_p;
+    const primaryPath = path.join(get_file_system(id_p));
+    const secondaryPath = path.join(__dirname, 'public', 'jsonData', id_p + '.json');
+    const filePath = fs.existsSync(primaryPath) ? primaryPath : secondaryPath;
+
+    fs.readFile(filePath, 'utf8', (readErr, data) => {
+        if (readErr) {
+            return res.status(500).json({ error: `Failed to read file: ${readErr.message}` });
+        }
+
+        try {
+            const pData = JSON.parse(data);
+            return res.status(200).json({pData});
+        } catch (parseErr) {
+            return res.status(500).json({ error: `Error parsing JSON data: ${parseErr.message}` });
+        }
+    });
+});
+
+
 app.post('/delete-file', (req, res) => {
     const { file_name } = req.body;
 
