@@ -337,7 +337,6 @@ select {
     float: left;
     width: 100%;
     background-color: #333333;
-    margin-bottom: 3px;
 }
 
 #task-all .task-item .txt {
@@ -346,9 +345,15 @@ select {
     margin-left: 12px;
 }
 
+#task-element{
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
 #task-element .task-item {
     font-size: xx-large;
-    padding: 2%;
+    height: 61.2px;
 }
 
 .lager-icon {
@@ -381,6 +386,40 @@ select {
     margin-right: 10px;
 }
 
+.t{
+    display: flex;
+    flex-direction: column;
+}
+
+.t .r {
+    display: flex;
+}
+
+.t .r:first-child {
+    flex-wrap: nowrap;
+    height: 54px;
+}
+
+.t .r:last-child .c {
+    flex: 1;
+}
+
+.t .r:first-child .c:first-child {
+    flex: 0.5;
+}
+
+.t .r:first-child .c:last-child {
+    flex: 2;
+    align-items: flex-start;
+}
+
+.t .r .c {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #tilt_angle{
     font-size: xx-large;
 }
@@ -395,29 +434,22 @@ select {
 }
 
 .lager-icon .title {
-    font-size: 187%;
+    font-size:xx-large;
     float: left;
-    margin-top: 15px;
     font-style: normal;
     font-weight: lighter;
 }
 
 .lager-icon .number {
-    float: left;
     width: 100%;
     text-align: center;
     font-size: 53px;
     font-weight: bold;
-    margin-top: -67px;
 }
 
 .lager-icon .icon_img{
-    margin-left: 2px;
-    float: left;
-    margin-top: 18px;
-    margin-right: 0px;
-    width: 25%;
-    height: 25%;
+    width: 70%;
+    height: 70%;
 }
 
 .lager-icon.oranger {
@@ -1035,17 +1067,24 @@ input[type="file"]::file-selector-button:hover {
     /* CSS for devices between 992px and 1199px (desktops) */
     #bar_menu_top{margin-left: 80px;}
     #chartTypeSelect_dropdown{width: unset !important;}
+    .lager-icon .title {font-size: x-large;}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) and (max-width: 1399.98px) {
     /* CSS for devices between 1200px and 1399px (large desktops) */
     #bar_menu_top{margin-left: 80px;}
+    .lager-icon .title {font-size: x-large;}
 }
 
-/* Extra Extra large devices (very large desktops, 1400px and up) */
-@media (min-width: 1400px) {
+@media (min-width: 1400px) and (max-width: 1499.98px) {
+    #bar_menu_top{margin-left: 80px;}
+    .lager-icon .title {font-size: x-large;}
+}
+
+@media (min-width: 1500px) {
     #bar_menu_top{margin-left: unset;}
+    .lager-icon .title {font-size: xx-large;}
 }
 
 /* Landscape orientation */
