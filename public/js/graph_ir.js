@@ -20,7 +20,7 @@ let listLabelY = [
 let labels = [];
 let labelY = [];
 let canvas = {};
-let myChart={};
+let myChart=null;
 let data_ir=[];
 let graph_max_y=0;
 
@@ -442,9 +442,18 @@ function drawGrid(chart) {
 }
 
 function resizeChart() {
-    canvas.height = (window.innerHeight * 0.5) + 20;
-    graphWidth = canvas.width - 100;
-    graphHeight = canvas.height - 100;
-    myChart.update();
+    //canvas.height = (window.innerHeight * 0.5) + 20;
+
+
+   // graphWidth = canvas.width - 100;
+    //graphHeight = canvas.height - 100;
+    setTimeout(() => {
+        canvas = document.getElementById('myChart');
+        graphWidth = canvas.width - 100;
+        graphHeight = canvas.height - 100;
+        myChart.update();
+    }, 500);
+
+
 }
 window.addEventListener('resize', resizeChart);
