@@ -6,6 +6,7 @@ html, body {
     background-color: #020202 !important;
     color: #1d1a1a;
     overflow-x: hidden;
+    min-width: 560px;
 }
 
 
@@ -348,11 +349,11 @@ select {
     display: flex;
     gap: 3px;
     flex-wrap: wrap;
+    height: 100%;
 }
 
 #task-element .task-item {
     font-size: xx-large;
-    height: 61.2px;
 }
 
 .lager-icon {
@@ -526,10 +527,12 @@ select {
 
 #list_btn_end{
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: stretch;
     gap: 10px;
     height: 62px;
+    flex: 1.6;
+    flex-wrap: nowrap;
 }
 
 #list_btn_end div{
@@ -539,7 +542,9 @@ select {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    width: 30%;
 }
+
 
 #list_btn_end div label{
     display: flex;
@@ -792,6 +797,26 @@ body.brown{
     margin-right: 6px;
 }
 
+.r_bottom{
+    display: flex;
+    align-items: stretch;
+    font-size: x-large;
+    gap: 40px;
+    height: 65px;
+}
+
+.r_bottom .c{
+    flex: 0.5;
+}
+
+.r_bottom .c div{
+    height: 100%;
+}
+
+.r_bottom .c-location{
+    flex: 1;
+}
+
 table{
     border-color: #333333 !important;
 }
@@ -848,6 +873,7 @@ table thead tr th{
     display: flex;
     gap: 10px;
 }
+
 #list_menu_top_right a{
     border-radius: 50%;
     width: 48px;
@@ -1051,7 +1077,12 @@ input[type="file"]::file-selector-button:hover {
     .lager-icon .title {font-size: x-large;}
     .list-attr .attr-item {font-size: 25px;}
     .list-attr .attr-item .txt {width: 50%;}
-    #list_btn_end div{padding: 10px;}
+    #list_btn_end div{padding: 3px;width: unset;}
+    #list_btn_end {height: unset;font-size: 8px;gap: 2px;}
+    .r_bottom {font-size: x-large;gap: 5px;height: 34px;}
+    .r_bottom .c-location {flex: 10;}
+    .ip-container{font-size: 12px !important;}
+    .ip-container img{width: 13px !important;height: 13px !important;}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -1069,7 +1100,12 @@ input[type="file"]::file-selector-button:hover {
     .lager-icon .title {font-size: x-large;}
     .list-attr .attr-item {font-size: 25px;}
     .list-attr .attr-item .txt {width: 50%;}
-    #list_btn_end div{padding: 10px;}
+    #list_btn_end div{padding: 3px;width: unset;}
+    #list_btn_end {height: unset;font-size: 8px;gap: 2px;}
+    .r_bottom {font-size: x-large;gap: 5px;height: 34px;}
+    .r_bottom .c-location {flex: 10;}
+    .ip-container{font-size: 12px !important;}
+    .ip-container img{width: 13px !important;height: 13px !important;}
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -1085,7 +1121,12 @@ input[type="file"]::file-selector-button:hover {
     .lager-icon .title {font-size: x-large;}
     .list-attr .attr-item {font-size: 25px;}
     .list-attr .attr-item .txt {width: 50%;}
-    #list_btn_end div{padding: 10px;}
+    #list_btn_end div{padding: 3px;width: unset;}
+    #list_btn_end {height: unset;font-size: 8px;gap: 2px;}
+    .r_bottom {font-size: x-large;gap: 5px;height: 34px;}
+    .r_bottom .c-location {flex: 10;}
+    .ip-container{font-size: 12px !important;}
+    .ip-container img{width: 13px !important;height: 13px !important;}
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -1094,7 +1135,12 @@ input[type="file"]::file-selector-button:hover {
     #bar_menu_top{margin-left: 60px;}
     #chartTypeSelect_dropdown{width: unset !important;}
     .lager-icon .title {font-size: x-large;}
-    #list_btn_end div{padding: 10px;}
+    #list_btn_end div{padding: 3px;width: unset;}
+    #list_btn_end {height: unset;font-size: 8px;gap: 2px;}
+    .r_bottom {font-size: x-large;gap: 5px;height: 34px;}
+    .r_bottom .c-location {flex: 10;}
+    .ip-container{font-size: 12px !important;}
+    .ip-container img{width: 13px !important;height: 13px !important;}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -1168,7 +1214,6 @@ input[type="file"]::file-selector-button:hover {
     /* Option text color */
 }
 
-
 .row-container {
     display: flex;
     align-items: center;
@@ -1217,13 +1262,20 @@ input[type="file"]::file-selector-button:hover {
 .progress-container{color: white;}
 
 .ip-container {
-    background-color: #444; /* Dark grey background */
+    background-color: #444;
     border-radius: 30px;
-    /* padding: 10px 20px; */
     display: flex;
     align-items: center;
     color: white;
     font-family: Arial, sans-serif;
+    padding-right: 5px;
+    justify-content: flex-start;
+    padding-left: 5px;
+}
+
+.ip-container img{
+    width: 48px;
+    height: 48px;
 }
 
 .marker {
@@ -1237,35 +1289,26 @@ input[type="file"]::file-selector-button:hover {
     font-weight: bold;
 }
 
-.ip-address {
-    font-size: x-large;
-}
-
 .PF-OP{
-    background-color: #132307; /* Dark green background */
-    border: 2px solid #52951e; /* Green border */
-    color: #fff; /* White text color */
-    font-size: x-large; /* Adjust the font size */
-    border-radius: 30px; /* Rounded corners */
+    background-color: #132307;
+    border: 2px solid #52951e;
+    color: #fff;
+    border-radius: 30px;
     text-align: center;
-    /* font-family: Arial, sans-serif; */
-    /* margin: 0 7%; */
 }
 
 .ToolsNet{
-    background-color: #2e0d08; /* Dark green background */
-    border: 2px solid #922919; /* Green border */
-    color: #fff; /* White text color */
-    font-size: x-large; /* Adjust the font size */
-    border-radius: 30px; /* Rounded corners */
+    background-color: #2e0d08;
+    border: 2px solid #922919;
+    color: #fff;
+    border-radius: 30px;
     text-align: center;
 }
 
 .Fieldbus{
-    background-color: #4d4d4d; /* Dark green background */
-    color: #fff; /* White text color */
-    font-size: x-large; /* Adjust the font size */
-    border-radius: 30px; /* Rounded corners */
+    background-color: #4d4d4d;
+    color: #fff;
+    border-radius: 30px;
     text-align: center;
 }
 
