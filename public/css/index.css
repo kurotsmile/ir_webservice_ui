@@ -524,6 +524,27 @@ select {
     cursor: pointer;
 }
 
+#list_btn_end{
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    gap: 10px;
+    height: 62px;
+}
+
+#list_btn_end div{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#list_btn_end div label{
+    display: flex;
+    justify-content: center;
+}
 
 .location {
     background-color: #333333;
@@ -1030,6 +1051,7 @@ input[type="file"]::file-selector-button:hover {
     .lager-icon .title {font-size: x-large;}
     .list-attr .attr-item {font-size: 25px;}
     .list-attr .attr-item .txt {width: 50%;}
+    #list_btn_end div{padding: 10px;}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -1047,6 +1069,7 @@ input[type="file"]::file-selector-button:hover {
     .lager-icon .title {font-size: x-large;}
     .list-attr .attr-item {font-size: 25px;}
     .list-attr .attr-item .txt {width: 50%;}
+    #list_btn_end div{padding: 10px;}
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -1057,36 +1080,41 @@ input[type="file"]::file-selector-button:hover {
     .col_tb_10p,.col_tb_20p,.col_tb_30p,.col_tb_40p,.col_tb_50p,.col_tb_60p,.col_tb_70p,.col_tb_80p,.col_tb_90p,.col_tb_100p{
         width: unset;
     }
-    #bar_menu_top{margin-left: 80px;}
+    #bar_menu_top{margin-left: 60px;}
     .bar_head{margin-left: 70px;}
     .lager-icon .title {font-size: x-large;}
     .list-attr .attr-item {font-size: 25px;}
     .list-attr .attr-item .txt {width: 50%;}
+    #list_btn_end div{padding: 10px;}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     /* CSS for devices between 992px and 1199px (desktops) */
-    #bar_menu_top{margin-left: 80px;}
+    #bar_menu_top{margin-left: 60px;}
     #chartTypeSelect_dropdown{width: unset !important;}
     .lager-icon .title {font-size: x-large;}
+    #list_btn_end div{padding: 10px;}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) and (max-width: 1399.98px) {
     /* CSS for devices between 1200px and 1399px (large desktops) */
-    #bar_menu_top{margin-left: 80px;}
+    #bar_menu_top{margin-left: 60px;}
     .lager-icon .title {font-size: x-large;}
+    #list_btn_end div{padding: 20px;}
 }
 
 @media (min-width: 1400px) and (max-width: 1499.98px) {
-    #bar_menu_top{margin-left: 80px;}
+    #bar_menu_top{margin-left: 30px;}
     .lager-icon .title {font-size: x-large;}
+    #list_btn_end div{padding: 20px;}
 }
 
 @media (min-width: 1500px) {
-    #bar_menu_top{margin-left: unset;}
+    #bar_menu_top {margin-left: 0px;}
     .lager-icon .title {font-size: xx-large;}
+    #list_btn_end div{padding: 20px;}
 }
 
 /* Landscape orientation */
@@ -1220,7 +1248,6 @@ input[type="file"]::file-selector-button:hover {
     font-size: x-large; /* Adjust the font size */
     border-radius: 30px; /* Rounded corners */
     text-align: center;
-    padding: 0 3em
     /* font-family: Arial, sans-serif; */
     /* margin: 0 7%; */
 }
@@ -1232,7 +1259,6 @@ input[type="file"]::file-selector-button:hover {
     font-size: x-large; /* Adjust the font size */
     border-radius: 30px; /* Rounded corners */
     text-align: center;
-    padding: 0 3em
 }
 
 .Fieldbus{
@@ -1241,8 +1267,6 @@ input[type="file"]::file-selector-button:hover {
     font-size: x-large; /* Adjust the font size */
     border-radius: 30px; /* Rounded corners */
     text-align: center;
-    padding: 0 3em
-    /* margin: 0 7%; */
 }
 
 ::-webkit-scrollbar {
