@@ -33,7 +33,7 @@
                 <div class="col-8 col-sm-8 col-md-8 col-lg-3 col-xl-3">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <select class="select_val form-select custom-combobox field_data" value="<%= FieldbusIO && FieldbusIO.Type ? FieldbusIO.Type : 'Input/Output' %>" field_key="Type"  field_type_data="string" field_type="emp_inp" > 
+                        <select class="select_val form-select custom-combobox field_data" value="<%= FieldbusIO && FieldbusIO.Type ? FieldbusIO.Type : 'Input/Output' %>" field_key="Type"  field_type_data="string" field_type="emp_inp" id="type_show"> 
                             <option value="Input/Output" <%= FieldbusIO && FieldbusIO.Type === 'Input/Output' ? 'selected' : '' %>>Input/Output</option>
                             <option value="Input" <%= FieldbusIO && FieldbusIO.Type === 'Input' ? 'selected' : '' %>>Input</option>
                             <option value="Output" <%= FieldbusIO && FieldbusIO.Type === 'Output' ? 'selected' : '' %>>Output</option>
@@ -44,7 +44,7 @@
                 <div class="col-1 col-sm-1 col-md-1 col-lg-6 col-xl-6">&nbsp;</div>
             </div>
 
-            <div class="row row-none mt-3 mb-3">
+            <div class="row row-none mt-3 mb-3 type_in">
                 <div class="col-6">
                     <div class="label-txt">Input Bytes Assignment</div>
                 </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <table class="table table-lg table-dark table-bordered table-p-list mb-5">
+            <table class="table table-lg table-dark table-bordered table-p-list mb-5 type_in">
                 <thead>
                   <tr>
                     <th scope="col" class="col_tb_id">Byte</th>
@@ -66,7 +66,7 @@
             </table>
 
 
-            <div class="row row-none mt-3 mb-3">
+            <div class="row row-none mt-3 mb-3 type_out">
                 <div class="col-6">
                     <div class="label-txt">Output Bytes Assignment</div>
                 </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <table class="table table-lg table-dark table-bordered table-p-list mb-5">
+            <table class="table table-lg table-dark table-bordered table-p-list mb-5 type_out">
                 <thead>
                   <tr>
                     <th scope="col" class="col_tb_id">Byte</th>
@@ -102,20 +102,31 @@
     </div>
     -->
 
-
     <%- include('p9_alet_warning.ejs') %>
     <script>
         var data_json= JSON.parse('<%- JSON.stringify(jsonData) %>');
+        var is_in_bcode=true;
+        var is_out_bcode=false;
 
         $(document).ready(()=>{
             load_data();
             load_ui_event();
+            check_type_show();
+            $(check_type_show).change(check_type_show);
         });
+
+        function check_type_show(){
+            var val_type=$("#type_show").val();
+            $(".type_out").show();
+            $(".type_in").show();
+            if(val_type=='Input') $(".type_out").hide();
+            if(val_type=='Output') $(".type_in").hide();
+        }
 
         function add_byte_row(index,type){
             var emp_row=$(`
-            <tr>
-                        <td>${index}</td>
+            <tr id="r_bit_${type}_${index}">
+                        <td id="r_bit_name_${type}_${index}">${index}</td>
                         <td id="list_bit_${type}_${index}" class="list_btn_bit pt-3" style="text-align: right;">
                             <span class="btn_0" id="bit_${type}_${index}_0">0</span>
                             <span class="btn_1" id="bit_${type}_${index}_1">1</span>
@@ -271,6 +282,12 @@
         }
 
         function show_add_byte(type='in'){
+            var s_display_code='';
+            if(type=='in'){
+                if(is_in_bcode) s_display_code="disabled";
+            }else{
+                if(is_out_bcode) s_display_code="disabled";
+            }
             var html='';
             html='<div class="row">';
                 html+='<div class="col-4"><div class="label-txt">Input/Output</div></div>';
@@ -293,7 +310,7 @@
                 html+='<div class="col-8">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
-                        html+='<select class="select_val form-select custom-combobox" id="type_add">';
+                        html+='<select class="select_val form-select custom-combobox" id="type_add" '+s_display_code+'> ';
                             html+='<option value="Bit">Bit</option>';
                             html+='<option value="BCODE/VIN">BCODE/VIN</option>';
                         html+='</select>';
@@ -365,6 +382,8 @@
         }
 
         function load_data(){
+            is_in_bcode=false;
+            is_out_bcode=false;
             $("#table_in").empty();
             $("#table_out").empty();
             if(data_json.Fieldbus.IO==undefined) {
@@ -388,7 +407,13 @@
                     if(data_json.Fieldbus.IO.lsIn!=null){
                         $(data_json.Fieldbus.IO.lsIn).each(function(index,bit){
                             if(bit.Bit=='255'){
+                                var b_Length=bit.Length;
                                 $("#list_bit_in_"+bit.Index).html('<span class="vin">BCODE / VIN</span>');
+                                $("#r_bit_name_in_"+bit.Index).html(bit.Index+"-"+(bit.Index+(b_Length-1)));
+                                for(let b_hide=bit.Index+1;b_hide<=b_Length+1;b_hide++){
+                                    $("#r_bit_in_"+b_hide).hide();
+                                }
+                                is_in_bcode=true;
                             }else{
                                 $("#bit_in_"+bit.Index+"_"+bit.Bit).addClass("active");
                                 $("#bit_in_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
@@ -405,9 +430,19 @@
 
                     if(data_json.Fieldbus.IO.lsOut!=null){
                         $(data_json.Fieldbus.IO.lsOut).each(function(index,bit){
-                            $("#bit_out_"+bit.Index+"_"+bit.Bit).addClass("active");
-                            $("#bit_out_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
-                            $("#bit_out_"+bit.Index+"_"+bit.Bit).attr("data-Polarity",bit.Polarity);
+                            if(bit.Bit=='255'){
+                                var b_Length=bit.Length;
+                                $("#list_bit_out_"+bit.Index).html('<span class="vin">BCODE / VIN</span>');
+                                $("#r_bit_name_out_"+bit.Index).html(bit.Index+"-"+(bit.Index+(b_Length-1)));
+                                for(let b_hide=bit.Index+1;b_hide<=b_Length+1;b_hide++){
+                                    $("#r_bit_out_"+b_hide).hide();
+                                }
+                                is_out_bcode=true;
+                            }else{
+                                $("#bit_out_"+bit.Index+"_"+bit.Bit).addClass("active");
+                                $("#bit_out_"+bit.Index+"_"+bit.Bit).attr("data-Behavior",bit.Behavior);
+                                $("#bit_out_"+bit.Index+"_"+bit.Bit).attr("data-Polarity",bit.Polarity);
+                            }
                         });
                     }
                 }

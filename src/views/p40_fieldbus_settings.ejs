@@ -83,8 +83,8 @@
 
                 <div class="col-7 col-sm-7 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
                     <div class="row" style="display: flex;flex-direction: row;flex-wrap: nowrap;">
-                        <span class="col mt-3 mb-3" style="color:darkgray;white-space: nowrap;">Input : 0/256 </span>
-                        <span class="col mt-3 mb-3" style="color:darkgray;white-space: nowrap;">Output : 0/256 </span>
+                        <span class="col mt-3 mb-3" style="color:darkgray;white-space: nowrap;">Input : <%= Fieldbus && Fieldbus.IO.IByteCount ? Fieldbus.IO.IByteCount : '0' %>/256 </span>
+                        <span class="col mt-3 mb-3" style="color:darkgray;white-space: nowrap;">Output : <%= Fieldbus && Fieldbus.IO.OByteCount ? Fieldbus.IO.OByteCount : '0' %>/256 </span>
                     </div>
                 </div>
 
