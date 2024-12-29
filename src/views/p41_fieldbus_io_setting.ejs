@@ -151,10 +151,10 @@
                 $(btn_bit).click(function(){
                     var html='';
                     html+='<div class="row">';
-                        html+='<div class="col-6">';
+                        html+='<div class="col-4">';
                             html+='<div class="label-txt">Behavior</div>';
                         html+='</div>';
-                        html+='<div class="col-6">';
+                        html+='<div class="col-8">';
                             html+='<div class="input-group r border mb-2 mt-2">';
                                 html+='<span class="input-group-text r-left">&nbsp;</span>';
                                 html+='<select class="select_val form-select custom-combobox" id="bit_Behavior">';
@@ -194,10 +194,10 @@
                     html+='</div>';
 
                     html+='<div class="row">';
-                        html+='<div class="col-6">';
+                        html+='<div class="col-4">';
                             html+='<div class="label-txt">Polarity</div>';
                         html+='</div>';
-                        html+='<div class="col-6">';
+                        html+='<div class="col-8">';
                             html+='<div class="input-group r border mb-2 mt-2">';
                                 html+='<span class="input-group-text r-left">&nbsp;</span>';
                                 html+='<select class="select_val form-select custom-combobox" id="bit_Polarity">';
@@ -209,14 +209,17 @@
                         html+='</div>';
                     html+='</div>';
 
-                    show_msg(html,"Input Byte "+index+", Bit "+i,()=>{
+                    var s_title="";
+                    if(type=="in") s_title="Input";
+                    else s_title="Ouput";
+                    show_msg(html,s_title+" Byte "+index+", Bit "+i,()=>{
 
                         var val_Behavior=$(btn_bit).attr("data-Behavior");
                         var val_Polarity=$(btn_bit).attr("data-Polarity");
                         if(val_Behavior!=undefined) $("#bit_Behavior").val(val_Behavior);
                         if(val_Polarity!=undefined) $("#bit_Polarity").val(val_Polarity);
 
-                        $("#box_msg").css("width","510px");
+                        $("#box_msg").css("width","596px");
                         $("#btn_msg_done").click(()=>{
                             var bit_Behavior = $('#bit_Behavior').prop('selectedIndex');;
                             if(bit_Behavior=="0"){
@@ -273,8 +276,8 @@
         function show_add_byte(type='in'){
             var html='';
             html='<div class="row">';
-                html+='<div class="col-6"><div class="label-txt">Input/Output</div></div>';
-                html+='<div class="col-6">';
+                html+='<div class="col-4"><div class="label-txt">Input/Output</div></div>';
+                html+='<div class="col-8">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
                         if(type=='in')
@@ -287,10 +290,10 @@
             html+='</div>';
 
             html+='<div class="row">';
-                html+='<div class="col-6">';
+                html+='<div class="col-4">';
                     html+='<div class="label-txt">Type</div>';
                 html+='</div>';
-                html+='<div class="col-6">';
+                html+='<div class="col-8">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
                         html+='<select class="select_val form-select custom-combobox" id="type_add">';
@@ -303,8 +306,8 @@
             html+='</div>';
 
             html+='<div class="row">';
-                html+='<div class="col-6"><div class="label-txt">Byte(s)</div></div>';
-                html+='<div class="col-6">';
+                html+='<div class="col-4"><div class="label-txt">Byte(s)</div></div>';
+                html+='<div class="col-8">';
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
                         html+='<input type="text" placeholder="Input" value="1" class="form-control" id="num_val_byte"/>';
@@ -317,7 +320,7 @@
                 html+='<div class="col-12"><div class="label-txt mb-0"><b>* Avalilable number of input Bytes \''+(256-$("#table_"+type+" tr").length)+'\'</b></div></div>';
             html+='</div>';
             show_msg(html,"Add Byte",()=>{
-                $("#box_msg").css("width","490px");
+                $("#box_msg").css("width","596px");
                 $("#box_msg_btn").addClass("mt-0").addClass("pt-0");
                 $("#btn_msg_done").click(()=>{
                     var type_add=$("#type_add").val();
