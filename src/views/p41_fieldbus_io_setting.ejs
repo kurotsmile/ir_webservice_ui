@@ -89,6 +89,9 @@
                 </thead>
                 <tbody id="table_out"></tbody>
             </table>
+
+            <div class="row mt-5 mb-5">&nbsp;</div>
+            <div class="row mt-5 mb-5">&nbsp;</div>
         </div>
     </main>
 
@@ -248,6 +251,7 @@
 
         function save_data(is_show_msg=true){
             data_json.Fieldbus.IO.InType=generateInTypeArray(data_json.Fieldbus.IO.IByteCount);
+            data_json.Fieldbus.IO.OutType=generateInTypeArray(data_json.Fieldbus.IO.OByteCount);
             $.ajax({
                 url: '/save-json',
                 type: 'POST',
