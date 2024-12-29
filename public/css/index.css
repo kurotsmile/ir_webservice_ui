@@ -6,7 +6,7 @@ html, body {
     background-color: #020202 !important;
     color: #1d1a1a;
     overflow-x: hidden;
-    min-width: 560px;
+    min-width: 600px;
 }
 
 
@@ -872,6 +872,9 @@ table thead tr th{
 #list_menu_top_right{
     display: flex;
     gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 6px;
 }
 
 #list_menu_top_right a{
@@ -1011,6 +1014,15 @@ table thead tr th{
     background-color: #00a1cb;
 }
 
+#header_top_home{
+    display: flex;
+    gap: 50px;
+}
+
+#header_top_home .top-header-item{
+    flex: 1;
+}
+
 .sel-dropdown{
     width: 348px !important;
 }
@@ -1083,6 +1095,7 @@ input[type="file"]::file-selector-button:hover {
     .r_bottom .c-location {flex: 10;}
     .ip-container{font-size: 12px !important;}
     .ip-container img{width: 13px !important;height: 13px !important;}
+    #header_top_home {gap: 10px;}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -1106,6 +1119,7 @@ input[type="file"]::file-selector-button:hover {
     .r_bottom .c-location {flex: 10;}
     .ip-container{font-size: 12px !important;}
     .ip-container img{width: 13px !important;height: 13px !important;}
+    #header_top_home {gap: 10px;}
 }
 
 /* Medium devices (tablets, 768px and up) */

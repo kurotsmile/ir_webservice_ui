@@ -267,9 +267,13 @@ $(document).ready(function () {
 
     // });
 
-    $(window).on('resize', function() {
-        if ($(window).width() < 560) {
-            window.resizeTo(560, $(window).height());
+    let isAdjusting = false;
+
+    $(window).on('resize', function () {
+        if (!isAdjusting && $(window).width() < 600) {
+            isAdjusting = true;
+            window.resizeTo(600, $(window).height());
+            setTimeout(() => isAdjusting = false, 100);
         }
     });
 });

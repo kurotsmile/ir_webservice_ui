@@ -85,7 +85,7 @@ app.use(cors({
 
 app.use('/public', express.static('public'));
 app.use((req, res, next) => {
-    res.locals.ver = '1.6.5';
+    res.locals.ver = '1.6.6';
     res.locals.currentRoute = req.path;
     next();
 });
