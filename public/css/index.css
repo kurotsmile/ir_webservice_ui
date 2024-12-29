@@ -639,6 +639,21 @@ canvas {
     right: 0px;
 }
 
+.btn-r{
+    font-family: Roboto !important;
+    padding-top: 8px !important;
+    padding-bottom: 6px !important;
+    padding-right: 13px !important;
+    white-space: nowrap;
+    border: none !important;
+}
+
+.btn-r img{
+    width: 26px;
+    height: 26px;
+    margin-right: 8px;
+}
+
 .btn-rounded{
     border-radius: 50px !important;
     margin-right: 3px;

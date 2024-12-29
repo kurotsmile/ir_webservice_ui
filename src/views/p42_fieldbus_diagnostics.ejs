@@ -27,10 +27,10 @@
     <main>
         <div class="container-fluid">
             <div class="row row-p">
-                <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ">
                     <div class="label-txt">Input/Output</div>
                 </div>
-                <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="col-8 col-sm-8 col-md-8 col-lg-3 col-xl-3">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <select class="select_val form-select custom-combobox field_data" value="<%= FieldbusIO && FieldbusIO.Type ? FieldbusIO.Type : 'Input/Output' %>" field_key="Type"  field_type_data="string" field_type="emp_inp" > 
@@ -41,7 +41,7 @@
                         <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-6 col-xl-6">&nbsp;</div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-6 col-xl-6">&nbsp;</div>
             </div>
 
             <div class="row row-none mt-3 mb-3">
@@ -273,9 +273,9 @@
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
                         if(type=='in')
-                            html+='<input type="text" placeholder="Input" value="Input" class="form-control">';
+                            html+='<input type="text" placeholder="Input" value="Input" class="form-control" disabled>';
                         else
-                            html+='<input type="text" placeholder="Output" value="Output" class="form-control">';
+                            html+='<input type="text" placeholder="Output" value="Output" class="form-control" disabled>';
                         html+='<span class="input-group-text r-right">&nbsp;</span>';
                     html+='</div>';
                 html+='</div>';
@@ -303,17 +303,17 @@
                     html+='<div class="input-group r border mb-2 mt-2">';
                         html+='<span class="input-group-text r-left">&nbsp;</span>';
                         html+='<input type="text" placeholder="Input" value="1" class="form-control" id="num_val_byte"/>';
-                        html+='<span class="input-group-text r-right"><span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span></span>';
+                        html+='<span class="input-group-text r-right" style="height: 42px;"><span role="button" class="input-group-text r-right" onclick="show_edit(this)"><img src="/public/SVG/Edit2.svg"/></span></span>';
                     html+='</div>';
                 html+='</div>';
             html+='</div>';
 
-            html+='<div class="row text-center">';
-                html+='<div class="col-12"><div class="label-txt"><b>* Avalilable number of input Bytes \'255\'</b></div></div>';
+            html+='<div class="row text-center mb-0">';
+                html+='<div class="col-12"><div class="label-txt mb-0"><b>* Avalilable number of input Bytes \''+(256-$("#table_"+type+" tr").length)+'\'</b></div></div>';
             html+='</div>';
-
-            show_msg(html,"Show Add Byte",()=>{
+            show_msg(html,"Add Byte",()=>{
                 $("#box_msg").css("width","490px");
+                $("#box_msg_btn").addClass("mt-0").addClass("pt-0");
                 $("#btn_msg_done").click(()=>{
                     var type_add=$("#type_add").val();
                     var num_val_byte=Number($("#num_val_byte").val());

@@ -195,6 +195,7 @@
             if(val=='Manual'){
                 $("#dt").css("color","#FFF");
                 $("#btn_sel_datetime").find("img").show();
+                $('#dt').prop('disabled', false);
                 load_DT_val();
             }else{
                 $("#btn_sel_datetime").find("img").hide();
@@ -202,6 +203,7 @@
                 dateObject_cur=new Date();
                 timer_cur_val=get_DT_ISO(dateObject_cur);
                 $("#dt").val(get_DT_val(dateObject_cur));
+                $('#dt').prop('disabled', true);
             }
         }
 
