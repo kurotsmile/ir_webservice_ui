@@ -37,11 +37,11 @@
                 </div>
 
                 <div class="col-6">
-                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= ToolsNet && ToolsNet.EnableProtocol ? ToolsNet.EnableProtocol : false %>" field_key="EnableProtocol" field_type="emp_value" field_type_data="bool"/>
+                    <img src="/public/SVG/On.svg" style="float: right;width: 42px;"  role="button" class="mb-2 mt-3 field_data btn_switch" value="<%= ToolsNet && ToolsNet.EnableProtocol ? ToolsNet.EnableProtocol : false %>" field_key="EnableProtocol" field_type="emp_value" field_type_data="bool" id="EnableProtocol"/>
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">Enable Logs</div>
                 </div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">System Type</div>
                 </div>
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">PIM IP Address</div>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">PIM IP Address</div>
                 </div>
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">PIM IP Address</div>
                 </div>
@@ -106,7 +106,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">Retry Interval</div>
                 </div>
@@ -123,7 +123,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">Keep Alive Timer</div>
                 </div>
@@ -140,7 +140,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">Connection Retry Timer</div>
                 </div>
@@ -157,7 +157,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">System Number</div>
                 </div>
@@ -170,7 +170,7 @@
                 </div>
             </div>
 
-            <div class="row row-p">
+            <div class="row row-p r-hide">
                 <div class="col-6">
                     <div class="label-txt">Spindle Name</div>
                 </div>
@@ -206,7 +206,15 @@
             $("#SystemNumber").on("input", v_SystemNumber);
             $("#PIMIPAddress1").on("input", v_PIMIPAddress1);
             //$("#RetryInterval").on("input", v_RetryInterval);
+            check_EnableProtocol();
+            $("#EnableProtocol").click(check_EnableProtocol);
         });
+
+        function check_EnableProtocol(){
+            var val_EnableProtocol=$("#EnableProtocol").attr("value");
+            if(val_EnableProtocol=="true") $(".r-hide").show();
+            else $(".r-hide").hide();
+        }
 
         function v_SystemNumber(){
             var is_error=0;
