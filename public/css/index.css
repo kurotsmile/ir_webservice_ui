@@ -1025,9 +1025,10 @@ table thead tr th{
 .list_btn_bit span.vin{
     background-color: #00a1cb;
     width: auto;
-    border-radius: 10px;
+    border-radius: 29px;
     padding-left: 20px;
     padding-right: 20px;
+    width: 310px;
 }
 
 .list_btn_bit span.active{
