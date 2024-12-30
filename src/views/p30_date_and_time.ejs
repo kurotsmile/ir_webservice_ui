@@ -73,7 +73,7 @@
                     <input type="hidden" id="datetimepicker">
                     <div class="input-group r border mb-2 mt-2">
                         <span class="input-group-text r-left">&nbsp;</span>
-                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="dt">                     
+                        <input type="text" placeholder="Enter data" class="form-control field_data" value="<%= SetDT && SetDT.DT ? SetDT.DT : '' %>" field_key="DT" field_type="emp_inp" field_type_data="string" id="dt" disabled>                     
                         <span id="btn_sel_datetime" role="button" class="input-group-text r-right" onclick="show_sel_time(this);return false;"><img src="/public/SVG/Date.svg"/></span>
                     </div>
                 </div>
@@ -195,7 +195,6 @@
             if(val=='Manual'){
                 $("#dt").css("color","#FFF");
                 $("#btn_sel_datetime").find("img").show();
-                $('#dt').prop('disabled', false);
                 load_DT_val();
             }else{
                 $("#btn_sel_datetime").find("img").hide();
@@ -203,7 +202,6 @@
                 dateObject_cur=new Date();
                 timer_cur_val=get_DT_ISO(dateObject_cur);
                 $("#dt").val(get_DT_val(dateObject_cur));
-                $('#dt').prop('disabled', true);
             }
         }
 

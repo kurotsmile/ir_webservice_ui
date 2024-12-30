@@ -36,17 +36,22 @@
 
                         <div id="box_login">
                             <form>
-
-                                <div class="input-group mb-3 r border" style="border: unset !important;">
+                                <div class="input-group r border" style="border: unset !important;">
                                     <span class="input-group-text r-left"><img src="/public/SVG/Users.svg"/></span>
                                     <input type="text" placeholder="Username"  class="form-control r-right">
                                 </div>
 
-                                <div class="input-group mb-3 r border" style="border: unset !important;">
+                                <div class="bg-danger pt-2 pb-2" style="background-color: #e54028;">*Username required</div>
+                                <div class="mb-2">&nbsp;</div>
+
+                                <div class="input-group r border" style="border: unset !important;">
                                     <span class="input-group-text r-left"><img src="/public/SVG/Lock.svg"/></span>
                                     <input type="password" placeholder="password" class="form-control">
                                     <span class="input-group-text r-right"><img src="/public/SVG/invisible.svg"/></span>
                                 </div>
+
+                                <div class="bg-danger pt-2 pb-2" style="background-color: #e54028;">*Password required</div>
+                                <div class="mb-2">&nbsp;</div>
 
                                 <div class="mb-3">
                                     <a href="/home" class="btn btn-info btn-rounded text-white w-100 p-2">Login</a>
@@ -60,10 +65,38 @@
                                     <a href="change_password" class="btn btn-outline-info btn-rounded text-white w-100 p-2"><img style="width: 20px;" src="/public/SVG/Lock.svg"/> Change Password</a>
                                 </div>
 
-                                <div class="input-group mt-5 r">
+                                <div class="input-group mt-5 mb-3 r  mt-3 p-0" style="background-color: black;">
                                     <span class="input-group-text r-left"><img src="/public/SVG/Language.svg"/></span>
-                                    <input type="text" placeholder="Select Country" class="form-control" value="English">
-                                    <span class="input-group-text r-right"><img src="/public/SVG/Dropdown.svg"/></span>
+                                    <select class="select_val form-select custom-combobox" id="LangSelect">
+                                        <option value="English" selected>English</option>
+                                        <option value="Vietnamese">Tiếng Việt</option>
+                                        <option value="Spanish">Español</option>
+                                        <option value="French">Français</option>
+                                        <option value="German">Deutsch</option>
+                                        <option value="Chinese">中文</option>
+                                        <option value="Japanese">日本語</option>
+                                        <option value="Korean">한국어</option>
+                                        <option value="Russian">Русский</option>
+                                        <option value="Italian">Italiano</option>
+                                        <option value="Portuguese">Português</option>
+                                        <option value="Arabic">العربية</option>
+                                        <option value="Hindi">हिन्दी</option>
+                                        <option value="Thai">ไทย</option>
+                                        <option value="Malay">Bahasa Melayu</option>
+                                        <option value="Indonesian">Bahasa Indonesia</option>
+                                        <option value="Dutch">Nederlands</option>
+                                        <option value="Swedish">Svenska</option>
+                                        <option value="Norwegian">Norsk</option>
+                                        <option value="Danish">Dansk</option>
+                                        <option value="Turkish">Türkçe</option>
+                                        <option value="Greek">Ελληνικά</option>
+                                        <option value="Polish">Polski</option>
+                                        <option value="Czech">Čeština</option>
+                                        <option value="Hungarian">Magyar</option>
+                                        <option value="Finnish">Suomi</option>
+                                        <option value="Hebrew">עברית</option>
+                                    </select>
+                                    <span class="input-group-text r-right">&nbsp;</span>
                                 </div>
                             </form>
                         </div>
