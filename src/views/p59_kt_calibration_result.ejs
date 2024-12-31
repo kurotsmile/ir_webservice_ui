@@ -25,9 +25,9 @@
         back:'tool_calibartion',
         emp_extension:`
             <div class="row">
-                <div class="col-12 col-md-8 col-lg-8 col-xl-8">&npsb;</div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <a style="font-weight: bold;" class="btn btn-danger text-white btn-rounded f-right mb-2 mt-2 w-100 p-2">End</a>
+                <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">&nbsp;</div>
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+                    <a style="font-weight: bold;" class="btn btn-danger text-white btn-rounded f-right mb-2 mt-2 w-100 p-2 btn-end" style="min-width: auto !important;" id="btn-end">End</a>
                 </div>
             </div>
         `
@@ -73,22 +73,26 @@
             </table>
 
             <div class="row row-h m-1">
-                <div class="col-6">
+                <div class="col-3 col-sm-3 col-md-6 col-lg-6 col-xl-6">
                     <div class="label-txt">Resultant TR Value</div>
                 </div>
-                <div class="col-5">
-                    <div class="input-group r border mb-2 mt-2">
+                <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-5">
+                    <div class="input-group r border mb-2 mt-3" style="padding-top: 2px;padding-bottom: 2px;">
                         <span class="input-group-text r-left">&nbsp;</span>
                         <input type="text" placeholder="Enter data" value="TRValue#" class="form-control">
                         <span class="input-group-text r-right">&nbsp;</span>
                     </div>
                 </div>
-                <div class="col-1">
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
                     <button class="btn btn-secondary btn-rounded f-right mt-3" style="min-width:100px;color: black;font-weight: bold;">Set</button>
                 </div>
             </div
         </div>
     </main>
-
+  <script>
+    $(document).ready(function(){
+      $("#btn-end").css("min-width","auto").css("padding-left","10px !important").css("padding-right","10px !important");
+    });
+  </script>
 </body>
 </html>
