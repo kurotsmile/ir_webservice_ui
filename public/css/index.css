@@ -1095,6 +1095,17 @@ input[type="file"]::file-selector-button:hover {
     display: none;
 }
 
+.btn-danger {
+    background-color: #e54028 !important;
+}
+
+.btn-set{
+    min-width: 100px;
+    color: black;
+    font-weight: 500;
+    background-color: #666666 !important;
+}
+
 /* Extra small devices (phones, 0px and up) */
 @media (max-width: 575.98px) {
     .col_tb_id{width: unset;}
